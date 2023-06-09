@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StonePlanner.exe" size="1948672">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StonePlanner.exe" size="2309120">
       <assemblyIdentity name="StonePlanner" version="2022.2.0.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>k0BaFijGfVALSFBgD4JLjJmyqz8JaPG0hIIT9jZ0MkM=</dsig:DigestValue>
+        <dsig:DigestValue>IaQXY7g3tKH5PzXlCMuIvM9m88x6AKGRUGT1+YzLvY8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -458,13 +458,13 @@
       <dsig:DigestValue>0lR1hxvF4NcYJnHx57jqnPhYzHt1RGEDc55/Ma/Kkf8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="StonePlanner.exe.config" size="189">
+  <file name="StonePlanner.exe.config" size="532">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
+      <dsig:DigestValue>MJ+Cc9wJ8ajFcnzf2zUMw14U142gBlXXgb85q9hX3U4=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

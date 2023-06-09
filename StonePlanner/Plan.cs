@@ -137,6 +137,7 @@ namespace StonePlanner
             this.wisdom = @struct.wisdom;
             this.startTime = DateTime.FromBinary(@struct.startTime);
             this.ID = @struct.UDID;
+            this.AddSign = @struct.Addsignal;
         }
 
         internal Plan(PlanClassC @struct)
@@ -215,6 +216,12 @@ namespace StonePlanner
                 //更新属性
                 Main.ValuesUpdate(+lasting, +explosive, +wisdom);
                 Main.plan = this;
+                AddSign?.Invoke(1);
+            }
+            else
+            {
+                //重新弹起按钮
+                button_Finish.Enabled = true;
             }
         }
 

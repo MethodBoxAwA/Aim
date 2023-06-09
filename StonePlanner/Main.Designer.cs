@@ -34,7 +34,6 @@
             this.pictureBox_T_Float = new System.Windows.Forms.PictureBox();
             this.label_GGS = new System.Windows.Forms.Label();
             this.User_Piicture = new System.Windows.Forms.PictureBox();
-            this.label_NeedTime = new System.Windows.Forms.Label();
             this.pictureBox_T_Exit = new System.Windows.Forms.PictureBox();
             this.label_Sentence = new System.Windows.Forms.Label();
             this.pictureBox_T_More = new System.Windows.Forms.PictureBox();
@@ -95,7 +94,6 @@
             this.panel_Top.Controls.Add(this.pictureBox_T_Float);
             this.panel_Top.Controls.Add(this.label_GGS);
             this.panel_Top.Controls.Add(this.User_Piicture);
-            this.panel_Top.Controls.Add(this.label_NeedTime);
             this.panel_Top.Controls.Add(this.pictureBox_T_Exit);
             this.panel_Top.Controls.Add(this.label_Sentence);
             this.panel_Top.Controls.Add(this.pictureBox_T_More);
@@ -114,6 +112,7 @@
             this.pictureBox_T_Float.Size = new System.Drawing.Size(25, 25);
             this.pictureBox_T_Float.TabIndex = 10;
             this.pictureBox_T_Float.TabStop = false;
+            this.pictureBox_T_Float.Click += new System.EventHandler(this.pictureBox_T_Float_Click);
             this.pictureBox_T_Float.DoubleClick += new System.EventHandler(this.pictureBox_T_Float_DoubleClick);
             // 
             // label_GGS
@@ -135,17 +134,8 @@
             this.User_Piicture.Size = new System.Drawing.Size(32, 27);
             this.User_Piicture.TabIndex = 8;
             this.User_Piicture.TabStop = false;
+            this.User_Piicture.Click += new System.EventHandler(this.User_Piicture_Click);
             this.User_Piicture.DoubleClick += new System.EventHandler(this.User_Piicture_DoubleClick);
-            // 
-            // label_NeedTime
-            // 
-            this.label_NeedTime.AutoSize = true;
-            this.label_NeedTime.Font = new System.Drawing.Font("Cambria", 10F);
-            this.label_NeedTime.Location = new System.Drawing.Point(465, 8);
-            this.label_NeedTime.Name = "label_NeedTime";
-            this.label_NeedTime.Size = new System.Drawing.Size(119, 16);
-            this.label_NeedTime.TabIndex = 7;
-            this.label_NeedTime.Text = "剩余xx时xx分xx秒";
             // 
             // pictureBox_T_Exit
             // 
@@ -567,7 +557,6 @@
         private System.Windows.Forms.Label label_Sentence;
         private System.Windows.Forms.Label label_Date;
         private System.Windows.Forms.Label label_Month;
-        private System.Windows.Forms.Label label_NeedTime;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_Anther1;
         private System.Windows.Forms.Panel panel_TaskDetail;

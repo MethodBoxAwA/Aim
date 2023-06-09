@@ -56,6 +56,7 @@ namespace StonePlanner
         {
             internal string intro;
             internal int UDID;
+            internal Action<int> Addsignal;
         }
 
         [Serializable]

@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using static StonePlanner.Develop;
 using static StonePlanner.Develop.Sign;
 using static StonePlanner.Exceptions;
 using static StonePlanner.Structs;
@@ -153,6 +154,57 @@ namespace StonePlanner
         addDelegate controlsAdd;
         internal void HandleSign(object sender, DataType.SignChangedEventArgs e)
         {
+            if (e.Sign == 1)
+            {
+                //链接数据库
+                string strConn = $" Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = {Application.StartupPath}\\data.mdb;Jet OLEDB:Database Password={Main.password}";
+                OleDbConnection myConn = new OleDbConnection(strConn);
+                myConn.Open();
+                //先搜一下数据库
+                //SELECT * FROM Persons WHERE City='Beijing'
+                var hResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE ID = {plan.ID}");
+                if (hResult.HasRows)
+                {
+                    /*
+                     * 此处的Bug：
+                     * 当任务完成后，会从列表中清理
+                     * 向数据库中保存时应该在删除任务时保存
+                     * 做法：
+                     * 更改保存位置
+                    */
+                    string updateString = $"UPDATE Tasks SET TaskTime = {plan.seconds}" +
+                                $" , TaskStatus = \"已办完\"" +
+                                $" WHERE ID = {plan.ID}";
+                    SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
+                }
+                else
+                {
+                    string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , " +
+                        "TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , ID" +
+                        " , TaskParent) VALUES ( ";
+                    strInsert += "'" + plan.capital + "', '";
+                    strInsert += plan.intro + "', '";
+                    strInsert += plan.status + "', ";
+                    strInsert += plan.seconds + ", ";
+                    strInsert += plan.difficulty + ",";
+                    strInsert += plan.lasting + ",";
+                    strInsert += plan.explosive + ",";
+                    strInsert += plan.wisdom + ",";
+                    strInsert += plan.ID + ",";
+                    strInsert += "'" + plan.parent + "'" + ")";
+                    //执行插入
+                    OleDbCommand inst = new OleDbCommand(strInsert, myConn);
+                    inst.ExecuteNonQuery();
+                }
+                //删除
+                int hNumber = plan.Lnumber;
+                recycle_bin.Add(plan);
+                panel_M.Controls.Remove(plan);
+                TasksDict[hNumber] = null;
+                plan = null;
+                LengthCalculation();
+                GC.Collect();
+            }
             //已废弃：Sign == 1，添加任务
             if (e.Sign == 2)
             {
@@ -410,7 +462,8 @@ namespace StonePlanner
                     lasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value),
                     explosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
                     wisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value),
-                    startTime = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[10].Value)
+                    startTime = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[10].Value),
+                    Addsignal = (Action<int>)AddSignal
                 };
                 AddPlan(new Plan(plancls));
                 LengthCalculation();
@@ -555,7 +608,8 @@ namespace StonePlanner
                         UDID = Convert.ToInt32(sResult[0]),
                         lasting = Convert.ToInt32(sResult[6]),
                         explosive = Convert.ToInt32(sResult[7]),
-                        wisdom = Convert.ToInt32(sResult[8])
+                        wisdom = Convert.ToInt32(sResult[8]),
+                        Addsignal = (Action<int>) AddSignal
                     };
                     using Plan plan = new Plan
                     (
@@ -1165,6 +1219,18 @@ namespace StonePlanner
         private void pictureBox_T_Float_DoubleClick(object sender, EventArgs e)
         {
             contextMenuStrip.Enabled = !contextMenuStrip.Enabled;
+        }
+
+        private void User_Piicture_Click(object sender, EventArgs e)
+        {
+            UserInfo info = new UserInfo();
+            info.Show();
+        }
+
+        private void pictureBox_T_Float_Click(object sender, EventArgs e)
+        {
+            Update update = new Update();
+            update.Show();
         }
     }
 }

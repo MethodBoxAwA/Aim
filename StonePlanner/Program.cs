@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter;
+using System;
 using System.Data.OleDb;
 using System.Windows.Forms;
 
@@ -15,9 +18,12 @@ namespace StonePlanner
         [STAThread]
         static void Main(string[] args)
         {
-            try 
+            //Connect Microsoft app center
+            AppCenter.Start("47eacc02-c48d-43a7-9295-aded8581daba",
+                  typeof(Analytics), typeof(Crashes));
+            try
             {
-                if (args[0] == "-itst")
+                if (args[0] == "-test")
                 {
                     EnableProgramTrusteeship = false;
                 }
