@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aim.Server", "Server\StoneP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aim.StartUp", "StonePlanner.StartUp\Aim.StartUp.csproj", "{87A5EAA0-4469-4CFB-8989-70B4AF1238A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aim.APIs", "Aim.APIs\Aim.APIs.csproj", "{56A78D00-07F0-489A-A4F4-2EE1E29F383A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aim.Plugin", "Aim.Plugin\Aim.Plugin.csproj", "{CFE39C05-65E2-4F8E-936A-4EC1C5834536}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +34,10 @@ Global
 		{87A5EAA0-4469-4CFB-8989-70B4AF1238A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87A5EAA0-4469-4CFB-8989-70B4AF1238A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87A5EAA0-4469-4CFB-8989-70B4AF1238A2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56A78D00-07F0-489A-A4F4-2EE1E29F383A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56A78D00-07F0-489A-A4F4-2EE1E29F383A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56A78D00-07F0-489A-A4F4-2EE1E29F383A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56A78D00-07F0-489A-A4F4-2EE1E29F383A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFE39C05-65E2-4F8E-936A-4EC1C5834536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFE39C05-65E2-4F8E-936A-4EC1C5834536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFE39C05-65E2-4F8E-936A-4EC1C5834536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFE39C05-65E2-4F8E-936A-4EC1C5834536}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

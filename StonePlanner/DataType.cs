@@ -45,5 +45,10 @@ namespace StonePlanner
                 return DownloadUri; 
             }
         }
+
+        public class MessageEventArgs : EventArgs
+        {
+            public string Message { get; set; }
+        }
     }
 }
