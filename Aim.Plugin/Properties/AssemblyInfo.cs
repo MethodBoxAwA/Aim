@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Aim.APIs")]
+[assembly: AssemblyTitle("Aim.Plugin")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Organization")]
-[assembly: AssemblyProduct("Aim.APIs")]
-[assembly: AssemblyCopyright("Copyright © Organization 2023")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Aim.Plugin")]
+[assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("56a78d00-07f0-489a-a4f4-2ee1e29f383a")]
+[assembly: Guid("cfe39c05-65e2-4f8e-936a-4ec1c5834536")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

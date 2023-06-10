@@ -47,18 +47,18 @@ namespace StonePlanner
         }
     }
 
-    public static class Aim
-    {
-        [DllImport("User32.dll")]
-        private static extern int SendMessage(int hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-        public static void Exit(AimInstance hInstance)
-        {
-            SendMessage(hInstance.hWndInstance.hWnd, Develop.Sign.AM_EXIT, new IntPtr(0), new IntPtr(0));
-        }
-        public static void AddMoney(AimInstance hInstance, int money)
-        {
-            IntPtr ptr = new IntPtr(money);
-            SendMessage(hInstance.hWndInstance.hWnd, 11452, ptr, new IntPtr(0));
-        }
-    }
+    //public static class Aim
+    //{
+    //    [DllImport("User32.dll")]
+    //    private static extern int SendMessage(int hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+    //    public static void Exit(AimInstance hInstance)
+    //    {
+    //        SendMessage(hInstance.hWndInstance.hWnd, Develop.Sign.AM_EXIT, new IntPtr(0), new IntPtr(0));
+    //    }
+    //    public static void AddMoney(AimInstance hInstance, int money)
+    //    {
+    //        IntPtr ptr = new IntPtr(money);
+    //        SendMessage(hInstance.hWndInstance.hWnd, 11452, ptr, new IntPtr(0));
+    //    }
+    //}
 }

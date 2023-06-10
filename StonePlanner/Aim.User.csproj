@@ -229,6 +229,12 @@
     </Compile>
     <Compile Include="Interfaces.cs" />
     <Compile Include="PluginStruct.cs" />
+    <Compile Include="PlugManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlugManager.Designer.cs">
+      <DependentUpon>PlugManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProcessExtends.cs" />
     <Compile Include="SchedulingCalendar.cs">
       <SubType>Form</SubType>
@@ -408,6 +414,9 @@
     <EmbeddedResource Include="Plan.resx">
       <DependentUpon>Plan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PlugManager.resx">
+      <DependentUpon>PlugManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -567,6 +576,12 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Client">
       <Version>5.2.9</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aim.Plugin\Aim.Plugin.csproj">
+      <Project>{cfe39c05-65e2-4f8e-936a-4ec1c5834536}</Project>
+      <Name>Aim.Plugin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
