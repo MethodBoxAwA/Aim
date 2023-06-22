@@ -32,12 +32,12 @@
             this.metroLabel_Scanned = new MetroFramework.Controls.MetroLabel();
             this.listBox_Scanned = new System.Windows.Forms.ListBox();
             this.metroPanel_PlugDetails = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel_PluginName = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel_PluginDescription = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel_PluginAuthor = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel_PluginVersion = new MetroFramework.Controls.MetroLabel();
-            this.pictureBox_Pict = new System.Windows.Forms.PictureBox();
             this.metroButton_Submit = new MetroFramework.Controls.MetroButton();
+            this.pictureBox_Pict = new System.Windows.Forms.PictureBox();
+            this.metroLabel_PluginVersion = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel_PluginAuthor = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel_PluginDescription = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel_PluginName = new MetroFramework.Controls.MetroLabel();
             this.metroPanel_PlugDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Pict)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +47,7 @@
             this.metroLabel_Scanned.AutoSize = true;
             this.metroLabel_Scanned.Location = new System.Drawing.Point(23, 77);
             this.metroLabel_Scanned.Name = "metroLabel_Scanned";
-            this.metroLabel_Scanned.Size = new System.Drawing.Size(93, 19);
+            this.metroLabel_Scanned.Size = new System.Drawing.Size(99, 20);
             this.metroLabel_Scanned.TabIndex = 0;
             this.metroLabel_Scanned.Text = "已扫描的插件";
             // 
@@ -80,41 +80,15 @@
             this.metroPanel_PlugDetails.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel_PlugDetails.VerticalScrollbarSize = 10;
             // 
-            // metroLabel_PluginName
+            // metroButton_Submit
             // 
-            this.metroLabel_PluginName.AutoSize = true;
-            this.metroLabel_PluginName.Location = new System.Drawing.Point(13, 88);
-            this.metroLabel_PluginName.Name = "metroLabel_PluginName";
-            this.metroLabel_PluginName.Size = new System.Drawing.Size(79, 19);
-            this.metroLabel_PluginName.TabIndex = 2;
-            this.metroLabel_PluginName.Text = "插件名称：";
-            // 
-            // metroLabel_PluginDescription
-            // 
-            this.metroLabel_PluginDescription.AutoSize = true;
-            this.metroLabel_PluginDescription.Location = new System.Drawing.Point(13, 120);
-            this.metroLabel_PluginDescription.Name = "metroLabel_PluginDescription";
-            this.metroLabel_PluginDescription.Size = new System.Drawing.Size(79, 19);
-            this.metroLabel_PluginDescription.TabIndex = 3;
-            this.metroLabel_PluginDescription.Text = "插件简介：";
-            // 
-            // metroLabel_PluginAuthor
-            // 
-            this.metroLabel_PluginAuthor.AutoSize = true;
-            this.metroLabel_PluginAuthor.Location = new System.Drawing.Point(13, 152);
-            this.metroLabel_PluginAuthor.Name = "metroLabel_PluginAuthor";
-            this.metroLabel_PluginAuthor.Size = new System.Drawing.Size(79, 19);
-            this.metroLabel_PluginAuthor.TabIndex = 4;
-            this.metroLabel_PluginAuthor.Text = "插件作者：";
-            // 
-            // metroLabel_PluginVersion
-            // 
-            this.metroLabel_PluginVersion.AutoSize = true;
-            this.metroLabel_PluginVersion.Location = new System.Drawing.Point(13, 184);
-            this.metroLabel_PluginVersion.Name = "metroLabel_PluginVersion";
-            this.metroLabel_PluginVersion.Size = new System.Drawing.Size(79, 19);
-            this.metroLabel_PluginVersion.TabIndex = 5;
-            this.metroLabel_PluginVersion.Text = "插件版本：";
+            this.metroButton_Submit.Location = new System.Drawing.Point(17, 217);
+            this.metroButton_Submit.Name = "metroButton_Submit";
+            this.metroButton_Submit.Size = new System.Drawing.Size(271, 27);
+            this.metroButton_Submit.TabIndex = 7;
+            this.metroButton_Submit.Text = "启用/禁用";
+            this.metroButton_Submit.UseSelectable = true;
+            this.metroButton_Submit.Click += new System.EventHandler(this.metroButton_Submit_Click);
             // 
             // pictureBox_Pict
             // 
@@ -126,14 +100,41 @@
             this.pictureBox_Pict.TabIndex = 6;
             this.pictureBox_Pict.TabStop = false;
             // 
-            // metroButton_Submit
+            // metroLabel_PluginVersion
             // 
-            this.metroButton_Submit.Location = new System.Drawing.Point(17, 217);
-            this.metroButton_Submit.Name = "metroButton_Submit";
-            this.metroButton_Submit.Size = new System.Drawing.Size(271, 27);
-            this.metroButton_Submit.TabIndex = 7;
-            this.metroButton_Submit.Text = "启用/禁用";
-            this.metroButton_Submit.UseSelectable = true;
+            this.metroLabel_PluginVersion.AutoSize = true;
+            this.metroLabel_PluginVersion.Location = new System.Drawing.Point(13, 184);
+            this.metroLabel_PluginVersion.Name = "metroLabel_PluginVersion";
+            this.metroLabel_PluginVersion.Size = new System.Drawing.Size(84, 20);
+            this.metroLabel_PluginVersion.TabIndex = 5;
+            this.metroLabel_PluginVersion.Text = "插件版本：";
+            // 
+            // metroLabel_PluginAuthor
+            // 
+            this.metroLabel_PluginAuthor.AutoSize = true;
+            this.metroLabel_PluginAuthor.Location = new System.Drawing.Point(13, 152);
+            this.metroLabel_PluginAuthor.Name = "metroLabel_PluginAuthor";
+            this.metroLabel_PluginAuthor.Size = new System.Drawing.Size(84, 20);
+            this.metroLabel_PluginAuthor.TabIndex = 4;
+            this.metroLabel_PluginAuthor.Text = "插件作者：";
+            // 
+            // metroLabel_PluginDescription
+            // 
+            this.metroLabel_PluginDescription.AutoSize = true;
+            this.metroLabel_PluginDescription.Location = new System.Drawing.Point(13, 120);
+            this.metroLabel_PluginDescription.Name = "metroLabel_PluginDescription";
+            this.metroLabel_PluginDescription.Size = new System.Drawing.Size(84, 20);
+            this.metroLabel_PluginDescription.TabIndex = 3;
+            this.metroLabel_PluginDescription.Text = "插件简介：";
+            // 
+            // metroLabel_PluginName
+            // 
+            this.metroLabel_PluginName.AutoSize = true;
+            this.metroLabel_PluginName.Location = new System.Drawing.Point(13, 88);
+            this.metroLabel_PluginName.Name = "metroLabel_PluginName";
+            this.metroLabel_PluginName.Size = new System.Drawing.Size(84, 20);
+            this.metroLabel_PluginName.TabIndex = 2;
+            this.metroLabel_PluginName.Text = "插件名称：";
             // 
             // PlugManager
             // 

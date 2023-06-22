@@ -569,6 +569,52 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="P:StonePlanner.Interfaces.IDev.PluginName">
+            <summary>
+            Name of plugin
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Interfaces.IDev.PluginAuthor">
+            <summary>
+            Author of plugin
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Interfaces.IDev.PluginDescription">
+            <summary>
+            Description of plugin
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Interfaces.IDev.Run">
+            <summary>
+            Plugin entry point
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Model.PluginModel.#ctor(StonePlanner.Interfaces.IDev)">
+            <summary>
+            Initialize plugin
+            </summary>
+            <param name="_pluginInstance">Instance of plugin</param>
+        </member>
+        <member name="P:StonePlanner.Model.PluginModel.PluginInstance">
+            <summary>
+            Plugin instance (inherit:IDev)
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Model.PluginModel.PluginName">
+            <summary>
+            Name of plugin
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Model.PluginModel.PluginAuthor">
+            <summary>
+            Author of plugin
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Model.PluginModel.PluginDescription">
+            <summary>
+            Description of plugin
+            </summary>
+        </member>
         <member name="F:StonePlanner.PlugManager.components">
             <summary>
             Required designer variable.
