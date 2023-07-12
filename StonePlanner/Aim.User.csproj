@@ -111,311 +111,311 @@
     <Compile Include="View\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Activation.cs">
+    <Compile Include="View\Activation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Activation.Designer.cs">
+    <Compile Include="View\Activation.Designer.cs">
       <DependentUpon>Activation.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddList.cs">
+    <Compile Include="View\AddList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddList.Designer.cs">
+    <Compile Include="View\AddList.Designer.cs">
       <DependentUpon>AddList.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddTodo.cs">
+    <Compile Include="View\AddTodo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddTodo.Designer.cs">
+    <Compile Include="View\AddTodo.Designer.cs">
       <DependentUpon>AddTodo.cs</DependentUpon>
     </Compile>
-    <Compile Include="AESEncrypt.cs" />
-    <Compile Include="Alert.cs">
+    <Compile Include="Process\AESEncrypt.cs" />
+    <Compile Include="View\Alert.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Alert.Designer.cs">
+    <Compile Include="View\Alert.Designer.cs">
       <DependentUpon>Alert.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ban.cs">
+    <Compile Include="View\Ban.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Ban.Designer.cs">
+    <Compile Include="View\Ban.Designer.cs">
       <DependentUpon>Ban.cs</DependentUpon>
     </Compile>
-    <Compile Include="Bottom.cs">
+    <Compile Include="Control\Bottom.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Bottom.Designer.cs">
+    <Compile Include="Control\Bottom.Designer.cs">
       <DependentUpon>Bottom.cs</DependentUpon>
     </Compile>
-    <Compile Include="BugReporter.cs">
+    <Compile Include="View\BugReporter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BugReporter.Designer.cs">
+    <Compile Include="View\BugReporter.Designer.cs">
       <DependentUpon>BugReporter.cs</DependentUpon>
     </Compile>
-    <Compile Include="ByteConvert.cs" />
-    <Compile Include="Code.cs" />
-    <Compile Include="CommonSettings.cs" />
-    <Compile Include="Console.cs">
+    <Compile Include="Process\ByteConvert.cs" />
+    <Compile Include="Process\Code.cs" />
+    <Compile Include="Process\CommonSettings.cs" />
+    <Compile Include="View\Console.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Console.Designer.cs">
+    <Compile Include="View\Console.Designer.cs">
       <DependentUpon>Console.cs</DependentUpon>
     </Compile>
-    <Compile Include="DailyDateTime.cs" />
-    <Compile Include="DataType.cs" />
-    <Compile Include="Develop.cs" />
-    <Compile Include="Enums.cs" />
-    <Compile Include="ErrorCenter.cs">
+    <Compile Include="Process\DailyDateTime.cs" />
+    <Compile Include="Process\DataType.cs" />
+    <Compile Include="Process\Develop.cs" />
+    <Compile Include="Process\Enums.cs" />
+    <Compile Include="View\ErrorCenter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ErrorCenter.Designer.cs">
+    <Compile Include="View\ErrorCenter.Designer.cs">
       <DependentUpon>ErrorCenter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Exceptions.cs" />
-    <Compile Include="ExportTodo.cs">
+    <Compile Include="Process\Exceptions.cs" />
+    <Compile Include="View\ExportTodo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExportTodo.Designer.cs">
+    <Compile Include="View\ExportTodo.Designer.cs">
       <DependentUpon>ExportTodo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Finder.cs">
+    <Compile Include="View\Finder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Finder.Designer.cs">
+    <Compile Include="View\Finder.Designer.cs">
       <DependentUpon>Finder.cs</DependentUpon>
     </Compile>
-    <Compile Include="FloatWindow.cs">
+    <Compile Include="View\FloatWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FloatWindow.Designer.cs">
+    <Compile Include="View\FloatWindow.Designer.cs">
       <DependentUpon>FloatWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Function.cs">
+    <Compile Include="Control\Function.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Function.Designer.cs">
+    <Compile Include="Control\Function.Designer.cs">
       <DependentUpon>Function.cs</DependentUpon>
     </Compile>
-    <Compile Include="Good.cs">
+    <Compile Include="Control\Good.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Good.Designer.cs">
+    <Compile Include="Control\Good.Designer.cs">
       <DependentUpon>Good.cs</DependentUpon>
     </Compile>
-    <Compile Include="GoodAdder.cs">
+    <Compile Include="View\GoodAdder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GoodAdder.Designer.cs">
+    <Compile Include="View\GoodAdder.Designer.cs">
       <DependentUpon>GoodAdder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Importer.cs">
+    <Compile Include="View\Importer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Importer.Designer.cs">
+    <Compile Include="View\Importer.Designer.cs">
       <DependentUpon>Importer.cs</DependentUpon>
     </Compile>
-    <Compile Include="InnerFuncs.cs" />
-    <Compile Include="InnerIDE.cs">
+    <Compile Include="Process\InnerFuncs.cs" />
+    <Compile Include="View\InnerIDE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InnerIDE.Designer.cs">
+    <Compile Include="View\InnerIDE.Designer.cs">
       <DependentUpon>InnerIDE.cs</DependentUpon>
     </Compile>
-    <Compile Include="InputBox.cs" />
-    <Compile Include="InputBox.Designer.cs">
+    <Compile Include="Process\InputBox.cs" />
+    <Compile Include="Process\InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces.cs" />
+    <Compile Include="Process\Interfaces.cs" />
     <Compile Include="Model\PluginModel.cs" />
-    <Compile Include="PluginStruct.cs" />
-    <Compile Include="PlugManager.cs">
+    <Compile Include="Process\PluginStruct.cs" />
+    <Compile Include="View\PlugManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PlugManager.Designer.cs">
+    <Compile Include="View\PlugManager.Designer.cs">
       <DependentUpon>PlugManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProcessExtends.cs" />
-    <Compile Include="SchedulingCalendar.cs">
+    <Compile Include="Process\ProcessExtends.cs" />
+    <Compile Include="View\SchedulingCalendar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SchedulingCalendar.Designer.cs">
+    <Compile Include="View\SchedulingCalendar.Designer.cs">
       <DependentUpon>SchedulingCalendar.cs</DependentUpon>
     </Compile>
-    <Compile Include="SchedulingCalendarDay.cs">
+    <Compile Include="Control\SchedulingCalendarDay.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SchedulingCalendarDay.Designer.cs">
+    <Compile Include="Control\SchedulingCalendarDay.Designer.cs">
       <DependentUpon>SchedulingCalendarDay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Signal.cs" />
-    <Compile Include="Structs.cs" />
-    <Compile Include="TestTools.cs">
+    <Compile Include="Process\Signal.cs" />
+    <Compile Include="Process\Structs.cs" />
+    <Compile Include="View\TestTools.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestTools.Designer.cs">
+    <Compile Include="View\TestTools.Designer.cs">
       <DependentUpon>TestTools.cs</DependentUpon>
     </Compile>
-    <Compile Include="Update.cs">
+    <Compile Include="View\Update.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Update.Designer.cs">
+    <Compile Include="View\Update.Designer.cs">
       <DependentUpon>Update.cs</DependentUpon>
     </Compile>
-    <Compile Include="WebService.cs">
+    <Compile Include="View\WebService.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WebService.Designer.cs">
+    <Compile Include="View\WebService.Designer.cs">
       <DependentUpon>WebService.cs</DependentUpon>
     </Compile>
-    <Compile Include="Legacy.cs" />
-    <Compile Include="Login.cs">
+    <Compile Include="Process\Legacy.cs" />
+    <Compile Include="View\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="View\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="View\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Include="View\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="MCIPlayer.cs" />
-    <Compile Include="Plan.cs">
+    <Compile Include="Process\MCIPlayer.cs" />
+    <Compile Include="Control\Plan.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Plan.Designer.cs">
+    <Compile Include="Control\Plan.Designer.cs">
       <DependentUpon>Plan.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recycle.cs">
+    <Compile Include="View\Recycle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Recycle.Designer.cs">
+    <Compile Include="View\Recycle.Designer.cs">
       <DependentUpon>Recycle.cs</DependentUpon>
     </Compile>
-    <Compile Include="Register.cs">
+    <Compile Include="View\Register.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Register.Designer.cs">
+    <Compile Include="View\Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs">
+    <Compile Include="View\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings.Designer.cs">
+    <Compile Include="View\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Shop.cs">
+    <Compile Include="View\Shop.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Shop.Designer.cs">
+    <Compile Include="View\Shop.Designer.cs">
       <DependentUpon>Shop.cs</DependentUpon>
     </Compile>
-    <Compile Include="SocketClient.cs" />
-    <Compile Include="SQLConnect.cs" />
-    <Compile Include="TaskDetails.cs">
+    <Compile Include="Process\SocketClient.cs" />
+    <Compile Include="Process\SQLConnect.cs" />
+    <Compile Include="Control\TaskDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TaskDetails.Designer.cs">
+    <Compile Include="Control\TaskDetails.Designer.cs">
       <DependentUpon>TaskDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Testify.cs">
+    <Compile Include="View\Testify.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Testify.Designer.cs">
+    <Compile Include="View\Testify.Designer.cs">
       <DependentUpon>Testify.cs</DependentUpon>
     </Compile>
-    <Compile Include="TestVersion.cs">
+    <Compile Include="View\TestVersion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestVersion.Designer.cs">
+    <Compile Include="View\TestVersion.Designer.cs">
       <DependentUpon>TestVersion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Thanks.cs">
+    <Compile Include="View\Thanks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Thanks.Designer.cs">
+    <Compile Include="View\Thanks.Designer.cs">
       <DependentUpon>Thanks.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInfo.cs">
+    <Compile Include="View\UserInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserInfo.Designer.cs">
+    <Compile Include="View\UserInfo.Designer.cs">
       <DependentUpon>UserInfo.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="View\About.resx">
       <DependentUpon>About.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Activation.resx">
+    <EmbeddedResource Include="View\Activation.resx">
       <DependentUpon>Activation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddList.resx">
+    <EmbeddedResource Include="View\AddList.resx">
       <DependentUpon>AddList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddTodo.resx">
+    <EmbeddedResource Include="View\AddTodo.resx">
       <DependentUpon>AddTodo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Alert.resx">
+    <EmbeddedResource Include="View\Alert.resx">
       <DependentUpon>Alert.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ban.resx">
+    <EmbeddedResource Include="View\Ban.resx">
       <DependentUpon>Ban.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bottom.resx">
+    <EmbeddedResource Include="Control\Bottom.resx">
       <DependentUpon>Bottom.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BugReporter.resx">
+    <EmbeddedResource Include="View\BugReporter.resx">
       <DependentUpon>BugReporter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Console.resx">
+    <EmbeddedResource Include="View\Console.resx">
       <DependentUpon>Console.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ErrorCenter.resx">
+    <EmbeddedResource Include="View\ErrorCenter.resx">
       <DependentUpon>ErrorCenter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExportTodo.resx">
+    <EmbeddedResource Include="View\ExportTodo.resx">
       <DependentUpon>ExportTodo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Finder.resx">
+    <EmbeddedResource Include="View\Finder.resx">
       <DependentUpon>Finder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FloatWindow.resx">
+    <EmbeddedResource Include="View\FloatWindow.resx">
       <DependentUpon>FloatWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Function.resx">
+    <EmbeddedResource Include="Control\Function.resx">
       <DependentUpon>Function.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Good.resx">
+    <EmbeddedResource Include="Control\Good.resx">
       <DependentUpon>Good.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GoodAdder.resx">
+    <EmbeddedResource Include="View\GoodAdder.resx">
       <DependentUpon>GoodAdder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Importer.resx">
+    <EmbeddedResource Include="View\Importer.resx">
       <DependentUpon>Importer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InnerIDE.resx">
+    <EmbeddedResource Include="View\InnerIDE.resx">
       <DependentUpon>InnerIDE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InputBox.resx">
+    <EmbeddedResource Include="Process\InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="View\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="View\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plan.resx">
+    <EmbeddedResource Include="Control\Plan.resx">
       <DependentUpon>Plan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PlugManager.resx">
+    <EmbeddedResource Include="View\PlugManager.resx">
       <DependentUpon>PlugManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -428,47 +428,47 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Recycle.resx">
+    <EmbeddedResource Include="View\Recycle.resx">
       <DependentUpon>Recycle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Register.resx">
+    <EmbeddedResource Include="View\Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SchedulingCalendar.resx">
+    <EmbeddedResource Include="View\SchedulingCalendar.resx">
       <DependentUpon>SchedulingCalendar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SchedulingCalendarDay.resx">
+    <EmbeddedResource Include="Control\SchedulingCalendarDay.resx">
       <DependentUpon>SchedulingCalendarDay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings.resx">
+    <EmbeddedResource Include="View\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Shop.resx">
+    <EmbeddedResource Include="View\Shop.resx">
       <DependentUpon>Shop.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TaskDetails.resx">
+    <EmbeddedResource Include="Control\TaskDetails.resx">
       <DependentUpon>TaskDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Testify.resx">
+    <EmbeddedResource Include="View\Testify.resx">
       <DependentUpon>Testify.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TestTools.resx">
+    <EmbeddedResource Include="View\TestTools.resx">
       <DependentUpon>TestTools.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TestVersion.resx">
+    <EmbeddedResource Include="View\TestVersion.resx">
       <DependentUpon>TestVersion.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Thanks.resx">
+    <EmbeddedResource Include="View\Thanks.resx">
       <DependentUpon>Thanks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Update.resx">
+    <EmbeddedResource Include="View\Update.resx">
       <DependentUpon>Update.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInfo.resx">
+    <EmbeddedResource Include="View\UserInfo.resx">
       <DependentUpon>UserInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebService.resx">
+    <EmbeddedResource Include="View\WebService.resx">
       <DependentUpon>WebService.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="..\.editorconfig">

@@ -448,7 +448,7 @@ namespace StonePlanner
                             try
                             {
                                 int signal = Convert.ToInt32(nInput[1]);
-                                //Main.AddSign(signal);
+                                //Main.AddSign(Signal);
                                 richTextBox_Output.Text += $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
                             }
                             catch (Exception ex)
@@ -1122,7 +1122,7 @@ namespace StonePlanner
                             try
                             {
                                 int signal = Convert.ToInt32(nInput[1]);
-                                //Main.AddSign(signal);
+                                //Main.AddSign(Signal);
                                 return $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
                             }
                             catch (Exception ex)

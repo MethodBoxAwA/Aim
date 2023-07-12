@@ -6,15 +6,27 @@ using System.Runtime.InteropServices;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// register account
+    /// </summary>
     public partial class Register : MetroForm
     {
+        /// <summary>
+        /// GetWindow function
+        /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern IntPtr GetWindow(IntPtr hWnd, int uCmd);
         int GW_CHILD = 5;
+        /// <summary>
+        /// SendMessage function
+        /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
-        public const int EM_SETREADONLY = 0xcf;
 
+        private const int EM_SETREADONLY = 0xcf;
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public Register()
         {
             InitializeComponent();
@@ -29,17 +41,19 @@ namespace StonePlanner
 
         private void button_Submit_Click(object sender, EventArgs e)
         {
+            // confirm if the username and password is not empty
             if (textBox_M_Name.Text.Length == 0 || textBox_M_Pwd.Text.Length == 0)
             {
-                MessageBox.Show("请输入用户名或密码！","注册失败",
+                MessageBox.Show(@"请输入用户名或密码！",@"注册失败",
                     MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 return;
             }
-            //确认用户名密码是否符合规则
+            // confirm if the username and password comply with the rules
             Regex regex = new Regex("^[\u4E00-\u9FA5A-Za-z0-9]+$");
             Match result = regex.Match(textBox_M_Name.Text);
-            bool add = (!regex.Match(textBox_M_Name.Text).Success) && (!regex.Match(textBox_M_Pwd.Text).Success);
-            if (add)
+            bool isSwitch = 
+                (!regex.Match(textBox_M_Name.Text).Success) && (!regex.Match(textBox_M_Pwd.Text).Success);
+            if (isSwitch)
             {
                 MessageBox.Show("您输入的用户名或密码含有特殊字符", "注册失败",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -50,7 +64,7 @@ namespace StonePlanner
                 comboBox_M_Type.Text = "Standard";
             }
             int i = comboBox_M_Type.Text == "Administrator" ? 0 : 1;
-            //创建一个恢复用KEY
+            // create a restore key
             var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var Charsarr = new char[30];
             var random = new Random();
@@ -58,9 +72,14 @@ namespace StonePlanner
             {
                 Charsarr[j] = characters[random.Next(characters.Length)];
             }
+            // insert into database
             var resultString = new String(Charsarr);
-            SQLConnect.SQLCommandExecution($" INSERT INTO Users (Username , Cmoney , Type , Pwd , Rkey) VALUES ('{textBox_M_Name.Text}' , 0 , {i} , '{textBox_M_Pwd.Text}','{resultString}')"/*cmd*/, ref Main.odcConnection);
-            MessageBox.Show($"以下是您的用户恢复密钥：\n{resultString}\n请妥善保管该密钥，您将不会再次看到它了。按确定键复制到剪贴板。");
+            SQLConnect.SQLCommandExecution($" INSERT INTO Users (Username , Cmoney , Type , Pwd , Rkey) " +
+                                           $"VALUES ('{textBox_M_Name.Text}' , 0 , {i} , '{textBox_M_Pwd.Text}'," +
+                                           $"'{resultString}')"/*cmd*/, ref Main.odcConnection);
+            MessageBox.Show($"以下是您的用户恢复密钥：\n{resultString}\n请妥善保管该密钥，您将不会再次看到它了。" +
+                            $"按确定键复制到剪贴板。");
+            // set to clipboard
             Clipboard.SetText(resultString);
             Close();
         }

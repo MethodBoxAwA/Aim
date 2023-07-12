@@ -6,15 +6,41 @@ using MetroFramework.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// The window to add new plan
+    /// </summary>
     public partial class AddTodo : MetroForm
     {
+        /// <summary>
+        /// SendMessage function
+        /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, 
+            IntPtr wParam, IntPtr lParam);
+        /// <summary>
+        /// ReleaseCapture function
+        /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool ReleaseCapture();
+        /// <summary>
+        /// the specific delegate to call plan add function
+        /// </summary>
+        /// <param name="plan">plan instance</param>
         public delegate void PlanAddInvoke(Plan plan);
+        /// <summary>
+        /// the specific delegate to call Signal add function
+        /// </summary>
         public Action<int> Addsignal;
+        /// <summary>
+        /// PlanAddInvoke's instantiation concrete implementation
+        /// </summary>
         PlanAddInvoke PlanAdditionInvoke;
+
+        /// <summary>
+        /// initialize component
+        /// </summary>
+        /// <param name="TargetFun">AddPlan's target callback function</param>
+        /// <param name="Addsignal">Addsignal's target callback function</param>
         public AddTodo(PlanAddInvoke TargetFun,Action<int> Addsignal)
         {
             InitializeComponent();
@@ -22,9 +48,14 @@ namespace StonePlanner
             this.Addsignal = Addsignal;
         }
 
+        /// <summary>
+        /// Add plan object according to plan struct
+        /// </summary>
+        /// <param name="planStruct"></param>
         internal AddTodo(Structs.PlanStruct planStruct)
         {
             InitializeComponent();
+            //set default value to controls
             try
             {
                 domainUpDown_Difficulty.Text = "SERVER" + " " + planStruct.Difficulty.ToString();
@@ -83,18 +114,24 @@ namespace StonePlanner
             }
         }
 
+        /// <summary>
+        /// window load function
+        /// </summary>
         private void AddTodo_Load(object sender, EventArgs e)
         {
+            //set topmost and some default settings
             this.TopMost = true;
             domainUpDown_Difficulty.ReadOnly = true;
             label_T.Text = "新建一个待办";
             metroButton_Submit.Text = "新建待办(&D)";
             textBox_Numbered.ReadOnly = true;
-            //Default HH and mm
-            //Default MotherFucker
+            //add now time to textbox
             textBox_hh.Text = DateTime.Now.ToString("HH");
             textBox_mm.Text = DateTime.Now.ToString("mm");
-            //难度添加
+            //add difficulties level
+            //NOTE:
+            //to avoid precision issues caused by float
+            //format string by "F1"
             for (double i = 0.1; i < 2.0; i += 0.1)
             {
                 domainUpDown_Difficulty.Items.Add($"EASY {i:F1}");
@@ -116,41 +153,26 @@ namespace StonePlanner
                 domainUpDown_Difficulty.Items.Add($"BEYOND {i:F1}");
             }
 
-            //读取清单
+            //read exists list in DataBase
             var sResult = SQLConnect.SQLCommandQuery("SELECT * FROM Lists");
             while (sResult.Read())
             {
                 comboBox_List.Items.Add(sResult[1]);
             }
 
-            //加载TIPS
-            try
-            {
-                //WFJsonStructure.DataItem weather;
-                //Main.wf.GetWInfo(out weather);
-                //if (Convert.ToInt32(weather.air) >= 180)
-                //{
-                //    //TIPS：今天天气状态良好，可以做想做的事情。
-                //    label_Tips.Text = $"TIPS:空气较差（{weather.air}），不建议在外活动。";
-                //}
-                //else if (Convert.ToInt32(weather.uvIndex) > 6)
-                //{
-                //    label_Tips.Text = $"TIPS:今日紫外线较强（{weather.uvIndex}），请做好防护。";
-                //}
-            }
-            catch
-            {
-                //天气预报 not loaded (x)
-                //developer should be fucked (√)夜班c
-            }
+            //add tips(deleted)
         }
 
+        /// <summary>
+        /// add plan function
+        /// </summary>
         private void button_New_Click(object sender, EventArgs e)
         {
             try
             {
-                //封装类送走
+                //create plan class
                 PlanClassC psc = new PlanClassC();
+                //class encapsulation
                 psc.capital = textBox_Capital.Text;
                 psc.seconds = Convert.ToInt32(textBox_Time.Text);
                 psc.intro = textBox_Intro.Text;
@@ -176,20 +198,21 @@ namespace StonePlanner
                 }
                 catch { diff = 0D; }
                 psc.difficulty = diff;
-                //对指针传出
+                //invoke callback function
                 PlanAdditionInvoke(new Plan(psc));
                 Close();
-                //封送结构体
-                //Main.planner = psc;
-                //Main.AddSign(4);
-                //Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n这通常是您错误的键入了某个值，或没有输入某个值导致。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //handle unknown error
+                MessageBox.Show(ex.Message + "\n这通常是您错误的键入了某个值，或没有输入某个值导致。", 
+                    "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        /// <summary>
+        /// move window
+        /// </summary>>
         private void panel_Top_MouseDown(object sender, MouseEventArgs e)
         {
             const int WM_NCLBUTTONDOWN = 0x00A1;
@@ -202,26 +225,23 @@ namespace StonePlanner
             }
         }
 
+        /// <summary>
+        /// close window
+        /// </summary>
         private void panel_Top_DoubleClick(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// close window
+        /// </summary>
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void groupBox_Area1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
+        //arouse AddList window
         private void metroButton_Add_Click(object sender, EventArgs e)
         {
             AddList al = new AddList();

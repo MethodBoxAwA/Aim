@@ -46,20 +46,19 @@
             this.panel_Background.BackColor = System.Drawing.Color.Black;
             this.panel_Background.Controls.Add(this.panel_Text);
             this.panel_Background.Location = new System.Drawing.Point(-4, -6);
-            this.panel_Background.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel_Background.Margin = new System.Windows.Forms.Padding(2);
             this.panel_Background.Name = "panel_Background";
             this.panel_Background.Size = new System.Drawing.Size(728, 480);
             this.panel_Background.TabIndex = 0;
-            this.panel_Background.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Background_Paint);
             // 
             // panel_Text
             // 
             this.panel_Text.Controls.Add(this.label_E);
             this.panel_Text.Controls.Add(this.pictureBox_Main);
             this.panel_Text.Controls.Add(this.label_Main);
-            this.panel_Text.Font = new System.Drawing.Font("YouYuan", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel_Text.Font = new System.Drawing.Font("幼圆", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.panel_Text.Location = new System.Drawing.Point(-40, 13);
-            this.panel_Text.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel_Text.Margin = new System.Windows.Forms.Padding(2);
             this.panel_Text.Name = "panel_Text";
             this.panel_Text.Size = new System.Drawing.Size(1130, 465);
             this.panel_Text.TabIndex = 0;
@@ -89,12 +88,12 @@
             // label_Main
             // 
             this.label_Main.AutoSize = true;
-            this.label_Main.Font = new System.Drawing.Font("Lucida Fax", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Main.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Main.ForeColor = System.Drawing.Color.White;
             this.label_Main.Location = new System.Drawing.Point(91, 154);
             this.label_Main.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_Main.Name = "label_Main";
-            this.label_Main.Size = new System.Drawing.Size(0, 17);
+            this.label_Main.Size = new System.Drawing.Size(0, 18);
             this.label_Main.TabIndex = 0;
             // 
             // timer1
@@ -109,7 +108,7 @@
             this.ClientSize = new System.Drawing.Size(722, 471);
             this.Controls.Add(this.panel_Background);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Thanks";
             this.Text = "Thanks";
             this.Load += new System.EventHandler(this.Thanks_Load);

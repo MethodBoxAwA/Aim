@@ -1,0 +1,90 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\methodbox\\Aim\\StonePlanner\\Aim.User.csproj": {}
+  },
+  "projects": {
+    "D:\\methodbox\\Aim\\StonePlanner\\Aim.User.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\methodbox\\Aim\\StonePlanner\\Aim.User.csproj",
+        "projectName": "StonePlanner",
+        "projectPath": "D:\\methodbox\\Aim\\StonePlanner\\Aim.User.csproj",
+        "packagesPath": "C:\\Users\\MethodBox\\.nuget\\packages\\",
+        "outputPath": "D:\\methodbox\\Aim\\StonePlanner\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\MethodBox\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "Costura.Fody": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.7.0, )"
+            },
+            "MetroFramework": {
+              "target": "Package",
+              "version": "[1.2.0.3, )"
+            },
+            "MetroModernUI": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "Microsoft.AppCenter": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.AppCenter.Analytics": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.AppCenter.Crashes": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-arm64": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

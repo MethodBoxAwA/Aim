@@ -7,23 +7,48 @@ using System.Windows.Forms;
 
 namespace StonePlanner
 {
-    //没有Bug的程序不是好程序
-    //                     ——MethodBox
+    // a program without bugs is not a good program  ——MethodBox
     public partial class SchedulingCalendar : MetroForm
     {
+        /// <summary>
+        /// SendMessage function
+        /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        /// <summary>
+        /// ReleaseCapture function
+        /// </summary>
+        /// <returns></returns>
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool ReleaseCapture();
-        Dictionary<DateTime, string> schd;
+        /// <summary>
+        /// array of user schedule
+        /// </summary>
+        Dictionary<DateTime, string> scheduleArray;
+        /// <summary>
+        /// whether it is a presentation mode
+        /// </summary>
         bool ed;
+        /// <summary>
+        /// handled result
+        /// </summary>
         string result;
-        SchedulingCalendarDay[,] dayarr;
+        /// <summary>
+        /// all of day information
+        /// </summary>
+        SchedulingCalendarDay[,] dayArray;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="schd"></param>
+        /// <param name="alert"></param>
+        /// <param name="bed"></param>
         public SchedulingCalendar(Dictionary<DateTime, string> schd, 
             out string alert, bool bed = false)
         {
             InitializeComponent();
-            this.schd = schd;
+            this.scheduleArray = schd;
             ed = bed;
             if (bed)
             {
@@ -38,9 +63,9 @@ namespace StonePlanner
 
         protected void ReLoad()
         {
-            foreach (var item in schd)
+            foreach (var item in scheduleArray)
             {
-                foreach (var d in dayarr)
+                foreach (var d in dayArray)
                 {
                     if (d is null)
                     {
@@ -78,7 +103,7 @@ namespace StonePlanner
             //获得今天的排班
             string status = "";
             //托盘气泡提示
-            foreach (var item in dayarr)
+            foreach (var item in dayArray)
             {
                 if (item is null)
                 {
@@ -120,7 +145,7 @@ namespace StonePlanner
                 //获得今天的排班
                 string status = "";
                 //托盘气泡提示
-                foreach (var item in dayarr)
+                foreach (var item in dayArray)
                 {
                     if (item is null)
                     {
@@ -188,7 +213,7 @@ namespace StonePlanner
             //画矩阵！
             //五行七列式
             //INT[第几个周，这周的第几天]
-            dayarr = new SchedulingCalendarDay[6, 7];
+            dayArray = new SchedulingCalendarDay[6, 7];
             //小母猪发情时起的变量名
             var (j, k) = (0, 0);
             for (int i = 0; i < 7; i++)
@@ -220,7 +245,7 @@ namespace StonePlanner
                     };
                     panel_CM.Controls.Add(day);
                     //数组会不会越界？我不知道，全凭运气
-                    dayarr[i, j] = day;
+                    dayArray[i, j] = day;
                 }
             }
             //尝 试 查找今天
@@ -237,7 +262,7 @@ namespace StonePlanner
                 }
                 int x = position;
                 //Result-Oriented Programming
-                dayarr[y, x - 1].BackColor = Color.White;
+                dayArray[y, x - 1].BackColor = Color.White;
             }
         }
 

@@ -9,8 +9,14 @@ using static StonePlanner.Interfaces;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// manager of plugin
+    /// </summary>
     public partial class PlugManager : MetroForm
     {
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public PlugManager()
         {
             InitializeComponent();
@@ -19,13 +25,14 @@ namespace StonePlanner
         private void PlugManager_Load(object sender, EventArgs e)
         {
             //Scan all of plug-ins
-            string path = Application.StartupPath + "\\ext";
-            string[] files = Directory.GetFiles(path, "*.dll",
-                SearchOption.AllDirectories);
-            foreach (string dllName in files)
-            {
-                listBox_Scanned.Items.Add(dllName.Split('\\')[7]);
-            }
+            //string path = Application.StartupPath + "\\ext";
+            //string[] files = Directory.GetFiles(path, "*.dll",
+            //    SearchOption.AllDirectories);
+            //foreach (string dllName in files)
+            //{
+            //    listBox_Scanned.Items.Add(dllName.Split('\\')[7]);
+            //}
+            LoadPlugin(Application.StartupPath + "\\ext");
         }
 
         private void listBox_Scanned_SelectedIndexChanged(object sender, EventArgs e)
@@ -37,7 +44,9 @@ namespace StonePlanner
                 return;
         }
 
-        List<Model.PluginModel> plugins = new List<Model.PluginModel>();
+        Dictionary<string,Model.PluginModel> plugins = 
+            new Dictionary<string,Model.PluginModel>();
+
         public bool LoadPlugin(string path) 
         {
             DirectoryInfo directory = new DirectoryInfo(path);
@@ -61,11 +70,16 @@ namespace StonePlanner
                         {
                             if (type.GetInterface(typeof(IDev).Name) != null)
                             {
-                                //valid aim plugin,add to list
-                                plugins.Add(new Model.PluginModel(
+                                //valid aim plugin
+                                //guide by plugin name
+                                //add to listbox(display)
+                                listBox_Scanned.Items.Add(file.Name);
+                                //add to dict
+                                plugins.Add(file.Name,new Model.PluginModel(
                                     Activator.CreateInstance(type) as IDev));
                             }
                         }
+                        return true;
                     }
                     catch 
                     {

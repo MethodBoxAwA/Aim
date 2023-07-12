@@ -38,8 +38,7 @@
             // 
             this.label_B.AutoSize = true;
             this.label_B.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label_B.Location = new System.Drawing.Point(25, 401);
-            this.label_B.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_B.Location = new System.Drawing.Point(19, 321);
             this.label_B.Name = "label_B";
             this.label_B.Size = new System.Drawing.Size(921, 138);
             this.label_B.TabIndex = 2;
@@ -49,8 +48,7 @@
             // 
             this.label_C.AutoSize = true;
             this.label_C.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_C.Location = new System.Drawing.Point(7, 9);
-            this.label_C.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_C.Location = new System.Drawing.Point(5, 7);
             this.label_C.Name = "label_C";
             this.label_C.Size = new System.Drawing.Size(0, 19);
             this.label_C.TabIndex = 0;
@@ -61,10 +59,9 @@
             // 
             // 
             this.metroTextBox1.CustomButton.Image = null;
-            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(656, 1);
-            this.metroTextBox1.CustomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(358, 1);
             this.metroTextBox1.CustomButton.Name = "";
-            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(307, 307);
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(184, 196);
             this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox1.CustomButton.TabIndex = 1;
             this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -73,8 +70,7 @@
             this.metroTextBox1.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.metroTextBox1.Lines = new string[] {
         "metroTextBox1"};
-            this.metroTextBox1.Location = new System.Drawing.Point(31, 84);
-            this.metroTextBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.metroTextBox1.Location = new System.Drawing.Point(23, 67);
             this.metroTextBox1.MaxLength = 32767;
             this.metroTextBox1.Name = "metroTextBox1";
             this.metroTextBox1.PasswordChar = '\0';
@@ -83,7 +79,7 @@
             this.metroTextBox1.SelectionLength = 0;
             this.metroTextBox1.SelectionStart = 0;
             this.metroTextBox1.ShortcutsEnabled = true;
-            this.metroTextBox1.Size = new System.Drawing.Size(964, 309);
+            this.metroTextBox1.Size = new System.Drawing.Size(723, 247);
             this.metroTextBox1.TabIndex = 3;
             this.metroTextBox1.Text = "metroTextBox1";
             this.metroTextBox1.UseSelectable = true;
@@ -92,16 +88,14 @@
             // 
             // BugReporter
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1037, 560);
+            this.ClientSize = new System.Drawing.Size(778, 448);
             this.Controls.Add(this.metroTextBox1);
             this.Controls.Add(this.label_B);
             this.Controls.Add(this.label_C);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "BugReporter";
-            this.Padding = new System.Windows.Forms.Padding(27, 75, 27, 25);
             this.Text = "应用程序内部错误";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.BugReporter_Load);

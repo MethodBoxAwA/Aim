@@ -4,10 +4,13 @@ using System.Windows.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// about window
+    /// </summary>
     public partial class About : MetroForm
     {
         /// <summary>
-        /// 构造函数，用于加载窗口中的控件
+        /// initialize component
         /// </summary>
         public About()
         {
@@ -15,7 +18,7 @@ namespace StonePlanner
         }
 
         /// <summary>
-        /// 用于显示感谢窗口
+        /// show thanks window
         /// </summary>
         public void button1_Click(object sender, EventArgs e)
         {
@@ -24,7 +27,7 @@ namespace StonePlanner
         }
 
         /// <summary>
-        /// 用于显示感谢窗口
+        /// show thanks window
         /// </summary>
         public void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -32,14 +35,12 @@ namespace StonePlanner
             t.Show();
         }
 
+        /// <summary>
+        /// load version information
+        /// </summary>
         private void About_Load(object sender, EventArgs e)
         {
             label4.Text += $" (内部版本{BASE_DATA.VERSION_NAME})";
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

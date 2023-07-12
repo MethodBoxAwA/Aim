@@ -13,7 +13,7 @@ namespace StonePlanner
     public partial class Activation : Form
     {
         /// <summary>
-        /// 构造函数，用于加载窗口中的控件。
+        /// initialize component
         /// </summary>
         public Activation()
         {
@@ -21,7 +21,7 @@ namespace StonePlanner
         }
 
         /// <summary>
-        /// 窗口初始化，用于检查用户是否被封禁，若封禁则无法激活软件。
+        /// check whether user has been banned
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -35,7 +35,7 @@ namespace StonePlanner
         }
 
         /// <summary>
-        /// 取消激活，关闭窗口。
+        /// close window
         /// </summary>
         public void linkLabel_D2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -43,7 +43,7 @@ namespace StonePlanner
         }
 
         /// <summary>
-        /// 用户获取激活码，引导至指定网站。
+        /// guide to specific website
         /// </summary>
         public void linkLabel_D1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -51,7 +51,7 @@ namespace StonePlanner
         }
 
         /// <summary>
-        /// 向服务器发送认证请求，确认用户输入的激活码是否正确。
+        /// check whether user's code is correct
         /// </summary>
         public void button_Submit_Click(object sender, EventArgs e)
         {

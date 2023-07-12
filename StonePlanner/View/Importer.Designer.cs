@@ -156,7 +156,6 @@
             this.MaximizeBox = false;
             this.Name = "Importer";
             this.Text = "预设导入器";
-            this.Load += new System.EventHandler(this.Importer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

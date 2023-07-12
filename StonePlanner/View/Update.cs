@@ -13,10 +13,24 @@ using static StonePlanner.DataType;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// update software GUI
+    /// </summary>
     public partial class Update : MetroForm
     {
-        string updateSource = @"https://raw.githubusercontent.com/lzr2006/lzr2006.github.io/main/Services/StonePlanner/update.txt";
+        /// <summary>
+        /// update information source
+        /// </summary>
+        string updateSource = @"https://raw.githubusercontent.com/
+        lzr2006/lzr2006.github.io/main/Services/StonePlanner/update.txt";
+        /// <summary>
+        /// list of versions
+        /// </summary>
         List<VersionInfo> versions = new List<VersionInfo>();
+
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public Update()
         {
             InitializeComponent();
@@ -35,7 +49,11 @@ namespace StonePlanner
                 $"({BASE_DATA.VRESION_COUNT})";
         }
 
-        private void DataFinished(object sender, DownloadStringCompletedEventArgs e) 
+        /// <summary>
+        /// data downloaded
+        /// </summary>
+        private void DataFinished(object sender, 
+            DownloadStringCompletedEventArgs e) 
         {
             string result = e.Result;
             List<string> route = new List<string>(result.Split('\n'));
@@ -54,7 +72,9 @@ namespace StonePlanner
             metroLabel_Info.Text = "获取信息成功！";
         }
 
-
+        /// <summary>
+        /// switch to the Beta channel
+        /// </summary>
         private void metroRadioButton_Beta_CheckedChanged(object sender, EventArgs e)
         {
             if (metroRadioButton_Beta.Checked)
@@ -66,6 +86,9 @@ namespace StonePlanner
             }
         }
 
+        /// <summary>
+        /// switch to the Release channel
+        /// </summary>
         private void metroRadioButton_Release_CheckedChanged(object sender, EventArgs e)
         {
             if (metroRadioButton_Release.Checked)
@@ -77,6 +100,9 @@ namespace StonePlanner
             }
         }
 
+        /// <summary>
+        /// switch to the Dev channel
+        /// </summary>
         private void metroRadioButton_Dev_CheckedChanged(object sender, EventArgs e)
         {
             if (metroRadioButton_Dev.Checked)
@@ -88,6 +114,9 @@ namespace StonePlanner
             }
         }
 
+        /// <summary>
+        /// start download new version of software
+        /// </summary>
         private async void Button_Submit_Click(object sender, EventArgs e)
         {
             //Download newest version
@@ -119,10 +148,13 @@ namespace StonePlanner
             {
                 saveFileName = saveFileDialog.FileName;
 
-                var progressMessageHandler = new ProgressMessageHandler(new HttpClientHandler());
+                var progressMessageHandler = new ProgressMessageHandler
+                    (new HttpClientHandler());
+                //display callback
                 progressMessageHandler.HttpReceiveProgress += (_, e) =>
                 {
-                    metroLabel_Info.Text = $"下载中：{e.ProgressPercentage}%";//下载进度百分比
+                    metroLabel_Info.Text = $"下载中：" +
+                    $"{e.ProgressPercentage}%";//下载进度百分比
                 };
                 using (var client = new HttpClient(progressMessageHandler))
                 using (var fileStream = new FileStream(saveFileName, FileMode.Create))
@@ -133,6 +165,9 @@ namespace StonePlanner
             }
         }
 
+        /// <summary>
+        /// prompt the download is ending
+        /// </summary>
         private void FileSaved(object sender, AsyncCompletedEventArgs e) 
         {
             MessageBox.Show("下载完成！");

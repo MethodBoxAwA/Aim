@@ -6,33 +6,49 @@ using MetroFramework.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// software settings
+    /// </summary>
     public partial class Settings : MetroForm
     {
+        /// <summary>
+        /// pack of settings
+        /// </summary>
         internal List<string> packedSettings = new List<string>();
+
+        /// <summary>
+        /// initialize component and read settings
+        /// </summary>
         public Settings()
         {
-            //还是将读取设置在这里
+            // or set the read here
             InitializeSettings();
             InitializeComponent();
         }
 
+        /// <summary>
+        /// scroll page
+        /// </summary>
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
             panel_Main.Top = -vScrollBar_Control.Value - 10;
         }
 
+        /// <summary>
+        /// save settings
+        /// </summary>
         private void button_Save_Click(object sender, EventArgs e)
         {
-            //写入
+            // write settings
             string path = $@"{Application.StartupPath}\settings.ini";
-            //1、切换设置
+            // toggle settings
             string SwitchPicturesYesNo = checkBox_PictureSwitch.Checked ? "True" : "False";
             Inner.INIHolder.Write("SwitchSettings", "PictureSwitch",SwitchPicturesYesNo,path);
             Inner.INIHolder.Write("SwitchSettings", "PictureSwitchTime", textBox_PictureSwitchTime_R.Text, path);
             string SwitchSentencesYesNo = checkBox_PictureSwitch.Checked ? "True" : "False";
             Inner.INIHolder.Write("SwitchSettings", "SentenceSwitch", SwitchSentencesYesNo, path);
             Inner.INIHolder.Write("SwitchSettings", "SentenceSwitchTime", textBox_SentenceSwitchTime_R.Text, path);
-            //2、自提示相关
+            // correlation from self-prompting
             if (checkBox_StartSwitch.Checked)
             {
                 RegistryKey R_local = Registry.CurrentUser;//RegistryKey R_local = Registry.CurrentUser;
@@ -53,7 +69,9 @@ namespace StonePlanner
             Inner.INIHolder.Write("SwitchSettings", "SentenceSwitch", AutoLoginYesNo, path);
         }
 
-
+        /// <summary>
+        /// initialize settings
+        /// </summary>
         protected void InitializeSettings() 
         {
             string path = $@"{Application.StartupPath}\settings.ini";
@@ -63,14 +81,15 @@ namespace StonePlanner
             packedSettings.Add(Inner.INIHolder.Read("SwitchSettings", "SentenceSwitchTime", "False", path));
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// close window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Exit_Click(object sender, EventArgs e)
         {
             Close();
         }
+
     }
 }

@@ -45,6 +45,13 @@ namespace StonePlanner
             /// Plugin entry point
             /// </summary>
             void Run();
+
+            /// <summary>
+            /// Plugin execute test method
+            /// </summary>
+            /// <param name="input"></param>
+            /// <returns></returns>
+            public string Execute(string input);
         }   
 	
     }

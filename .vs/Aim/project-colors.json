@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "cfe39c05-65e2-4f8e-936a-4ec1c5834536": {
+      "ProjectGuid": "cfe39c05-65e2-4f8e-936a-4ec1c5834536",
+      "DisplayName": "Aim.Plugin",
+      "ColorIndex": 0
+    },
+    "cf2163f8-6d72-428e-8a29-b95c5cef1610": {
+      "ProjectGuid": "cf2163f8-6d72-428e-8a29-b95c5cef1610",
+      "DisplayName": "Aim.User",
+      "ColorIndex": 1
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 2
+}

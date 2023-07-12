@@ -165,7 +165,6 @@
             this.Name = "Testify";
             this.Padding = new System.Windows.Forms.Padding(27, 75, 27, 25);
             this.Text = "静态值指示器";
-            this.Load += new System.EventHandler(this.Testify_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

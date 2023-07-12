@@ -6,18 +6,29 @@ namespace StonePlanner
 {
     public partial class BugReporter : MetroForm
     {
-        string info;
-        public BugReporter(string pInfo)
+
+        /// <summary>
+        /// error information
+        /// </summary>
+        public string Info { get; set; }
+        /// <summary>
+        /// initialize component and get error information
+        /// </summary>
+        /// <param name="info">error info</param>
+        public BugReporter(string info)
         {
             InitializeComponent();
 
-            this.info = pInfo;
+            Info = info;
         }
 
+        /// <summary>
+        /// window load
+        /// </summary>
         private void BugReporter_Load(object sender, EventArgs e)
         {
             metroTextBox1.Multiline = true;
-            metroTextBox1.Text = info;
+            metroTextBox1.Text = Info;
         }
     }
 }

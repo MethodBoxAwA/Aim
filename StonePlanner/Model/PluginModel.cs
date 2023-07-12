@@ -35,6 +35,9 @@ namespace StonePlanner.Model
         /// </summary>
         public string PluginDescription => PluginInstance?.PluginDescription;
 
-
+        public string Execute(string input) 
+        {
+            return PluginInstance.Execute(input);
+        }
     }
 }

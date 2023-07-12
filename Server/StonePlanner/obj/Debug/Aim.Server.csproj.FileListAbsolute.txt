@@ -1,0 +1,15 @@
+D:\methodbox\Aim\Server\StonePlanner\bin\Debug\StonePlanner.exe.config
+D:\methodbox\Aim\Server\StonePlanner\bin\Debug\StonePlanner.exe
+D:\methodbox\Aim\Server\StonePlanner\bin\Debug\StonePlanner.pdb
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\Aim.Server.csproj.AssemblyReference.cache
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\StonePlanner.ControlButton.resources
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\StonePlanner.Main.resources
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\StonePlanner.Properties.Resources.resources
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\StonePlanner.ServerInfo.resources
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\StonePlanner.ServerSettings.resources
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\StonePlanner.TaskSettings.resources
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\StonePlanner.UserInfo.resources
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\Aim.Server.csproj.GenerateResource.cache
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\Aim.Server.csproj.CoreCompileInputs.cache
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\StonePlanner.exe
+D:\methodbox\Aim\Server\StonePlanner\obj\Debug\StonePlanner.pdb

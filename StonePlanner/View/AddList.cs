@@ -6,11 +6,17 @@ namespace StonePlanner
 {
     public partial class AddList : MetroForm
     {
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public AddList()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// insert new list
+        /// </summary>
         private void button_Submit_Click(object sender, EventArgs e)
         {
             try
@@ -20,11 +26,15 @@ namespace StonePlanner
             }
             catch(Exception ex) 
             {
+                // encounter insert error
                 ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex);
                 MessageBox.Show($"添加失败，原因是{ex.Message}。","失败",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
         }
 
+        /// <summary>
+        /// set window topmost
+        /// </summary>
         private void AddList_Load(object sender, EventArgs e)
         {
             TopMost = true;

@@ -6,10 +6,23 @@ using System.Windows.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// login window
+    /// </summary>
     public partial class Login : MetroForm
     {
+        /// <summary>
+        /// user's name
+        /// </summary>
         public static string UserName;
+        /// <summary>
+        /// user's type
+        /// </summary>
         public static int UserType;
+
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public Login()
         {
             InitializeComponent();
@@ -19,22 +32,27 @@ namespace StonePlanner
         {
             dataGridView1.Visible = false;  
             textBox_M_Pwd.UseSystemPasswordChar = true;
-           // MessageBox.Show("This program is protected by unregistered ASProtect.","ASProtect",MessageBoxButtons.OK,MessageBoxIcon.Information);
+           // MessageBox.Show("This program is protected by
+           // unregistered ASProtect.","ASProtect",
+           // MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
         
+        /// <summary>
+        /// login
+        /// </summary>
         private void button_Submit_Click(object sender, EventArgs e)
         {
-            //该逻辑依赖于DataTable，实际上没什么用，急需重写
             var account = SQLConnect.SQLCommandQuery(
                 $"SELECT Pwd FROM Users where Username='{textBox_M_Name.Text}';");
             if (!account.HasRows)
             {
+                // no corresponding account exists
                 MessageBox.Show("账号不存在！", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             else
             {
-                //存在相应账户
+                // corresponding account exists
                 account.Read();
                 string password = account["Pwd"].ToString();
                 if (textBox_M_Pwd.Text == password)

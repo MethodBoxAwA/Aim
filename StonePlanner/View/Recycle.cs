@@ -6,8 +6,15 @@ using System.Windows.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// save all of finished tasks
+    /// </summary>
     public partial class Recycle : MetroForm
     {
+
+        /// <summary>
+        /// initialize component and load cols
+        /// </summary>
         public Recycle()
         {
             InitializeComponent();
@@ -15,16 +22,22 @@ namespace StonePlanner
             LoadCol();
         }
 
+        /// <summary>
+        /// load task columns
+        /// </summary>
         protected void LoadCol() 
         {
+            // connect to database
             OleDbConnection conn = new OleDbConnection(
                 $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\\data.mdb;Jet OLEDB:Database Password={Main.password};"
-                ); //Jet OLEDB:Database Password=
+                ); 
+            // Jet OLEDB:Database Password=
             OleDbCommand cmd = conn.CreateCommand();
             cmd.CommandText = "select top 10 * from Tasks";
             conn.Open();
             OleDbDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
+            // use DataTable
             if (dr.HasRows)
             {
                 for (int i = 0; i < dr.FieldCount; i++)
@@ -42,6 +55,7 @@ namespace StonePlanner
                 }
                 dt.Rows.Add(row);
             }
+            // close and dispose
             cmd.Dispose();
             conn.Close();
             dataGridView1.DataSource = dt;
@@ -49,23 +63,7 @@ namespace StonePlanner
 
         private void Recycle_Load(object sender, EventArgs e)
         {
-            //List<Plan> recycleList = Main.recycle_bin;
-            //int index = 0;
-            //foreach (var item in recycleList)
-            //{
-            //    dataGridView1.Rows.Add();
-            //    dataGridView1.Rows[index].Cells["TaskName"].Value = item.capital;
-            //    dataGridView1.Rows[index].Cells["TaskTime"].Value = item.dwSeconds;
-            //    dataGridView1.Rows[index].Cells["TaskStatus"].Value = item.status;
-            //    dataGridView1.Rows[index].Cells["TaskDifficulty"].Value = item.dwDifficulty;                    ////
-            //    if (dataGridView1.Rows[index].Cells["TaskDifficulty"].Value.ToString().Length == 1)             ////
-            //    {                                                                                               ////
-            //        dataGridView1.Rows[index].Cells["TaskDifficulty"].Value =
-            //            $"{dataGridView1.Rows[index].Cells["TaskDifficulty"].Value}.0"
-            //            ;//
-            //    }
-            //    index++;
-            //}
+
         }
     }
 }

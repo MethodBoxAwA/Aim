@@ -11,20 +11,34 @@ namespace StonePlanner
 {
     public partial class WebService : MetroForm
     {
-        protected static Socket cilent;
+        /// <summary>
+        /// client socket instance
+        /// </summary>
+        protected static Socket client;
+
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public WebService()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// find password hyperlink
+        /// </summary>
         private void linkLabel_Register_LinkClicked(object sender, EventArgs e)
         {
-            MessageBox.Show("请联系您的网络管理员操作", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("请联系您的网络管理员操作", "提醒", 
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// login to server
+        /// </summary>
         private void button_Submit_Click(object sender, EventArgs e)
         {
-            cilent = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint iPEndPoint = null;
             try
             {
@@ -40,7 +54,7 @@ namespace StonePlanner
             }
             try
             {
-                cilent.Connect(iPEndPoint);
+                client.Connect(iPEndPoint);
             }
             catch (Exception ex)
             {
@@ -48,16 +62,20 @@ namespace StonePlanner
                     , MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
-            //尝试登录
+            //try login
             string command = $"-login {textBox_M_Name.Text} {textBox_M_Pwd.Text}";
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(command);
-            cilent.Send(buffer);
+            client.Send(buffer);
 
             Thread receiveThread = new Thread(Receive);
             receiveThread.IsBackground = true;
-            receiveThread.Start(cilent);
+            receiveThread.Start(client);
         }
 
+        /// <summary>
+        /// on receive message
+        /// </summary>
+        /// <param name="socket">receive socket instance</param>
         protected void Receive(object socket)
         {
             Socket receiver = socket as Socket;
@@ -87,20 +105,20 @@ namespace StonePlanner
                     try
                     {
                         var dResult = (Structs.PlanStruct) ByteConvert.BytesToObject(buffer);
-                        AddTodo addtodo = new AddTodo(dResult);
-                        MethodInvoker fmShower = new MethodInvoker(() => addtodo.Show());
+                        AddTodo addTodo = new AddTodo(dResult);
+                        MethodInvoker fmShower = new MethodInvoker(() => addTodo.Show());
                         BeginInvoke(fmShower);
                     }
                     catch { }
                     if (serverInfo.Replace("\0", "") == "-Getinfo")
                     {
-                        Structs.UserStruct ubuff = new Structs.UserStruct();
-                        ubuff.userName = Login.UserName;
-                        ubuff.userMoney = Main.money;
-                        ubuff.userExplosive = Main.explosive;
-                        ubuff.userWisdom = Main.wisdom;
-                        ubuff.userLasting = Main.lasting;
-                        byte[] buffer_send = ByteConvert.ObjectToBytes(ubuff);
+                        Structs.UserStruct uBuff = new Structs.UserStruct();
+                        uBuff.userName = Login.UserName;
+                        uBuff.userMoney = Main.money;
+                        uBuff.userExplosive = Main.explosive;
+                        uBuff.userWisdom = Main.wisdom;
+                        uBuff.userLasting = Main.lasting;
+                        byte[] buffer_send = ByteConvert.ObjectToBytes(uBuff);
                         receiver.Send(buffer_send, SocketFlags.None);
                     }
                     if (serverInfo.Replace("\0", "") == "-Gettask")

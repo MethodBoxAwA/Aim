@@ -10,15 +10,31 @@ using MetroFramework.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// control
+    /// </summary>
     public partial class Console : MetroForm
     {
-        //INT类型存储器 多步执行布尔存储器
-        internal int EPH,KDP = 0;
+        /// <summary>
+        /// INT type memory
+        /// </summary>
+        internal int EPH = 0;
+        /// <summary>
+        /// Multi-step Boolean memory
+        /// </summary>
+        internal int KDP = 0;
+
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public Console()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// set default settings
+        /// </summary>
         private void Console_Load(object sender, EventArgs e)
         {
             richTextBox_Output.ReadOnly = true;
@@ -26,8 +42,12 @@ namespace StonePlanner
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
-        // 返回搜索字符
-        public static string GetLastWord(string str, int i)
+        /// <summary>
+        /// returns the specified search character
+        /// </summary>
+        /// <param name="str">characters want to search for</param>
+        /// <returns>the specified search character</returns>
+        public static string GetLastWord(string str)
         {
             string x = str;
             Regex reg = new Regex(@"\S+[a-z]+\S*|[a-z]+\S*|\S+[a-z]*", RegexOptions.RightToLeft);
@@ -37,7 +57,10 @@ namespace StonePlanner
             return x;
         }
 
-        //关键字集
+        /// <summary>
+        /// get all of key words
+        /// </summary>
+        /// <returns>all of key words</returns>
         public static List<string> AllClass()
         {
             List<string> list = new List<string>();
@@ -49,8 +72,27 @@ namespace StonePlanner
             list.Add("COMPILE");
             return list;
         }
-        protected List<List<string>> rx = new List<List<string>>(); int rw = 0;
+        /// <summary>
+        /// what's this?
+        /// </summary>
+        protected List<List<string>> rx = new List<List<string>>(); 
+        int rw = 0;
         #region 语法解析器
+        /// <summary>
+        /// new syntax parser
+        /// </summary>
+        /// <param name="row">code row</param>
+        protected void SyntaxParser(string row) 
+        {
+            List<string> code = new List<string>();
+
+        }
+
+        /// <summary>
+        /// legacy syntax parser
+        /// </summary>
+        /// <param name="row">code row</param>
+        /// <param name="dwStatus">match status</param>
         protected void SyntaxParser(string row,int dwStatus = 0)
         {
             try
@@ -238,7 +280,7 @@ namespace StonePlanner
                             try
                             {
                                 int signal = Convert.ToInt32(nInput[1]);
-                                //Main.AddSign(signal);
+                                //Main.AddSign(Signal);
                                 richTextBox_Output.Text += $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
                             }
                             catch (Exception ex)
@@ -262,6 +304,9 @@ namespace StonePlanner
             catch(Exception ex) { ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex); }
         }
         #endregion
+        /// <summary>
+        /// use syntax parser to compile file
+        /// </summary>
         protected void Compile() 
         {
             string[] command = textBox_Pars.Text.Trim().Split('\n');
@@ -288,7 +333,7 @@ namespace StonePlanner
             RichTextBox rich = (RichTextBox)sender;
 
             //语法高亮
-            string s = GetLastWord(rich.Text, rich.SelectionStart);
+            string s = GetLastWord(rich.Text);
             if (AllClass().IndexOf(s) > -1)
             {
                 MySelect(rich, rich.SelectionStart, s, Color.CadetBlue, true);
@@ -317,7 +362,14 @@ namespace StonePlanner
             }
         }
 
-        // 设定颜色
+        /// <summary>
+        /// set select color
+        /// </summary>
+        /// <param name="tb">textbox</param>
+        /// <param name="i">index</param>
+        /// <param name="s">selected string</param>
+        /// <param name="c">color</param>
+        /// <param name="font">selected font</param>
         public static void MySelect(System.Windows.Forms.RichTextBox tb, int i, string s, Color c, bool font)
         {
             try

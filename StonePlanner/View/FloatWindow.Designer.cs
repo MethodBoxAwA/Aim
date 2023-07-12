@@ -34,17 +34,20 @@
             // panel_Only
             // 
             this.panel_Only.Location = new System.Drawing.Point(1, -1);
+            this.panel_Only.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel_Only.Name = "panel_Only";
-            this.panel_Only.Size = new System.Drawing.Size(238, 37);
+            this.panel_Only.Size = new System.Drawing.Size(178, 30);
             this.panel_Only.TabIndex = 0;
+            this.panel_Only.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Only_Paint);
             // 
             // FloatWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 34);
+            this.ClientSize = new System.Drawing.Size(180, 27);
             this.Controls.Add(this.panel_Only);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FloatWindow";
             this.Text = "FloatWindow";
             this.ResumeLayout(false);

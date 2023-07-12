@@ -4,13 +4,24 @@ using System.Windows.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// show all of static fields
+    /// </summary>
     public partial class Testify : MetroForm
     {
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public Testify()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// refresh value of fields
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
             label2.Text = Login.UserName;
@@ -21,11 +32,6 @@ namespace StonePlanner
             label7.Text = $"用户智慧值：{Main.wisdom}";
             label8.Text = $"剩余时间：{Main.nTime}";
             label9.Text = $"主信号值：0";
-        }
-
-        private void Testify_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

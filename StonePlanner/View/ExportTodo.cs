@@ -10,9 +10,19 @@ using System.Windows.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// export all unfinished task (Deprecated)
+    /// </summary>
     public partial class ExportTodo : Form
     {
+        /// <summary>
+        /// all plan control
+        /// </summary>
         System.Windows.Forms.Control.ControlCollection planCollcetion;
+        /// <summary>
+        /// initialize component and load collection
+        /// </summary>
+        /// <param name="szPlanCollcetions">plan control collection</param>
         public ExportTodo(Control.ControlCollection szPlanCollcetions)
         {
             InitializeComponent();
@@ -20,6 +30,9 @@ namespace StonePlanner
             this.planCollcetion = szPlanCollcetions;
         }
 
+        /// <summary>
+        /// load plan information and export as texture
+        /// </summary>
         private void ExportTodo_Load(object sender, EventArgs e)
         {
             try
@@ -41,10 +54,14 @@ namespace StonePlanner
                     planStatus.Add(item.status);
                     i++;
                 }
-                //释放
+                // free
                 i = 0;
             }
-            catch { MessageBox.Show("请先添加待办！");}
+            catch 
+            { 
+                // have no plan
+                MessageBox.Show("请先添加待办！");
+            }
         }
 
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)

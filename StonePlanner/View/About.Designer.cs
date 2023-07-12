@@ -427,7 +427,6 @@
             this.label9.Size = new System.Drawing.Size(263, 255);
             this.label9.TabIndex = 0;
             this.label9.Text = resources.GetString("label9.Text");
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // pictureBox2
             // 

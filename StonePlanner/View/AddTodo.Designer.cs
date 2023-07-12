@@ -502,7 +502,6 @@ namespace StonePlanner
             this.groupBox_Area1.TabIndex = 28;
             this.groupBox_Area1.TabStop = false;
             this.groupBox_Area1.Text = "基本信息";
-            this.groupBox_Area1.Enter += new System.EventHandler(this.groupBox_Area1_Enter);
             // 
             // groupBox_Area2
             // 
@@ -552,7 +551,6 @@ namespace StonePlanner
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "其它信息";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // metroButton_Add
             // 

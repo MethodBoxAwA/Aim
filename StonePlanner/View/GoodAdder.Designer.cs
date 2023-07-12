@@ -264,7 +264,6 @@
             this.label_Function.Size = new System.Drawing.Size(89, 20);
             this.label_Function.TabIndex = 10;
             this.label_Function.Text = "功  能：";
-            this.label_Function.Click += new System.EventHandler(this.label_Function_Click);
             // 
             // textBox6
             // 
@@ -413,7 +412,6 @@
             this.Name = "GoodAdder";
             this.Padding = new System.Windows.Forms.Padding(27, 75, 27, 25);
             this.Text = "新建商品";
-            this.Load += new System.EventHandler(this.GoodAdder_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

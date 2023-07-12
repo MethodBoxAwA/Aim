@@ -11,8 +11,14 @@ using System.Windows.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// import prefabs window
+    /// </summary>
     public partial class Importer : Form
     {
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public Importer()
         {
             InitializeComponent();
@@ -20,9 +26,10 @@ namespace StonePlanner
 
         private void button_Choose_Click(object sender, EventArgs e)
         {
+            // use OpenFileDialog
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "选择预设包";
-            openFileDialog.InitialDirectory = "c:\\";//注意这里写路径时要用c:\\而不是c:\
+            openFileDialog.InitialDirectory = "c:\\";
             openFileDialog.Filter = "预设数据库|*.mdb";
             openFileDialog.RestoreDirectory = true;
             openFileDialog.FilterIndex = 1;
@@ -75,14 +82,12 @@ namespace StonePlanner
             dataGridView1.DataSource = dt;
         }
 
-        private void Importer_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// start import
+        /// </summary>
         private void button_Import_Click(object sender, EventArgs e)
         {
-            //扫描数据
+            // scan data
             List<string> k = new List<string>();
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {

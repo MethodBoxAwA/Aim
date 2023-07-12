@@ -5,13 +5,22 @@ using System.Windows.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// add good window
+    /// </summary>
     public partial class GoodAdder : MetroForm
     {
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public GoodAdder()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// show ide window
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             InnerIDE iDE = new InnerIDE();
@@ -22,7 +31,7 @@ namespace StonePlanner
         {
             try
             {
-                //链接数据库
+                // connect to database
                 OleDbConnection conn = new OleDbConnection(
                    $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\\data.mdb;Jet OLEDB:Database Password={Main.password};"
                    ); //Jet OLEDB:Database Password=
@@ -34,6 +43,7 @@ namespace StonePlanner
                     $"'{textBox_GoodPicture.Text}'," +
                     $"'{textBox_GoodIntro.Text}'," +
                     $"'{textBox_Function.Text}')";
+                // close and dispose
                 conn.Open();
                 cmd.ExecuteReader();
                 GC.Collect();
@@ -45,21 +55,14 @@ namespace StonePlanner
             }
         }
 
-        private void label_Function_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void GoodAdder_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// choose picture
+        /// </summary>
         private void Buton_Cospic_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "c:\\";//注意这里写路径时要用c:\\而不是c:\
-            openFileDialog.Filter = "便携式网络图形|*.png|联合图像专家组|*.jpg|所有文件|*.*";
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = @"png文件|*.png|jpg文件|*.jpg|所有文件|*.*";
             openFileDialog.RestoreDirectory = true;
             openFileDialog.FilterIndex = 1;
             if (openFileDialog.ShowDialog() == DialogResult.OK)

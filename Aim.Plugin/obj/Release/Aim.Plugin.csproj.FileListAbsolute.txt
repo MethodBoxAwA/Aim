@@ -1,0 +1,6 @@
+D:\methodbox\Aim\Aim.Plugin\bin\Release\Aim.Plugin.dll
+D:\methodbox\Aim\Aim.Plugin\bin\Release\Aim.Plugin.pdb
+D:\methodbox\Aim\Aim.Plugin\obj\Release\Aim.Plugin.csproj.AssemblyReference.cache
+D:\methodbox\Aim\Aim.Plugin\obj\Release\Aim.Plugin.csproj.CoreCompileInputs.cache
+D:\methodbox\Aim\Aim.Plugin\obj\Release\Aim.Plugin.dll
+D:\methodbox\Aim\Aim.Plugin\obj\Release\Aim.Plugin.pdb

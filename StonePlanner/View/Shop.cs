@@ -1,31 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StonePlanner
 {
+    /// <summary>
+    /// shop
+    /// </summary>
     public partial class Shop : Form
     {
+        /// <summary>
+        /// initialize component
+        /// </summary>
         public Shop()
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// list of all of goods
+        /// </summary>
         protected List<Good> goodList;
+        /// <summary>
+        /// about page information
+        /// </summary>
         protected int page = 1,maxPage = 1;
+        /// <summary>
+        /// count of goods
+        /// </summary>
         internal static int PWMS_ACCOUNT;
         private void Shop_Load(object sender, EventArgs e)
         {
-            //连接数据库 获取商品
+            // Connect to the database to get the item
             OleDbConnection conn = new OleDbConnection(
                $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\\data.mdb;Jet OLEDB:Database Password={Main.password};"
-               ); //Jet OLEDB:Database Password=
+               ); 
             OleDbCommand cmd = conn.CreateCommand();
             cmd.CommandText = "select * from Goods";
             conn.Open();
@@ -53,12 +64,13 @@ namespace StonePlanner
             dataGridView1.DataSource = dt;
             dataGridView1.Visible = false;
 
-            //展示商品
+            //display goods
             goodList = new List<Good>();
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
                 try
                 {
+                    // buy mode
                     Good good = new Good
                         (
                           dataGridView1.Rows[i].Cells[2].Value.ToString(),
@@ -66,7 +78,7 @@ namespace StonePlanner
                           Image.FromFile(dataGridView1.Rows[i].Cells[3].Value.ToString()),
                           Convert.ToInt32(dataGridView1.Rows[i].Cells[1].Value),
                           Convert.ToInt32(dataGridView1.Rows[i].Cells[0].Value),
-                          new IntPtr(1) //购买模式
+                          new IntPtr(1) 
                         );
                     goodList.Add(good);
                 }
@@ -78,10 +90,14 @@ namespace StonePlanner
             maxPage = goodList.Count / 6 + 1;
             PWMS_ACCOUNT = goodList.Count;
             label_Main.Text = $"第{page}页，共{maxPage}页";
-            goodShower(page);
+            ShowGood(page);
         }
 
-        internal void goodShower(int page) 
+        /// <summary>
+        /// display goods
+        /// </summary>
+        /// <param name="page">page index</param>
+        internal void ShowGood(int page) 
         {
             try 
             {
@@ -102,6 +118,9 @@ namespace StonePlanner
             catch { }
         }
 
+        /// <summary>
+        /// page backwards
+        /// </summary>
         private void btn_tRight_Click(object sender, EventArgs e)
         {
             if (page == maxPage)
@@ -112,22 +131,23 @@ namespace StonePlanner
             {
                 panel_Main.Controls.Clear();
                 page++;
-                goodShower(page);
+                ShowGood(page);
                 label_Main.Text = $"第{page}页，共{maxPage}页";
             }
         }
 
+        /// <summary>
+        /// open AddGood window
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
-            GoodAdder ga = new GoodAdder();
+            AddGood ga = new AddGood();
             ga.Show();
         }
 
-        private void panel_Main_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// page forwards
+        /// </summary>
         private void btn_tLeft_Click(object sender, EventArgs e)
         {
             if (page == 1)
@@ -138,7 +158,7 @@ namespace StonePlanner
             {
                 panel_Main.Controls.Clear();
                 page--;
-                goodShower(page);
+                ShowGood(page);
                 label_Main.Text = $"第{page}页，共{maxPage}页";
             }
         }

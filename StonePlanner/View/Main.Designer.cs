@@ -135,7 +135,7 @@
             this.User_Piicture.TabIndex = 8;
             this.User_Piicture.TabStop = false;
             this.User_Piicture.Click += new System.EventHandler(this.User_Piicture_Click);
-            this.User_Piicture.DoubleClick += new System.EventHandler(this.User_Piicture_DoubleClick);
+            this.User_Piicture.DoubleClick += new System.EventHandler(this.User_Picture_DoubleClick);
             // 
             // pictureBox_T_Exit
             // 
