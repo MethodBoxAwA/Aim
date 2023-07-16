@@ -37,7 +37,7 @@ namespace StonePlanner
             // convert to specific string
             string levelString = errLevel switch
             {
-                DataType.ExceptionsLevel.Infomation => "Information",
+                DataType.ExceptionsLevel.Information => "Information",
                 DataType.ExceptionsLevel.Caution => "Caution",
                 DataType.ExceptionsLevel.Warning => "Warning",
                 DataType.ExceptionsLevel.Error => "Error",

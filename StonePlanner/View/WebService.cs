@@ -129,11 +129,11 @@ namespace StonePlanner
                         {
                             try
                             {
-                                taskTypePairs.Add(item.capital, 1);
+                                taskTypePairs.Add(item.Capital, 1);
                             }
                             catch
                             {
-                                taskTypePairs.Add(item.capital + rd.Next(0, 10000), 1);
+                                taskTypePairs.Add(item.Capital + rd.Next(0, 10000), 1);
 
                             }
                         }

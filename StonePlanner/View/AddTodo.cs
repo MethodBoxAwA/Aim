@@ -171,15 +171,15 @@ namespace StonePlanner
             try
             {
                 //create plan class
-                PlanClassC psc = new PlanClassC();
+                PlanStructC psc = new PlanStructC();
                 //class encapsulation
-                psc.capital = textBox_Capital.Text;
-                psc.seconds = Convert.ToInt32(textBox_Time.Text);
-                psc.intro = textBox_Intro.Text;
-                psc.lasting = Convert.ToInt32(textBox_Lasting.Text);
-                psc.explosive = Convert.ToInt32(textBox_Explosive.Text);
-                psc.wisdom = Convert.ToInt32(textBox_Wisdom.Text);
-                psc.parent = comboBox_List.SelectedItem.ToString();
+                psc.Capital = textBox_Capital.Text;
+                psc.Seconds = Convert.ToInt32(textBox_Time.Text);
+                psc.Intro = textBox_Intro.Text;
+                psc.Lasting = Convert.ToInt32(textBox_Lasting.Text);
+                psc.Explosive = Convert.ToInt32(textBox_Explosive.Text);
+                psc.Wisdom = Convert.ToInt32(textBox_Wisdom.Text);
+                psc.Parent = comboBox_List.SelectedItem.ToString();
                 DateTime _ = new DateTime(
                     dateTimePicker_Now.Value.Year,
                     dateTimePicker_Now.Value.Month,
@@ -189,7 +189,7 @@ namespace StonePlanner
                     0
                     );
                 psc.UDID = new Random().Next(100000000, 999999999);
-                psc.startTime = _.ToBinary();
+                psc.StartTime = _.ToBinary();
                 psc.Addsignal = Addsignal;
                 double diff = 0D;
                 try
@@ -197,7 +197,7 @@ namespace StonePlanner
                     diff = Math.Round(Convert.ToDouble(domainUpDown_Difficulty.SelectedItem.ToString().Split(' ')[1]), 1);
                 }
                 catch { diff = 0D; }
-                psc.difficulty = diff;
+                psc.Difficulty = diff;
                 //invoke callback function
                 PlanAdditionInvoke(new Plan(psc));
                 Close();

@@ -9,7 +9,7 @@ namespace StonePlanner
 {
     internal static class Program
     {
-        public static bool HIDEBUG = true;
+        public static bool HIDEBUG = false;
         public static bool EnableErrorCenter = false;
         static bool EnableProgramTrusteeship = true;
         /// <summary>
@@ -50,7 +50,7 @@ namespace StonePlanner
                 if (EnableProgramTrusteeship) AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             }
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            /*!!!!!*/Application.Run(new StonePlanner.PlugManager());//!!!!!!!
+            /*!!!!!*/Application.Run(new Console());//!!!!!!!
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             string strConn = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\data.mdb;Jet OLEDB:Database Password={StonePlanner.Main.password}";
             StonePlanner.Main.odcConnection = new OleDbConnection(strConn); //2、打开连接 C#操作Access之按列读取mdb   

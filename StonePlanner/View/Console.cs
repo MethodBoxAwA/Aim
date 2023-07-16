@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using MetroFramework.Forms;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using MetroFramework.Forms;
+using static StonePlanner.Interfaces;
 
 namespace StonePlanner
 {
@@ -15,15 +15,15 @@ namespace StonePlanner
     /// </summary>
     public partial class Console : MetroForm
     {
-        /// <summary>
-        /// INT type memory
-        /// </summary>
-        internal int EPH = 0;
-        /// <summary>
-        /// Multi-step Boolean memory
-        /// </summary>
-        internal int KDP = 0;
-
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessage
+        (
+            IntPtr hWNd,
+            uint Msg,
+            IntPtr wParam,
+            IntPtr lParam
+        );
+        
         /// <summary>
         /// initialize component
         /// </summary>
@@ -33,13 +33,19 @@ namespace StonePlanner
         }
 
         /// <summary>
+        /// function pointers STL
+        /// </summary>
+        internal Dictionary<string, Func<IAimEventArgs, object, object>> 
+            commonFuncPointsList = new ();
+
+        /// <summary>
         /// set default settings
         /// </summary>
         private void Console_Load(object sender, EventArgs e)
         {
             richTextBox_Output.ReadOnly = true;
             textBox_Pars.Visible = false;
-            Control.CheckForIllegalCrossThreadCalls = false;
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         /// <summary>
@@ -64,7 +70,7 @@ namespace StonePlanner
         public static List<string> AllClass()
         {
             List<string> list = new List<string>();
-            list.Add("EXIT");
+            list.Add("exit");
             list.Add("SLEEP");
             list.Add("SET");
             list.Add("ADD");
@@ -77,257 +83,39 @@ namespace StonePlanner
         /// </summary>
         protected List<List<string>> rx = new List<List<string>>(); 
         int rw = 0;
+
         #region 语法解析器
         /// <summary>
         /// new syntax parser
         /// </summary>
         /// <param name="row">code row</param>
-        protected void SyntaxParser(string row) 
+        protected void SyntaxParser(object rowing)
         {
-            List<string> code = new List<string>();
-
-        }
-
-        /// <summary>
-        /// legacy syntax parser
-        /// </summary>
-        /// <param name="row">code row</param>
-        /// <param name="dwStatus">match status</param>
-        protected void SyntaxParser(string row,int dwStatus = 0)
-        {
-            try
+            string row = (string)rowing;
+            List<string> code = new(row.Split('\n'));
+            foreach (var line in code)
             {
-                List<string> nInput = new List<string>();
-                if (dwStatus == 0)
+                AddString("Console","User",line);
+                if (line == "exit")
                 {
-                    richTextBox_Output.Text += $"\nlocal@user>{row}";
-                }
-                richTextBox_Input.Text = string.Empty;
-                //语法解析
-                Regex parser = new Regex(@"\S+[a-z]+\S*|[a-z]+\S*|\S+[a-z]*");
-                MatchCollection result = parser.Matches(row);
-                foreach (var item in result)
-                {
-                    nInput.Add(item.ToString());
-                }
-                //识别
-                //方式：顺序识别
-                //IDE多步语法解析器
-                #region FOR
-                if (nInput[0] == "END")
-                {
-                    rw = 0;
-                    for (int i = 0; i < KDP; i++)
-                    {
-                        foreach (var item in rx)
-                        {
-                            string tempRow = "";
-                            int j = 0;
-                            foreach (var txt in item)
-                            {
-                                if (j != 0) tempRow += " ";
-                                tempRow += txt;
-                                j++;
-                            }
-                            //提前更新一下吧...
-                            tempRow = tempRow.Replace("[EPH]", EPH.ToString());
-                            SyntaxParser(tempRow, 0);
-                            Thread.Sleep(100);
-                        }
-
-                    }
-                }
-                if (rw != 0)
-                {
-                    rx.Add(nInput);//COMPILE .\A.TXT
-                    return;
-                }
-                if (nInput[0] == "REPEAT" && dwStatus == 1)
-                {
-                    if (KDP == 0)
-                    {
-                        //执行循环
-                        KDP = Convert.ToInt32(nInput[1]);
-                        rw = 1;
-                        return;
-                    }
-                }
-                #endregion
-                //IDE普通命令解析器
-                try
-                {
-                    //休眠命令
-                    if (nInput[0] == "SLEEP")
-                    {
-                        if (nInput[1] != "EPH")
-                        {
-                            Thread.Sleep(Convert.ToInt32(nInput[1]));
-                            richTextBox_Output.Text += $"\nConsole@Enviroment>休眠{nInput[1]}毫秒。";
-                        }
-                        else
-                        {
-                            Thread.Sleep(EPH);
-                            richTextBox_Output.Text += $"\nConsole@Enviroment>休眠{EPH}毫秒。";
-                        }
-                    }
-                    else if (nInput[0] == "SET")
-                    {
-                        ArrayList arraySet = new ArrayList();
-                        arraySet.AddRange(nInput);
-                        if (arraySet[1].ToString() == "EPH")
-                        {
-                            //整数型赋值
-                            EPH = Convert.ToInt32(arraySet[2]);
-                            richTextBox_Output.Text += $"\nConsole@Memory>将{arraySet[2]}设置到整数存储器。";
-                        }
-                        else
-                        {
-                            richTextBox_Output.Text += $"\nMemoryNotExistException：未找到该存储器";
-                            try
-                            {
-                                throw new Exceptions.MethodNotExistException("MemoryNotExistException：未找到该存储器。");
-                            }
-                            catch
-                            {
-                                System.Console.WriteLine("MemoryNotExistException：未找到该存储器。");
-                            }
-                        }
-                    }
-                    else if (nInput[0].StartsWith("EPH"))
-                    {
-                        //存储器操作
-                        if (nInput[0] == "EPH+")
-                        {
-                            EPH += Convert.ToInt32(nInput[1]);
-                        }
-                        else if (nInput[0] == "EPH-")
-                        {
-                            EPH -= Convert.ToInt32(nInput[1]);
-                        }
-                        else if (nInput[0] == "EPH*")
-                        {
-                            EPH *= Convert.ToInt32(nInput[1]);
-                        }
-                        else if (nInput[0] == "EPH/")
-                        {
-                            EPH /= Convert.ToInt32(nInput[1]);
-                        }
-                        else
-                        {
-                            try
-                            {
-                                throw new Exceptions.MethodNotExistException("MethodNotExistError：存储器EPH不存在该操作。");
-                            }
-                            catch
-                            {
-                                System.Console.WriteLine("MethodNotExistError：存储器EPH不存在该操作。");
-                            }
-                        }
-                        richTextBox_Output.Text += $"\nConsole@Memory>EPH：{EPH.ToString()}";
-                    }
-                    else if (nInput[0] == "ADD")
-                    {
-                        //打开信号接口
-                        if (dwStatus != 1)
-                        {
-                            if (nInput[1].Contains("[EPH]"))
-                            {
-                                nInput[1] = nInput[1].Replace("[EPH]", EPH.ToString());
-                            }
-                            if (nInput[2].Contains("[EPH]"))
-                            {
-                                nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
-                            }
-                        } 
-                        Main.planner.capital = nInput[1];
-                        Main.planner.seconds = Convert.ToInt32(nInput[2]);
-                        //Main.AddSign(4);
-                        richTextBox_Output.Text += $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
-                    }
-                    else if (nInput[0] == "COMPILE")
-                    {
-                        nInput[1] = nInput[1].Replace(@".\", Application.StartupPath + @"\");
-                        try
-                        {
-                            using (StreamReader sr = new StreamReader(nInput[1]))
-                            {
-                                textBox_Pars.Text = sr.ReadToEnd().Trim();
-                            }
-                            richTextBox_Output.Text += $"\nConsole@Main>Main：开始编译解析{nInput[1]}。";
-                            //开新线程解析语法
-                            Thread threadCompile = new Thread(new ThreadStart(Compile));
-                            threadCompile.Start();
-                        }
-                        catch { richTextBox_Output.Text += $"\nFileNotExistError：指定文件不存在。"; }
-
-                    }
-                    else if (nInput[0] == "SIGN")
-                    {
-                        if (nInput[1] == "HELP")
-                        {
-                            richTextBox_Output.Text += "\nConsole@Main>信 号 规 范：";
-                            richTextBox_Output.Text += "\n|SIGN = 1 => 删除任务";
-                            richTextBox_Output.Text += "\n|SIGN = 2 => 伸长菜单栏";
-                            richTextBox_Output.Text += "\n|SIGN = 3 => 缩短菜单栏";
-                            richTextBox_Output.Text += "\n|SIGN = 4 => 新建待办";
-                            richTextBox_Output.Text += "\n|SIGN = 5 => 传出自身对象集合";
-                            richTextBox_Output.Text += "\n|SIGN = 6 => 查看待办信息";
-                            richTextBox_Output.Text += "\n|SIGN = 7 => 关闭待办详情";
-                            richTextBox_Output.Text += "\nConsole@Main>请注意：错误的使用信号将导致崩溃";
-                        }
-                        else
-                        {
-                            try
-                            {
-                                int signal = Convert.ToInt32(nInput[1]);
-                                //Main.AddSign(Signal);
-                                richTextBox_Output.Text += $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
-                            }
-                            catch (Exception ex)
-                            {
-                                ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, ex);
-                            }
-                        }
-                    }
-                    else if (nInput[0] == "EXIT")
-                    {
-                        richTextBox_Output.Text = "";
-                        Thread tdExit = new Thread(new ThreadStart(EXIT));
-                        tdExit.Start();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ErrorCenter.AddError(DataType.ExceptionsLevel.Infomation, ex);
+                    // exit aim
+                    SendMessage(this.Handle, Develop.Sign.AM_EXIT, 
+                        IntPtr.Zero, IntPtr.Zero);
+                    Environment.Exit(0);
                 }
             }
-            catch(Exception ex) { ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex); }
         }
+
         #endregion
-        /// <summary>
-        /// use syntax parser to compile file
-        /// </summary>
-        protected void Compile() 
-        {
-            string[] command = textBox_Pars.Text.Trim().Split('\n');
-            foreach (var item in command)
-            {
-                richTextBox_Output.Text += $"\nConsole@Compiler>{item}";
-                SyntaxParser(item,1);
-                Thread.Sleep(1000);
-            }
-            richTextBox_Output.Text += $"\nConsole@Compiler>编译解析完成。";
-        } 
+
         private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             //命令执行
             if (e.KeyCode == Keys.Enter)
             {
-                if (Login.UserType == 1)
-                {
-                    MessageBox.Show("语法解析运行时权限拒绝：非管理员用户无权运行命令。", "用户系统（测试）", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                // use multi-thread
+                new Thread(new ParameterizedThreadStart(SyntaxParser)).Start(richTextBox_Input.Text);
+                ;
                 SyntaxParser(richTextBox_Input.Text);
             }
             RichTextBox rich = (RichTextBox)sender;
@@ -384,36 +172,6 @@ namespace StonePlanner
             catch { }
         }
 
-        #region 功能函数
-        internal void EXIT()
-        {
-            richTextBox_Output.Text += $"Console@Clear>正在准备退出...";
-            for (int i = 0; i < 4; i++)
-            {
-                richTextBox_Output.Text += $"\n";
-                Random random = new Random();
-                for (int j = 0; j < 7; j++)
-                {
-                    if (j != 0)
-                    {
-                        richTextBox_Output.Text += $"  {random.Next(10, 90)}";
-                    }
-                    else
-                    {
-                        richTextBox_Output.Text += $"Ln-{i}：{random.Next(10, 90)}";
-                    }
-                    Thread.Sleep(150);
-                }
-            }
-            for (int i = 5; i > 0; i--)
-            {
-                richTextBox_Output.Text = "";
-                richTextBox_Output.Text += $"Console@Enviroment>指令收到，{i}秒后退出。";
-                Thread.Sleep(1000);
-            }
-            Environment.Exit(0);
-        }
-        #endregion
 
         private void richTextBox_Output_TextChanged(object sender, EventArgs e)
         {
@@ -427,6 +185,12 @@ namespace StonePlanner
             Control[] c = tb.Controls.Find("mylb", false);
             if (c.Length > 0)
                 ((ListBox)c[0]).Dispose();
+        }
+
+        private void AddString(string parent, string calling, string info)
+        {
+            richTextBox_Output.Text +=
+                $"\n{parent}@{calling}>{info}";
         }
     }
 }

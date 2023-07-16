@@ -11,7 +11,7 @@ namespace StonePlanner
     {
         internal enum ExceptionsLevel
         {
-            Infomation,
+            Information,
             Caution,
             Warning,
             Error
@@ -46,9 +46,6 @@ namespace StonePlanner
             }
         }
 
-        public class MessageEventArgs : EventArgs
-        {
-            public string Message { get; set; }
-        }
+
     }
 }

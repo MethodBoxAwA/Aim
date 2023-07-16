@@ -27,7 +27,7 @@ namespace StonePlanner
         /// <summary>
         /// 任务大标题
         /// </summary>
-        public string capital;
+        public string Capital;
         /// <summary>
         /// 任务自动编号值
         /// </summary>
@@ -39,15 +39,15 @@ namespace StonePlanner
         /// <summary>
         /// 完成任务所需时间
         /// </summary>
-        public int seconds;
+        public int Seconds;
         /// <summary>
         /// 任务具体介绍
         /// </summary>
-        public string intro = "";
+        public string Intro = "";
         /// <summary>
         /// 任务难度
         /// </summary>
-        public double difficulty = 0.0D;
+        public double Difficulty = 0.0D;
         //第二次重构
         /*
          * 重载 重载 重载 重载
@@ -57,17 +57,17 @@ namespace StonePlanner
          * 让你创新 不是创死我自己
          */
         /// <summary>
-        /// 任务持久力<code>MA_LASTING值</code>
+        /// 任务持久力<code>MA_Lasting值</code>
         /// </summary>
-        public int lasting;
+        public int Lasting;
         /// <summary>
-        /// 任务爆发力<code>MA_EXPLOSIVE值</code>
+        /// 任务爆发力<code>MA_Explosive值</code>
         /// </summary>
-        public int explosive;
+        public int Explosive;
         /// <summary>
-        /// 任务智慧值<code>MA_WISDOM值</code>
+        /// 任务智慧值<code>MA_Wisdom值</code>
         /// </summary>
-        public int wisdom;
+        public int Wisdom;
         //第三次重构
         /* 
          * 我人麻了 真不知道你是怎么想的
@@ -96,11 +96,11 @@ namespace StonePlanner
         /// <summary>
         /// 所属类别
         /// </summary>
-        public string parent;
+        public string Parent;
         /// <summary>
         /// 开始时间
         /// </summary>
-        public DateTime startTime;
+        public DateTime StartTime;
         public Action<int> AddSign;
         /*
          * 第五次重构
@@ -108,52 +108,52 @@ namespace StonePlanner
          * 乱世已过，静待花开
          */
 
-        internal Plan(PlanClassA @struct)
+        internal Plan(PlanStructA @struct)
         {
             InitializeComponent();
-            this.capital = @struct.capital;
-            this.seconds = @struct.seconds;
-            this.intro = @struct.intro;
-            this.difficulty = @struct.difficulty;
-            this.lasting = @struct.lasting;
-            this.explosive = @struct.explosive;
-            this.wisdom = @struct.wisdom;
-            this.parent = @struct.parent;
-            this.startTime = DateTime.FromBinary(@struct.startTime);
+            this.Capital = @struct.Capital;
+            this.Seconds = @struct.Seconds;
+            this.Intro = @struct.Intro;
+            this.Difficulty = @struct.Difficulty;
+            this.Lasting = @struct.Lasting;
+            this.Explosive = @struct.Explosive;
+            this.Wisdom = @struct.Wisdom;
+            this.Parent = @struct.Parent;
+            this.StartTime = DateTime.FromBinary(@struct.StartTime);
             this.AddSign = @struct.Addsignal;
             //智障代码
             this.ID = new Random().Next(100000000, 999999999);
         }
 
-        internal Plan(PlanClassB @struct)
+        internal Plan(PlanStructB @struct)
         {
             InitializeComponent();
-            this.capital = @struct.capital;
-            this.seconds = @struct.seconds;
-            this.intro = @struct.intro;
-            this.difficulty = @struct.difficulty;
-            this.lasting = @struct.lasting;
-            this.explosive = @struct.explosive;
-            this.wisdom = @struct.wisdom;
-            this.startTime = DateTime.FromBinary(@struct.startTime);
+            this.Capital = @struct.Capital;
+            this.Seconds = @struct.Seconds;
+            this.Intro = @struct.Intro;
+            this.Difficulty = @struct.Difficulty;
+            this.Lasting = @struct.Lasting;
+            this.Explosive = @struct.Explosive;
+            this.Wisdom = @struct.Wisdom;
+            this.StartTime = DateTime.FromBinary(@struct.StartTime);
             this.ID = @struct.UDID;
             this.AddSign = @struct.Addsignal;
         }
 
-        internal Plan(PlanClassC @struct)
+        internal Plan(PlanStructC @struct)
         {
             InitializeComponent();
             try
             {
-                this.capital = @struct.capital;
-                this.seconds = @struct.seconds;
-                this.intro = @struct.intro;
-                this.difficulty = @struct.difficulty;
-                this.lasting = @struct.lasting;
-                this.explosive = @struct.explosive;
-                this.wisdom = @struct.wisdom;
-                this.parent = @struct.parent;
-                this.startTime = DateTime.FromBinary(@struct.startTime);
+                this.Capital = @struct.Capital;
+                this.Seconds = @struct.Seconds;
+                this.Intro = @struct.Intro;
+                this.Difficulty = @struct.Difficulty;
+                this.Lasting = @struct.Lasting;
+                this.Explosive = @struct.Explosive;
+                this.Wisdom = @struct.Wisdom;
+                this.Parent = @struct.Parent;
+                this.StartTime = DateTime.FromBinary(@struct.StartTime);
                 this.ID = @struct.UDID;
                 this.AddSign = @struct.Addsignal;
             }
@@ -167,9 +167,9 @@ namespace StonePlanner
 
         private void Plan_Load(object sender, EventArgs e)
         {
-            label_TaskDes.Text = capital;
+            label_TaskDes.Text = Capital;
             button_Finish.Text = "完成";
-            label_Time.Text = seconds.ToString();
+            label_Time.Text = Seconds.ToString();
             this.timer1.Enabled = true;
         }
 
@@ -210,11 +210,11 @@ namespace StonePlanner
             button_Finish.Enabled = false;
             //更新金钱
             //添加限制条件：只有任务完成时才可以被删除
-            if (this.seconds == 0)
+            if (this.Seconds == 0)
             {
-                Main.MoneyUpdate(+(int) this.difficulty * 10);
+                Main.MoneyUpdate(+(int) this.Difficulty * 10);
                 //更新属性
-                Main.ValuesUpdate(+lasting, +explosive, +wisdom);
+                Main.ValuesUpdate(+Lasting, +Explosive, +Wisdom);
                 Main.plan = this;
                 AddSign?.Invoke(1);
             }
@@ -227,32 +227,32 @@ namespace StonePlanner
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (seconds <= 0)
+            if (Seconds <= 0)
             {
-                seconds = 0;
+                Seconds = 0;
                 panel_Status.BackColor = Color.Lime;
                 status = "已办完";
             }
             if (panel_Status.BackColor == Color.Red)
             {
-                seconds -= 1;
+                Seconds -= 1;
             }
-            label_Time.Text = seconds.ToString();
+            label_Time.Text = Seconds.ToString();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (seconds <= 0)
+            if (Seconds <= 0)
             {
-                seconds = 0;
+                Seconds = 0;
                 panel_Status.BackColor = Color.Lime;
                 status = "已办完";
             }
             if (panel_Status.BackColor == Color.Red)
             {
-                seconds -= 1;
+                Seconds -= 1;
             }
-            label_Time.Text = seconds.ToString();
+            label_Time.Text = Seconds.ToString();
         }
 
         private void label_TaskDes_Click_1(object sender, EventArgs e)

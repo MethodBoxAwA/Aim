@@ -526,7 +526,7 @@
             this.Controls.Add(this.vScrollBar_Main);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Main";
-            this.Text = "盒子待办";
+            this.Text = "AimPlanner";
             this.Load += new System.EventHandler(this.Main_Load);
             this.panel_Top.ResumeLayout(false);
             this.panel_Top.PerformLayout();

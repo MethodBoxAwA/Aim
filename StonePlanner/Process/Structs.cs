@@ -3,82 +3,88 @@ using System.Runtime.InteropServices;
 
 namespace StonePlanner
 {
-    internal class Structs
+    public class Structs
     {
         [Serializable]
-        internal struct UserStruct
+        public struct UserStruct
         {
-            internal string userName;
-            internal int userMoney;
-            internal int userExplosive;
-            internal int userLasting;
-            internal int userWisdom;
+            public string userName;
+            public int userMoney;
+            public int userExplosive;
+            public int userLasting;
+            public int userWisdom;
         }
 
         [Serializable]
         public struct PlanStruct
         {
-            internal string Capital;
-            internal int Seconds;
-            internal string Intro;
-            internal double Difficulty;
-            internal int UDID;
-            internal string Parent;
-            internal int Lasting;
-            internal int Wisdom;
-            internal int Explosive;
+            public string Capital;
+            public int Seconds;
+            public string Intro;
+            public double Difficulty;
+            public int UDID;
+            public string Parent;
+            public int Lasting;
+            public int Wisdom;
+            public int Explosive;
+        }
+
+        [Serializable]
+        public struct PlanStructA
+        {
+            public string Capital { get; set; }
+            public int Seconds { get; set; }
+            public double Difficulty { get; set; }
+            public int Lasting { get; set; }
+            public int Explosive { get; set; }
+            public int Wisdom { get; set; }
+            public long StartTime { get; set; }
+            public string Intro { get; set; }
+            public string Parent { get; set; }
+            public Action<int> Addsignal { get => addsignal; set => addsignal=value; }
+            private Action<int> addsignal;
+        }
+
+        [Serializable]
+        public class PlanStructB
+        {
+            public string Capital { get; set; }
+            public int Seconds { get; set; }
+            public double Difficulty { get; set; }
+            public int Lasting { get; set; }
+            public int Explosive { get; set; }
+            public int Wisdom { get; set; }
+            public long StartTime { get; set; }
+            public string Intro { get; set;}
+            public Action<int> Addsignal { get => addsignal; set => addsignal=value; }
+            public int UDID;
+            private Action<int> addsignal;
         }
 
         [Serializable]
         [ComVisible(true)]
         [StructLayout(LayoutKind.Auto)]
-        public abstract partial class PlanBase
+        public class PlanStructC
         {
-            internal string capital;
-            internal int seconds;
-            internal double difficulty;
-            internal int lasting;
-            internal int explosive;
-            internal int wisdom;
-            internal long startTime;
+            public string Capital { get; set; }
+            public int Seconds { get; set; }
+            public double Difficulty { get; set; }
+            public int Lasting { get; set; }
+            public int Explosive { get; set; }
+            public int Wisdom { get; set; }
+            public long StartTime { get; set; }
+            public string Intro { get; set; }
+            public int UDID;
+            public string Parent { get; set; }
+            public Action<int> Addsignal { get => addsignal; set => addsignal=value; }
+            private Action<int> addsignal;
         }
-
-        [Serializable]
-        public class PlanClassA : PlanBase
-        {
-            internal string intro;
-            internal string parent;
-            internal Action<int> Addsignal;
-        }
-
-        [Serializable]
-        public class PlanClassB : PlanBase
-        {
-            internal string intro;
-            internal int UDID;
-            internal Action<int> Addsignal;
-        }
-
-        [Serializable]
-        [ComVisible(true)]
-        [StructLayout(LayoutKind.Auto)]
-        public class PlanClassC : PlanBase
-        {
-            internal string intro;
-            internal int UDID;
-            internal string parent;
-            internal Action<int> Addsignal;
-        }
-
-        public class PlanClassD : PlanBase { }
-
-
 
         [Serializable]
         public class ChatStruct
         {
-            internal string req_Head;
-            internal string Text;
+            public string req_Head;
+            public string Text;
         }
     }
 }

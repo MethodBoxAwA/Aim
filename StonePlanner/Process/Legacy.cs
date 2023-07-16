@@ -38,17 +38,17 @@ namespace StonePlanner
             foreach (var item in recycle_bin)
             {
                 string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ) VALUES ( ";
-                allTask += item.capital + ";";
+                allTask += item.Capital + ";";
                 //allTask += item.dwAim + ";";
-                allTask += item.seconds + ";";
-                allTask += item.difficulty;
+                allTask += item.Seconds + ";";
+                allTask += item.Difficulty;
                 allTask += "\n";
 
-                strInsert += "'" + item.capital + "', '";
-                strInsert += item.intro + "', '";
+                strInsert += "'" + item.Capital + "', '";
+                strInsert += item.Intro + "', '";
                 strInsert += item.status + "', ";
-                strInsert += item.seconds + ", ";
-                strInsert += item.difficulty + ")";
+                strInsert += item.Seconds + ", ";
+                strInsert += item.Difficulty + ")";
                 //清空原有数据
                 inst = new OleDbCommand(strInsert, myConn);
                 int lines = inst.ExecuteNonQuery();
@@ -173,7 +173,7 @@ namespace StonePlanner
             }
         }
 
-        //internal unsafe void PlanAdder(Plan pValue, PlanClassD @struct)
+        //internal unsafe void PlanAdder(Plan pValue, PlanStructD @struct)
         //{
         //    /*
         //     * 这个奇怪的函数真是令人费解
@@ -197,7 +197,7 @@ namespace StonePlanner
         //    if (thisNumber == -1) { return; }
         //    pValue.Top = 36 * thisNumber;
         //    //获取结构体
-        //    //PlanClassD @struct = Pointer.Box((void*)pStruct, typeof(PlanClassD)) as PlanClassD;
+        //    //PlanStructD @struct = Pointer.Box((void*)pStruct, typeof(PlanStructD)) as PlanStructD;
         //    //设置任务标题
         //    pValue.capital = @struct.lpCapital;
         //    //内置编号

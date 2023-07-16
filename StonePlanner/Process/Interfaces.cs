@@ -52,7 +52,12 @@ namespace StonePlanner
             /// <param name="input"></param>
             /// <returns></returns>
             public string Execute(string input);
-        }   
-	
+        }
+
+        internal interface IAimEventArgs
+        {
+            DateTime SendTime { get; set; }
+            string Signature { get; set; }
+        }
     }
 }

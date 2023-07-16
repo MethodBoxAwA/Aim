@@ -1,0 +1,6 @@
+D:\methodbox\Aim\MethodBox.General\bin\Debug\MethodBox.General.dll
+D:\methodbox\Aim\MethodBox.General\bin\Debug\MethodBox.General.pdb
+D:\methodbox\Aim\MethodBox.General\obj\Debug\MethodBox.General.csproj.AssemblyReference.cache
+D:\methodbox\Aim\MethodBox.General\obj\Debug\MethodBox.General.csproj.CoreCompileInputs.cache
+D:\methodbox\Aim\MethodBox.General\obj\Debug\MethodBox.General.dll
+D:\methodbox\Aim\MethodBox.General\obj\Debug\MethodBox.General.pdb

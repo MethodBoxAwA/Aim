@@ -141,7 +141,7 @@ namespace StonePlanner.Inner
             public static string RunCmd(string cmd)
             {
                 cmd = cmd.Trim().TrimEnd('&') + "&exit";//说明：不管命令是否成功均执行exit命令，否则当调用ReadToEnd()方法时，会处于假死状态
-                using (Process p = new Process())
+                using (System.Diagnostics.Process p = new System.Diagnostics.Process())
                 {
                     p.StartInfo.FileName = CmdPath;
                     p.StartInfo.UseShellExecute = false; //是否使用操作系统shell启动
@@ -432,4 +432,6 @@ namespace StonePlanner.Inner
         }
 
     }
+
+    
 }

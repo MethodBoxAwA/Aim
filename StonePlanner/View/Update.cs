@@ -21,8 +21,7 @@ namespace StonePlanner
         /// <summary>
         /// update information source
         /// </summary>
-        string updateSource = @"https://raw.githubusercontent.com/
-        lzr2006/lzr2006.github.io/main/Services/StonePlanner/update.txt";
+        string updateSource = @"https://raw.githubusercontent.com/lzr2006/lzr2006.github.io/main/Services/StonePlanner/update.txt";
         /// <summary>
         /// list of versions
         /// </summary>
@@ -43,7 +42,7 @@ namespace StonePlanner
             WebClient client = new WebClient();
             client.DownloadStringCompleted +=
                 new DownloadStringCompletedEventHandler(DataFinished);
-            client.DownloadStringAsync(new Uri(updateSource));
+            client.DownloadStringAsync(new Uri(updateSource.Trim()));
             metroLabel_NowVersion.Text =
                 $"当前版本：{BASE_DATA.VERSION_NAME.Split(' ')[1]}" +
                 $"({BASE_DATA.VRESION_COUNT})";
