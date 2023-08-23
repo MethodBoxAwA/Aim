@@ -1,10 +1,11 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using Microsoft.Win32;
+using StonePlanner.Classes.Helpers;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// software settings
@@ -43,11 +44,11 @@ namespace StonePlanner
             string path = $@"{Application.StartupPath}\settings.ini";
             // toggle settings
             string SwitchPicturesYesNo = checkBox_PictureSwitch.Checked ? "True" : "False";
-            Inner.INIHolder.Write("SwitchSettings", "PictureSwitch",SwitchPicturesYesNo,path);
-            Inner.INIHolder.Write("SwitchSettings", "PictureSwitchTime", textBox_PictureSwitchTime_R.Text, path);
+            INIHolder.Write("SwitchSettings", "PictureSwitch",SwitchPicturesYesNo,path);
+            INIHolder.Write("SwitchSettings", "PictureSwitchTime", textBox_PictureSwitchTime_R.Text, path);
             string SwitchSentencesYesNo = checkBox_PictureSwitch.Checked ? "True" : "False";
-            Inner.INIHolder.Write("SwitchSettings", "SentenceSwitch", SwitchSentencesYesNo, path);
-            Inner.INIHolder.Write("SwitchSettings", "SentenceSwitchTime", textBox_SentenceSwitchTime_R.Text, path);
+            INIHolder.Write("SwitchSettings", "SentenceSwitch", SwitchSentencesYesNo, path);
+            INIHolder.Write("SwitchSettings", "SentenceSwitchTime", textBox_SentenceSwitchTime_R.Text, path);
             // correlation from self-prompting
             if (checkBox_StartSwitch.Checked)
             {
@@ -66,7 +67,7 @@ namespace StonePlanner
                 R_local.Close();
             }
             string AutoLoginYesNo = checkBox_LoginSwitch.Checked ? "True" : "False";
-            Inner.INIHolder.Write("SwitchSettings", "SentenceSwitch", AutoLoginYesNo, path);
+            INIHolder.Write("SwitchSettings", "SentenceSwitch", AutoLoginYesNo, path);
         }
 
         /// <summary>
@@ -75,10 +76,10 @@ namespace StonePlanner
         protected void InitializeSettings() 
         {
             string path = $@"{Application.StartupPath}\settings.ini";
-            packedSettings.Add(Inner.INIHolder.Read("SwitchSettings", "PictureSwitch", "False", path));
-            packedSettings.Add(Inner.INIHolder.Read("SwitchSettings", "PictureSwitchTime", "False", path));
-            packedSettings.Add(Inner.INIHolder.Read("SwitchSettings", "SentenceSwitch", "False", path));
-            packedSettings.Add(Inner.INIHolder.Read("SwitchSettings", "SentenceSwitchTime", "False", path));
+            packedSettings.Add(INIHolder.Read("SwitchSettings", "PictureSwitch", "False", path));
+            packedSettings.Add(INIHolder.Read("SwitchSettings", "PictureSwitchTime", "False", path));
+            packedSettings.Add(INIHolder.Read("SwitchSettings", "SentenceSwitch", "False", path));
+            packedSettings.Add(INIHolder.Read("SwitchSettings", "SentenceSwitchTime", "False", path));
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace StonePlanner
+﻿namespace StonePlanner.View
 {
     partial class About
     {
@@ -64,6 +64,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label24 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Line)).BeginInit();
             this.panel1.SuspendLayout();
@@ -113,12 +114,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F);
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(21, 168);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(347, 17);
+            this.label1.Size = new System.Drawing.Size(289, 16);
             this.label1.TabIndex = 4;
-            this.label1.Text = "开发者：Intromnia（F.Iron Feat MethodBox as \"Arq\"）";
+            this.label1.Text = "开发者：Str1ke（From MBSoftware Network）";
             // 
             // label2
             // 
@@ -133,10 +134,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F);
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(22, 222);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(392, 17);
+            this.label3.Size = new System.Drawing.Size(366, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "MethodBox AimPlanner（Insider Version && TEST EPSILON）";
             // 
@@ -146,9 +147,9 @@
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11F);
             this.label4.Location = new System.Drawing.Point(22, 241);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(124, 17);
+            this.label4.Size = new System.Drawing.Size(168, 17);
             this.label4.TabIndex = 7;
-            this.label4.Text = "版本 Release 1.0.0";
+            this.label4.Text = "版本 Dev. 23072701_1214";
             // 
             // label5
             // 
@@ -158,7 +159,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(470, 51);
             this.label5.TabIndex = 8;
-            this.label5.Text = "©MethodBoxs Studio，保留所有权利。\r\n本软件受中华人民共和国《计算机软件条例》以及其它国家或地区\r\n的相应法律保护。擅自修改或破解该软件将会受到" +
+            this.label5.Text = "©MethodBox Studios，保留所有权利。\r\n本软件受中华人民共和国《计算机软件条例》以及其它国家或地区\r\n的相应法律保护。擅自修改或破解该软件将会受到" +
     "最大范围内的法律追究。";
             // 
             // label6
@@ -213,10 +214,9 @@
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.label9);
-            this.panel1.Location = new System.Drawing.Point(566, 190);
+            this.panel1.Location = new System.Drawing.Point(563, 367);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(8, 94);
+            this.panel1.Size = new System.Drawing.Size(10, 17);
             this.panel1.TabIndex = 12;
             // 
             // button1
@@ -422,7 +422,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("宋体", 11F);
-            this.label9.Location = new System.Drawing.Point(3, 1);
+            this.label9.Location = new System.Drawing.Point(566, 353);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(263, 255);
             this.label9.TabIndex = 0;
@@ -439,11 +439,22 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("宋体", 12F);
+            this.label24.Location = new System.Drawing.Point(342, 260);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(215, 16);
+            this.label24.TabIndex = 14;
+            this.label24.Text = "该版本仅供给参赛展示使用。";
+            // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 403);
+            this.Controls.Add(this.label24);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label8);
@@ -458,6 +469,7 @@
             this.Controls.Add(this.label_T);
             this.Controls.Add(this.label_TT);
             this.Controls.Add(this.pictureBox_Logo);
+            this.Controls.Add(this.label9);
             this.MaximizeBox = false;
             this.Name = "About";
             this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 16);
@@ -511,5 +523,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label24;
     }
 }

@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using StonePlanner.Control;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// export all unfinished task (Deprecated)
@@ -23,7 +18,7 @@ namespace StonePlanner
         /// initialize component and load collection
         /// </summary>
         /// <param name="szPlanCollcetions">plan control collection</param>
-        public ExportTodo(Control.ControlCollection szPlanCollcetions)
+        public ExportTodo(System.Windows.Forms.Control.ControlCollection szPlanCollcetions)
         {
             InitializeComponent();
 

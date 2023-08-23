@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using StonePlanner.Classes.DataHandlers;
+using StonePlanner.Classes.DataTypes;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     public partial class AddList : MetroForm
     {

@@ -1,8 +1,7 @@
-﻿using MetroFramework.Forms;
-using System;
-using System.Windows.Forms;
+﻿using System;
+using MetroFramework.Forms;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// show all of static fields

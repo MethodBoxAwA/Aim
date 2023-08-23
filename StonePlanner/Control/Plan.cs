@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static StonePlanner.Structs;
+using StonePlanner.Classes.DataTypes;
+using StonePlanner.View;
+using static StonePlanner.Classes.DataTypes.Structs;
 
-namespace StonePlanner
+namespace StonePlanner.Control
 {
     public partial class Plan : UserControl
     {

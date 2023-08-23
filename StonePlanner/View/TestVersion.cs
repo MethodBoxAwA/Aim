@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Windows.Forms;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// <para>[temporarily abandoned]</para>

@@ -1,9 +1,9 @@
-﻿using MetroFramework.Forms;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// show tools for test

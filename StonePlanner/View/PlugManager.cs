@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 using MetroFramework.Forms;
-using static StonePlanner.Interfaces;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// manager of plugin

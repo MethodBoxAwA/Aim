@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Data;
-using System.Data.OleDb;
-using MetroFramework.Forms;
 using System.Windows.Forms;
+using MetroFramework.Forms;
+using StonePlanner.Classes.DataHandlers;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// login window

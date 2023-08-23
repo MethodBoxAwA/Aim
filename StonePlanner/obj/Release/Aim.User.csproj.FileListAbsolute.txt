@@ -55,3 +55,4 @@ D:\methodbox\Aim\StonePlanner\bin\Release\runtimes\win-arm\native\e_sqlite3.dll
 D:\methodbox\Aim\StonePlanner\obj\Release\Aim.User.csproj.SuggestedBindingRedirects.cache
 D:\methodbox\Aim\StonePlanner\obj\Release\StonePlanner.exe.config
 D:\methodbox\Aim\StonePlanner\obj\Release\StonePlanner.PlugManager.resources
+D:\MethodBox\Aim\StonePlanner\obj\Release\StonePlanner.View.Installer1.resources

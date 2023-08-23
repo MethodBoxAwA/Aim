@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using MetroFramework.Forms;
+using StonePlanner.Classes.DataHandlers;
+using StonePlanner.Classes.Helpers;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// display user personal information
@@ -36,13 +37,14 @@ namespace StonePlanner
                 label_WisdomC.Text = $"智慧值：需激活";
                 return;
             }
+
             // user's basic information
             label_Username.Text = $"用 户 名：{Login.UserName}";
             label_Money.Text = $"金 币 数 量：{Main.money}";
             // user's lasting information
             var Lasting = LevelGetter(Main.lasting);
             label_LastingC.Text = $"耐力值：{Main.lasting}"+
-                Inner.InnerFuncs.MultipleStrings(Space- Lasting[0].
+                InnerFuncs.MultipleStrings((Space - Lasting[0] + 1).
                 ToString().Length) +$"Lv.{Lasting[0]}";
             label_Lastingleft.Text = Lasting[1].ToString();
             label_Lastingright.Text = Lasting[2].ToString();
@@ -53,7 +55,7 @@ namespace StonePlanner
             // user's explosive information
             var Explosive = LevelGetter(Main.explosive);
             label_ExplosiveC.Text = $"爆发值：{Main.explosive}" +
-                Inner.InnerFuncs.MultipleStrings(Space - Explosive[0].
+                InnerFuncs.MultipleStrings((Space - Explosive[0] + 1).
                 ToString().Length) + $"Lv.{Explosive[0]}";
             label_Explosiveleft.Text = Explosive[1].ToString();
             label_Explosiveright.Text = Explosive[2].ToString();
@@ -64,7 +66,7 @@ namespace StonePlanner
             // user's wisdom information
             var Wisdom = LevelGetter(Main.wisdom);
             label_WisdomC.Text = $"智慧值：{Main.wisdom}" +
-               Inner.InnerFuncs.MultipleStrings(Space - Wisdom[0].
+               InnerFuncs.MultipleStrings((Space - Wisdom[0] + 1).
                ToString().Length) + $"Lv.{Wisdom[0]}";
             label_Wisdomleft.Text = Wisdom[1].ToString();
             label_Wisdomright.Text = Wisdom[2].ToString();

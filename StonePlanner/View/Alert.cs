@@ -1,9 +1,9 @@
 ﻿using System;
-using MetroFramework.Forms;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using MetroFramework.Forms;
+using StonePlanner.Classes.DataTypes;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     public partial class Alert : MetroForm
     {

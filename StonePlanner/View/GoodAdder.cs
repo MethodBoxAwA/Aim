@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data.OleDb;
-using MetroFramework.Forms;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// add good window

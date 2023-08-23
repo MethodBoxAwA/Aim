@@ -4,6 +4,9 @@ using Microsoft.AppCenter;
 using System;
 using System.Data.OleDb;
 using System.Windows.Forms;
+using StonePlanner.Classes.DataHandlers;
+using StonePlanner.Classes.DataTypes;
+using StonePlanner.View;
 
 namespace StonePlanner
 {
@@ -50,11 +53,11 @@ namespace StonePlanner
                 if (EnableProgramTrusteeship) AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             }
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            /*!!!!!*/Application.Run(new Console());//!!!!!!!
+            /*!!!!!*/Application.Run(new Login());//!!!!!!!
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            string strConn = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\data.mdb;Jet OLEDB:Database Password={StonePlanner.Main.password}";
-            StonePlanner.Main.odcConnection = new OleDbConnection(strConn); //2、打开连接 C#操作Access之按列读取mdb   
-            StonePlanner.Main.odcConnection.Open();
+            string strConn = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\data.mdb;Jet OLEDB:Database Password={View.Main.password}";
+            View.Main.odcConnection = new OleDbConnection(strConn); //2、打开连接 C#操作Access之按列读取mdb   
+            View.Main.odcConnection.Open();
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

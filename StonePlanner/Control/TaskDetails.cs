@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StonePlanner
+namespace StonePlanner.Control
 {
     public partial class TaskDetails : UserControl
     {
@@ -40,7 +34,7 @@ namespace StonePlanner
             }
             //txtc();
         }
-        internal static void Type(Control sender, int p_1, double p_2)
+        internal static void Type(System.Windows.Forms.Control sender, int p_1, double p_2)
         {
             //圆 角
             GraphicsPath oPath = new GraphicsPath();

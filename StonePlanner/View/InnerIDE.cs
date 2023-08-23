@@ -1,21 +1,21 @@
-﻿using MDI;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Media;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using static StonePlanner.Structs;
+using StonePlanner.Classes.Controls;
+using StonePlanner.Classes.DataHandlers;
+using StonePlanner.Classes.DataTypes;
+using StonePlanner.Classes.Helpers;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     public partial class InnerIDE : Form
     {
@@ -203,7 +203,7 @@ namespace StonePlanner
                 if (true)
                 {
                     //搜索ListBox是否已经被创建
-                    Control[] c = tb.Controls.Find("mylb", false);
+                    System.Windows.Forms.Control[] c = tb.Controls.Find("mylb", false);
                     if (c.Length > 0)
                         ((ListBox)c[0]).Dispose();  //如果被创建则释放
                     lb = new ListBox();
@@ -581,20 +581,20 @@ namespace StonePlanner
         {            //char szBufferSize;
             //char* chineseText = &szBufferSize;
             //InputBoxStruct IBS = new InputBoxStruct();
-            //IBS.lpText = "请输入您想插入的中文";
-            //IBS.lpCaption = "中文插入系统";
+            //IBS.Text = "请输入您想插入的中文";
+            //IBS.Caption = "中文插入系统";
             //IBS.szValueBack = chineseText;
             //InputBox IB = new InputBox(IBS);
             //IB.Show();
             //TaskFactory nameGetThread = new TaskFactory();
             //nameGetThread.StartNew(() => FileAddition(chineseText, IB));
-            Inner.InnerFuncs.CmdExecuter.RunCmd("notepad");
+            InnerFuncs.CmdExecuter.RunCmd("notepad");
         }
         private void 新建NToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InputBoxStruct IBS = new InputBoxStruct();
-            IBS.lpText = "输入文件名";
-            IBS.lpCaption = "请输入文件名";
+            IBS.Text = "输入文件名";
+            IBS.Caption = "请输入文件名";
             InputBox input = new InputBox(IBS, new InputBox.SetNameInvokeBase(AddFile));
             input.Show();
         }
@@ -605,11 +605,6 @@ namespace StonePlanner
             iFileName = $"{Application.StartupPath}\\coding\\{fileName.Trim(new char[] { '\0' })}.mtd";
             iFileName.Replace('\0', ' ');
         }
-
-        //        foreach (var item in fileName)
-        //{
-        //    fileNameString += *item;
-        //}
 
         private void 文件FToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -663,7 +658,7 @@ namespace StonePlanner
                 StreamWriter sw = new StreamWriter(path);
                 sw.Write(richTextBox_Main.Text);
                 sw.Close();
-                Inner.InnerFuncs.CmdExecuter.RunCmd($"notepad {path}");
+                InnerFuncs.CmdExecuter.RunCmd($"notepad {path}");
             }
             catch { }
         }
@@ -675,7 +670,7 @@ namespace StonePlanner
             StreamWriter sw = new StreamWriter(path);
             sw.Write(richTextBox_Main.Text);
             sw.Close();
-            Inner.InnerFuncs.CmdExecuter.RunCmd($"notepad {path}");
+            InnerFuncs.CmdExecuter.RunCmd($"notepad {path}");
         }
 
         private void 退出XToolStripMenuItem_Click(object sender, EventArgs e)

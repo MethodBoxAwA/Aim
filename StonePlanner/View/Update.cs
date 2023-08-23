@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Handlers;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using MetroFramework.Forms;
+using StonePlanner.Classes.Controls;
+using StonePlanner.Classes.DataTypes;
 using static StonePlanner.DataType;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// update software GUI
@@ -21,7 +21,7 @@ namespace StonePlanner
         /// <summary>
         /// update information source
         /// </summary>
-        string updateSource = @"https://raw.githubusercontent.com/lzr2006/lzr2006.github.io/main/Services/StonePlanner/update.txt";
+        string updateSource = @"https://methodboxawa.github.io/Services/StonePlanner/update.txt";
         /// <summary>
         /// list of versions
         /// </summary>
@@ -44,8 +44,8 @@ namespace StonePlanner
                 new DownloadStringCompletedEventHandler(DataFinished);
             client.DownloadStringAsync(new Uri(updateSource.Trim()));
             metroLabel_NowVersion.Text =
-                $"当前版本：{BASE_DATA.VERSION_NAME.Split(' ')[1]}" +
-                $"({BASE_DATA.VRESION_COUNT})";
+                $@"当前版本：{BaseData.VersionName.Split(' ')[1]}" +
+                $@"({BaseData.VersionCount})";
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace StonePlanner
                 metroLabel_NewVersion.Text =
                     $"最新版本：{versions[1].Version}({versions[1].Number})";
                 Button_Submit.Enabled = 
-                    versions[1].IsNeedUpdate(BASE_DATA.VRESION_COUNT);
+                    versions[1].IsNeedUpdate(BaseData.VersionCount);
             }
         }
 
@@ -95,7 +95,7 @@ namespace StonePlanner
                 metroLabel_NewVersion.Text =
                     $"最新版本：{versions[0].Version}({versions[0].Number})";
                 Button_Submit.Enabled = 
-                    versions[0].IsNeedUpdate(BASE_DATA.VRESION_COUNT);
+                    versions[0].IsNeedUpdate(BaseData.VersionCount);
             }
         }
 
@@ -109,7 +109,7 @@ namespace StonePlanner
                 metroLabel_NewVersion.Text =
                     $"最新版本：{versions[2].Version}({versions[2].Number})";
                 Button_Submit.Enabled = 
-                    versions[2].IsNeedUpdate(BASE_DATA.VRESION_COUNT);
+                    versions[2].IsNeedUpdate(BaseData.VersionCount);
             }
         }
 

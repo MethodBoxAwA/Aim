@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static StonePlanner.Structs;
 using MetroFramework.Forms;
+using StonePlanner.Classes.DataHandlers;
+using StonePlanner.Classes.DataTypes;
+using StonePlanner.Control;
+using static StonePlanner.Classes.DataTypes.Structs;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// The window to add new plan
@@ -52,9 +55,10 @@ namespace StonePlanner
         /// Add plan object according to plan struct
         /// </summary>
         /// <param name="planStruct"></param>
-        internal AddTodo(Structs.PlanStruct planStruct)
+        internal AddTodo(PlanAddInvoke targetFun,Structs.PlanStruct planStruct)
         {
             InitializeComponent();
+            PlanAdditionInvoke = new PlanAddInvoke(targetFun);
             //set default value to controls
             try
             {
@@ -194,9 +198,13 @@ namespace StonePlanner
                 double diff = 0D;
                 try
                 {
-                    diff = Math.Round(Convert.ToDouble(domainUpDown_Difficulty.SelectedItem.ToString().Split(' ')[1]), 1);
+                    diff = Math.Round(Convert.ToDouble(domainUpDown_Difficulty.SelectedItem.ToString().Split(' ')[1]),
+                        1);
                 }
-                catch { diff = 0D; }
+                catch
+                {
+                    diff = 0D;
+                }
                 psc.Difficulty = diff;
                 //invoke callback function
                 PlanAdditionInvoke(new Plan(psc));
@@ -205,7 +213,7 @@ namespace StonePlanner
             catch (Exception ex)
             {
                 //handle unknown error
-                MessageBox.Show(ex.Message + "\n这通常是您错误的键入了某个值，或没有输入某个值导致。", 
+                MessageBox.Show(ex.Message + "\n这通常是您错误的键入了某个值，或没有输入某个值导致。",
                     "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

@@ -1,9 +1,8 @@
-﻿using StonePlanner;
-using System;
+﻿using System;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 
-namespace MDI
+namespace StonePlanner.View
 {
     /// <summary>
     /// (to InnerIDE)

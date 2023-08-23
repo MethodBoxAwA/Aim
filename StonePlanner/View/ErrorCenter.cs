@@ -3,8 +3,10 @@ using System.Data;
 using System.Data.OleDb;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using StonePlanner.Classes.DataHandlers;
+using StonePlanner.Classes.DataTypes;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     public partial class ErrorCenter : MetroForm
     {

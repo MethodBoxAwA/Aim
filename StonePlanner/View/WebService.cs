@@ -6,6 +6,10 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using StonePlanner.Classes;
+using StonePlanner.Classes.DataTypes;
+using StonePlanner.Classes.Helpers;
+using StonePlanner.View;
 
 namespace StonePlanner
 {
@@ -16,12 +20,16 @@ namespace StonePlanner
         /// </summary>
         protected static Socket client;
 
+        private AddTodo.PlanAddInvoke CallBack;
+
         /// <summary>
         /// initialize component
         /// </summary>
-        public WebService()
+        public WebService(AddTodo.PlanAddInvoke sender)
         {
             InitializeComponent();
+
+            CallBack = sender;
         }
 
         /// <summary>
@@ -67,7 +75,8 @@ namespace StonePlanner
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(command);
             client.Send(buffer);
 
-            Thread receiveThread = new Thread(Receive);
+            Thread receiveThread 
+                = new Thread(Receive);
             receiveThread.IsBackground = true;
             receiveThread.Start(client);
         }
@@ -105,7 +114,7 @@ namespace StonePlanner
                     try
                     {
                         var dResult = (Structs.PlanStruct) ByteConvert.BytesToObject(buffer);
-                        AddTodo addTodo = new AddTodo(dResult);
+                        AddTodo addTodo = new AddTodo(CallBack,dResult);
                         MethodInvoker fmShower = new MethodInvoker(() => addTodo.Show());
                         BeginInvoke(fmShower);
                     }

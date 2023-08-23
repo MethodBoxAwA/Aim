@@ -1,8 +1,7 @@
 ﻿using System;
 using MetroFramework.Forms;
-using System.Windows.Forms;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     public partial class BugReporter : MetroForm
     {

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using MetroFramework.Forms;
 using System.Windows.Forms;
+using MetroFramework.Forms;
+using StonePlanner.Classes.DataTypes;
+using StonePlanner.Control;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     // a program without bugs is not a good program  ——MethodBox
     public partial class SchedulingCalendar : MetroForm

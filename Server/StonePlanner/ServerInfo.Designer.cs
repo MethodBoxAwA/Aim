@@ -49,6 +49,7 @@
             this.button_Task = new System.Windows.Forms.Button();
             this.button_Info = new System.Windows.Forms.Button();
             this.button_Kick = new System.Windows.Forms.Button();
+            this.button_Chat = new System.Windows.Forms.Button();
             this.panel_ConnectCount.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_P_1)).BeginInit();
             this.panel_Status.SuspendLayout();
@@ -73,7 +74,7 @@
             // label_OnlineR
             // 
             this.label_OnlineR.AutoSize = true;
-            this.label_OnlineR.Font = new System.Drawing.Font("SimSun", 12F);
+            this.label_OnlineR.Font = new System.Drawing.Font("宋体", 12F);
             this.label_OnlineR.Location = new System.Drawing.Point(87, 57);
             this.label_OnlineR.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_OnlineR.Name = "label_OnlineR";
@@ -85,7 +86,7 @@
             // label_OnlineC
             // 
             this.label_OnlineC.AutoSize = true;
-            this.label_OnlineC.Font = new System.Drawing.Font("SimSun", 12F);
+            this.label_OnlineC.Font = new System.Drawing.Font("宋体", 12F);
             this.label_OnlineC.Location = new System.Drawing.Point(75, 31);
             this.label_OnlineC.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_OnlineC.Name = "label_OnlineC";
@@ -98,7 +99,7 @@
             this.pictureBox_P_1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_P_1.BackgroundImage")));
             this.pictureBox_P_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_P_1.Location = new System.Drawing.Point(16, 28);
-            this.pictureBox_P_1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox_P_1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_P_1.Name = "pictureBox_P_1";
             this.pictureBox_P_1.Size = new System.Drawing.Size(45, 47);
             this.pictureBox_P_1.TabIndex = 1;
@@ -119,7 +120,7 @@
             // label_StatusR
             // 
             this.label_StatusR.AutoSize = true;
-            this.label_StatusR.Font = new System.Drawing.Font("SimSun", 12F);
+            this.label_StatusR.Font = new System.Drawing.Font("宋体", 12F);
             this.label_StatusR.Location = new System.Drawing.Point(87, 57);
             this.label_StatusR.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_StatusR.Name = "label_StatusR";
@@ -130,7 +131,7 @@
             // label_StatusC
             // 
             this.label_StatusC.AutoSize = true;
-            this.label_StatusC.Font = new System.Drawing.Font("SimSun", 12F);
+            this.label_StatusC.Font = new System.Drawing.Font("宋体", 12F);
             this.label_StatusC.Location = new System.Drawing.Point(75, 31);
             this.label_StatusC.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_StatusC.Name = "label_StatusC";
@@ -143,7 +144,7 @@
             this.pictureBox_Status.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Status.BackgroundImage")));
             this.pictureBox_Status.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_Status.Location = new System.Drawing.Point(16, 28);
-            this.pictureBox_Status.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox_Status.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_Status.Name = "pictureBox_Status";
             this.pictureBox_Status.Size = new System.Drawing.Size(45, 47);
             this.pictureBox_Status.TabIndex = 1;
@@ -164,7 +165,7 @@
             // label_TimeR
             // 
             this.label_TimeR.AutoSize = true;
-            this.label_TimeR.Font = new System.Drawing.Font("SimSun", 12F);
+            this.label_TimeR.Font = new System.Drawing.Font("宋体", 12F);
             this.label_TimeR.Location = new System.Drawing.Point(76, 57);
             this.label_TimeR.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_TimeR.Name = "label_TimeR";
@@ -175,7 +176,7 @@
             // label_TimeC
             // 
             this.label_TimeC.AutoSize = true;
-            this.label_TimeC.Font = new System.Drawing.Font("SimSun", 12F);
+            this.label_TimeC.Font = new System.Drawing.Font("宋体", 12F);
             this.label_TimeC.Location = new System.Drawing.Point(75, 31);
             this.label_TimeC.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_TimeC.Name = "label_TimeC";
@@ -188,7 +189,7 @@
             this.pictureBox_Time.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Time.BackgroundImage")));
             this.pictureBox_Time.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_Time.Location = new System.Drawing.Point(16, 28);
-            this.pictureBox_Time.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox_Time.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_Time.Name = "pictureBox_Time";
             this.pictureBox_Time.Size = new System.Drawing.Size(45, 47);
             this.pictureBox_Time.TabIndex = 1;
@@ -201,7 +202,7 @@
             // 
             // listBox_Users
             // 
-            this.listBox_Users.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.listBox_Users.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.listBox_Users.FormattingEnabled = true;
             this.listBox_Users.ItemHeight = 16;
             this.listBox_Users.Location = new System.Drawing.Point(56, 176);
@@ -212,7 +213,7 @@
             // label_User
             // 
             this.label_User.AutoSize = true;
-            this.label_User.Font = new System.Drawing.Font("SimSun", 12F);
+            this.label_User.Font = new System.Drawing.Font("宋体", 12F);
             this.label_User.Location = new System.Drawing.Point(53, 150);
             this.label_User.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_User.Name = "label_User";
@@ -223,20 +224,21 @@
             // panel_Runner
             // 
             this.panel_Runner.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel_Runner.Controls.Add(this.button_Chat);
             this.panel_Runner.Controls.Add(this.button_Task);
             this.panel_Runner.Controls.Add(this.button_Info);
             this.panel_Runner.Controls.Add(this.button_Kick);
             this.panel_Runner.Location = new System.Drawing.Point(601, 176);
-            this.panel_Runner.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel_Runner.Margin = new System.Windows.Forms.Padding(2);
             this.panel_Runner.Name = "panel_Runner";
             this.panel_Runner.Size = new System.Drawing.Size(128, 227);
             this.panel_Runner.TabIndex = 5;
             // 
             // button_Task
             // 
-            this.button_Task.Font = new System.Drawing.Font("SimSun", 11F);
-            this.button_Task.Location = new System.Drawing.Point(21, 165);
-            this.button_Task.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Task.Font = new System.Drawing.Font("宋体", 11F);
+            this.button_Task.Location = new System.Drawing.Point(21, 126);
+            this.button_Task.Margin = new System.Windows.Forms.Padding(2);
             this.button_Task.Name = "button_Task";
             this.button_Task.Size = new System.Drawing.Size(86, 33);
             this.button_Task.TabIndex = 2;
@@ -246,9 +248,9 @@
             // 
             // button_Info
             // 
-            this.button_Info.Font = new System.Drawing.Font("SimSun", 11F);
-            this.button_Info.Location = new System.Drawing.Point(21, 95);
-            this.button_Info.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Info.Font = new System.Drawing.Font("宋体", 11F);
+            this.button_Info.Location = new System.Drawing.Point(21, 76);
+            this.button_Info.Margin = new System.Windows.Forms.Padding(2);
             this.button_Info.Name = "button_Info";
             this.button_Info.Size = new System.Drawing.Size(86, 33);
             this.button_Info.TabIndex = 1;
@@ -258,15 +260,26 @@
             // 
             // button_Kick
             // 
-            this.button_Kick.Font = new System.Drawing.Font("SimSun", 11F);
+            this.button_Kick.Font = new System.Drawing.Font("宋体", 11F);
             this.button_Kick.Location = new System.Drawing.Point(20, 26);
-            this.button_Kick.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Kick.Margin = new System.Windows.Forms.Padding(2);
             this.button_Kick.Name = "button_Kick";
             this.button_Kick.Size = new System.Drawing.Size(86, 33);
             this.button_Kick.TabIndex = 0;
             this.button_Kick.Text = "踢出用户";
             this.button_Kick.UseVisualStyleBackColor = true;
             this.button_Kick.Click += new System.EventHandler(this.button_Kick_Click);
+            // 
+            // button_Chat
+            // 
+            this.button_Chat.Font = new System.Drawing.Font("宋体", 11F);
+            this.button_Chat.Location = new System.Drawing.Point(21, 176);
+            this.button_Chat.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Chat.Name = "button_Chat";
+            this.button_Chat.Size = new System.Drawing.Size(86, 33);
+            this.button_Chat.TabIndex = 3;
+            this.button_Chat.Text = "发送信息";
+            this.button_Chat.UseVisualStyleBackColor = true;
             // 
             // ServerInfo
             // 
@@ -317,5 +330,6 @@
         private System.Windows.Forms.Button button_Kick;
         private System.Windows.Forms.Button button_Task;
         private System.Windows.Forms.Button button_Info;
+        private System.Windows.Forms.Button button_Chat;
     }
 }

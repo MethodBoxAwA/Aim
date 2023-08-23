@@ -1,4 +1,4 @@
-﻿namespace StonePlanner
+﻿namespace StonePlanner.Control
 {
     partial class Plan
     {

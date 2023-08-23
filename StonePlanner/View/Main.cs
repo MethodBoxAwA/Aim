@@ -4,22 +4,21 @@ using System.Data.OleDb;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Management;
 using System.Media;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using static StonePlanner.Develop.Sign;
-using static StonePlanner.Exceptions;
-using static StonePlanner.Structs;
+using StonePlanner.Classes.DataHandlers;
+using StonePlanner.Classes.DataTypes;
+using StonePlanner.Classes.Helpers;
+using StonePlanner.Control;
 
 /*
  * **************************************************************************
  * ********************                                  ********************
- * ********************      COPYRIGHT MethodBox 2022       *****************
+ * ********************      COPYRIGHT MethodBox 2023       *****************
  * ********************                                  ********************
  * **************************************************************************
  *                                                                          *
@@ -49,7 +48,7 @@ using static StonePlanner.Structs;
  * **************************************************************************
  */
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// main window
@@ -71,7 +70,7 @@ namespace StonePlanner
         // array of discarded tasks
         public static List<Plan> recycle_bin = new List<Plan>();
         // TO-DO
-        internal static PlanStructC planner; //It is a void*
+        internal static Structs.PlanStructC planner; //It is a void*
         // time count
         internal static int nTime;
         // money and attribute
@@ -95,13 +94,13 @@ namespace StonePlanner
         /// this function is used to send Windows Message (WM) handling window drag events.
         /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        private static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
         /// <summary>
         /// the function releases the mouse capture from the window
         /// in the current thread and resumes the usual mouse input processing.
         /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern bool ReleaseCapture();
+        private static extern bool ReleaseCapture();
         /// <summary>
         /// retrieves information about the specified process
         /// </summary>
@@ -140,22 +139,15 @@ namespace StonePlanner
             label_XHDL.Parent = pictureBox_Main;
             settings.Dispose();
             // check activation here, don't ask why
-            var hresult = SQLConnect.SQLCommandQuery($"SELECT * FROM Users WHERE Username = 'mactivation'");
-            hresult.Read();
-            string code = hresult[4] as string;
+            var queryResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Users WHERE Username = 'mactivation'");
+            queryResult.Read();
+            string code = queryResult[4] as string;
             // check banned
             if (code == "Banned")
             {
                 banned = true;
             }
-            if (StonePlanner.License.Code.codes.Contains(code))
-            {
-                activation = true;
-            }
-            else
-            {
-                activation = false;
-            }
+            activation = StonePlanner.Classes.License.Code.codes.Contains(code);
             // bind Message Queuing to process event
             signal.SignChanged += HandleSign;
         }
@@ -168,13 +160,13 @@ namespace StonePlanner
         /// </summary>
         /// <param name="sender">object from which the call originated</param>
         /// <param name="e">addSignal event args</param>
-        internal void HandleSign(object sender, DataType.SignChangedEventArgs e)
+        private void HandleSign(object sender, DataType.SignChangedEventArgs e)
         {
             if (e.Sign == 1)
             {
                 // connect to database
-                string strConn = $" Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = {Application.StartupPath}\\data.mdb;Jet OLEDB:Database Password={Main.password}";
-                OleDbConnection myConn = new OleDbConnection(strConn);
+                var strConn = $" Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = {Application.StartupPath}\\data.mdb;Jet OLEDB:Database Password={Main.password}";
+                var myConn = new OleDbConnection(strConn);
                 myConn.Open();
                 // search the database first
                 //SELECT * FROM Persons WHERE City='Beijing'
@@ -188,7 +180,7 @@ namespace StonePlanner
                      * handle method：
                      * change the save location
                     */
-                    string updateString = $"UPDATE Tasks SET TaskTime = {plan.Seconds}" +
+                    var updateString = $"UPDATE Tasks SET TaskTime = {plan.Seconds}" +
                                 $" , TaskStatus = \"已办完\"" +
                                 $" WHERE ID = {plan.ID}";
                     SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
@@ -243,7 +235,7 @@ namespace StonePlanner
             // [deprecated] Sign == 1 then export tasks
             else if (e.Sign == 5)
             {
-                ExportTodo et = new ExportTodo(panel_M.Controls);
+                var et = new ExportTodo(panel_M.Controls);
                 et.Show();
             }
             // show task detail control
@@ -318,25 +310,20 @@ namespace StonePlanner
         {
             switch (m.Msg)
             {
-                case AM_EXIT:
+                case Develop.Sign.AM_EXIT:
                     Environment.Exit(0);
                     break;
-                case AM_ADDMONEY:
+                case Develop.Sign.AM_ADDMONEY:
                     MoneyUpdate(m.WParam.ToInt32());
                     break;
-                case AM_GETMONEY:
+                case Develop.Sign.AM_GETMONEY:
                     var moneyQuery = SQLConnect.SQLCommandQuery($"SELECT * FROM Users WHERE Username = '{Login.UserName}'");
                     moneyQuery.Read();
                     money = Convert.ToInt32(moneyQuery.GetValue(2));
-                    SendMessage(m.WParam, AM_GETMONEY, (IntPtr)money, IntPtr.Zero);
+                    SendMessage(m.WParam, Develop.Sign.AM_GETMONEY, (IntPtr)money, IntPtr.Zero);
                     break;
-                case AM_ADDTASK:
+                case Develop.Sign.AM_ADDTASK:
                     //TODO:操你妈傻逼内存，老子给你撂这儿，以后再他妈跟你玩
-                    //AimLib.COPYDATASTRUCT cds = new AimLib.COPYDATASTRUCT();
-                    //Type t = cds.GetType();
-                    //cds = (MethodBox.AimLib.COPYDATASTRUCT)m.GetLParam(t);
-                    //string strResult = cds.dwData.ToString() + ":" +cds.lpData;
-                    //MessageBox.Show(strResult);
                     break;
                 // call the base class function so that the system can process additional messages.
                 default:
@@ -391,7 +378,7 @@ namespace StonePlanner
                             else
                             {
                                 ErrorCenter.AddError(DataType.ExceptionsLevel.Warning
-                                    , new ObjectFreedException("已经被清除的任务再次添加。"));
+                                    , new Exceptions.ObjectFreedException("已经被清除的任务再次添加。"));
                             }
                         }
                     }
@@ -445,7 +432,7 @@ namespace StonePlanner
             // assignment empty plan
             for (int i = 0; i < 100; i++)
             {
-                PlanStructA emptyPlan = new()
+                Structs.PlanStructA emptyPlan = new()
                 {
                     Capital = "NULL",
                     Parent = null,
@@ -478,7 +465,7 @@ namespace StonePlanner
                     continue;
                 }
                 // a terrible override
-                PlanStructB recycledPlan = new()
+                Structs.PlanStructB recycledPlan = new()
                 {
                     Capital = recycleBin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
                     Intro = recycleBin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
@@ -601,7 +588,8 @@ namespace StonePlanner
             {
                 listLists.Add(sResult[1].ToString());
             }
-            /* for all lists Search for their child values in turn
+            /*
+             * for all lists Search for their child values in turn
              * there are too many reads here, so there is no need
              * to encapsulate the query
              * reference closes the original database connection
@@ -622,7 +610,7 @@ namespace StonePlanner
                 // 1 5 2 4 9 6 7 8
                 while (sResult.Read())
                 {
-                    PlanStructB psb = new()
+                    Structs.PlanStructB psb = new()
                     {
                         Capital = sResult[1].ToString(),
                         Intro = sResult[2].ToString(),
@@ -646,7 +634,7 @@ namespace StonePlanner
         }
 
         /// <summary>
-        /// load 
+        /// load functions
         /// </summary>
         protected void FunctionLoader()
         {
@@ -689,55 +677,55 @@ namespace StonePlanner
                     Top = 3 * i
                 };
                 panel_L.Controls.Add(console);
-                Function IDE = new($"{Application.StartupPath}\\icon\\program.png", "事件编写", "__IDE__")
+                Function ide = new($"{Application.StartupPath}\\icon\\program.png", "事件编写", "__IDE__")
                 {
                     Top = 4 * i
                 };
-                panel_L.Controls.Add(IDE);
-                Function Online = new($"{Application.StartupPath}\\icon\\server.png", $"在线协作", "__Online__")
+                panel_L.Controls.Add(ide);
+                Function online = new($"{Application.StartupPath}\\icon\\server.png", $"在线协作", "__Online__",officalInvoke)
                 {
                     Top = 5 * i
                 };
-                panel_L.Controls.Add(Online);
+                panel_L.Controls.Add(online);
                 //Function Settings = new($"{Application.StartupPath}\\icon\\settings.png", $"软件设置", "__Settings__")
                 //{
                 //    Top = 6 * i
                 //};
                 //panel_L.Controls.Add(Settings);
-                Function Shop = new($"{Application.StartupPath}\\icon\\shop.png", $"我的商城", "__Shop__")
+                Function shop = new($"{Application.StartupPath}\\icon\\shop.png", $"我的商城", "__Shop__")
                 {
                     Top = 2 * i
                 };
-                panel_L.Controls.Add(Shop);
-                Function Schedule = new($"{Application.StartupPath}\\icon\\schedule.png",
+                panel_L.Controls.Add(shop);
+                Function schedule = new($"{Application.StartupPath}\\icon\\schedule.png",
                     $"排班日历", "__Schedule__", (Action<int>) AddSignal)
                 {
                     Top = 8 * i
                 };
-                panel_L.Controls.Add(Schedule);
-                Function Update = new($"{Application.StartupPath}\\icon\\update.png",$"软件升级", "__Update__")
+                panel_L.Controls.Add(schedule);
+                Function update = new($"{Application.StartupPath}\\icon\\update.png",$"软件升级", "__Update__")
                 {
                     Top = 6 * i
                 };
-                panel_L.Controls.Add(Update);
+                panel_L.Controls.Add(update);
                 // guess where the click function is?
                 // I didn't expect it, here！
-                Bottom Function = new("功能")
+                Bottom function = new("功能")
                 {
                     Top = 374,
                     Left = 1
                 };
-                Function.Click += label_L_Function_Click;
-                Function.label_B.Click += label_L_Function_Click;
-                panel_L.Controls.Add(Function);
-                Bottom Type = new("分类")
+                function.Click += label_L_Function_Click;
+                function.label_B.Click += label_L_Function_Click;
+                panel_L.Controls.Add(function);
+                Bottom type = new("分类")
                 {
                     Top = 374,
                     Left = 60
                 };
-                Type.Click += label_L_Type_Click;
-                Type.label_B.Click += label_L_Type_Click;
-                panel_L.Controls.Add(Type);
+                type.Click += label_L_Type_Click;
+                type.label_B.Click += label_L_Type_Click;
+                panel_L.Controls.Add(type);
                 // resting state
                 label_Status.Text = "正在休息";
             }
@@ -773,7 +761,7 @@ namespace StonePlanner
             }
             nownn.Clear();
             string[] files;
-            foreach (Control item in panel_M.Controls)
+            foreach (System.Windows.Forms.Control item in panel_M.Controls)
             {
                 if (item.GetType() == typeof(Plan))
                 {
@@ -786,7 +774,7 @@ namespace StonePlanner
             }
             catch
             {
-                MessageBox.Show("您可能试图尝试在其它框架下运行Aim，例如BepInEx。请注意，这样的做法不是正确的。", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(@"您可能试图尝试在其它框架下运行Aim，例如BepInEx。请注意，这样的做法不是正确的。", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
                 // backhand closes threads
                 label_Sentence.Text = "A Fetal Error Occured";
@@ -818,9 +806,9 @@ namespace StonePlanner
                     int breakOnTermination = 0x1D;
                     // acquire Debug Privileges
                     // setting the BreakOnTermination = 1 for the current process
-                    Process.EnterDebugMode();  
+                    System.Diagnostics.Process.EnterDebugMode();  
                                                
-                    NtSetInformationProcess(Process.GetCurrentProcess().Handle, 
+                    NtSetInformationProcess(System.Diagnostics.Process.GetCurrentProcess().Handle, 
                         breakOnTermination, 
                         ref isCritical, 
                         sizeof(int));
@@ -1240,8 +1228,8 @@ namespace StonePlanner
 
         private void 登录服务器ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WebService _ = new WebService();
-            _.Show();
+            //WebService _ = new WebService();
+            //_.Show();
         }
 
         private void 静态指示器ToolStripMenuItem_Click(object sender, EventArgs e)

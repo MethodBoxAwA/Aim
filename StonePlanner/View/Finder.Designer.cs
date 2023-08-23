@@ -1,4 +1,4 @@
-﻿namespace MDI
+﻿namespace StonePlanner.View
 {
     partial class Finder
     {

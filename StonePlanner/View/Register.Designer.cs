@@ -1,4 +1,4 @@
-﻿namespace StonePlanner
+﻿namespace StonePlanner.View
 {
     partial class Register
     {

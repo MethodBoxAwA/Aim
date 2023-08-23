@@ -1,10 +1,11 @@
 ﻿using System;
-using MetroFramework.Forms;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using MetroFramework.Forms;
+using StonePlanner.Classes.DataHandlers;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// register account

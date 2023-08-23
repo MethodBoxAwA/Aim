@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using StonePlanner.View;
+using Console = StonePlanner.View.Console;
 
-namespace StonePlanner
+namespace StonePlanner.Control
 {
     public partial class Function : UserControl
     {
@@ -120,7 +116,7 @@ namespace StonePlanner
                 }
                 else if (__Name__ == "__Online__")                
                 {
-                    WebService ws = new WebService();
+                    WebService ws = new WebService((AddTodo.PlanAddInvoke)Callback);
                     ws.Show();
                 }
                 else if (__Name__ == "__Debugger__")

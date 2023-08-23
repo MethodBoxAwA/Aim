@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using StonePlanner.Classes.DataHandlers;
+using StonePlanner.Classes.License;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     public partial class Activation : Form
     {
@@ -60,7 +55,7 @@ namespace StonePlanner
                 label_Tip.Text = "Aim出现了一个未知错误（Ban）";
                 return;
             }
-            if (License.Code.codes.Contains(textBox_Code.Text))
+            if (Code.codes.Contains(textBox_Code.Text))
             {
                 MessageBox.Show("激活成功，感谢您对MethodBox的支持。\n请重启软件。","激活成功",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 //写入

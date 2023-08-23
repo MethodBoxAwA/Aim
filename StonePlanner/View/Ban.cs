@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// ban window

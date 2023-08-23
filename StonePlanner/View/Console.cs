@@ -1,14 +1,14 @@
-﻿using MetroFramework.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
-using static StonePlanner.Interfaces;
+using MetroFramework.Forms;
+using StonePlanner.Classes.DataTypes;
+using static StonePlanner.Classes.DataTypes.Interfaces;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// control
@@ -88,20 +88,24 @@ namespace StonePlanner
         /// <summary>
         /// new syntax parser
         /// </summary>
-        /// <param name="row">code row</param>
-        protected void SyntaxParser(object rowing)
+        /// <param name="rowing">code row</param>
+        private void SyntaxParser(object rowing)
         {
             string row = (string)rowing;
             List<string> code = new(row.Split('\n'));
             foreach (var line in code)
             {
                 AddString("Console","User",line);
-                if (line == "exit")
+                if (line == "Exit")
                 {
                     // exit aim
                     SendMessage(this.Handle, Develop.Sign.AM_EXIT, 
                         IntPtr.Zero, IntPtr.Zero);
                     Environment.Exit(0);
+                }
+                else if (line.Contains("AddTask"))
+                {
+                    
                 }
             }
         }
@@ -114,10 +118,10 @@ namespace StonePlanner
             if (e.KeyCode == Keys.Enter)
             {
                 // use multi-thread
-                new Thread(new ParameterizedThreadStart(SyntaxParser)).Start(richTextBox_Input.Text);
-                ;
+                // new Thread(new ParameterizedThreadStart(SyntaxParser)).Start(richTextBox_Input.Text);
                 SyntaxParser(richTextBox_Input.Text);
             }
+
             RichTextBox rich = (RichTextBox)sender;
 
             //语法高亮
@@ -132,7 +136,7 @@ namespace StonePlanner
             if (checkBox1.Checked)
             {
                 //搜索ListBox是否已经被创建
-                Control[] c = tb.Controls.Find("mylb", false);
+                System.Windows.Forms.Control[] c = tb.Controls.Find("mylb", false);
                 if (c.Length > 0)
                     ((ListBox)c[0]).Dispose();  //如果被创建则释放
 
@@ -182,7 +186,7 @@ namespace StonePlanner
         private void richTextBox_Input_Click(object sender, EventArgs e)
         {
             RichTextBox tb = (RichTextBox)sender;
-            Control[] c = tb.Controls.Find("mylb", false);
+            System.Windows.Forms.Control[] c = tb.Controls.Find("mylb", false);
             if (c.Length > 0)
                 ((ListBox)c[0]).Dispose();
         }

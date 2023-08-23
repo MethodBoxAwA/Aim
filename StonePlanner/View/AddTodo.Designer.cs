@@ -1,5 +1,6 @@
 ﻿using MetroFramework.Controls;
-namespace StonePlanner
+
+namespace StonePlanner.View
 {
     partial class AddTodo
     {

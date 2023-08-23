@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static StonePlanner.Interfaces;
+using StonePlanner.Classes.DataTypes;
 
 namespace StonePlanner.Model
 {
@@ -13,7 +13,7 @@ namespace StonePlanner.Model
         /// Initialize plugin
         /// </summary>
         /// <param name="_pluginInstance">Instance of plugin</param>
-        public PluginModel(IDev _pluginInstance)
+        public PluginModel(Interfaces.IDev _pluginInstance)
         {
             PluginInstance = _pluginInstance;
         }
@@ -21,7 +21,7 @@ namespace StonePlanner.Model
         /// <summary>
         /// Plugin instance (inherit:IDev)
         /// </summary>
-        IDev PluginInstance { get; }
+        Interfaces.IDev PluginInstance { get; }
         /// <summary>
         /// Name of plugin
         /// </summary>

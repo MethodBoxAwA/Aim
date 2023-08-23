@@ -1,8 +1,8 @@
 ﻿using System;
 using MetroFramework.Forms;
-using System.Windows.Forms;
+using StonePlanner.Classes.Controls;
 
-namespace StonePlanner
+namespace StonePlanner.View
 {
     /// <summary>
     /// about window
@@ -40,7 +40,7 @@ namespace StonePlanner
         /// </summary>
         private void About_Load(object sender, EventArgs e)
         {
-            label4.Text += $" (内部版本{BASE_DATA.VERSION_NAME})";
+            label4.Text += $@" (内部版本{BaseData.VersionName})";
         }
     }
 }

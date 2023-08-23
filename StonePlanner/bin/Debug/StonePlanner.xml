@@ -4,748 +4,54 @@
         <name>StonePlanner</name>
     </assembly>
     <members>
-        <member name="T:StonePlanner.About">
+        <member name="T:StonePlanner.Classes.Helpers.Encrypt">
             <summary>
-            about window
+            class to encrypt
             </summary>
         </member>
-        <member name="M:StonePlanner.About.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.About.button1_Click(System.Object,System.EventArgs)">
-            <summary>
-            show thanks window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.About.pictureBox2_Click(System.Object,System.EventArgs)">
-            <summary>
-            show thanks window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.About.About_Load(System.Object,System.EventArgs)">
-            <summary>
-            load version information
-            </summary>
-        </member>
-        <member name="F:StonePlanner.About.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.About.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.About.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Activation.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Activation.Activation_Load(System.Object,System.EventArgs)">
-            <summary>
-            check whether user has been banned
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:StonePlanner.Activation.linkLabel_D2_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
-            <summary>
-            close window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Activation.linkLabel_D1_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
-            <summary>
-            guide to specific website
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Activation.button_Submit_Click(System.Object,System.EventArgs)">
-            <summary>
-            check whether user's code is correct
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Activation.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Activation.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Activation.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddList.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddList.button_Submit_Click(System.Object,System.EventArgs)">
-            <summary>
-            insert new list
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddList.AddList_Load(System.Object,System.EventArgs)">
-            <summary>
-            set window topmost
-            </summary>
-        </member>
-        <member name="F:StonePlanner.AddList.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddList.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.AddList.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.AddTodo">
-            <summary>
-            The window to add new plan
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddTodo.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
-            <summary>
-            SendMessage function
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddTodo.ReleaseCapture">
-            <summary>
-            ReleaseCapture function
-            </summary>
-        </member>
-        <member name="T:StonePlanner.AddTodo.PlanAddInvoke">
-            <summary>
-            the specific delegate to call plan add function
-            </summary>
-            <param name="plan">plan instance</param>
-        </member>
-        <member name="F:StonePlanner.AddTodo.Addsignal">
-            <summary>
-            the specific delegate to call Signal add function
-            </summary>
-        </member>
-        <member name="F:StonePlanner.AddTodo.PlanAdditionInvoke">
-            <summary>
-            PlanAddInvoke's instantiation concrete implementation
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddTodo.#ctor(StonePlanner.AddTodo.PlanAddInvoke,System.Action{System.Int32})">
-            <summary>
-            initialize component
-            </summary>
-            <param name="TargetFun">AddPlan's target callback function</param>
-            <param name="Addsignal">Addsignal's target callback function</param>
-        </member>
-        <member name="M:StonePlanner.AddTodo.#ctor(StonePlanner.Structs.PlanStruct)">
-            <summary>
-            Add plan object according to plan struct
-            </summary>
-            <param name="planStruct"></param>
-        </member>
-        <member name="M:StonePlanner.AddTodo.AddTodo_Load(System.Object,System.EventArgs)">
-            <summary>
-            window load function
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddTodo.button_New_Click(System.Object,System.EventArgs)">
-            <summary>
-            add plan function
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddTodo.panel_Top_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            move window
-            </summary>>
-        </member>
-        <member name="M:StonePlanner.AddTodo.panel_Top_DoubleClick(System.Object,System.EventArgs)">
-            <summary>
-            close window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddTodo.pictureBox_T_Exit_Click(System.Object,System.EventArgs)">
-            <summary>
-            close window
-            </summary>
-        </member>
-        <member name="F:StonePlanner.AddTodo.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AddTodo.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.AddTodo.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.AESEncrypt.Encrypt(System.String,System.String,System.String)">
-            <summary>
-            AES加密
-            </summary>
-            <param name="Data">被加密的明文</param>
-            <param name="Key">密钥</param>
-            <param name="Vector">向量</param>
-            <returns>密文</returns>
-        </member>
-        <member name="M:StonePlanner.AESEncrypt.Decrypt(System.String,System.String,System.String)">
-            <summary>
-            AES解密
-            </summary>
-            <param name="Data">被解密的密文</param>
-            <param name="Key">密钥</param>
-            <param name="Vector">向量</param>
-            <returns>明文</returns>
-        </member>
-        <member name="M:StonePlanner.AESEncrypt.Encrypt(System.String,System.String)">
-            <summary>
-            AES加密(无向量)
-            </summary>
-            <param name="Data">被加密的明文</param>
-            <param name="Key">密钥</param>
-            <returns>密文</returns>
-        </member>
-        <member name="M:StonePlanner.AESEncrypt.AESDecrypt(System.String,System.String)">
-            <summary>
-            AES解密(无向量)
-            </summary>
-            <param name="Data">被加密的明文</param>
-            <param name="Key">密钥</param>
-            <returns>明文</returns>
-        </member>
-        <member name="M:StonePlanner.Alert.#ctor(System.Collections.Generic.List{System.String},System.String)">
-            <summary>
-            alert initialize function
-            </summary>
-            <param name="tasks"></param>
-            <param name="alert"></param>
-        </member>
-        <member name="M:StonePlanner.Alert.button_S_Click(System.Object,System.EventArgs)">
-            <summary>
-            close window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Alert.Alert_Load(System.Object,System.EventArgs)">
-            <summary>
-            scan all tasks
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Alert.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Alert.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Alert.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Ban">
-            <summary>
-            ban window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Ban.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
-            <summary>
-            SendMessage function
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Ban.ReleaseCapture">
-            <summary>
-            ReleaseCapture function
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Ban.#ctor">
-            <summary>
-            initialize component 
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Ban.Ban_Load(System.Object,System.EventArgs)">
-            <summary>
-            set default value
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Ban.panel_Capital_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            move window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Ban.GetLocalIP">
-            <summary>
-            get local using IP address
-            </summary>
-            <returns>IP address</returns>
-        </member>
-        <member name="M:StonePlanner.Ban.GetPrimaryDNS">
-            <summary>
-            Get the native primary DNS
-            </summary>
-            <returns>DNS address</returns>
-        </member>
-        <member name="M:StonePlanner.Ban.RunApp(System.String,System.String,System.Boolean)">
-            <summary>
-            run a console application and get result
-            </summary>
-            <param name="filename">name of the specific program</param>
-            <param name="arguments">input arguments</param>
-            <param name="recordLog">log content</param>
-            <returns>the result after run</returns>
-        </member>
-        <member name="F:StonePlanner.Ban.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Ban.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Ban.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Bottom.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Bottom.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Bottom.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="P:StonePlanner.BugReporter.Info">
-            <summary>
-            error information
-            </summary>
-        </member>
-        <member name="M:StonePlanner.BugReporter.#ctor(System.String)">
-            <summary>
-            initialize component and get error information
-            </summary>
-            <param name="info">error info</param>
-        </member>
-        <member name="M:StonePlanner.BugReporter.BugReporter_Load(System.Object,System.EventArgs)">
-            <summary>
-            window load
-            </summary>
-        </member>
-        <member name="F:StonePlanner.BugReporter.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.BugReporter.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.BugReporter.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.ByteConvert.ObjectToBytes(System.Object)">
+        <member name="M:StonePlanner.Classes.Helpers.ByteConvert.ObjectToBytes(System.Object)">
             <summary>
             将一个object对象序列化，返回一个byte[]
             </summary>
             <param name="obj">能序列化的对象</param>
             <returns></returns>
         </member>
-        <member name="M:StonePlanner.ByteConvert.BytesToObject(System.Byte[])">
+        <member name="M:StonePlanner.Classes.Helpers.ByteConvert.BytesToObject(System.Byte[])">
             <summary>
             将一个序列化后的byte[]数组还原
             </summary>
-            <param name="Bytes"></param>
+            <param name="bytes"></param>
             <returns></returns>
         </member>
-        <member name="F:StonePlanner.CommonSettings.YesNoSwitchPictures">
-            <summary>
-            是否打开轮播图功能
-            </summary>
-        </member>
-        <member name="F:StonePlanner.CommonSettings.SwitchPicturesTime">
-            <summary>
-            轮播图切换时间
-            </summary>
-        </member>
-        <member name="F:StonePlanner.CommonSettings.YesNoSwitchSentence">
-            <summary>
-            是否轮换句子
-            </summary>
-        </member>
-        <member name="F:StonePlanner.CommonSettings.SwitchSentenceTime">
-            <summary>
-            轮换句子时间
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Console">
-            <summary>
-            control
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Console.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Console.Console_Load(System.Object,System.EventArgs)">
-            <summary>
-            set default settings
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Console.GetLastWord(System.String)">
-            <summary>
-            returns the specified search character
-            </summary>
-            <param name="str">characters want to search for</param>
-            <returns>the specified search character</returns>
-        </member>
-        <member name="M:StonePlanner.Console.AllClass">
-            <summary>
-            get all of key words
-            </summary>
-            <returns>all of key words</returns>
-        </member>
-        <member name="F:StonePlanner.Console.rx">
-            <summary>
-            what's this?
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Console.SyntaxParser(System.Object)">
-            <summary>
-            new syntax parser
-            </summary>
-            <param name="row">code row</param>
-        </member>
-        <member name="M:StonePlanner.Console.MySelect(System.Windows.Forms.RichTextBox,System.Int32,System.String,System.Drawing.Color,System.Boolean)">
-            <summary>
-            set select color
-            </summary>
-            <param name="tb">textbox</param>
-            <param name="i">index</param>
-            <param name="s">selected string</param>
-            <param name="c">color</param>
-            <param name="font">selected font</param>
-        </member>
-        <member name="F:StonePlanner.Console.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Console.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Console.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Develop.Sign.AM_EXIT">
-            <summary>
-            该消息用于命令AimPlanner退出，注意：直接退出会导致用户数据丢失，如非必须，请勿使用。
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Develop.Sign.AM_ADDMONEY">
-            <summary>
-            该消息用于给用户加额定数量的货币，数量请包括在wParam参数内，类型为INT。
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Develop.Sign.AM_GETMONEY">
-            <summary>
-            该消息用于获取用户的货币数量，调用方句柄请包括在wParam参数内，类型为INT。
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Develop.Sign.AM_ADDTASK">
-            <summary>
-            该消息用于给用户添加指定任务
-            </summary>
-        </member>
-        <member name="M:StonePlanner.ErrorCenter.#ctor">
-            <summary>
-            initialize component and switch whether enable ErrorCenter
-            </summary>
-        </member>
-        <member name="M:StonePlanner.ErrorCenter.AddError(StonePlanner.DataType.ExceptionsLevel,System.Exception)">
-            <summary>
-            add error to ErrorCenter
-            </summary>
-            <param name="errLevel">error level</param>
-            <param name="err">error instance</param>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:StonePlanner.ErrorCenter.ErrorCenter_Load(System.Object,System.EventArgs)">
-            <summary>
-            get errors from database
-            </summary>
-        </member>
-        <member name="F:StonePlanner.ErrorCenter.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.ErrorCenter.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.ErrorCenter.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.ExportTodo">
-            <summary>
-            export all unfinished task (Deprecated)
-            </summary>
-        </member>
-        <member name="F:StonePlanner.ExportTodo.planCollcetion">
-            <summary>
-            all plan control
-            </summary>
-        </member>
-        <member name="M:StonePlanner.ExportTodo.#ctor(System.Windows.Forms.Control.ControlCollection)">
-            <summary>
-            initialize component and load collection
-            </summary>
-            <param name="szPlanCollcetions">plan control collection</param>
-        </member>
-        <member name="M:StonePlanner.ExportTodo.ExportTodo_Load(System.Object,System.EventArgs)">
-            <summary>
-            load plan information and export as texture
-            </summary>
-        </member>
-        <member name="F:StonePlanner.ExportTodo.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.ExportTodo.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.ExportTodo.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.FloatWindow">
-            <summary>
-            show float task window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.FloatWindow.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="F:StonePlanner.FloatWindow.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.FloatWindow.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.FloatWindow.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Function.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Function.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:StonePlanner.Function.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要修改
-            使用代码编辑器修改此方法的内容。
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Good.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Good.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Good.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.GoodAdder">
-            <summary>
-            add good window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.GoodAdder.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.GoodAdder.button1_Click(System.Object,System.EventArgs)">
-            <summary>
-            show ide window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.GoodAdder.Buton_Cospic_Click(System.Object,System.EventArgs)">
-            <summary>
-            choose picture
-            </summary>
-        </member>
-        <member name="F:StonePlanner.GoodAdder.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.GoodAdder.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.GoodAdder.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Importer">
-            <summary>
-            import prefabs window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Importer.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Importer.button_Import_Click(System.Object,System.EventArgs)">
-            <summary>
-            start import
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Importer.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Importer.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Importer.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Inner.InnerFuncs.GenerateChineseWords(System.Int32)">
+        <member name="M:StonePlanner.Classes.Helpers.InnerFuncs.GenerateChineseWords(System.Int32)">
             <summary>
             随机产生常用汉字
             </summary>
             <param name="count">要产生汉字的个数</param>
             <returns>常用汉字</returns>
         </member>
-        <member name="M:StonePlanner.Inner.InnerFuncs.GetMD5WithFilePath(System.String)">
+        <member name="M:StonePlanner.Classes.Helpers.InnerFuncs.GetMD5WithFilePath(System.String)">
             <summary>
             获取指定文件的MD5值 
             </summary>
             <param name="filePath">文件路径</param>
             <returns>该文件的MD5值</returns>
         </member>
-        <member name="M:StonePlanner.Inner.InnerFuncs.GetMD5WithString(System.String)">
+        <member name="M:StonePlanner.Classes.Helpers.InnerFuncs.GetMD5WithString(System.String)">
             <summary>
             获取指定文件的MD5值 
             </summary>
             <param name="sDataIn">字符串</param>
             <returns>该字符串的MD5值</returns>
         </member>
-        <member name="M:StonePlanner.Inner.InnerFuncs.SecToHms(System.Int64)">
+        <member name="M:StonePlanner.Classes.Helpers.InnerFuncs.SecToHms(System.Int64)">
             <summary>
             将秒转换为时分秒
             </summary>
             <param name="duration">秒</param>
             <returns>时分秒格式化结果</returns>
         </member>
-        <member name="M:StonePlanner.Inner.InnerFuncs.CmdExecuter.RunCmd(System.String)">
+        <member name="M:StonePlanner.Classes.Helpers.InnerFuncs.CmdExecuter.RunCmd(System.String)">
              <summary>
              执行cmd命令 返回cmd窗口显示的信息
              多命令请使用批处理命令连接符：
@@ -757,27 +63,27 @@
              </summary>
             <param name="cmd">执行的命令</param>
         </member>
-        <member name="M:StonePlanner.Inner.HttpHelper.CreateGetHttpResponse(System.String,System.Int32,System.String,System.Net.CookieCollection)">
+        <member name="M:StonePlanner.Classes.Helpers.HttpHelper.CreateGetHttpResponse(System.String,System.Int32,System.String,System.Net.CookieCollection)">
             <summary>  
             创建GET方式的HTTP请求  
             </summary>  
         </member>
-        <member name="M:StonePlanner.Inner.HttpHelper.CreatePostHttpResponse(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Int32,System.String,System.Net.CookieCollection)">
+        <member name="M:StonePlanner.Classes.Helpers.HttpHelper.CreatePostHttpResponse(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Int32,System.String,System.Net.CookieCollection)">
             <summary>  
             创建POST方式的HTTP请求  
             </summary>  
         </member>
-        <member name="M:StonePlanner.Inner.HttpHelper.GetResponseString(System.Net.HttpWebResponse)">
+        <member name="M:StonePlanner.Classes.Helpers.HttpHelper.GetResponseString(System.Net.HttpWebResponse)">
             <summary>
             获取请求的数据
             </summary>
         </member>
-        <member name="M:StonePlanner.Inner.HttpHelper.CheckValidationResult(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+        <member name="M:StonePlanner.Classes.Helpers.HttpHelper.CheckValidationResult(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
             <summary>
             验证证书
             </summary>
         </member>
-        <member name="M:StonePlanner.Inner.INIHolder.GetPrivateProfileString(System.String,System.String,System.String,System.Text.StringBuilder,System.Int32,System.String)">
+        <member name="M:StonePlanner.Classes.Helpers.INIHolder.GetPrivateProfileString(System.String,System.String,System.String,System.Text.StringBuilder,System.Int32,System.String)">
             <summary>
             为INI文件中指定的节点取得字符串
             </summary>
@@ -789,7 +95,7 @@
             <param name="lpFileName">INI文件完整路径</param>
             <returns>复制到lpReturnedString缓冲区的字节数量，其中不包括那些NULL中止字符</returns>
         </member>
-        <member name="M:StonePlanner.Inner.INIHolder.WritePrivateProfileString(System.String,System.String,System.String,System.String)">
+        <member name="M:StonePlanner.Classes.Helpers.INIHolder.WritePrivateProfileString(System.String,System.String,System.String,System.String)">
             <summary>
             修改INI文件中内容
             </summary>
@@ -799,7 +105,7 @@
             <param name="lpFileName">INI文件完整路径</param>
             <returns>非零表示成功，零表示失败</returns>
         </member>
-        <member name="M:StonePlanner.Inner.INIHolder.Read(System.String,System.String,System.String,System.String)">
+        <member name="M:StonePlanner.Classes.Helpers.INIHolder.Read(System.String,System.String,System.String,System.String)">
             <summary>
             读取INI文件值
             </summary>
@@ -809,7 +115,7 @@
             <param name="filePath">INI文件完整路径</param>
             <returns>读取的值</returns>
         </member>
-        <member name="M:StonePlanner.Inner.INIHolder.Write(System.String,System.String,System.String,System.String)">
+        <member name="M:StonePlanner.Classes.Helpers.INIHolder.Write(System.String,System.String,System.String,System.String)">
             <summary>
             写INI文件值
             </summary>
@@ -819,7 +125,7 @@
             <param name="filePath">INI文件完整路径</param>
             <returns>非零表示成功，零表示失败</returns>
         </member>
-        <member name="M:StonePlanner.Inner.INIHolder.DeleteSection(System.String,System.String)">
+        <member name="M:StonePlanner.Classes.Helpers.INIHolder.DeleteSection(System.String,System.String)">
             <summary>
             删除节
             </summary>
@@ -827,7 +133,7 @@
             <param name="filePath">INI文件完整路径</param>
             <returns>非零表示成功，零表示失败</returns>
         </member>
-        <member name="M:StonePlanner.Inner.INIHolder.DeleteKey(System.String,System.String,System.String)">
+        <member name="M:StonePlanner.Classes.Helpers.INIHolder.DeleteKey(System.String,System.String,System.String)">
             <summary>
             删除键的值
             </summary>
@@ -836,68 +142,1750 @@
             <param name="filePath">INI文件完整路径</param>
             <returns>非零表示成功，零表示失败</returns>
         </member>
-        <member name="F:StonePlanner.InnerIDE.components">
+        <member name="T:StonePlanner.Classes.Controls.InputBox.SetNameInvokeBase">
+            <summary>
+            用于从InputBox向IDE封送数据的委托
+            </summary>
+            <param name="s">欲封送的字符串</param>
+        </member>
+        <member name="F:StonePlanner.Classes.Controls.InputBox.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:StonePlanner.InnerIDE.Dispose(System.Boolean)">
+        <member name="M:StonePlanner.Classes.Controls.InputBox.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:StonePlanner.InnerIDE.InitializeComponent">
+        <member name="M:StonePlanner.Classes.Controls.InputBox.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="F:StonePlanner.InputBox.components">
+        <member name="T:StonePlanner.Classes.Controls.Legacy">
             <summary>
-            Required designer variable.
+            此类内含所有已经被废弃的代码 以供查阅
             </summary>
         </member>
-        <member name="M:StonePlanner.InputBox.Dispose(System.Boolean)">
+        <member name="M:StonePlanner.Classes.Controls.Legacy.GetPoint">
             <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.InputBox.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
+            原外部评分函数
             </summary>
         </member>
-        <member name="P:StonePlanner.Interfaces.IDev.PluginName">
+        <member name="M:StonePlanner.Classes.Controls.MCIPlayer.PlayMusic_Repeat(System.String)">
+            <summary>
+            播放音乐文件(重复)
+            </summary>
+            <param name="p_FileName">音乐文件名称</param>
+        </member>
+        <member name="M:StonePlanner.Classes.Controls.MCIPlayer.PlayMusic(System.String)">
+            <summary>
+            播放音乐文件
+            </summary>
+            <param name="p_FileName">音乐文件名称</param>
+        </member>
+        <member name="M:StonePlanner.Classes.Controls.MCIPlayer.StopMusic(System.String)">
+            <summary>
+            停止当前音乐播放
+            </summary>
+            <param name="p_FileName">音乐文件名称</param>
+        </member>
+        <member name="F:StonePlanner.Classes.DataTypes.Develop.Sign.AM_EXIT">
+            <summary>
+            该消息用于命令AimPlanner退出，注意：直接退出会导致用户数据丢失，如非必须，请勿使用。
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Classes.DataTypes.Develop.Sign.AM_ADDMONEY">
+            <summary>
+            该消息用于给用户加额定数量的货币，数量请包括在wParam参数内，类型为INT。
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Classes.DataTypes.Develop.Sign.AM_GETMONEY">
+            <summary>
+            该消息用于获取用户的货币数量，调用方句柄请包括在wParam参数内，类型为INT。
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Classes.DataTypes.Develop.Sign.AM_ADDTASK">
+            <summary>
+            该消息用于给用户添加指定任务
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Classes.DataTypes.Interfaces.IDev.PluginName">
             <summary>
             Name of plugin
             </summary>
         </member>
-        <member name="P:StonePlanner.Interfaces.IDev.PluginAuthor">
+        <member name="P:StonePlanner.Classes.DataTypes.Interfaces.IDev.PluginAuthor">
             <summary>
             Author of plugin
             </summary>
         </member>
-        <member name="P:StonePlanner.Interfaces.IDev.PluginDescription">
+        <member name="P:StonePlanner.Classes.DataTypes.Interfaces.IDev.PluginDescription">
             <summary>
             Description of plugin
             </summary>
         </member>
-        <member name="M:StonePlanner.Interfaces.IDev.Run">
+        <member name="M:StonePlanner.Classes.DataTypes.Interfaces.IDev.Run">
             <summary>
             Plugin entry point
             </summary>
         </member>
-        <member name="M:StonePlanner.Interfaces.IDev.Execute(System.String)">
+        <member name="M:StonePlanner.Classes.DataTypes.Interfaces.IDev.Execute(System.String)">
             <summary>
             Plugin execute test method
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:StonePlanner.Model.PluginModel.#ctor(StonePlanner.Interfaces.IDev)">
+        <member name="M:StonePlanner.Classes.WebRoute.SocketClient.#ctor(System.String,System.Int32,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="ip">连接服务器的IP</param>
+            <param name="port">连接服务器的端口</param>
+        </member>
+        <member name="M:StonePlanner.Classes.WebRoute.SocketClient.#ctor(System.Int32)">
+            <summary>
+            绑定
+            </summary>
+            <param name="port"></param>
+        </member>
+        <member name="M:StonePlanner.Classes.WebRoute.SocketClient.StartClient">
+            <summary>
+            开启服务,连接服务端
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.About">
+            <summary>
+            about window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.About.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.About.button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            show thanks window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.About.pictureBox2_Click(System.Object,System.EventArgs)">
+            <summary>
+            show thanks window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.About.About_Load(System.Object,System.EventArgs)">
+            <summary>
+            load version information
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.About.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.About.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.About.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Activation.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Activation.Activation_Load(System.Object,System.EventArgs)">
+            <summary>
+            check whether user has been banned
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:StonePlanner.View.Activation.linkLabel_D2_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
+            <summary>
+            close window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Activation.linkLabel_D1_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
+            <summary>
+            guide to specific website
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Activation.button_Submit_Click(System.Object,System.EventArgs)">
+            <summary>
+            check whether user's code is correct
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Activation.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Activation.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Activation.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddList.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddList.button_Submit_Click(System.Object,System.EventArgs)">
+            <summary>
+            insert new list
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddList.AddList_Load(System.Object,System.EventArgs)">
+            <summary>
+            set window topmost
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.AddList.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddList.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.AddList.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.AddTodo">
+            <summary>
+            The window to add new plan
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            SendMessage function
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.ReleaseCapture">
+            <summary>
+            ReleaseCapture function
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.AddTodo.PlanAddInvoke">
+            <summary>
+            the specific delegate to call plan add function
+            </summary>
+            <param name="plan">plan instance</param>
+        </member>
+        <member name="F:StonePlanner.View.AddTodo.Addsignal">
+            <summary>
+            the specific delegate to call Signal add function
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.AddTodo.PlanAdditionInvoke">
+            <summary>
+            PlanAddInvoke's instantiation concrete implementation
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.#ctor(StonePlanner.View.AddTodo.PlanAddInvoke,System.Action{System.Int32})">
+            <summary>
+            initialize component
+            </summary>
+            <param name="TargetFun">AddPlan's target callback function</param>
+            <param name="Addsignal">Addsignal's target callback function</param>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.#ctor(StonePlanner.View.AddTodo.PlanAddInvoke,StonePlanner.Classes.DataTypes.Structs.PlanStruct)">
+            <summary>
+            Add plan object according to plan struct
+            </summary>
+            <param name="planStruct"></param>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.AddTodo_Load(System.Object,System.EventArgs)">
+            <summary>
+            window load function
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.button_New_Click(System.Object,System.EventArgs)">
+            <summary>
+            add plan function
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.panel_Top_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            move window
+            </summary>>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.panel_Top_DoubleClick(System.Object,System.EventArgs)">
+            <summary>
+            close window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.pictureBox_T_Exit_Click(System.Object,System.EventArgs)">
+            <summary>
+            close window
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.AddTodo.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.AddTodo.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Alert.#ctor(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            alert initialize function
+            </summary>
+            <param name="tasks"></param>
+            <param name="alert"></param>
+        </member>
+        <member name="M:StonePlanner.View.Alert.button_S_Click(System.Object,System.EventArgs)">
+            <summary>
+            close window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Alert.Alert_Load(System.Object,System.EventArgs)">
+            <summary>
+            scan all tasks
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Alert.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Alert.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Alert.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Ban">
+            <summary>
+            ban window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Ban.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            SendMessage function
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Ban.ReleaseCapture">
+            <summary>
+            ReleaseCapture function
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Ban.#ctor">
+            <summary>
+            initialize component 
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Ban.Ban_Load(System.Object,System.EventArgs)">
+            <summary>
+            set default value
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Ban.panel_Capital_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            move window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Ban.GetLocalIP">
+            <summary>
+            get local using IP address
+            </summary>
+            <returns>IP address</returns>
+        </member>
+        <member name="M:StonePlanner.View.Ban.GetPrimaryDNS">
+            <summary>
+            Get the native primary DNS
+            </summary>
+            <returns>DNS address</returns>
+        </member>
+        <member name="M:StonePlanner.View.Ban.RunApp(System.String,System.String,System.Boolean)">
+            <summary>
+            run a console application and get result
+            </summary>
+            <param name="filename">name of the specific program</param>
+            <param name="arguments">input arguments</param>
+            <param name="recordLog">log content</param>
+            <returns>the result after run</returns>
+        </member>
+        <member name="F:StonePlanner.View.Ban.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Ban.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Ban.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:StonePlanner.View.BugReporter.Info">
+            <summary>
+            error information
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.BugReporter.#ctor(System.String)">
+            <summary>
+            initialize component and get error information
+            </summary>
+            <param name="info">error info</param>
+        </member>
+        <member name="M:StonePlanner.View.BugReporter.BugReporter_Load(System.Object,System.EventArgs)">
+            <summary>
+            window load
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.BugReporter.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.BugReporter.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.BugReporter.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Console">
+            <summary>
+            control
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Console.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Console.commonFuncPointsList">
+            <summary>
+            function pointers STL
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Console.Console_Load(System.Object,System.EventArgs)">
+            <summary>
+            set default settings
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Console.GetLastWord(System.String)">
+            <summary>
+            returns the specified search character
+            </summary>
+            <param name="str">characters want to search for</param>
+            <returns>the specified search character</returns>
+        </member>
+        <member name="M:StonePlanner.View.Console.AllClass">
+            <summary>
+            get all of key words
+            </summary>
+            <returns>all of key words</returns>
+        </member>
+        <member name="F:StonePlanner.View.Console.rx">
+            <summary>
+            what's this?
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Console.SyntaxParser(System.Object)">
+            <summary>
+            new syntax parser
+            </summary>
+            <param name="rowing">code row</param>
+        </member>
+        <member name="M:StonePlanner.View.Console.MySelect(System.Windows.Forms.RichTextBox,System.Int32,System.String,System.Drawing.Color,System.Boolean)">
+            <summary>
+            set select color
+            </summary>
+            <param name="tb">textbox</param>
+            <param name="i">index</param>
+            <param name="s">selected string</param>
+            <param name="c">color</param>
+            <param name="font">selected font</param>
+        </member>
+        <member name="F:StonePlanner.View.Console.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Console.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Console.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.ErrorCenter.#ctor">
+            <summary>
+            initialize component and switch whether enable ErrorCenter
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.ErrorCenter.AddError(StonePlanner.DataType.ExceptionsLevel,System.Exception)">
+            <summary>
+            add error to ErrorCenter
+            </summary>
+            <param name="errLevel">error level</param>
+            <param name="err">error instance</param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:StonePlanner.View.ErrorCenter.ErrorCenter_Load(System.Object,System.EventArgs)">
+            <summary>
+            get errors from database
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.ErrorCenter.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.ErrorCenter.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.ErrorCenter.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.ExportTodo">
+            <summary>
+            export all unfinished task (Deprecated)
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.ExportTodo.planCollcetion">
+            <summary>
+            all plan control
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.ExportTodo.#ctor(System.Windows.Forms.Control.ControlCollection)">
+            <summary>
+            initialize component and load collection
+            </summary>
+            <param name="szPlanCollcetions">plan control collection</param>
+        </member>
+        <member name="M:StonePlanner.View.ExportTodo.ExportTodo_Load(System.Object,System.EventArgs)">
+            <summary>
+            load plan information and export as texture
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.ExportTodo.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.ExportTodo.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.ExportTodo.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Finder">
+            <summary>
+            (to InnerIDE)
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Finder.primaryIDE">
+            <summary>
+            IDE instance
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Finder.#ctor(StonePlanner.View.InnerIDE)">
+            <summary>
+            initialize component and get IDE
+            </summary>
+            <param name="form">IDE instance</param>
+        </member>
+        <member name="M:StonePlanner.View.Finder.Finder_Load(System.Object,System.EventArgs)">
+            <summary>
+            load window,the find down feature is enabled by default
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Finder.button2_Click(System.Object,System.EventArgs)">
+            <summary>
+            Replace the text in textBox1 with the text in textBox2
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Finder.button3_Click(System.Object,System.EventArgs)">
+            <summary>
+            replace all
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Finder.button4_Click(System.Object,System.EventArgs)">
+            <summary>
+            find specific character
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Finder.FindUp(System.Windows.Forms.RichTextBox,System.String)">
+            <summary>
+            function for lookup up
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Finder.FindDown(System.Windows.Forms.RichTextBox,System.String)">
+            <summary>
+            function for finding down
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Finder.FindDownM(System.Windows.Forms.RichTextBox,System.String)">
+            <summary>
+            function for finding down
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Finder.seeks(System.String)">
+            <summary>
+            pop-up window to prompt
+            </summary>
+            <param name="str">handled string</param>
+        </member>
+        <member name="M:StonePlanner.View.Finder.ReplaceAll(System.Windows.Forms.RichTextBox,System.String,System.String)">
+            <summary>
+            replace all <code>strPrevious</code> to <code>strNew</code>
+            </summary>
+            <param name="rtxBox">the RichTextBox to replace</param>
+            <param name="strPrevious">previous string</param>
+            <param name="strNew">new string</param>
+        </member>
+        <member name="M:StonePlanner.View.Finder.replace(System.String,System.String)">
+            <summary>
+            replace single <code>strPrevious</code> to <code>strNew</code>
+            </summary>
+            <param name="strPrevious">previous string</param>
+            <param name="strNew">new string</param>
+        </member>
+        <member name="M:StonePlanner.View.Finder.textBox1_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            text trigger
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Finder.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Finder.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Finder.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.FloatWindow">
+            <summary>
+            show float task window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.FloatWindow.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.FloatWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.FloatWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.FloatWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.GoodAdder">
+            <summary>
+            add good window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.GoodAdder.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.GoodAdder.button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            show ide window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.GoodAdder.Buton_Cospic_Click(System.Object,System.EventArgs)">
+            <summary>
+            choose picture
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.GoodAdder.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.GoodAdder.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.GoodAdder.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Importer">
+            <summary>
+            import prefabs window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Importer.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Importer.button_Import_Click(System.Object,System.EventArgs)">
+            <summary>
+            start import
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Importer.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Importer.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Importer.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.InnerIDE.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.InnerIDE.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.InnerIDE.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.PlugManager">
+            <summary>
+            manager of plugin
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.PlugManager.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.PlugManager.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.PlugManager.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.PlugManager.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.SchedulingCalendar.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            SendMessage function
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.SchedulingCalendar.ReleaseCapture">
+            <summary>
+            ReleaseCapture function
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:StonePlanner.View.SchedulingCalendar.scheduleArray">
+            <summary>
+            array of user schedule
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.SchedulingCalendar.ed">
+            <summary>
+            whether it is a presentation mode
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.SchedulingCalendar.result">
+            <summary>
+            handled result
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.SchedulingCalendar.dayArray">
+            <summary>
+            all of day information
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.SchedulingCalendar.#ctor(System.Collections.Generic.Dictionary{System.DateTime,System.String},System.String@,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="schd"></param>
+            <param name="alert"></param>
+            <param name="bed"></param>
+        </member>
+        <member name="F:StonePlanner.View.SchedulingCalendar.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.SchedulingCalendar.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.SchedulingCalendar.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.TestTools">
+            <summary>
+            show tools for test
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.TestTools.SignalCallback">
+            <summary>
+            absolutely useless,but i cannot remove it now :D
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.TestTools.#ctor(System.Action{System.Int32})">
+            <summary>
+            initialize component and do some horrible things
+            </summary>
+            <param name="SignalCallback">i think it is terrible</param>
+        </member>
+        <member name="M:StonePlanner.View.TestTools.listView_Main_ItemChecked(System.Object,System.Windows.Forms.ItemCheckedEventArgs)">
+            <summary>
+            show what user selected
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.TestTools.listView_Main_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            open specific tool
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.TestTools.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.TestTools.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.TestTools.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Update">
+            <summary>
+            update software GUI
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Update.updateSource">
+            <summary>
+            update information source
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Update.versions">
+            <summary>
+            list of versions
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Update.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Update.DataFinished(System.Object,System.Net.DownloadStringCompletedEventArgs)">
+            <summary>
+            data downloaded
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Update.metroRadioButton_Beta_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            switch to the Beta channel
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Update.metroRadioButton_Release_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            switch to the Release channel
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Update.metroRadioButton_Dev_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            switch to the Dev channel
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Update.Button_Submit_Click(System.Object,System.EventArgs)">
+            <summary>
+            start download new version of software
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Update.FileSaved(System.Object,System.ComponentModel.AsyncCompletedEventArgs)">
+            <summary>
+            prompt the download is ending
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Update.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Update.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Update.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Login">
+            <summary>
+            login window
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Login.UserName">
+            <summary>
+            user's name
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Login.UserType">
+            <summary>
+            user's type
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Login.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Login.button_Submit_Click(System.Object,System.EventArgs)">
+            <summary>
+            login
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Login.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Login.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Login.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Main">
+            <summary>
+            main window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            this function is used to send Windows Message (WM) handling window drag events.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.ReleaseCapture">
+            <summary>
+            the function releases the mouse capture from the window
+            in the current thread and resumes the usual mouse input processing.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.NtSetInformationProcess(System.IntPtr,System.Int32,System.Int32@,System.Int32)">
+            <summary>
+            retrieves information about the specified process
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StonePlanner.View.Main.panel_Top_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            the function sends a drag event for dragging the window.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.#ctor">
+            <summary>
+            <para>the main window constructor, the basic purpose is as follows:</para>
+            <para>load controls (automatically generated)</para>
+            <para>assign yourself to your own main variable</para>
+            <para>cancel the cross-thread operation check</para>
+            <para>load the setting window in advance to facilitate later reading of the settings</para>
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.HandleSign(System.Object,StonePlanner.DataType.SignChangedEventArgs)">
+            <summary>
+            addSignal handler
+            </summary>
+            <param name="sender">object from which the call originated</param>
+            <param name="e">addSignal event args</param>
+        </member>
+        <member name="M:StonePlanner.View.Main.DefWndProc(System.Windows.Forms.Message@)">
+            <summary>
+            overrides the form's message handler
+            </summary>
+            <param name="m">message</param>
+        </member>
+        <member name="M:StonePlanner.View.Main.pictureBox_T_Exit_Click(System.Object,System.EventArgs)">
+            <summary>
+            handles the user exit event and deposits new data that has not yet been stored.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.Main_Load(System.Object,System.EventArgs)">
+            <summary>
+            this function is used for main window loading
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Main.PlanAddInvoke">
+            <summary>
+            invoke for plan addition
+            </summary>
+            <param name="plan">plan instance</param>
+        </member>
+        <member name="M:StonePlanner.View.Main.AddPlan(StonePlanner.Control.Plan)">
+            <summary>
+            function to add plan to GUI
+            </summary>
+            <param name="pValue"></param>
+        </member>
+        <member name="M:StonePlanner.View.Main.ScanTaskTime(System.String)">
+            <summary>
+            scan task time and switch whether is not finished
+            </summary>
+            <param name="alert">alert info</param>
+        </member>
+        <member name="M:StonePlanner.View.Main.HoldList">
+            <summary>
+            load user lists
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.FunctionLoader">
+            <summary>
+            load functions
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.timer_Anti_Tick(System.Object,System.EventArgs)">
+            <summary>
+            anti-piracy check
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.SearchProcA(System.String)">
+            <summary>
+            determine whether the process contains this string (fuzzy)
+            </summary>
+            <param name="strProcName">process string</param>
+            <returns>whether it contains</returns>
+        </member>
+        <member name="M:StonePlanner.View.Main.ChangeMoney(System.Int32)">
+            <summary>
+            change user money
+            </summary>
+            <param name="value">money value</param>
+        </member>
+        <member name="M:StonePlanner.View.Main.MoneyUpdate(System.Int32)">
+            <summary>
+            update user money
+            </summary>
+            <param name="delta">money delta value</param>
+        </member>
+        <member name="M:StonePlanner.View.Main.ValuesUpdate(System.UInt32,System.Int32)">
+            <summary>
+            update user attribute
+            </summary>
+            <param name="type">attribute type</param>
+            <param name="delta">attribute delta value</param>
+        </member>
+        <member name="M:StonePlanner.View.Main.ValuesUpdate(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            update user's all attribute
+            </summary>
+            <param name="lasting">lasting value</param>
+            <param name="explosive">explosive value</param>
+            <param name="wisdom">wisdom value</param>
+        </member>
+        <member name="M:StonePlanner.View.Main.ValueGetter">
+            <summary>
+            get user money
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.AddSignal(System.Int32)">
+            <summary>
+            add specific addSignal
+            </summary>
+            <param name="addSignal">signal you want to add</param>
+        </member>
+        <member name="M:StonePlanner.View.Main.pictureBox_T_More_Click(System.Object,System.EventArgs)">
+            <summary>
+            control window length
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.GetDailySentence">
+            <summary>
+            get daily sentence
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.label_Sentence_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            change sentence
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.label_Sentence_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            move window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.User_Picture_DoubleClick(System.Object,System.EventArgs)">
+            <summary>
+            show error center
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.label_L_Function_Click(System.Object,System.EventArgs)">
+            <summary>
+            stretch the menu bar
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.label_L_Type_Click(System.Object,System.EventArgs)">
+            <summary>
+            display a list of categories
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.panel_L_MouseWheel(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            The middle mouse button of the category box
+            scrolls in response to events
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.LengthCalculation">
+            <summary>
+            dynamically calculating box length
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.Another_OnControlAdded(System.Object,System.Windows.Forms.ControlEventArgs)">
+            <summary>
+            overwrite the add control event to add it in order
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Main.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Main.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Main.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Recycle">
+            <summary>
+            save all of finished tasks
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Recycle.#ctor">
+            <summary>
+            initialize component and load cols
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Recycle.LoadCol">
+            <summary>
+            load task columns
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Recycle.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Recycle.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Recycle.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Register">
+            <summary>
+            register account
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Register.GetWindow(System.IntPtr,System.Int32)">
+            <summary>
+            GetWindow function
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Register.SendMessage(System.IntPtr,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            SendMessage function
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Register.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Register.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Register.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Register.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Settings">
+            <summary>
+            software settings
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Settings.packedSettings">
+            <summary>
+            pack of settings
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Settings.#ctor">
+            <summary>
+            initialize component and read settings
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Settings.vScrollBar1_Scroll(System.Object,System.Windows.Forms.ScrollEventArgs)">
+            <summary>
+            scroll page
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Settings.button_Save_Click(System.Object,System.EventArgs)">
+            <summary>
+            save settings
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Settings.InitializeSettings">
+            <summary>
+            initialize settings
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Settings.Exit_Click(System.Object,System.EventArgs)">
+            <summary>
+            close window
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:StonePlanner.View.Settings.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Settings.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Settings.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Shop">
+            <summary>
+            shop
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Shop.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Shop.goodList">
+            <summary>
+            list of all of goods
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Shop.page">
+            <summary>
+            about page information
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Shop.maxPage">
+            <summary>
+            about page information
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Shop.PWMS_ACCOUNT">
+            <summary>
+            count of goods
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Shop.ShowGood(System.Int32)">
+            <summary>
+            display goods
+            </summary>
+            <param name="page">page index</param>
+        </member>
+        <member name="M:StonePlanner.View.Shop.btn_tRight_Click(System.Object,System.EventArgs)">
+            <summary>
+            page backwards
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Shop.button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            open AddGood window
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Shop.btn_tLeft_Click(System.Object,System.EventArgs)">
+            <summary>
+            page forwards
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Shop.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Shop.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Shop.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Testify">
+            <summary>
+            show all of static fields
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Testify.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Testify.timer1_Tick(System.Object,System.EventArgs)">
+            <summary>
+            refresh value of fields
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:StonePlanner.View.Testify.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Testify.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Testify.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.TestVersion">
+            <summary>
+            <para>[temporarily abandoned]</para>
+            <para>restrict users who have not obtained test codes from using new features</para>
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.TestVersion.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.TestVersion.linkLabel1_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
+            <summary>
+            guide to website
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.TestVersion.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.TestVersion.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.TestVersion.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.Thanks">
+            <summary>
+            show thanks list
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Thanks.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Thanks.timer1_Tick(System.Object,System.EventArgs)">
+            <summary>
+            play the thanks list
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Thanks.label_E_Click(System.Object,System.EventArgs)">
+            <summary>
+            stop play music,but it seems like useless
+            </summary>
+        </member>
+        <member name="F:StonePlanner.View.Thanks.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.Thanks.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.Thanks.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.View.UserInfo">
+            <summary>
+            display user personal information
+            </summary>
+        </member>
+        <member name="P:StonePlanner.View.UserInfo.Space">
+            <summary>
+            format spaces
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.UserInfo.#ctor">
+            <summary>
+            initialize component
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.UserInfo.LevelGetter(System.Int32)">
+            <summary>
+            get level information
+            </summary>
+            <param name="nowValue">now value</param>
+            <returns>level information:
+            [0] = Grade; [1] = left border; [2] = Right border.</returns>
+        </member>
+        <member name="F:StonePlanner.View.UserInfo.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.View.UserInfo.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.View.UserInfo.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Bottom.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Control.Bottom.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.Control.Bottom.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Function.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Control.Function.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:StonePlanner.Control.Function.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Good.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Control.Good.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.Control.Good.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.SchedulingCalendarDay.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Control.SchedulingCalendarDay.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:StonePlanner.Control.SchedulingCalendarDay.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.Capital">
+            <summary>
+            任务大标题
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.Lnumber">
+            <summary>
+            任务自动编号值
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.status">
+            <summary>
+            任务状态
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.Seconds">
+            <summary>
+            完成任务所需时间
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.Intro">
+            <summary>
+            任务具体介绍
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.Difficulty">
+            <summary>
+            任务难度
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.Lasting">
+            <summary>
+            任务持久力<code>MA_Lasting值</code>
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.Explosive">
+            <summary>
+            任务爆发力<code>MA_Explosive值</code>
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.Wisdom">
+            <summary>
+            任务智慧值<code>MA_Wisdom值</code>
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.ID">
+            <summary>
+            任务唯一标识符 
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.Parent">
+            <summary>
+            所属类别
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.Plan.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Control.Plan.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.Control.Plan.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Control.TaskDetails.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Control.TaskDetails.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:StonePlanner.Control.TaskDetails.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Model.PluginModel.#ctor(StonePlanner.Classes.DataTypes.Interfaces.IDev)">
             <summary>
             Initialize plugin
             </summary>
@@ -923,222 +1911,12 @@
             Description of plugin
             </summary>
         </member>
-        <member name="T:StonePlanner.PlugManager">
-            <summary>
-            manager of plugin
-            </summary>
-        </member>
-        <member name="M:StonePlanner.PlugManager.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="F:StonePlanner.PlugManager.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.PlugManager.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.PlugManager.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.SchedulingCalendar.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
-            <summary>
-            SendMessage function
-            </summary>
-        </member>
-        <member name="M:StonePlanner.SchedulingCalendar.ReleaseCapture">
-            <summary>
-            ReleaseCapture function
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="F:StonePlanner.SchedulingCalendar.scheduleArray">
-            <summary>
-            array of user schedule
-            </summary>
-        </member>
-        <member name="F:StonePlanner.SchedulingCalendar.ed">
-            <summary>
-            whether it is a presentation mode
-            </summary>
-        </member>
-        <member name="F:StonePlanner.SchedulingCalendar.result">
-            <summary>
-            handled result
-            </summary>
-        </member>
-        <member name="F:StonePlanner.SchedulingCalendar.dayArray">
-            <summary>
-            all of day information
-            </summary>
-        </member>
-        <member name="M:StonePlanner.SchedulingCalendar.#ctor(System.Collections.Generic.Dictionary{System.DateTime,System.String},System.String@,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="schd"></param>
-            <param name="alert"></param>
-            <param name="bed"></param>
-        </member>
-        <member name="F:StonePlanner.SchedulingCalendar.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.SchedulingCalendar.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.SchedulingCalendar.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:StonePlanner.SchedulingCalendarDay.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:StonePlanner.SchedulingCalendarDay.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:StonePlanner.SchedulingCalendarDay.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要修改
-            使用代码编辑器修改此方法的内容。
-            </summary>
-        </member>
-        <member name="T:StonePlanner.TestTools">
-            <summary>
-            show tools for test
-            </summary>
-        </member>
-        <member name="F:StonePlanner.TestTools.SignalCallback">
-            <summary>
-            absolutely useless,but i cannot remove it now :D
-            </summary>
-        </member>
-        <member name="M:StonePlanner.TestTools.#ctor(System.Action{System.Int32})">
-            <summary>
-            initialize component and do some horrible things
-            </summary>
-            <param name="SignalCallback">i think it is terrible</param>
-        </member>
-        <member name="M:StonePlanner.TestTools.listView_Main_ItemChecked(System.Object,System.Windows.Forms.ItemCheckedEventArgs)">
-            <summary>
-            show what user selected
-            </summary>
-        </member>
-        <member name="M:StonePlanner.TestTools.listView_Main_SelectedIndexChanged(System.Object,System.EventArgs)">
-            <summary>
-            open specific tool
-            </summary>
-        </member>
-        <member name="F:StonePlanner.TestTools.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.TestTools.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.TestTools.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Update">
-            <summary>
-            update software GUI
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Update.updateSource">
-            <summary>
-            update information source
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Update.versions">
-            <summary>
-            list of versions
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Update.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Update.DataFinished(System.Object,System.Net.DownloadStringCompletedEventArgs)">
-            <summary>
-            data downloaded
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Update.metroRadioButton_Beta_CheckedChanged(System.Object,System.EventArgs)">
-            <summary>
-            switch to the Beta channel
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Update.metroRadioButton_Release_CheckedChanged(System.Object,System.EventArgs)">
-            <summary>
-            switch to the Release channel
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Update.metroRadioButton_Dev_CheckedChanged(System.Object,System.EventArgs)">
-            <summary>
-            switch to the Dev channel
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Update.Button_Submit_Click(System.Object,System.EventArgs)">
-            <summary>
-            start download new version of software
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Update.FileSaved(System.Object,System.ComponentModel.AsyncCompletedEventArgs)">
-            <summary>
-            prompt the download is ending
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Update.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Update.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Update.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="F:StonePlanner.WebService.client">
             <summary>
             client socket instance
             </summary>
         </member>
-        <member name="M:StonePlanner.WebService.#ctor">
+        <member name="M:StonePlanner.WebService.#ctor(StonePlanner.View.AddTodo.PlanAddInvoke)">
             <summary>
             initialize component
             </summary>
@@ -1176,725 +1954,9 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:StonePlanner.Legacy">
-            <summary>
-            此类内含所有已经被废弃的代码 以供查阅
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Legacy.GetPoint">
-            <summary>
-            原外部评分函数
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Login">
-            <summary>
-            login window
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Login.UserName">
-            <summary>
-            user's name
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Login.UserType">
-            <summary>
-            user's type
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Login.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Login.button_Submit_Click(System.Object,System.EventArgs)">
-            <summary>
-            login
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Login.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Login.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Login.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Main">
-            <summary>
-            main window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
-            <summary>
-            this function is used to send Windows Message (WM) handling window drag events.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.ReleaseCapture">
-            <summary>
-            the function releases the mouse capture from the window
-            in the current thread and resumes the usual mouse input processing.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.NtSetInformationProcess(System.IntPtr,System.Int32,System.Int32@,System.Int32)">
-            <summary>
-            retrieves information about the specified process
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:StonePlanner.Main.panel_Top_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            the function sends a drag event for dragging the window.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.#ctor">
-            <summary>
-            <para>the main window constructor, the basic purpose is as follows:</para>
-            <para>load controls (automatically generated)</para>
-            <para>assign yourself to your own main variable</para>
-            <para>cancel the cross-thread operation check</para>
-            <para>load the setting window in advance to facilitate later reading of the settings</para>
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.HandleSign(System.Object,StonePlanner.DataType.SignChangedEventArgs)">
-            <summary>
-            addSignal handler
-            </summary>
-            <param name="sender">object from which the call originated</param>
-            <param name="e">addSignal event args</param>
-        </member>
-        <member name="M:StonePlanner.Main.DefWndProc(System.Windows.Forms.Message@)">
-            <summary>
-            overrides the form's message handler
-            </summary>
-            <param name="m">message</param>
-        </member>
-        <member name="M:StonePlanner.Main.pictureBox_T_Exit_Click(System.Object,System.EventArgs)">
-            <summary>
-            handles the user exit event and deposits new data that has not yet been stored.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.Main_Load(System.Object,System.EventArgs)">
-            <summary>
-            this function is used for main window loading
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Main.PlanAddInvoke">
-            <summary>
-            invoke for plan addition
-            </summary>
-            <param name="plan">plan instance</param>
-        </member>
-        <member name="M:StonePlanner.Main.AddPlan(StonePlanner.Plan)">
-            <summary>
-            function to add plan to GUI
-            </summary>
-            <param name="pValue"></param>
-        </member>
-        <member name="M:StonePlanner.Main.ScanTaskTime(System.String)">
-            <summary>
-            scan task time and switch whether is not finished
-            </summary>
-            <param name="alert">alert info</param>
-        </member>
-        <member name="M:StonePlanner.Main.HoldList">
-            <summary>
-            load user lists
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.FunctionLoader">
-            <summary>
-            load 
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.timer_Anti_Tick(System.Object,System.EventArgs)">
-            <summary>
-            anti-piracy check
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.SearchProcA(System.String)">
-            <summary>
-            determine whether the process contains this string (fuzzy)
-            </summary>
-            <param name="strProcName">process string</param>
-            <returns>whether it contains</returns>
-        </member>
-        <member name="M:StonePlanner.Main.ChangeMoney(System.Int32)">
-            <summary>
-            change user money
-            </summary>
-            <param name="value">money value</param>
-        </member>
-        <member name="M:StonePlanner.Main.MoneyUpdate(System.Int32)">
-            <summary>
-            update user money
-            </summary>
-            <param name="delta">money delta value</param>
-        </member>
-        <member name="M:StonePlanner.Main.ValuesUpdate(System.UInt32,System.Int32)">
-            <summary>
-            update user attribute
-            </summary>
-            <param name="type">attribute type</param>
-            <param name="delta">attribute delta value</param>
-        </member>
-        <member name="M:StonePlanner.Main.ValuesUpdate(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            update user's all attribute
-            </summary>
-            <param name="lasting">lasting value</param>
-            <param name="explosive">explosive value</param>
-            <param name="wisdom">wisdom value</param>
-        </member>
-        <member name="M:StonePlanner.Main.ValueGetter">
-            <summary>
-            get user money
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.AddSignal(System.Int32)">
-            <summary>
-            add specific addSignal
-            </summary>
-            <param name="addSignal">signal you want to add</param>
-        </member>
-        <member name="M:StonePlanner.Main.pictureBox_T_More_Click(System.Object,System.EventArgs)">
-            <summary>
-            control window length
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.GetDailySentence">
-            <summary>
-            get daily sentence
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.label_Sentence_TextChanged(System.Object,System.EventArgs)">
-            <summary>
-            change sentence
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.label_Sentence_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            move window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.User_Picture_DoubleClick(System.Object,System.EventArgs)">
-            <summary>
-            show error center
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.label_L_Function_Click(System.Object,System.EventArgs)">
-            <summary>
-            stretch the menu bar
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.label_L_Type_Click(System.Object,System.EventArgs)">
-            <summary>
-            display a list of categories
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.panel_L_MouseWheel(System.Object,System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            The middle mouse button of the category box
-            scrolls in response to events
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.LengthCalculation">
-            <summary>
-            dynamically calculating box length
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.Another_OnControlAdded(System.Object,System.Windows.Forms.ControlEventArgs)">
-            <summary>
-            overwrite the add control event to add it in order
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Main.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Main.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.MCIPlayer.PlayMusic_Repeat(System.String)">
-            <summary>
-            播放音乐文件(重复)
-            </summary>
-            <param name="p_FileName">音乐文件名称</param>
-        </member>
-        <member name="M:StonePlanner.MCIPlayer.PlayMusic(System.String)">
-            <summary>
-            播放音乐文件
-            </summary>
-            <param name="p_FileName">音乐文件名称</param>
-        </member>
-        <member name="M:StonePlanner.MCIPlayer.StopMusic(System.String)">
-            <summary>
-            停止当前音乐播放
-            </summary>
-            <param name="p_FileName">音乐文件名称</param>
-        </member>
-        <member name="F:StonePlanner.Plan.Capital">
-            <summary>
-            任务大标题
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.Lnumber">
-            <summary>
-            任务自动编号值
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.status">
-            <summary>
-            任务状态
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.Seconds">
-            <summary>
-            完成任务所需时间
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.Intro">
-            <summary>
-            任务具体介绍
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.Difficulty">
-            <summary>
-            任务难度
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.Lasting">
-            <summary>
-            任务持久力<code>MA_Lasting值</code>
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.Explosive">
-            <summary>
-            任务爆发力<code>MA_Explosive值</code>
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.Wisdom">
-            <summary>
-            任务智慧值<code>MA_Wisdom值</code>
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.ID">
-            <summary>
-            任务唯一标识符 
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.Parent">
-            <summary>
-            所属类别
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.StartTime">
-            <summary>
-            开始时间
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Plan.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Plan.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Plan.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="M:StonePlanner.Program.Main(System.String[])">
             <summary>
             The main entry point for the application.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Recycle">
-            <summary>
-            save all of finished tasks
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Recycle.#ctor">
-            <summary>
-            initialize component and load cols
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Recycle.LoadCol">
-            <summary>
-            load task columns
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Recycle.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Recycle.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Recycle.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Register">
-            <summary>
-            register account
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Register.GetWindow(System.IntPtr,System.Int32)">
-            <summary>
-            GetWindow function
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Register.SendMessage(System.IntPtr,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            SendMessage function
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Register.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Register.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Register.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Register.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Settings">
-            <summary>
-            software settings
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Settings.packedSettings">
-            <summary>
-            pack of settings
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Settings.#ctor">
-            <summary>
-            initialize component and read settings
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Settings.vScrollBar1_Scroll(System.Object,System.Windows.Forms.ScrollEventArgs)">
-            <summary>
-            scroll page
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Settings.button_Save_Click(System.Object,System.EventArgs)">
-            <summary>
-            save settings
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Settings.InitializeSettings">
-            <summary>
-            initialize settings
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Settings.Exit_Click(System.Object,System.EventArgs)">
-            <summary>
-            close window
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="F:StonePlanner.Settings.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Settings.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Settings.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Shop">
-            <summary>
-            shop
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Shop.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Shop.goodList">
-            <summary>
-            list of all of goods
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Shop.page">
-            <summary>
-            about page information
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Shop.maxPage">
-            <summary>
-            about page information
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Shop.PWMS_ACCOUNT">
-            <summary>
-            count of goods
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Shop.ShowGood(System.Int32)">
-            <summary>
-            display goods
-            </summary>
-            <param name="page">page index</param>
-        </member>
-        <member name="M:StonePlanner.Shop.btn_tRight_Click(System.Object,System.EventArgs)">
-            <summary>
-            page backwards
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Shop.button1_Click(System.Object,System.EventArgs)">
-            <summary>
-            open AddGood window
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Shop.btn_tLeft_Click(System.Object,System.EventArgs)">
-            <summary>
-            page forwards
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Shop.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Shop.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Shop.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.SocketClient.#ctor(System.String,System.Int32,System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="ip">连接服务器的IP</param>
-            <param name="port">连接服务器的端口</param>
-        </member>
-        <member name="M:StonePlanner.SocketClient.StartClient">
-            <summary>
-            开启服务,连接服务端
-            </summary>
-        </member>
-        <member name="F:StonePlanner.TaskDetails.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:StonePlanner.TaskDetails.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:StonePlanner.TaskDetails.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要修改
-            使用代码编辑器修改此方法的内容。
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Testify">
-            <summary>
-            show all of static fields
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Testify.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Testify.timer1_Tick(System.Object,System.EventArgs)">
-            <summary>
-            refresh value of fields
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="F:StonePlanner.Testify.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Testify.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Testify.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.TestVersion">
-            <summary>
-            <para>[temporarily abandoned]</para>
-            <para>restrict users who have not obtained test codes from using new features</para>
-            </summary>
-        </member>
-        <member name="M:StonePlanner.TestVersion.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.TestVersion.linkLabel1_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
-            <summary>
-            guide to website
-            </summary>
-        </member>
-        <member name="F:StonePlanner.TestVersion.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.TestVersion.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.TestVersion.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Thanks">
-            <summary>
-            show thanks list
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Thanks.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Thanks.timer1_Tick(System.Object,System.EventArgs)">
-            <summary>
-            play the thanks list
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Thanks.label_E_Click(System.Object,System.EventArgs)">
-            <summary>
-            stop play music,but it seems like useless
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Thanks.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Thanks.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.Thanks.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:StonePlanner.UserInfo">
-            <summary>
-            display user personal information
-            </summary>
-        </member>
-        <member name="P:StonePlanner.UserInfo.Space">
-            <summary>
-            format spaces
-            </summary>
-        </member>
-        <member name="M:StonePlanner.UserInfo.#ctor">
-            <summary>
-            initialize component
-            </summary>
-        </member>
-        <member name="M:StonePlanner.UserInfo.LevelGetter(System.Int32)">
-            <summary>
-            get level information
-            </summary>
-            <param name="nowValue">now value</param>
-            <returns>level information:
-            [0] = Grade; [1] = left border; [2] = Right border.</returns>
-        </member>
-        <member name="F:StonePlanner.UserInfo.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.UserInfo.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.UserInfo.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="T:StonePlanner.Properties.Resources">
@@ -1911,100 +1973,6 @@
             <summary>
               重写当前线程的 CurrentUICulture 属性，对
               使用此强类型资源类的所有资源查找执行重写。
-            </summary>
-        </member>
-        <member name="T:MDI.Finder">
-            <summary>
-            (to InnerIDE)
-            </summary>
-        </member>
-        <member name="F:MDI.Finder.primaryIDE">
-            <summary>
-            IDE instance
-            </summary>
-        </member>
-        <member name="M:MDI.Finder.#ctor(StonePlanner.InnerIDE)">
-            <summary>
-            initialize component and get IDE
-            </summary>
-            <param name="form">IDE instance</param>
-        </member>
-        <member name="M:MDI.Finder.Finder_Load(System.Object,System.EventArgs)">
-            <summary>
-            load window,the find down feature is enabled by default
-            </summary>
-        </member>
-        <member name="M:MDI.Finder.button2_Click(System.Object,System.EventArgs)">
-            <summary>
-            Replace the text in textBox1 with the text in textBox2
-            </summary>
-        </member>
-        <member name="M:MDI.Finder.button3_Click(System.Object,System.EventArgs)">
-            <summary>
-            replace all
-            </summary>
-        </member>
-        <member name="M:MDI.Finder.button4_Click(System.Object,System.EventArgs)">
-            <summary>
-            find specific character
-            </summary>
-        </member>
-        <member name="M:MDI.Finder.FindUp(System.Windows.Forms.RichTextBox,System.String)">
-            <summary>
-            function for lookup up
-            </summary>
-        </member>
-        <member name="M:MDI.Finder.FindDown(System.Windows.Forms.RichTextBox,System.String)">
-            <summary>
-            function for finding down
-            </summary>
-        </member>
-        <member name="M:MDI.Finder.FindDownM(System.Windows.Forms.RichTextBox,System.String)">
-            <summary>
-            function for finding down
-            </summary>
-        </member>
-        <member name="M:MDI.Finder.seeks(System.String)">
-            <summary>
-            pop-up window to prompt
-            </summary>
-            <param name="str">handled string</param>
-        </member>
-        <member name="M:MDI.Finder.ReplaceAll(System.Windows.Forms.RichTextBox,System.String,System.String)">
-            <summary>
-            replace all <code>strPrevious</code> to <code>strNew</code>
-            </summary>
-            <param name="rtxBox">the RichTextBox to replace</param>
-            <param name="strPrevious">previous string</param>
-            <param name="strNew">new string</param>
-        </member>
-        <member name="M:MDI.Finder.replace(System.String,System.String)">
-            <summary>
-            replace single <code>strPrevious</code> to <code>strNew</code>
-            </summary>
-            <param name="strPrevious">previous string</param>
-            <param name="strNew">new string</param>
-        </member>
-        <member name="M:MDI.Finder.textBox1_TextChanged(System.Object,System.EventArgs)">
-            <summary>
-            text trigger
-            </summary>
-        </member>
-        <member name="F:MDI.Finder.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:MDI.Finder.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:MDI.Finder.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
             </summary>
         </member>
     </members>

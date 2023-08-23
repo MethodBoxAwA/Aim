@@ -91,6 +91,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
@@ -108,8 +109,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Process\AimEventArgs.cs" />
-    <Compile Include="Process\Encrypt.cs" />
+    <Compile Include="Classes\Helpers\Encrypt.cs" />
     <Compile Include="View\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,7 +134,6 @@
     <Compile Include="View\AddTodo.Designer.cs">
       <DependentUpon>AddTodo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\AESEncrypt.cs" />
     <Compile Include="View\Alert.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,26 +158,26 @@
     <Compile Include="View\BugReporter.Designer.cs">
       <DependentUpon>BugReporter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\ByteConvert.cs" />
-    <Compile Include="Process\Code.cs" />
-    <Compile Include="Process\CommonSettings.cs" />
+    <Compile Include="Classes\Helpers\ByteConvert.cs" />
+    <Compile Include="Classes\License\Code.cs" />
+    <Compile Include="Classes\Controls\BaseData.cs" />
     <Compile Include="View\Console.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\Console.Designer.cs">
       <DependentUpon>Console.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\DailyDateTime.cs" />
-    <Compile Include="Process\DataType.cs" />
-    <Compile Include="Process\Develop.cs" />
-    <Compile Include="Process\Enums.cs" />
+    <Compile Include="Classes\DataTypes\DailyDateTime.cs" />
+    <Compile Include="Classes\DataTypes\DataType.cs" />
+    <Compile Include="Classes\DataTypes\Develop.cs" />
+    <Compile Include="Classes\DataTypes\Enums.cs" />
     <Compile Include="View\ErrorCenter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\ErrorCenter.Designer.cs">
       <DependentUpon>ErrorCenter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\Exceptions.cs" />
+    <Compile Include="Classes\DataTypes\Exceptions.cs" />
     <Compile Include="View\ExportTodo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,27 +220,27 @@
     <Compile Include="View\Importer.Designer.cs">
       <DependentUpon>Importer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\InnerFuncs.cs" />
+    <Compile Include="Classes\Helpers\InnerFuncs.cs" />
     <Compile Include="View\InnerIDE.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\InnerIDE.Designer.cs">
       <DependentUpon>InnerIDE.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\InputBox.cs" />
-    <Compile Include="Process\InputBox.Designer.cs">
+    <Compile Include="Classes\Controls\InputBox.cs" />
+    <Compile Include="Classes\Controls\InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\Interfaces.cs" />
+    <Compile Include="Classes\DataTypes\Interfaces.cs" />
     <Compile Include="Model\PluginModel.cs" />
-    <Compile Include="Process\PluginStruct.cs" />
+    <Compile Include="Classes\DataTypes\PluginStruct.cs" />
     <Compile Include="View\PlugManager.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\PlugManager.Designer.cs">
       <DependentUpon>PlugManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\ProcessExtends.cs" />
+    <Compile Include="Classes\Helpers\ProcessExtends.cs" />
     <Compile Include="View\SchedulingCalendar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -254,8 +253,8 @@
     <Compile Include="Control\SchedulingCalendarDay.Designer.cs">
       <DependentUpon>SchedulingCalendarDay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\Signal.cs" />
-    <Compile Include="Process\Structs.cs" />
+    <Compile Include="Classes\DataHandlers\Signal.cs" />
+    <Compile Include="Classes\DataTypes\Structs.cs" />
     <Compile Include="View\TestTools.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -274,7 +273,7 @@
     <Compile Include="View\WebService.Designer.cs">
       <DependentUpon>WebService.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\Legacy.cs" />
+    <Compile Include="Classes\Controls\Legacy.cs" />
     <Compile Include="View\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,7 +286,7 @@
     <Compile Include="View\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\MCIPlayer.cs" />
+    <Compile Include="Classes\Controls\MCIPlayer.cs" />
     <Compile Include="Control\Plan.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -320,8 +319,8 @@
     <Compile Include="View\Shop.Designer.cs">
       <DependentUpon>Shop.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\SocketClient.cs" />
-    <Compile Include="Process\SQLConnect.cs" />
+    <Compile Include="Classes\WebRoute\SocketClient.cs" />
+    <Compile Include="Classes\DataHandlers\SQLConnect.cs" />
     <Compile Include="Control\TaskDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -407,7 +406,7 @@
     <EmbeddedResource Include="View\InnerIDE.resx">
       <DependentUpon>InnerIDE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Process\InputBox.resx">
+    <EmbeddedResource Include="Classes\Controls\InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Login.resx">
