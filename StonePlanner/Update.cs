@@ -15,7 +15,7 @@ namespace StonePlanner
 {
     public partial class Update : MetroForm
     {
-        string updateSource = @"https://raw.githubusercontent.com/lzr2006/lzr2006.github.io/main/Services/StonePlanner/update.txt";
+        string updateSource = @"https://www.methodbox.top/Services/StonePlanner/update.txt";
         List<VersionInfo> versions = new List<VersionInfo>();
         public Update()
         {
@@ -123,6 +123,7 @@ namespace StonePlanner
                 progressMessageHandler.HttpReceiveProgress += (_, e) =>
                 {
                     metroLabel_Info.Text = $"下载中：{e.ProgressPercentage}%";//下载进度百分比
+                    if (e.ProgressPercentage == 100) metroLabel_Info.Text = $"软件下载完成！";
                 };
                 using (var client = new HttpClient(progressMessageHandler))
                 using (var fileStream = new FileStream(saveFileName, FileMode.Create))

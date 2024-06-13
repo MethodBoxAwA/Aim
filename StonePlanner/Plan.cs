@@ -15,98 +15,168 @@ namespace StonePlanner
 {
     public partial class Plan : UserControl
     {
-        //编写+第一次重构
-        /*
-         * 一次写好 是最明智的做法
-         * 继承 继承 继承
-         * 封装 封装 封装
-         * 多态 多态 多态
-         * 面向对象白学了属于是
-         * 现在写出这样的大粪来
-         */
+
+        // Totally rewrite
+        // WOW,how motherfxxker code it is!
+
         /// <summary>
-        /// 任务大标题
+        /// The capital of this plan
         /// </summary>
-        public string capital;
+        public string Capital { get; set; }
+
         /// <summary>
-        /// 任务自动编号值
+        /// Task automatic numbering value
         /// </summary>
-        public int Lnumber;
+        public string Serial { get; set; }
+
         /// <summary>
-        /// 任务状态
+        /// Current status of the task
         /// </summary>
-        public string status = "待办";
+        public string Status { get; set; }
+
         /// <summary>
-        /// 完成任务所需时间
+        /// The introduce of this plan
         /// </summary>
-        public int seconds;
+        public string Intro { get; set; }
+
         /// <summary>
-        /// 任务具体介绍
+        /// A number from 1 to 10, in steps of 0.1, representing the difficulty of this plan
         /// </summary>
-        public string intro = "";
+        public double Difficulty { get; set; }
+
         /// <summary>
-        /// 任务难度
+        /// Lasting obtained from completing this plan
         /// </summary>
-        public double difficulty = 0.0D;
-        //第二次重构
-        /*
-         * 重载 重载 重载 重载
-         * 写的都是些什么玩意
-         * 我不希望看到
-         * 你有一亿个重载
-         * 让你创新 不是创死我自己
-         */
+        public int Lasting { get; set; }
+
         /// <summary>
-        /// 任务持久力<code>MA_LASTING值</code>
+        /// Wisdom obtained from completing this plan
         /// </summary>
-        public int lasting;
+        public int Wisdom { get; set; }
+
         /// <summary>
-        /// 任务爆发力<code>MA_EXPLOSIVE值</code>
+        /// Explosive obtained from completing this plan
         /// </summary>
-        public int explosive;
+        public int Explosive { get; set; }
+
         /// <summary>
-        /// 任务智慧值<code>MA_WISDOM值</code>
+        /// Task unique identifier
         /// </summary>
-        public int wisdom;
-        //第三次重构
-        /* 
-         * 我人麻了 真不知道你是怎么想的
-         * 任务状态这种无用东西加上 ID不要了
-         * 或许你刚开始确实没想到要做大 但是你之前有两次重构
-         * 什么都加了 就是ID没加
-         * 脑子被驴踢了是吧
-         * 记住 写代码要用脑子写 而不是寄吧
-         * 导致现在一个什么问题 用所谓UDID标识 而不是ID
-         * 那ID的用途是什么 占用空间吗
-         */
+        public int ID { get; set; }
+
         /// <summary>
-        /// 任务唯一标识符 
+        /// List of Tasks Belonging to
         /// </summary>
-        public int ID;
-        //第四次重构
-        /*
-         * 世界爆炸
-         * 重构是最痛苦的事情 没有之一
-         * 把这些东西都的封装起来不好吗
-         * 非得弄得到处都是 乱七八糟
-         * 牵一发而动全身 直接大出血
-         * 以后更新 我看你怎么办
-         * 哼哼啊啊啊啊啊啊啊啊啊啊（恼）
-         */
+        public string Parent { get; set; }
+
         /// <summary>
-        /// 所属类别
+        /// Task start time
         /// </summary>
-        public string parent;
+        public DateTime StartTime { get; set; }
+
         /// <summary>
-        /// 开始时间
+        /// 
         /// </summary>
-        public DateTime startTime;
         public Action<int> AddSign;
+
+        #region 史
+        ////编写+第一次重构
+        ///*
+        // * 一次写好 是最明智的做法
+        // * 继承 继承 继承
+        // * 封装 封装 封装
+        // * 多态 多态 多态
+        // * 面向对象白学了属于是
+        // * 现在写出这样的大粪来
+        // */
+        ///// <summary>
+        ///// 任务大标题
+        ///// </summary>
+        //public string capital;
+        ///// <summary>
+        ///// 任务自动编号值
+        ///// </summary>
+        //public int Lnumber;
+        ///// <summary>
+        ///// 任务状态
+        ///// </summary>
+        //public string status = "待办";
+        ///// <summary>
+        ///// 完成任务所需时间
+        ///// </summary>
+        //public int seconds;
+        ///// <summary>
+        ///// 任务具体介绍
+        ///// </summary>
+        //public string intro = "";
+        ///// <summary>
+        ///// 任务难度
+        ///// </summary>
+        //public double difficulty = 0.0D;
+        ////第二次重构
+        ///*
+        // * 重载 重载 重载 重载
+        // * 写的都是些什么玩意
+        // * 我不希望看到
+        // * 你有一亿个重载
+        // * 让你创新 不是创死我自己
+        // */
+        ///// <summary>
+        ///// 任务持久力<code>MA_LASTING值</code>
+        ///// </summary>
+        //public int lasting;
+        ///// <summary>
+        ///// 任务爆发力<code>MA_EXPLOSIVE值</code>
+        ///// </summary>
+        //public int explosive;
+        ///// <summary>
+        ///// 任务智慧值<code>MA_WISDOM值</code>
+        ///// </summary>
+        //public int wisdom;
+        ////第三次重构
+        ///* 
+        // * 我人麻了 真不知道你是怎么想的
+        // * 任务状态这种无用东西加上 ID不要了
+        // * 或许你刚开始确实没想到要做大 但是你之前有两次重构
+        // * 什么都加了 就是ID没加
+        // * 脑子被驴踢了是吧
+        // * 记住 写代码要用脑子写 而不是寄吧
+        // * 导致现在一个什么问题 用所谓UDID标识 而不是ID
+        // * 那ID的用途是什么 占用空间吗
+        // */
+
+        ////第四次重构
+        ///*
+        // * 世界爆炸
+        // * 重构是最痛苦的事情 没有之一
+        // * 把这些东西都的封装起来不好吗
+        // * 非得弄得到处都是 乱七八糟
+        // * 牵一发而动全身 直接大出血
+        // * 以后更新 我看你怎么办
+        // * 哼哼啊啊啊啊啊啊啊啊啊啊（恼）
+        // */
+        ///// <summary>
+        ///// 所属类别
+        ///// </summary>
+        //public string parent;
+        ///// <summary>
+        ///// 开始时间
+        ///// </summary>
+        //public DateTime startTime;
+        // public Action<int> AddSign;
         /*
          * 第五次重构
          * 我们修复了遍地都是的重载和乱七八糟的类
          * 乱世已过，静待花开
          */
+        #endregion
+
+
+        internal Plan(UserPlan planData)
+        {
+
+        }
+
 
         internal Plan(PlanClassA @struct)
         {

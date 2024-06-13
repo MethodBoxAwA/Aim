@@ -15,6 +15,11 @@ namespace StonePlanner
             /// 该消息用于给用户加额定数量的货币，数量请包括在wParam参数内，类型为INT。
             /// </summary>
             internal const int AM_ADDMONEY = 0x2cbc;
+            /// <summary>
+            /// 该消息可以获取用户货币数量，请将接收结果的窗口的句柄包含在wParam参数内，
+            /// 软件将以0x2cbd作为消息值，将用户货币数量以wParam参数回传至指定窗口。
+            /// </summary>
+            internal const int AM_GETMONEY = 0x2cbd;
         }
     }
     public class HWND

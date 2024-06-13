@@ -51,7 +51,7 @@ namespace StonePlanner
                 return false;
             }
         }
-
+        
         protected void FunctionLoader() 
         {
             panel_RightAll.Controls.Add(new ControlButton("服务设置", Image.FromFile($@"{Application.StartupPath}\icon\server.png"), 1));

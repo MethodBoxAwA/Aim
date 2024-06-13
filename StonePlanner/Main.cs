@@ -300,6 +300,9 @@ namespace StonePlanner
                 case AM_ADDMONEY:
                     MoneyUpdate(m.WParam.ToInt32());
                     break;
+                case AM_GETMONEY:
+                    SendMessage(m.WParam, AM_GETMONEY, (IntPtr)money, IntPtr.Zero);
+                    break;
                 //调用基类函数，以便系统处理其它消息。
                 default:
                     base.DefWndProc(ref m);
