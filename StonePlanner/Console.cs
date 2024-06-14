@@ -197,8 +197,8 @@ namespace StonePlanner
                                 nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
                             }
                         } 
-                        Main.planner.capital = nInput[1];
-                        Main.planner.seconds = Convert.ToInt32(nInput[2]);
+                        Main.planner.Capital = nInput[1];
+                        Main.planner.Seconds = Convert.ToInt32(nInput[2]);
                         //Main.AddSign(4);
                         richTextBox_Output.Text += $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
                     }

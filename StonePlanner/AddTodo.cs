@@ -22,64 +22,30 @@ namespace StonePlanner
             this.Addsignal = Addsignal;
         }
 
-        internal AddTodo(Structs.PlanStruct planStruct)
+        internal AddTodo(PlanStruct planStruct)
         {
             InitializeComponent();
+
             try
             {
                 domainUpDown_Difficulty.Text = "SERVER" + " " + planStruct.Difficulty.ToString();
-            }
-            catch
-            {
-                domainUpDown_Difficulty.Text = "SERVER" + " " + "0.0";
-            }
-            try
-            {
                 textBox_Capital.Text = planStruct.Capital;
-            }
-            catch
-            {
-                textBox_Capital.Text = "无标题";
-            }
-            try
-            {
                 textBox_Explosive.Text = planStruct.Explosive.ToString();
-            }
-            catch
-            {
-                textBox_Explosive.Text = "0";
-            }
-            try
-            {
                 textBox_Intro.Text = planStruct.Intro;
-            }
-            catch
-            {
-                textBox_Intro.Text = "无简介";
-            }
-            try
-            {
                 textBox_Lasting.Text = planStruct.Lasting.ToString();
-            }
-            catch
-            {
-                textBox_Lasting.Text = "0";
-            }
-            try
-            {
                 textBox_Time.Text = planStruct.Seconds.ToString();
-            }
-            catch
-            {
-                textBox_Time.Text = "100";
-            }
-            try
-            {
                 textBox_Wisdom.Text = planStruct.Wisdom.ToString();
             }
-            catch
+
+            catch (NullReferenceException) when (planStruct.Capital is null)
             {
-                textBox_Wisdom.Text = "0";
+
+                textBox_Capital.Text = "无标题";
+            }
+            catch (NullReferenceException) when (planStruct.Intro is null)
+            {
+
+                textBox_Intro.Text = "无标题";
             }
         }
 
@@ -149,35 +115,36 @@ namespace StonePlanner
         {
             try
             {
-                //封装类送走
-                PlanClassC psc = new PlanClassC();
-                psc.capital = textBox_Capital.Text;
-                psc.seconds = Convert.ToInt32(textBox_Time.Text);
-                psc.intro = textBox_Intro.Text;
-                psc.lasting = Convert.ToInt32(textBox_Lasting.Text);
-                psc.explosive = Convert.ToInt32(textBox_Explosive.Text);
-                psc.wisdom = Convert.ToInt32(textBox_Wisdom.Text);
-                psc.parent = comboBox_List.SelectedItem.ToString();
-                DateTime _ = new DateTime(
+                UserPlan userPlan = new()
+                {
+                    Capital = textBox_Capital.Text,
+                    Seconds = Convert.ToInt32(textBox_Time.Text),
+                    Intro = textBox_Intro.Text,
+                    Lasting = Convert.ToInt32(textBox_Lasting.Text),
+                    Explosive = Convert.ToInt32(textBox_Explosive.Text),
+                    Wisdom = Convert.ToInt32(textBox_Wisdom.Text),
+                    Parent = comboBox_List.SelectedItem.ToString(),
+                    StartTime = new DateTime(
                     dateTimePicker_Now.Value.Year,
                     dateTimePicker_Now.Value.Month,
                     dateTimePicker_Now.Value.Day,
                     Convert.ToInt32(textBox_hh.Text),
                     Convert.ToInt32(textBox_mm.Text),
                     0
-                    );
-                psc.UDID = new Random().Next(100000000, 999999999);
-                psc.startTime = _.ToBinary();
-                psc.Addsignal = Addsignal;
+                    ).ToBinary(),
+                    UDID = new Random().Next(100000000, 999999999),
+                    AddSign = Addsignal
+                };
                 double diff = 0D;
                 try
                 {
                     diff = Math.Round(Convert.ToDouble(domainUpDown_Difficulty.SelectedItem.ToString().Split(' ')[1]), 1);
                 }
                 catch { diff = 0D; }
-                psc.difficulty = diff;
+                userPlan.Difficulty = diff;
+
                 //对指针传出
-                PlanAdditionInvoke(new Plan(psc));
+                PlanAdditionInvoke(new Plan(userPlan));
                 Close();
                 //封送结构体
                 //Main.planner = psc;

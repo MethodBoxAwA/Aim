@@ -38,17 +38,17 @@ namespace StonePlanner
             foreach (var item in recycle_bin)
             {
                 string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ) VALUES ( ";
-                allTask += item.capital + ";";
+                allTask += item.Capital + ";";
                 //allTask += item.dwAim + ";";
-                allTask += item.seconds + ";";
-                allTask += item.difficulty;
+                allTask += item.Seconds + ";";
+                allTask += item.Difficulty;
                 allTask += "\n";
 
-                strInsert += "'" + item.capital + "', '";
-                strInsert += item.intro + "', '";
-                strInsert += item.status + "', ";
-                strInsert += item.seconds + ", ";
-                strInsert += item.difficulty + ")";
+                strInsert += "'" + item.Capital + "', '";
+                strInsert += item.Intro + "', '";
+                strInsert += item.Status + "', ";
+                strInsert += item.Seconds + ", ";
+                strInsert += item.Difficulty + ")";
                 //清空原有数据
                 inst = new OleDbCommand(strInsert, myConn);
                 int lines = inst.ExecuteNonQuery();

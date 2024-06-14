@@ -609,6 +609,86 @@
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
+        <member name="P:StonePlanner.Structs.UserPlan.Capital">
+            <summary>
+            The capital of this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Structs.UserPlan.Seconds">
+            <summary>
+            The duration of this plan will continue
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Structs.UserPlan.Intro">
+            <summary>
+            The introduce of this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Structs.UserPlan.Difficulty">
+            <summary>
+            A number from 1 to 10, in steps of 0.1, representing the difficulty of this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Structs.UserPlan.UDID">
+            <summary>
+            The unique identifier of this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Structs.UserPlan.Parent">
+            <summary>
+            The list to which this plan belongs
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Structs.UserPlan.Lasting">
+            <summary>
+            Lasting obtained from completing this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Structs.UserPlan.Wisdom">
+            <summary>
+            Wisdom obtained from completing this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Structs.UserPlan.Explosive">
+            <summary>
+            Explosive obtained from completing this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Structs.UserPlan.StartTime">
+            <summary>
+            Task start time
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Structs.UserPlan.AddSign">
+            <summary>
+            AddSign delegate
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Structs.UserPlan.BuildMode">
+            <summary>
+            Model applicable in plan building
+            </summary>
+        </member>
+        <member name="T:StonePlanner.Structs.PlanBuildMode">
+            <summary>
+            任务构建模式
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Structs.PlanBuildMode.A">
+            <summary>
+            用于分配空白Plan对象
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Structs.PlanBuildMode.B">
+            <summary>
+            用于从数据库建立Plan对象
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Structs.PlanBuildMode.C">
+            <summary>
+            用于从新建页面建立Plan对象
+            </summary>
+        </member>
         <member name="F:StonePlanner.TestTools.components">
             <summary>
             Required designer variable.
@@ -668,6 +748,16 @@
         <member name="M:StonePlanner.Legacy.GetPoint">
             <summary>
             原外部评分函数
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Login.button_Submit_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handle logic of user login
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Login.linkLabel_Register_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
+            <summary>
+            Open register form
             </summary>
         </member>
         <member name="F:StonePlanner.Login.components">
@@ -794,65 +884,73 @@
             </summary>
             <param name="p_FileName">音乐文件名称</param>
         </member>
-        <member name="F:StonePlanner.Plan.capital">
+        <member name="P:StonePlanner.Plan.Capital">
             <summary>
-            任务大标题
+            The capital of this plan
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.Lnumber">
+        <member name="P:StonePlanner.Plan.Seconds">
             <summary>
-            任务自动编号值
+            The remain seconds of this plan
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.status">
+        <member name="P:StonePlanner.Plan.Serial">
             <summary>
-            任务状态
+            Task automatic numbering value
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.seconds">
+        <member name="P:StonePlanner.Plan.Status">
             <summary>
-            完成任务所需时间
+            Current status of the task
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.intro">
+        <member name="P:StonePlanner.Plan.Intro">
             <summary>
-            任务具体介绍
+            The introduce of this plan
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.difficulty">
+        <member name="P:StonePlanner.Plan.Difficulty">
             <summary>
-            任务难度
+            A number from 1 to 10, in steps of 0.1, representing the difficulty of this plan
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.lasting">
+        <member name="P:StonePlanner.Plan.Lasting">
             <summary>
-            任务持久力<code>MA_LASTING值</code>
+            Lasting obtained from completing this plan
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.explosive">
+        <member name="P:StonePlanner.Plan.Wisdom">
             <summary>
-            任务爆发力<code>MA_EXPLOSIVE值</code>
+            Wisdom obtained from completing this plan
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.wisdom">
+        <member name="P:StonePlanner.Plan.Explosive">
             <summary>
-            任务智慧值<code>MA_WISDOM值</code>
+            Explosive obtained from completing this plan
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.ID">
+        <member name="P:StonePlanner.Plan.ID">
             <summary>
-            任务唯一标识符 
+            Task unique identifier
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.parent">
+        <member name="P:StonePlanner.Plan.Parent">
             <summary>
-            所属类别
+            List of Tasks Belonging to
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.startTime">
+        <member name="P:StonePlanner.Plan.StartTime">
             <summary>
-            开始时间
+            Task start time
             </summary>
+        </member>
+        <member name="F:StonePlanner.Plan.AddSign">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Plan.#ctor(StonePlanner.Structs.UserPlan)">
+            *
         </member>
         <member name="F:StonePlanner.Plan.components">
             <summary> 

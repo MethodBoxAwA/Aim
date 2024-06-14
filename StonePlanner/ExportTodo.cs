@@ -36,9 +36,9 @@ namespace StonePlanner
                 {
                     if (item.GetType() is null) { continue; }
                     richTextBox_M.Text +=
-                        $"{i}    {item.capital}          {item.status}\n";
-                    planCapital.Add(item.capital);
-                    planStatus.Add(item.status);
+                        $"{i}    {item.Capital}          {item.Status}\n";
+                    planCapital.Add(item.Capital);
+                    planStatus.Add(item.Status);
                     i++;
                 }
                 //释放

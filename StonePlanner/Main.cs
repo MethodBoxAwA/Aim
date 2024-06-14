@@ -67,7 +67,7 @@ namespace StonePlanner
         //废弃任务数组
         public static List<Plan> recycle_bin = new List<Plan>();
         //TO-DO
-        internal static PlanClassC planner; //It is a void*
+        internal static UserPlan planner; //It is a void*
         //总时间
         internal static int nTime;
         //金钱
@@ -172,7 +172,7 @@ namespace StonePlanner
                      * 做法：
                      * 更改保存位置
                     */
-                    string updateString = $"UPDATE Tasks SET TaskTime = {plan.seconds}" +
+                    string updateString = $"UPDATE Tasks SET TaskTime = {plan.Seconds}" +
                                 $" , TaskStatus = \"已办完\"" +
                                 $" WHERE ID = {plan.ID}";
                     SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
@@ -182,22 +182,22 @@ namespace StonePlanner
                     string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , " +
                         "TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , ID" +
                         " , TaskParent) VALUES ( ";
-                    strInsert += "'" + plan.capital + "', '";
-                    strInsert += plan.intro + "', '";
-                    strInsert += plan.status + "', ";
-                    strInsert += plan.seconds + ", ";
-                    strInsert += plan.difficulty + ",";
-                    strInsert += plan.lasting + ",";
-                    strInsert += plan.explosive + ",";
-                    strInsert += plan.wisdom + ",";
+                    strInsert += "'" + plan.Capital + "', '";
+                    strInsert += plan.Intro + "', '";
+                    strInsert += plan.Status + "', ";
+                    strInsert += plan.Seconds + ", ";
+                    strInsert += plan.Difficulty + ",";
+                    strInsert += plan.Lasting + ",";
+                    strInsert += plan.Explosive + ",";
+                    strInsert += plan.Width + ",";
                     strInsert += plan.ID + ",";
-                    strInsert += "'" + plan.parent + "'" + ")";
+                    strInsert += "'" + plan.Parent + "'" + ")";
                     //执行插入
                     OleDbCommand inst = new OleDbCommand(strInsert, myConn);
                     inst.ExecuteNonQuery();
                 }
                 //删除
-                int hNumber = plan.Lnumber;
+                int hNumber = plan.Serial;
                 recycle_bin.Add(plan);
                 panel_M.Controls.Remove(plan);
                 TasksDict[hNumber] = null;
@@ -236,14 +236,14 @@ namespace StonePlanner
                 td = new TaskDetails((Action<int>) AddSignal);
                 td.Left = 16;
                 td.Top = 15;
-                td.Capital = plan.capital;
-                td.Time = plan.seconds.ToString();
-                td.Intro = plan.intro;
-                td.StatusResult = plan.status;
-                td.Difficulty = plan.difficulty;
-                td.Lasting = plan.lasting.ToString();
-                td.Explosive = plan.explosive.ToString();
-                td.Wisdom = plan.wisdom.ToString();
+                td.Capital = plan.Capital;
+                td.Time = plan.Seconds.ToString();
+                td.Intro = plan.Intro;
+                td.StatusResult = plan.Status;
+                td.Difficulty = plan.Difficulty;
+                td.Lasting = plan.Lasting.ToString();
+                td.Explosive = plan.Explosive.ToString();
+                td.Wisdom = plan.Wisdom.ToString();
                 SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\icon\Click.wav");
                 sp.Play();
                 panel_TaskDetail.Controls.Add(td);
@@ -347,9 +347,9 @@ namespace StonePlanner
                         {
                             //更新时间和待办状态
                             //UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
-                            if (plan.Value.seconds > 0)
+                            if (plan.Value.Seconds > 0)
                             {
-                                string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.seconds}" +
+                                string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.Seconds}" +
                                     $" WHERE ID = {plan.Value.ID}";
                                 SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
                                 continue;
@@ -363,16 +363,16 @@ namespace StonePlanner
                     }
                     //脑子是个好东西 下次带上
                     string strInsert = "INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , TaskParent , StartTime) VALUES ( ";
-                    strInsert += "'" + plan.Value.capital + "', '";
-                    strInsert += plan.Value.intro + "', '";
-                    strInsert += plan.Value.status + "', ";
-                    strInsert += plan.Value.seconds + ", ";
-                    strInsert += plan.Value.difficulty + ",";
-                    strInsert += plan.Value.lasting + ",";
-                    strInsert += plan.Value.explosive + ",";
-                    strInsert += plan.Value.wisdom + ",";
-                    strInsert += "'" + plan.Value.parent + "',";
-                    strInsert += "'" + plan.Value.startTime.ToBinary() + "')";
+                    strInsert += "'" + plan.Value.Capital + "', '";
+                    strInsert += plan.Value.Intro + "', '";
+                    strInsert += plan.Value.Status + "', ";
+                    strInsert += plan.Value.Seconds + ", ";
+                    strInsert += plan.Value.Difficulty + ",";
+                    strInsert += plan.Value.Lasting + ",";
+                    strInsert += plan.Value.Explosive + ",";
+                    strInsert += plan.Value.Wisdom + ",";
+                    strInsert += "'" + plan.Value.Parent + "',";
+                    strInsert += "'" + plan.Value.StartTime + "')";
                     //执行插入
                     SQLConnect.SQLCommandExecution(strInsert, ref Main.odcConnection);
                     recycle_bin.Add(plan.Value);
@@ -422,22 +422,20 @@ namespace StonePlanner
             //分配
             for (int i = 0; i < 100; i++)
             {
-                PlanClassA plancls = new()
+                UserPlan planInstance = new()
                 {
-                    capital = "NULL",
-                    parent = null,
-                    startTime = 0,
-                    wisdom = 0,
-                    lasting = 0,
-                    explosive = 0,
-                    intro = "NULL",
-                    seconds = 0,
-                    Addsignal = (Action<int>) AddSignal
+                    Capital = "NULL",
+                    Parent = null,
+                    StartTime = DateTime.Now.ToBinary(),
+                    Wisdom = 0,
+                    Lasting = 0,
+                    Explosive = 0,
+                    Intro = "NULL",
+                    Seconds = 0,
+                    AddSign = (Action<int>) AddSignal
                 };
-                Plan p = new(plancls)
-                {
-                    Lnumber = -1
-                };
+
+                Plan plan = new Plan(planInstance) { Serial = -1 };
                 TasksDict.Add(i, null);
             }
             //加载日期时间
@@ -454,21 +452,23 @@ namespace StonePlanner
                 {
                     continue;
                 }
-                //完了，他妈的，重载全几把乱了
-                PlanClassB plancls = new()
+
+                UserPlan userPlan = new()
                 {
-                    capital = recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
-                    intro = recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
-                    seconds = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
-                    difficulty = Convert.ToDouble(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
+                    Capital = recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
+                    Intro = recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
+                    Seconds = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
+                    Difficulty = Convert.ToDouble(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
                     UDID = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[0].Value),
-                    lasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value),
-                    explosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
-                    wisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value),
-                    startTime = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[10].Value),
-                    Addsignal = (Action<int>)AddSignal
+                    Lasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value),
+                    Explosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
+                    Wisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value),
+                    StartTime = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[10].Value),
+                    AddSign = (Action<int>) AddSignal,
+                    BuildMode = PlanBuildMode.B
                 };
-                AddPlan(new Plan(plancls));
+
+                AddPlan(new Plan(userPlan));
                 LengthCalculation();
                 plan = null;
             }
@@ -527,11 +527,11 @@ namespace StonePlanner
                 {
                     temp = item as Plan;
                 }
-                if (temp.status != "正在办")
+                if (temp.Status != "正在办")
                 {
-                    if (DateTime.Now >= temp.startTime)
+                    if (DateTime.Now.ToBinary() >= temp.StartTime)
                     {
-                        _tasks.Add(temp.capital);
+                        _tasks.Add(temp.Capital);
                     }
                 }
             }
@@ -602,21 +602,23 @@ namespace StonePlanner
                 //1 5 2 4 9 6 7 8
                 while (sResult.Read())
                 {
-                    PlanClassB psb = new()
+                    UserPlan userPlan = new()
                     {
-                        capital = sResult[1].ToString(),
-                        intro = sResult[2].ToString(),
-                        seconds = Convert.ToInt32(sResult[5]),
-                        difficulty = Convert.ToInt64(sResult[4]),
+                        Capital = sResult[1].ToString(),
+                        Intro = sResult[2].ToString(),
+                        Seconds = Convert.ToInt32(sResult[5]),
+                        Difficulty = Convert.ToInt64(sResult[4]),
                         UDID = Convert.ToInt32(sResult[0]),
-                        lasting = Convert.ToInt32(sResult[6]),
-                        explosive = Convert.ToInt32(sResult[7]),
-                        wisdom = Convert.ToInt32(sResult[8]),
-                        Addsignal = (Action<int>) AddSignal
+                        Lasting = Convert.ToInt32(sResult[6]),
+                        Explosive = Convert.ToInt32(sResult[7]),
+                        Wisdom = Convert.ToInt32(sResult[8]),
+                        AddSign = (Action<int>) AddSignal,
+                        BuildMode = PlanBuildMode.B
                     };
+
                     using Plan plan = new Plan
                     (
-                          psb
+                          userPlan
                     );
                     Function sonMain = new Function(sResult[1].ToString(), item, 0); panel_L.Controls.Add(sonMain);
                 }
@@ -748,7 +750,7 @@ namespace StonePlanner
             {
                 if (item.GetType() == typeof(Plan))
                 {
-                    nownn.Add((item as Plan).capital);
+                    nownn.Add((item as Plan).Capital);
                 }
             }
             try
@@ -887,7 +889,7 @@ namespace StonePlanner
             {
                 if (item is Plan)
                 {
-                    DateTime d = (item as Plan).startTime;
+                    DateTime d = DateTime.FromBinary((item as Plan).StartTime);
                     if (returns.ContainsKey(d))
                     {
                         //频率统计
@@ -896,7 +898,7 @@ namespace StonePlanner
                     else
                     {
                         Plan plan1 = (item as Plan);
-                        string sch = plan1.startTime.Hour switch
+                        string sch = DateTime.FromBinary(plan1.StartTime).Hour switch
                         {
                             > 6 and < 15 => " 白班",
                             _ => " 夜班",

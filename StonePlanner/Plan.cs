@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static StonePlanner.Structs;
 
@@ -25,9 +17,14 @@ namespace StonePlanner
         public string Capital { get; set; }
 
         /// <summary>
+        /// The remain seconds of this plan
+        /// </summary>
+        public int Seconds { get; set; }
+
+        /// <summary>
         /// Task automatic numbering value
         /// </summary>
-        public string Serial { get; set; }
+        public int Serial { get; set; }
 
         /// <summary>
         /// Current status of the task
@@ -72,7 +69,7 @@ namespace StonePlanner
         /// <summary>
         /// Task start time
         /// </summary>
-        public DateTime StartTime { get; set; }
+        public long StartTime { get; set; }
 
         /// <summary>
         /// 
@@ -174,72 +171,43 @@ namespace StonePlanner
 
         internal Plan(UserPlan planData)
         {
-
-        }
-
-
-        internal Plan(PlanClassA @struct)
-        {
+            // Initial controls
             InitializeComponent();
-            this.capital = @struct.capital;
-            this.seconds = @struct.seconds;
-            this.intro = @struct.intro;
-            this.difficulty = @struct.difficulty;
-            this.lasting = @struct.lasting;
-            this.explosive = @struct.explosive;
-            this.wisdom = @struct.wisdom;
-            this.parent = @struct.parent;
-            this.startTime = DateTime.FromBinary(@struct.startTime);
-            this.AddSign = @struct.Addsignal;
-            //智障代码
-            this.ID = new Random().Next(100000000, 999999999);
-        }
 
-        internal Plan(PlanClassB @struct)
-        {
-            InitializeComponent();
-            this.capital = @struct.capital;
-            this.seconds = @struct.seconds;
-            this.intro = @struct.intro;
-            this.difficulty = @struct.difficulty;
-            this.lasting = @struct.lasting;
-            this.explosive = @struct.explosive;
-            this.wisdom = @struct.wisdom;
-            this.startTime = DateTime.FromBinary(@struct.startTime);
-            this.ID = @struct.UDID;
-            this.AddSign = @struct.Addsignal;
-        }
-
-        internal Plan(PlanClassC @struct)
-        {
-            InitializeComponent();
-            try
+            // Build structure
+            switch (planData.BuildMode)
             {
-                this.capital = @struct.capital;
-                this.seconds = @struct.seconds;
-                this.intro = @struct.intro;
-                this.difficulty = @struct.difficulty;
-                this.lasting = @struct.lasting;
-                this.explosive = @struct.explosive;
-                this.wisdom = @struct.wisdom;
-                this.parent = @struct.parent;
-                this.startTime = DateTime.FromBinary(@struct.startTime);
-                this.ID = @struct.UDID;
-                this.AddSign = @struct.Addsignal;
-            }
-            catch (NullReferenceException e) 
-            {
-                ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, e);
+                case PlanBuildMode.A:
+                    Parent = planData.Parent;
+                    StartTime = planData.StartTime;
+                    AddSign = planData.AddSign;
+                    ID = new Random().Next(100000000, 999999999);
+                    goto default;
+                case PlanBuildMode.B:
+                    Parent = planData.Parent;
+                    StartTime = planData.StartTime;
+                    AddSign = planData.AddSign;
+                    break;
+                case PlanBuildMode.C:
+                    break;
+                default:
+                    Capital = planData.Capital;
+                    Seconds = planData.Seconds;
+                    Intro = planData.Intro;
+                    Difficulty = planData.Difficulty;
+                    Lasting = planData.Lasting;
+                    Explosive = planData.Explosive;
+                    Wisdom = planData.Wisdom;
+                    break;
             }
         }
-
- 
+    
 
         private void Plan_Load(object sender, EventArgs e)
         {
-            label_TaskDes.Text = capital;
+            label_TaskDes.Text = Capital;
             button_Finish.Text = "完成";
-            label_Time.Text = seconds.ToString();
+            label_Time.Text = Seconds.ToString();
             this.timer1.Enabled = true;
         }
 
@@ -248,12 +216,12 @@ namespace StonePlanner
             if (panel_Status.BackColor == Color.LightGray)
             {
                 panel_Status.BackColor = Color.Red;
-                status = "正在办";
+                Status = "正在办";
             }
             else 
             {
                 panel_Status.BackColor = Color.LightGray;
-                status = "待办";
+                Status = "待办";
             }
            
         }
@@ -280,11 +248,11 @@ namespace StonePlanner
             button_Finish.Enabled = false;
             //更新金钱
             //添加限制条件：只有任务完成时才可以被删除
-            if (this.seconds == 0)
+            if (this.Seconds == 0)
             {
-                Main.MoneyUpdate(+(int) this.difficulty * 10);
+                Main.MoneyUpdate(+(int) this.Difficulty * 10);
                 //更新属性
-                Main.ValuesUpdate(+lasting, +explosive, +wisdom);
+                Main.ValuesUpdate(+Lasting, +Explosive, +Wisdom);
                 Main.plan = this;
                 AddSign?.Invoke(1);
             }
@@ -297,32 +265,32 @@ namespace StonePlanner
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (seconds <= 0)
+            if (Seconds <= 0)
             {
-                seconds = 0;
+                Seconds = 0;
                 panel_Status.BackColor = Color.Lime;
-                status = "已办完";
+                Status = "已办完";
             }
             if (panel_Status.BackColor == Color.Red)
             {
-                seconds -= 1;
+                Seconds -= 1;
             }
-            label_Time.Text = seconds.ToString();
+            label_Time.Text = Seconds.ToString();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (seconds <= 0)
+            if (Seconds <= 0)
             {
-                seconds = 0;
+                Seconds = 0;
                 panel_Status.BackColor = Color.Lime;
-                status = "已办完";
+                Status = "已办完";
             }
             if (panel_Status.BackColor == Color.Red)
             {
-                seconds -= 1;
+                Seconds -= 1;
             }
-            label_Time.Text = seconds.ToString();
+            label_Time.Text = Seconds.ToString();
         }
 
         private void label_TaskDes_Click_1(object sender, EventArgs e)
