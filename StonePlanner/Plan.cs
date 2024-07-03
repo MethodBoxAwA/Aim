@@ -7,10 +7,6 @@ namespace StonePlanner
 {
     public partial class Plan : UserControl
     {
-
-        // Totally rewrite
-        // WOW,how motherfxxker code it is!
-
         /// <summary>
         /// The capital of this plan
         /// </summary>
@@ -64,7 +60,7 @@ namespace StonePlanner
         /// <summary>
         /// List of Tasks Belonging to
         /// </summary>
-        public string Parent { get; set; }
+        public new string Parent { get; set; }
 
         /// <summary>
         /// Task start time
@@ -72,102 +68,9 @@ namespace StonePlanner
         public long StartTime { get; set; }
 
         /// <summary>
-        /// 
+        /// Delegate for add plan to main window
         /// </summary>
         public Action<int> AddSign;
-
-        #region 史
-        ////编写+第一次重构
-        ///*
-        // * 一次写好 是最明智的做法
-        // * 继承 继承 继承
-        // * 封装 封装 封装
-        // * 多态 多态 多态
-        // * 面向对象白学了属于是
-        // * 现在写出这样的大粪来
-        // */
-        ///// <summary>
-        ///// 任务大标题
-        ///// </summary>
-        //public string capital;
-        ///// <summary>
-        ///// 任务自动编号值
-        ///// </summary>
-        //public int Lnumber;
-        ///// <summary>
-        ///// 任务状态
-        ///// </summary>
-        //public string status = "待办";
-        ///// <summary>
-        ///// 完成任务所需时间
-        ///// </summary>
-        //public int seconds;
-        ///// <summary>
-        ///// 任务具体介绍
-        ///// </summary>
-        //public string intro = "";
-        ///// <summary>
-        ///// 任务难度
-        ///// </summary>
-        //public double difficulty = 0.0D;
-        ////第二次重构
-        ///*
-        // * 重载 重载 重载 重载
-        // * 写的都是些什么玩意
-        // * 我不希望看到
-        // * 你有一亿个重载
-        // * 让你创新 不是创死我自己
-        // */
-        ///// <summary>
-        ///// 任务持久力<code>MA_LASTING值</code>
-        ///// </summary>
-        //public int lasting;
-        ///// <summary>
-        ///// 任务爆发力<code>MA_EXPLOSIVE值</code>
-        ///// </summary>
-        //public int explosive;
-        ///// <summary>
-        ///// 任务智慧值<code>MA_WISDOM值</code>
-        ///// </summary>
-        //public int wisdom;
-        ////第三次重构
-        ///* 
-        // * 我人麻了 真不知道你是怎么想的
-        // * 任务状态这种无用东西加上 ID不要了
-        // * 或许你刚开始确实没想到要做大 但是你之前有两次重构
-        // * 什么都加了 就是ID没加
-        // * 脑子被驴踢了是吧
-        // * 记住 写代码要用脑子写 而不是寄吧
-        // * 导致现在一个什么问题 用所谓UDID标识 而不是ID
-        // * 那ID的用途是什么 占用空间吗
-        // */
-
-        ////第四次重构
-        ///*
-        // * 世界爆炸
-        // * 重构是最痛苦的事情 没有之一
-        // * 把这些东西都的封装起来不好吗
-        // * 非得弄得到处都是 乱七八糟
-        // * 牵一发而动全身 直接大出血
-        // * 以后更新 我看你怎么办
-        // * 哼哼啊啊啊啊啊啊啊啊啊啊（恼）
-        // */
-        ///// <summary>
-        ///// 所属类别
-        ///// </summary>
-        //public string parent;
-        ///// <summary>
-        ///// 开始时间
-        ///// </summary>
-        //public DateTime startTime;
-        // public Action<int> AddSign;
-        /*
-         * 第五次重构
-         * 我们修复了遍地都是的重载和乱七八糟的类
-         * 乱世已过，静待花开
-         */
-        #endregion
-
 
         internal Plan(UserPlan planData)
         {
@@ -187,9 +90,10 @@ namespace StonePlanner
                     Parent = planData.Parent;
                     StartTime = planData.StartTime;
                     AddSign = planData.AddSign;
-                    break;
+                    ID = planData.ID;
+                    goto default;
                 case PlanBuildMode.C:
-                    break;
+                    goto default;
                 default:
                     Capital = planData.Capital;
                     Seconds = planData.Seconds;
@@ -205,6 +109,7 @@ namespace StonePlanner
 
         private void Plan_Load(object sender, EventArgs e)
         {
+            // Load default settings
             label_TaskDes.Text = Capital;
             button_Finish.Text = "完成";
             label_Time.Text = Seconds.ToString();
@@ -233,7 +138,10 @@ namespace StonePlanner
                 {
                     base.CreateHandle();
                 }
-                catch(Exception ex) { ErrorCenter.AddError(DataType.ExceptionsLevel.Error, ex); }
+                catch (Exception ex) 
+                {
+                    ErrorCenter.AddError(DataType.ExceptionsLevel.Error, ex); 
+                }
                 finally
                 {
                     if (!IsHandleCreated)
@@ -243,6 +151,7 @@ namespace StonePlanner
                 }
             }
         }
+
         private void button_Finish_Click(object sender, EventArgs e)
         {
             button_Finish.Enabled = false;
@@ -251,14 +160,15 @@ namespace StonePlanner
             if (this.Seconds == 0)
             {
                 Main.MoneyUpdate(+(int) this.Difficulty * 10);
-                //更新属性
+                // Update properties
                 Main.ValuesUpdate(+Lasting, +Explosive, +Wisdom);
                 Main.plan = this;
                 AddSign?.Invoke(1);
             }
             else
             {
-                //重新弹起按钮
+                // Task has not been finished
+                System.Console.WriteLine("任务尚未完成！");
                 button_Finish.Enabled = true;
             }
         }
@@ -299,5 +209,4 @@ namespace StonePlanner
             Main.plan = this;
         }
     }
-    
 }

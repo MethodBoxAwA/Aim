@@ -45,5 +45,86 @@ namespace StonePlanner
                 return DownloadUri; 
             }
         }
+
+        /// <summary>
+        /// Provide functions about manage task number
+        /// </summary>
+        public class SerialManager
+        {
+            private object _lock = new object();
+            private SerialManager _manager;
+            private List<Plan> _planList;
+            private List<int> _deleteMemory = new List<int>();
+
+            private SerialManager()
+            {
+                _planList = new();
+            }
+
+            /// <summary>
+            /// Get singal instance
+            /// </summary>
+            /// <returns></returns>
+            public SerialManager GetManagerInstance()
+            {
+                if (_manager is null)
+                {
+                    lock (_lock)
+                    {
+                        if (_manager is null)
+                        {
+                            _manager = new SerialManager();
+                        }
+                    }
+                }
+                return _manager;
+            }
+
+            /// <summary>
+            /// Add specific task to list
+            /// </summary>
+            /// <param name="task">The postion of current task</param>
+            /// <returns></returns>
+            public int AddTask(Plan task)
+            {
+                // Exist empty postion
+                try
+                {
+                    int postion = FindNextPosition();
+                    _planList[postion] = task;
+                    return task.Height * postion;
+                }
+
+                // NOT exist empty postion
+                catch (Exception e) when (e is IndexOutOfRangeException)
+                {
+                    _planList.Add(task);
+                    return task.Height * _planList.Count;
+                }
+            }
+
+            /// <summary>
+            /// Remove specific task and remember the number
+            /// </summary>
+            /// <param name="serial"></param>
+            public void RemoveTask(int serial) 
+            {
+                _deleteMemory.Add(serial);
+                _planList[serial] = null;
+            }
+
+            private int FindNextPosition()
+            {
+                if (_deleteMemory.Count == 0) 
+                    throw new IndexOutOfRangeException("Array is empty!");
+
+                var nextPosition = (from position in _deleteMemory
+                                   orderby position ascending
+                                   select position).ToList()[0];
+
+                _deleteMemory.Remove(nextPosition);
+                return nextPosition;
+            }
+        }
     }
 }

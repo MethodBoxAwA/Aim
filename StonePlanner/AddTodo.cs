@@ -132,7 +132,7 @@ namespace StonePlanner
                     Convert.ToInt32(textBox_mm.Text),
                     0
                     ).ToBinary(),
-                    UDID = new Random().Next(100000000, 999999999),
+                    ID = new Random().Next(100000000, 999999999),
                     AddSign = Addsignal
                 };
                 double diff = 0D;

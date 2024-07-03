@@ -103,7 +103,7 @@ namespace StonePlanner
             /// <summary>
             /// The unique identifier of this plan
             /// </summary>
-            public int UDID { get; set; }
+            public int ID { get; set; }
 
             /// <summary>
             /// The list to which this plan belongs

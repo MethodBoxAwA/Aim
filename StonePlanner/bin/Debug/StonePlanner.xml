@@ -629,7 +629,7 @@
             A number from 1 to 10, in steps of 0.1, representing the difficulty of this plan
             </summary>
         </member>
-        <member name="P:StonePlanner.Structs.UserPlan.UDID">
+        <member name="P:StonePlanner.Structs.UserPlan.ID">
             <summary>
             The unique identifier of this plan
             </summary>
@@ -946,11 +946,8 @@
         </member>
         <member name="F:StonePlanner.Plan.AddSign">
             <summary>
-            
+            Delegate for add plan to main window
             </summary>
-        </member>
-        <member name="M:StonePlanner.Plan.#ctor(StonePlanner.Structs.UserPlan)">
-            *
         </member>
         <member name="F:StonePlanner.Plan.components">
             <summary> 
