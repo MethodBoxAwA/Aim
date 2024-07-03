@@ -51,10 +51,15 @@ namespace StonePlanner
         /// </summary>
         public class SerialManager
         {
-            private object _lock = new object();
-            private SerialManager _manager;
+            private static object _lock = new object();
+            private static SerialManager _manager;
             private List<Plan> _planList;
             private List<int> _deleteMemory = new List<int>();
+
+            /// <summary>
+            /// Count of current tasks
+            /// </summary>
+            public int TaskCount { get => _planList.Count - _deleteMemory.Count; }
 
             private SerialManager()
             {
@@ -65,7 +70,7 @@ namespace StonePlanner
             /// Get singal instance
             /// </summary>
             /// <returns></returns>
-            public SerialManager GetManagerInstance()
+            public static SerialManager GetManagerInstance()
             {
                 if (_manager is null)
                 {
@@ -99,7 +104,7 @@ namespace StonePlanner
                 catch (Exception e) when (e is IndexOutOfRangeException)
                 {
                     _planList.Add(task);
-                    return task.Height * _planList.Count;
+                    return task.Height * (_planList.Count - 1);
                 }
             }
 
@@ -125,6 +130,8 @@ namespace StonePlanner
                 _deleteMemory.Remove(nextPosition);
                 return nextPosition;
             }
+
+            public List<Plan> GetList() => _planList;
         }
     }
 }

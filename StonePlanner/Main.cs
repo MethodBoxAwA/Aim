@@ -55,8 +55,6 @@ namespace StonePlanner
         //常量
         const int DC_PLANHEIGHT = 36;
         const int DC_LRESULT = 0;
-        //任务列表
-        public Dictionary<int, Plan> TasksDict = new Dictionary<int, Plan>();
         //信号
         internal Signal signal = new Signal();
         //传出请求删除的请求体对象本身
@@ -160,17 +158,9 @@ namespace StonePlanner
                 OleDbConnection myConn = new OleDbConnection(strConn);
                 myConn.Open();
                 //先搜一下数据库
-                //SELECT * FROM Persons WHERE City='Beijing'
                 var hResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE ID = {plan.ID}");
                 if (hResult.HasRows)
                 {
-                    /*
-                     * 此处的Bug：
-                     * 当任务完成后，会从列表中清理
-                     * 向数据库中保存时应该在删除任务时保存
-                     * 做法：
-                     * 更改保存位置
-                    */
                     string updateString = $"UPDATE Tasks SET TaskTime = {plan.Seconds}" +
                                 $" , TaskStatus = \"已办完\"" +
                                 $" WHERE ID = {plan.ID}";
@@ -195,14 +185,20 @@ namespace StonePlanner
                     OleDbCommand inst = new OleDbCommand(strInsert, myConn);
                     inst.ExecuteNonQuery();
                 }
+
                 //删除
-                int hNumber = plan.Serial;
+                var manager = DataType.SerialManager.GetManagerInstance();
                 recycle_bin.Add(plan);
-                panel_M.Controls.Remove(plan);
-                TasksDict[hNumber] = null;
+                manager.RemoveTask(plan.Serial);
                 plan = null;
                 LengthCalculation();
-                GC.Collect();
+
+                //int hNumber = plan.Serial;
+                //panel_M.Controls.Remove(plan);
+                //TasksDict[hNumber] = null;
+                //plan = null;
+                //LengthCalculation();
+                //GC.Collect();
             }
             //已废弃：Sign == 1，添加任务
             if (e.Sign == 2)
@@ -314,12 +310,13 @@ namespace StonePlanner
         /// </summary>
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
+            var manager = DataType.SerialManager.GetManagerInstance();
             //存入还未完成的任务
-            foreach (var plan in TasksDict)
+            foreach (var plan in manager.GetList())
             {
                 //先判断是否存在
                 //Users可还行 表都他妈不分了吗你
-                if (plan.Value != null)
+                if (plan != null)
                 {
                     /*
                      * 此处的Bug：
@@ -330,7 +327,7 @@ namespace StonePlanner
                      * 做法：
                      * 仅对状态为待办的剩余时间和是否完成进行更新
                     */
-                    string queryString = $"SELECT * FROM Tasks WHERE ID = {plan.Value.ID}";
+                    string queryString = $"SELECT * FROM Tasks WHERE ID = {plan.ID}";
                     var sqlResult = SQLConnect.SQLCommandQuery(queryString, ref Main.odcConnection);
                     if (sqlResult.HasRows)
                     {
@@ -339,17 +336,17 @@ namespace StonePlanner
                         //查询状态 不为待办
                         if (sqlResult["TaskStatus"].ToString() != "待办")
                         {
-                            MessageBox.Show(sqlResult["TaskStatus"].ToString());
+                            //MessageBox.Show(sqlResult["TaskStatus"].ToString());
                             continue;
                         }
                         else
                         {
                             //更新时间和待办状态
                             //UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
-                            if (plan.Value.Seconds > 0)
+                            if (plan.Seconds > 0)
                             {
-                                string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.Seconds}" +
-                                    $" WHERE ID = {plan.Value.ID}";
+                                string updateString = $"UPDATE Tasks SET TaskTime = {plan.Seconds}" +
+                                    $" WHERE ID = {plan.ID}";
                                 SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
                                 continue;
                             }
@@ -362,19 +359,19 @@ namespace StonePlanner
                     }
                     //脑子是个好东西 下次带上
                     string strInsert = "INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , TaskParent , StartTime) VALUES ( ";
-                    strInsert += "'" + plan.Value.Capital + "', '";
-                    strInsert += plan.Value.Intro + "', '";
-                    strInsert += plan.Value.Status + "', ";
-                    strInsert += plan.Value.Seconds + ", ";
-                    strInsert += plan.Value.Difficulty + ",";
-                    strInsert += plan.Value.Lasting + ",";
-                    strInsert += plan.Value.Explosive + ",";
-                    strInsert += plan.Value.Wisdom + ",";
-                    strInsert += "'" + plan.Value.Parent + "',";
-                    strInsert += "'" + plan.Value.StartTime + "')";
+                    strInsert += "'" + plan.Capital + "', '";
+                    strInsert += plan.Intro + "', '";
+                    strInsert += plan.Status + "', ";
+                    strInsert += plan.Seconds + ", ";
+                    strInsert += plan.Difficulty + ",";
+                    strInsert += plan.Lasting + ",";
+                    strInsert += plan.Explosive + ",";
+                    strInsert += plan.Wisdom + ",";
+                    strInsert += "'" + plan.Parent + "',";
+                    strInsert += "'" + plan.StartTime + "')";
                     //执行插入
                     SQLConnect.SQLCommandExecution(strInsert, ref Main.odcConnection);
-                    recycle_bin.Add(plan.Value);
+                    recycle_bin.Add(plan);
                 }
             }
             //关闭数据库连接
@@ -420,24 +417,24 @@ namespace StonePlanner
             Thread sentenceGetter = new Thread(() => SentenceGetter());
             sentenceGetter.Start();
             //分配
-            for (int i = 0; i < 100; i++)
-            {
-                UserPlan planInstance = new()
-                {
-                    Capital = "NULL",
-                    Parent = null,
-                    StartTime = DateTime.Now.ToBinary(),
-                    Wisdom = 0,
-                    Lasting = 0,
-                    Explosive = 0,
-                    Intro = "NULL",
-                    Seconds = 0,
-                    AddSign = (Action<int>) AddSignal
-                };
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    UserPlan planInstance = new()
+            //    {
+            //        Capital = "NULL",
+            //        Parent = null,
+            //        StartTime = DateTime.Now.ToBinary(),
+            //        Wisdom = 0,
+            //        Lasting = 0,
+            //        Explosive = 0,
+            //        Intro = "NULL",
+            //        Seconds = 0,
+            //        AddSign = (Action<int>) AddSignal
+            //    };
 
-                Plan plan = new Plan(planInstance) { Serial = -1 };
-                TasksDict.Add(i, null);
-            }
+            //    Plan plan = new Plan(planInstance) { Serial = -1 };
+            //    TasksDict.Add(i, null);
+            // }
             //加载日期时间
             label_Date.Text = DateTime.Now.ToString("dd");
             label_Month.Text = DateTime.Now.ToString("MM");
@@ -493,24 +490,29 @@ namespace StonePlanner
         #endregion
         delegate void PlanAddInvoke(Plan pValue);
         #region 任务处理相关
-        internal void AddPlan(Plan pValue)
+        internal void AddPlan(Plan task)
         {
             //分配唯一编号
-            int thisNumber = -1;
-            for (int i = 0; i < 100; i++)
-            {
-                if (TasksDict[i] == null)
-                {
-                    thisNumber = i;
-                    break;
-                }
-            }
-            if (thisNumber == -1) { return; }
-            pValue.Top = 36 * thisNumber;
-            //添加到字典
-            TasksDict[thisNumber] = pValue;
-            panel_M.Controls.Add(pValue);
+            var manager = DataType.SerialManager.GetManagerInstance();
+            task.Top = manager.AddTask(task);
+            panel_M.Controls.Add(task);
             LengthCalculation();
+
+            //int thisNumber = -1;
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    if (TasksDict[i] == null)
+            //    {
+            //        thisNumber = i;
+            //        break;
+            //    }
+            //}
+            //if (thisNumber == -1) { return; }
+            //task.Top = 36 * thisNumber;
+            ////添加到字典
+            //TasksDict[thisNumber] = task;
+            //panel_M.Controls.Add(task);
+            //LengthCalculation();
         }
 
         protected void ScanTaskTime(string alert = "")
@@ -1061,14 +1063,8 @@ namespace StonePlanner
         /// </summary>
         internal void LengthCalculation()
         {
-            int count = default;
-            foreach (var item in TasksDict)
-            {
-                if (item.Value != null)
-                {
-                    count++;
-                }
-            }
+            var manager = DataType.SerialManager.GetManagerInstance();
+            int count = manager.TaskCount;
             if (count <= 10)
             {
                 try
