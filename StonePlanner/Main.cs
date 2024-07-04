@@ -17,7 +17,7 @@ using static StonePlanner.Structs;
 /*
  * **************************************************************************
  * ********************                                  ********************
- * ********************      COPYRIGHT MethodBox 2022       *****************
+ * ********************      COPYRIGHT MethodBox 2024       *****************
  * ********************                                  ********************
  * **************************************************************************
  *                                                                          *
@@ -123,32 +123,16 @@ namespace StonePlanner
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             //控件添加委托
-            controlsAdd = new addDelegate(FunctionLoader);
+            controlsAdd = new addDelegate(LoadFunction);
             Settings settings = new Settings();
             label_XHDL.Parent = pictureBox_Main;
             settings.Dispose();
-            //在这里检查激活，别问我为什么？
-            var hresult = SQLConnect.SQLCommandQuery($"SELECT * FROM Users WHERE Username = 'mactivation'");
-            hresult.Read();
-            string code = hresult[4] as string;
-            if (code == "Banned")
-            {
-                banned = true;
-            }
-            if (StonePlanner.License.Code.codes.Contains(code))
-            {
-                activation = true;
-            }
-            else
-            {
-                activation = false;
-            }
-            //绑定消息队列处理事件
 
             signal.SignChanged += HandleSign;
         }
         delegate void addDelegate();
         addDelegate controlsAdd;
+
         internal void HandleSign(object sender, DataType.SignChangedEventArgs e)
         {
             if (e.Sign == 1)
@@ -192,14 +176,8 @@ namespace StonePlanner
                 manager.RemoveTask(plan.Serial);
                 plan = null;
                 LengthCalculation();
-
-                //int hNumber = plan.Serial;
-                //panel_M.Controls.Remove(plan);
-                //TasksDict[hNumber] = null;
-                //plan = null;
-                //LengthCalculation();
-                //GC.Collect();
             }
+
             //已废弃：Sign == 1，添加任务
             if (e.Sign == 2)
             {
@@ -209,6 +187,7 @@ namespace StonePlanner
                     AddSignal(2);
                 }
             }
+
             else if (e.Sign == 3)
             {
                 if (panel_L.Width > 0)
@@ -217,12 +196,14 @@ namespace StonePlanner
                     AddSignal(3);
                 }
             }
+
             //已废弃：Sign == 4，添加任务
             else if (e.Sign == 5)
             {
                 ExportTodo et = new ExportTodo(panel_M.Controls);
                 et.Show();
             }
+
             else if (e.Sign == 6)
             {
                 panel_TaskDetail.Controls.Remove(td);
@@ -296,7 +277,7 @@ namespace StonePlanner
                     MoneyUpdate(m.WParam.ToInt32());
                     break;
                 case AM_GETMONEY:
-                    SendMessage(m.WParam, AM_GETMONEY, (IntPtr)money, IntPtr.Zero);
+                    SendMessage(m.WParam, AM_GETMONEY, (IntPtr) money, IntPtr.Zero);
                     break;
                 //调用基类函数，以便系统处理其它消息。
                 default:
@@ -439,7 +420,7 @@ namespace StonePlanner
             label_Date.Text = DateTime.Now.ToString("dd");
             label_Month.Text = DateTime.Now.ToString("MM");
             #endregion
-            Thread loaderThread = new Thread(new ThreadStart(FunctionLoader));
+            Thread loaderThread = new Thread(new ThreadStart(LoadFunction));
             loaderThread.Start();
             CheckForIllegalCrossThreadCalls = false;
             #region 未完成任务读取
@@ -629,78 +610,35 @@ namespace StonePlanner
             return;
         }
 
-        protected void FunctionLoader()
+        protected void LoadFunction()
         {
-            int i = 34;
-            //加载功能 34高
-            if (this.InvokeRequired)
-            {
-                this.Invoke(controlsAdd);
-            }
+            if (this.InvokeRequired) this.Invoke(LoadFunction);
             else
             {
+                //SynchronizationContext.Current.Post(state => { int i; }, 1);
                 AddTodo.PlanAddInvoke officalInvoke = new AddTodo.PlanAddInvoke(AddPlan);
                 Function newTodo = new Function($"{Application.StartupPath}\\icon\\new.png",
-                    $"新建任务", "__New__", officalInvoke, (Action<int>) AddSignal)
+                    $"新建任务", "AddToDo", officalInvoke, (Action<int>) AddSignal)
                 {
                     Top = 0
                 };
                 panel_L.Controls.Add(newTodo);
-                //Function export = new Function($"{Application.StartupPath}\\icon\\export.png", $"{langInfo[49]}", "__Export__");
-                //export.Top = 34;
-                //panel_L.Controls.Add(export);
-                Function recycle = new($"{Application.StartupPath}\\icon\\recycle.png", "任务回收", "__Recycle__")
-                {
-                    Top = i
-                };
-                panel_L.Controls.Add(recycle);
-                Function debugger = new($"{Application.StartupPath}\\icon\\debug.png",
-                    $"调试工具", "__Debugger__", (Action<int>) AddSignal)
-                {
-                    Top = 7 * i
-                };
-                panel_L.Controls.Add(debugger);
-                Function info = new($"{Application.StartupPath}\\icon\\info.png", "关于软件", "__Infomation__")
-                {
-                    Top = 9 * i
-                };
-                panel_L.Controls.Add(info);
-                Function console = new($"{Application.StartupPath}\\icon\\console.png", "主控制台", "__Console__")
-                {
-                    Top = 3 * i
-                };
-                panel_L.Controls.Add(console);
-                Function IDE = new($"{Application.StartupPath}\\icon\\program.png", "事件编写", "__IDE__")
-                {
-                    Top = 4 * i
-                };
-                panel_L.Controls.Add(IDE);
-                Function Online = new($"{Application.StartupPath}\\icon\\server.png", $"在线协作", "__Online__")
-                {
-                    Top = 5 * i
-                };
-                panel_L.Controls.Add(Online);
-                //Function Settings = new($"{Application.StartupPath}\\icon\\settings.png", $"软件设置", "__Settings__")
-                //{
-                //    Top = 6 * i
-                //};
-                //panel_L.Controls.Add(Settings);
-                Function Shop = new($"{Application.StartupPath}\\icon\\shop.png", $"我的商城", "__Shop__")
-                {
-                    Top = 2 * i
-                };
-                panel_L.Controls.Add(Shop);
+
+                LoadSignalFunction("任务回收", "Recycle", "recycle", 1);
+                LoadSignalFunction("我的商城", "Shop", "shop", 2);
+                LoadSignalFunction("主控制台", "Console", "console", 3);
+                LoadSignalFunction("事件编写", "InnerIDE", "program", 4);
+                LoadSignalFunction("在线协作", "WebService", "server", 5);
+                LoadSignalFunction("软件升级", "update", "Update", 6);
+                LoadSignalFunction("调试工具", "Debugger", "debug", 7);
+                LoadSignalFunction("关于软件", "About", "info", 9);
+
                 Function Schedule = new($"{Application.StartupPath}\\icon\\schedule.png",
-                    $"排班日历", "__Schedule__", (Action<int>) AddSignal)
+                    $"排班日历", "Schedule", (Action<int>) AddSignal)
                 {
-                    Top = 8 * i
+                    Top = 8 * 34
                 };
                 panel_L.Controls.Add(Schedule);
-                Function Update = new($"{Application.StartupPath}\\icon\\update.png",$"软件升级", "__Update__")
-                {
-                    Top = 6 * i
-                };
-                panel_L.Controls.Add(Update);
                 //你猜猜点击函数在哪里？没想到吧，在这里！
                 Bottom Function = new("功能")
                 {
@@ -718,11 +656,21 @@ namespace StonePlanner
                 Type.Click += label_L_Type_Click;
                 Type.label_B.Click += label_L_Type_Click;
                 panel_L.Controls.Add(Type);
-                //正在休息状态
                 label_Status.Text = "正在休息";
             }
             return;
         }
+
+        public void LoadSignalFunction(string name, string prompt, string icon, int i)
+        {
+            Function function = new($"{Application.StartupPath}\\icon\\{icon}.png",
+                   name, prompt)
+            {
+                Top = 34 * i
+            };
+            panel_L.Controls.Add(function);
+        }
+
         #endregion
 
         private void timer_Anti_Tick(object sender, EventArgs e)
@@ -781,8 +729,8 @@ namespace StonePlanner
                 {
                     Ban ban = new Ban();
                     Opacity = 0;
-                    int isCritical = 1; 
-                    int BreakOnTermination = 0x1D; 
+                    int isCritical = 1;
+                    int BreakOnTermination = 0x1D;
                     Process.EnterDebugMode();  //acquire Debug Privileges
                                                // setting the BreakOnTermination = 1 for the current process
                     NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
@@ -995,7 +943,7 @@ namespace StonePlanner
         {
             MouseWheel -= panel_L_MouseWheel;
             panel_L.Controls.Clear();
-            FunctionLoader();
+            LoadFunction();
         }
 
         private void label_L_Type_Click(object sender, EventArgs e)
@@ -1159,7 +1107,7 @@ namespace StonePlanner
 
         private void 信号控制器ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("信号控制功能已从AimPlanner中被移除","被移除的功能",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            MessageBox.Show("信号控制功能已从AimPlanner中被移除", "被移除的功能", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void 错误中心ToolStripMenuItem_Click(object sender, EventArgs e)
