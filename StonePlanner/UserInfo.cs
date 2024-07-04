@@ -16,6 +16,9 @@ namespace StonePlanner
 
         private void UserInfo_Load(object sender, EventArgs e)
         {
+            var moneyManager = Manager.MoneyManager.GetManagerInstance();
+            var propertyManager = Manager.PropertyManager.GetManagerInstance();
+
             if (!Main.activation)
             {
                 new Activation().Show();
@@ -28,39 +31,39 @@ namespace StonePlanner
             }
             //用户基本信息
             label_Username.Text = $"用 户 名：{Login.UserName}";
-            label_Money.Text = $"金 币 数 量：{Main.money}";
+            label_Money.Text = $"金 币 数 量：{moneyManager.GetValue()}";
             //耐力值信息
-            var Lasting = LevelGetter(Main.lasting);
-            label_LastingC.Text = $"耐力值：{Main.lasting}"+
-                Inner.InnerFuncs.MultipleStrings(space- Lasting[0].
+            var Lasting = LevelGetter(propertyManager.Lasting);
+            label_LastingC.Text = $"耐力值：{propertyManager.Lasting}"+
+                Helpers.TextHelper.MultipleStrings(space - Lasting[0].
                 ToString().Length) +$"Lv.{Lasting[0]}";
             label_Lastingleft.Text = Lasting[1].ToString();
             label_Lastingright.Text = Lasting[2].ToString();
             //耐力值进度
             int delta = Convert.ToInt32(label_Lastingright.Text) - Convert.ToInt32(label_Lastingleft.Text);
-            int lasting = Main.lasting;
+            int lasting = propertyManager.Lasting;
             panel_Lasting.Width = (int) (((double) (lasting - Convert.ToInt32(label_Lastingleft.Text)) / (double) delta) * 184);
             //爆发值信息
-            var Explosive = LevelGetter(Main.explosive);
-            label_ExplosiveC.Text = $"爆发值：{Main.explosive}" +
-                Inner.InnerFuncs.MultipleStrings(space - Explosive[0].
+            var Explosive = LevelGetter(propertyManager.Explosive);
+            label_ExplosiveC.Text = $"爆发值：{propertyManager.Explosive}" +
+                Helpers.TextHelper.MultipleStrings(space - Explosive[0].
                 ToString().Length) + $"Lv.{Explosive[0]}";
             label_Explosiveleft.Text = Explosive[1].ToString();
             label_Explosiveright.Text = Explosive[2].ToString();
             //爆发值进度
             delta = Convert.ToInt32(label_Explosiveright.Text) - Convert.ToInt32(label_Explosiveleft.Text);
-            int explosive = Main.explosive;
+            int explosive = propertyManager.Explosive;
             panel_Explosive.Width = (int) (((double) (explosive - Convert.ToInt32(label_Explosiveleft.Text)) / (double) delta) * 184);
             //智慧值信息
-            var Wisdom = LevelGetter(Main.wisdom);
-            label_WisdomC.Text = $"智慧值：{Main.wisdom}" +
-               Inner.InnerFuncs.MultipleStrings(space - Wisdom[0].
+            var Wisdom = LevelGetter(propertyManager.Wisdom);
+            label_WisdomC.Text = $"智慧值：{propertyManager.Wisdom}" +
+               Helpers.TextHelper.MultipleStrings(space - Wisdom[0].
                ToString().Length) + $"Lv.{Wisdom[0]}";
             label_Wisdomleft.Text = Wisdom[1].ToString();
             label_Wisdomright.Text = Wisdom[2].ToString();
             //智慧值进度
             delta = Convert.ToInt32(label_Wisdomright.Text) - Convert.ToInt32(label_Wisdomleft.Text);
-            int wisdom = Main.wisdom;
+            int wisdom = propertyManager.Wisdom;
             panel_Wisdom.Width = (int) (((double) (wisdom - Convert.ToInt32(label_Wisdomleft.Text)) / (double) delta) * 184);
             //综合评分
             double point_User = lasting * 0.05 + wisdom * 0.02 + explosive * 0.01;

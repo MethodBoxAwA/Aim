@@ -96,10 +96,14 @@ namespace StonePlanner
                     {
                         Structs.UserStruct ubuff = new Structs.UserStruct();
                         ubuff.userName = Login.UserName;
-                        ubuff.userMoney = Main.money;
-                        ubuff.userExplosive = Main.explosive;
-                        ubuff.userWisdom = Main.wisdom;
-                        ubuff.userLasting = Main.lasting;
+
+                        var moneyManager = Manager.MoneyManager.GetManagerInstance();
+                        var propertyManager = Manager.PropertyManager.GetManagerInstance();
+
+                        ubuff.userMoney = moneyManager.GetValue();
+                        ubuff.userExplosive = propertyManager.Explosive;
+                        ubuff.userWisdom = propertyManager.Wisdom;
+                        ubuff.userLasting = propertyManager.Lasting;
                         byte[] buffer_send = ByteConvert.ObjectToBytes(ubuff);
                         receiver.Send(buffer_send, SocketFlags.None);
                     }

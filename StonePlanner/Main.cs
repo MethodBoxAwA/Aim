@@ -67,15 +67,10 @@ namespace StonePlanner
         internal static UserPlan planner; //It is a void*
         //总时间
         internal static int nTime;
-        //金钱
-        internal static int money;
-        internal static int lasting;
-        internal static int explosive;
-        internal static int wisdom;
         //密码
         internal static string password = "methodbox5";
         //检查语言包
-        internal static bool activation = false;
+        internal static bool activation = true;
         internal static bool banned = false;
         //全局展示
         TaskDetails td;
@@ -111,19 +106,9 @@ namespace StonePlanner
         }
         #endregion
         #region 主窗口及设置加载/退出
-        /// <summary>
-        /// 主窗口构造函数，基本用途如下：
-        /// 1、加载控件（自动生成）；
-        /// 2、把自己赋值给自身的<code>main</code>变量；
-        /// 3、取消跨线程操作检查；
-        /// 4、提前加载设置窗口，以便于后期读取设置。
-        /// </summary>
         public Main()
         {
             InitializeComponent();
-            CheckForIllegalCrossThreadCalls = false;
-            //控件添加委托
-            controlsAdd = new addDelegate(LoadFunction);
             Settings settings = new Settings();
             label_XHDL.Parent = pictureBox_Main;
             settings.Dispose();
@@ -171,7 +156,7 @@ namespace StonePlanner
                 }
 
                 //删除
-                var manager = DataType.SerialManager.GetManagerInstance();
+                var manager = Manager.SerialManager.GetManagerInstance();
                 recycle_bin.Add(plan);
                 manager.RemoveTask(plan.Serial);
                 plan = null;
@@ -274,10 +259,12 @@ namespace StonePlanner
                     Environment.Exit(0);
                     break;
                 case AM_ADDMONEY:
-                    MoneyUpdate(m.WParam.ToInt32());
+                    var moneyManager = Manager.MoneyManager.GetManagerInstance();
+                    moneyManager.Change(m.WParam.ToInt32());
                     break;
                 case AM_GETMONEY:
-                    SendMessage(m.WParam, AM_GETMONEY, (IntPtr) money, IntPtr.Zero);
+                    moneyManager = Manager.MoneyManager.GetManagerInstance();
+                    SendMessage(m.WParam, AM_GETMONEY, (IntPtr) moneyManager.GetValue(), IntPtr.Zero);
                     break;
                 //调用基类函数，以便系统处理其它消息。
                 default:
@@ -291,7 +278,7 @@ namespace StonePlanner
         /// </summary>
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
-            var manager = DataType.SerialManager.GetManagerInstance();
+            var manager = Manager.SerialManager.GetManagerInstance();
             //存入还未完成的任务
             foreach (var plan in manager.GetList())
             {
@@ -360,19 +347,6 @@ namespace StonePlanner
             Environment.Exit(0);
         }
 
-        /// <summary>
-        /// 该函数用于主窗口加载，其基本用途如下：
-        /// 1、加载设置项；
-        /// 2、初始化回收站模块，用于读取数据；
-        /// 3、读取用户属性并加载相应值；
-        /// 4、盗版检查；
-        /// 5、获取格言与图片地址或内容；
-        /// 6、预分配100个空任务；
-        /// 7、加载日期时间；
-        /// 8、加载一个一个语言啊；
-        /// 9、读取未完成任务
-        /// 10、加载功能。
-        /// </summary>
         private void Main_Load(object sender, EventArgs e)
         {
             #region 窗口加载
@@ -383,45 +357,31 @@ namespace StonePlanner
             GC.Collect();
             //从表中获取金钱
             //Login.UserName = "Me";
-            var moneyTemp = SQLConnect.SQLCommandQuery($"SELECT * FROM Users WHERE Username = '{Login.UserName}'");
-            moneyTemp.Read();
-            money = Convert.ToInt32(moneyTemp.GetValue(2));
-            //读取各项属性
-            lasting = Convert.ToInt32(moneyTemp.GetValue(6));
-            explosive = Convert.ToInt32(moneyTemp.GetValue(7));
-            wisdom = Convert.ToInt32(moneyTemp.GetValue(8));
-            label_GGS.Text = moneyTemp.GetValue(2).ToString();
+            var userInfo = SQLConnect.SQLCommandQuery($"SELECT * FROM Users WHERE Username = '{Login.UserName}'");
+
+            userInfo.Read();
+
+            // Create money manager for global
+            var moneyManager =
+                Manager.MoneyManager.GetManagerInstance(Convert.ToInt32(userInfo.GetValue(2)));
+
+            // Create property(LEW) manager for global
+            int userLasting = Convert.ToInt32(userInfo.GetValue(6));
+            int userExplosive = Convert.ToInt32(userInfo.GetValue(7));
+            int userWisdom = Convert.ToInt32(userInfo.GetValue(8));
+            var propertyManager =
+                Manager.PropertyManager.GetManagerInstance(userLasting, userExplosive, userWisdom);
+
+            label_GGS.Text = userInfo.GetValue(2).ToString();
             Thread valueThread = new Thread(new ThreadStart(ValueGetter));
             valueThread.Start();
             //pictureBox_Main.ImageLocation = "https://tse1-mm.cn.bing.net/th/id/R-C.2fd0dadf9d13c716cf0494d17875cf3b?rik=mf3ZQjupoBDr2A&riu=http%3a%2f%2fup.36992.com%2fpic%2f07%2fd3%2fe8%2f07d3e81f37f5922b5b0021a1c0b2d3da.jpg&ehk=P8hpii3cUJykmCt97WX0kATyROzUNRuexj8faXE7q6c%3d&risl=&pid=ImgRaw&r=0";
             //获取格言
             Thread sentenceGetter = new Thread(() => SentenceGetter());
             sentenceGetter.Start();
-            //分配
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    UserPlan planInstance = new()
-            //    {
-            //        Capital = "NULL",
-            //        Parent = null,
-            //        StartTime = DateTime.Now.ToBinary(),
-            //        Wisdom = 0,
-            //        Lasting = 0,
-            //        Explosive = 0,
-            //        Intro = "NULL",
-            //        Seconds = 0,
-            //        AddSign = (Action<int>) AddSignal
-            //    };
-
-            //    Plan plan = new Plan(planInstance) { Serial = -1 };
-            //    TasksDict.Add(i, null);
-            // }
-            //加载日期时间
             label_Date.Text = DateTime.Now.ToString("dd");
             label_Month.Text = DateTime.Now.ToString("MM");
             #endregion
-            Thread loaderThread = new Thread(new ThreadStart(LoadFunction));
-            loaderThread.Start();
             CheckForIllegalCrossThreadCalls = false;
             #region 未完成任务读取
             for (int i = 0; i < recy_bin.dataGridView1.Rows.Count - 1; i++)
@@ -451,8 +411,6 @@ namespace StonePlanner
                 plan = null;
             }
             #endregion
-            // \Linq is Gooooood!/
-            // \We Love Linq!/
             sentence.FindAll(sentence => sentence.Contains("\n")).ForEach(sentence => sentence.Replace("\n", ""));
             #region 功能控制器
             if (!activation)
@@ -474,26 +432,10 @@ namespace StonePlanner
         internal void AddPlan(Plan task)
         {
             //分配唯一编号
-            var manager = DataType.SerialManager.GetManagerInstance();
+            var manager = Manager.SerialManager.GetManagerInstance();
             task.Top = manager.AddTask(task);
             panel_M.Controls.Add(task);
             LengthCalculation();
-
-            //int thisNumber = -1;
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    if (TasksDict[i] == null)
-            //    {
-            //        thisNumber = i;
-            //        break;
-            //    }
-            //}
-            //if (thisNumber == -1) { return; }
-            //task.Top = 36 * thisNumber;
-            ////添加到字典
-            //TasksDict[thisNumber] = task;
-            //panel_M.Controls.Add(task);
-            //LengthCalculation();
         }
 
         protected void ScanTaskTime(string alert = "")
@@ -612,10 +554,11 @@ namespace StonePlanner
 
         protected void LoadFunction()
         {
-            if (this.InvokeRequired) this.Invoke(LoadFunction);
+            if (this.InvokeRequired)
+                this.Invoke(LoadFunction);
             else
             {
-                //SynchronizationContext.Current.Post(state => { int i; }, 1);
+                SynchronizationContext.Current.Post(state => { int i; }, 1);
                 AddTodo.PlanAddInvoke officalInvoke = new AddTodo.PlanAddInvoke(AddPlan);
                 Function newTodo = new Function($"{Application.StartupPath}\\icon\\new.png",
                     $"新建任务", "AddToDo", officalInvoke, (Action<int>) AddSignal)
@@ -768,58 +711,12 @@ namespace StonePlanner
         }
 
         #region 金钱操作
-        internal void ChangeMoney(int value)
-        {
-            money += value;
-            //向指定用户插入
-            SQLConnect.SQLCommandExecution($"UPDATE Users SET Cmoney = {money} WHERE Username = {Login.UserName}", ref Main.odcConnection);
-        }
-        /// <summary>
-        /// 更新用户金钱
-        /// </summary>
-        internal static void MoneyUpdate(int delta)
-        {
-            money += delta;
-            SQLConnect.SQLCommandExecution($"UPDATE Users SET Cmoney = {money} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
-        }
-
-        internal static void ValuesUpdate(uint type, int delta)
-        {
-            if (type == 1)
-            {
-                lasting += delta;
-                SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_lasting = {lasting} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
-            }
-            else if (type == 2)
-            {
-                explosive += delta;
-                SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_explosive = {explosive} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
-            }
-            else if (type == 3)
-            {
-                wisdom += delta;
-                SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_wisdom = {wisdom} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        internal static void ValuesUpdate(int lasting, int explosive, int wisdom)
-        {
-            Main.lasting += lasting;
-            Main.explosive += explosive;
-            Main.wisdom += wisdom;
-
-            SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_lasting = {Main.lasting} , ABT_explosive = {Main.explosive} , ABT_wisdom = {Main.wisdom} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
-        }
-
         public void ValueGetter()
         {
+            var moneyManager = Manager.MoneyManager.GetManagerInstance();
             while (true)
             {
-                label_GGS.Text = money.ToString();
+                label_GGS.Text = moneyManager.GetValue().ToString();
                 Thread.Sleep(1000);
             }
         }
@@ -881,6 +778,12 @@ namespace StonePlanner
 
         private void pictureBox_T_More_Click(object sender, EventArgs e)
         {
+            if (panel_L.Controls.Count == 0)
+            {
+                Thread loaderThread = new Thread(new ThreadStart(LoadFunction));
+                loaderThread.Start();
+            }
+
             if (panel_L.Width == 0)
             {
                 AddSignal(2);
@@ -1011,7 +914,7 @@ namespace StonePlanner
         /// </summary>
         internal void LengthCalculation()
         {
-            var manager = DataType.SerialManager.GetManagerInstance();
+            var manager = Manager.SerialManager.GetManagerInstance();
             int count = manager.TaskCount;
             if (count <= 10)
             {

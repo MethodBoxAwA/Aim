@@ -25,5 +25,11 @@ namespace StonePlanner
             Uri GetUri();
             bool IsNeedUpdate(int equNum);
         }
+
+        internal interface IManager<T>
+        {
+            void Change(T delta);
+            T GetValue();
+        }
     }
 }

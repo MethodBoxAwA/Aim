@@ -216,7 +216,7 @@
     <Compile Include="Importer.Designer.cs">
       <DependentUpon>Importer.cs</DependentUpon>
     </Compile>
-    <Compile Include="InnerFuncs.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="InnerIDE.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +228,7 @@
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces.cs" />
+    <Compile Include="Manager.cs" />
     <Compile Include="PluginStruct.cs" />
     <Compile Include="ProcessExtends.cs" />
     <Compile Include="SchedulingCalendar.cs">

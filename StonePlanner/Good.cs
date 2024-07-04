@@ -22,11 +22,13 @@ namespace StonePlanner
         {
             if (lev == new IntPtr(1))
             {
-                //购买模式
-                if (Main.money > GoodPrice)
+                // Try buy good
+                var moneyManager = Manager.MoneyManager.GetManagerInstance();
+                int money = moneyManager.GetValue();
+                if (money > GoodPrice)
                 {
-                    //减少金钱
-                    Main.MoneyUpdate(-GoodPrice);
+                    // Cost money
+                    moneyManager.Change(-GoodPrice);
                     //执行
                     var reader = SQLConnect.SQLCommandQuery($"SELECT UseCode FROM Goods WHERE GoodName = '{GoodName}'");
                     reader.Read();
@@ -40,7 +42,7 @@ namespace StonePlanner
                 }
                 else
                 {
-                    MessageBox.Show($"您的金钱不够，还缺{GoodPrice - Main.money}。");
+                    MessageBox.Show($"您的金钱不够，还缺{GoodPrice - money}。");
                 }
             }
             else

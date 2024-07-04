@@ -463,7 +463,8 @@ namespace StonePlanner
                     }
                     else if (nInput[0] == "MADD")
                     {
-                        Main.money += Convert.ToInt32(nInput[1]);
+                        var moneyManager = Manager.MoneyManager.GetManagerInstance();
+                        moneyManager.Change(Convert.ToInt32(nInput[1]));
                     }
                     else if (nInput[0] == "RESET")
                     {
@@ -588,7 +589,7 @@ namespace StonePlanner
             //IB.Show();
             //TaskFactory nameGetThread = new TaskFactory();
             //nameGetThread.StartNew(() => FileAddition(chineseText, IB));
-            Inner.InnerFuncs.CmdExecuter.RunCmd("notepad");
+            Helpers.CmdHelper.RunCmd("notepad");
         }
         private void 新建NToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -663,7 +664,7 @@ namespace StonePlanner
                 StreamWriter sw = new StreamWriter(path);
                 sw.Write(richTextBox_Main.Text);
                 sw.Close();
-                Inner.InnerFuncs.CmdExecuter.RunCmd($"notepad {path}");
+                Helpers.CmdHelper.RunCmd($"notepad {path}");
             }
             catch { }
         }
@@ -675,7 +676,7 @@ namespace StonePlanner
             StreamWriter sw = new StreamWriter(path);
             sw.Write(richTextBox_Main.Text);
             sw.Close();
-            Inner.InnerFuncs.CmdExecuter.RunCmd($"notepad {path}");
+            Helpers.CmdHelper.RunCmd($"notepad {path}");
         }
 
         private void 退出XToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1139,36 +1140,39 @@ namespace StonePlanner
                     //问我为什么没有减少？其实你可以用负数啊
                     else if (nInput[0] == "MADD")
                     {
+                        var moneyManager = Manager.MoneyManager.GetManagerInstance();
                         if (nInput[1] == "RANDRX")
                         {
+                            
                             int lv = new Random().Next(Convert.ToInt32(nInput[2]), Convert.ToInt32(nInput[3]));
-                            Main.MoneyUpdate(lv);
+                            moneyManager.Change(lv);
                             return $"您获得了{lv}个金币";
                         }
                         else
                         {
-                            Main.MoneyUpdate(Convert.ToInt32(nInput[1]));
+                            moneyManager.Change(Convert.ToInt32(nInput[1]));
                             return $"您获得了{nInput[1]}个金币";
                         }
 
                     }
                     else if (nInput[0] == "VADD")
                     {
+                        var propertyManger = Manager.PropertyManager.GetManagerInstance();
                         if (nInput[2] == "RANDRX")
                         {
                             nInput[2] = $"{new Random().Next(Convert.ToInt32(nInput[2]), Convert.ToInt32(nInput[3]))}";
                         }
                         if (nInput[1] == "L")
                         {
-                            Main.ValuesUpdate(1, Convert.ToInt32(nInput[2]));
+                            propertyManger.Update("lasting", Convert.ToInt32(nInput[2]));
                         }
                         else if (nInput[1] == "E")
                         {
-                            Main.ValuesUpdate(2, Convert.ToInt32(nInput[2]));
+                            propertyManger.Update("explosive", Convert.ToInt32(nInput[2]));
                         }
                         else
                         {
-                            Main.ValuesUpdate(3, Convert.ToInt32(nInput[2]));
+                            propertyManger.Update("wisdom", Convert.ToInt32(nInput[2]));
                         }
                     }
                     else if (nInput[0] == "RESET")

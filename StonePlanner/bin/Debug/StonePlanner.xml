@@ -287,35 +287,6 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:StonePlanner.DataType.SerialManager">
-            <summary>
-            Provide functions about manage task number
-            </summary>
-        </member>
-        <member name="P:StonePlanner.DataType.SerialManager.TaskCount">
-            <summary>
-            Count of current tasks
-            </summary>
-        </member>
-        <member name="M:StonePlanner.DataType.SerialManager.GetManagerInstance">
-            <summary>
-            Get singal instance
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:StonePlanner.DataType.SerialManager.AddTask(StonePlanner.Plan)">
-            <summary>
-            Add specific task to list
-            </summary>
-            <param name="task">The postion of current task</param>
-            <returns></returns>
-        </member>
-        <member name="M:StonePlanner.DataType.SerialManager.RemoveTask(System.Int32)">
-            <summary>
-            Remove specific task and remember the number
-            </summary>
-            <param name="serial"></param>
-        </member>
         <member name="F:StonePlanner.Develop.Sign.AM_EXIT">
             <summary>
             该消息用于命令AimPlanner退出，注意：直接退出会导致用户数据丢失，如非必须，请勿使用。
@@ -451,35 +422,7 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:StonePlanner.Inner.InnerFuncs.GenerateChineseWords(System.Int32)">
-            <summary>
-            随机产生常用汉字
-            </summary>
-            <param name="count">要产生汉字的个数</param>
-            <returns>常用汉字</returns>
-        </member>
-        <member name="M:StonePlanner.Inner.InnerFuncs.GetMD5WithFilePath(System.String)">
-            <summary>
-            获取指定文件的MD5值 
-            </summary>
-            <param name="filePath">文件路径</param>
-            <returns>该文件的MD5值</returns>
-        </member>
-        <member name="M:StonePlanner.Inner.InnerFuncs.GetMD5WithString(System.String)">
-            <summary>
-            获取指定文件的MD5值 
-            </summary>
-            <param name="sDataIn">字符串</param>
-            <returns>该字符串的MD5值</returns>
-        </member>
-        <member name="M:StonePlanner.Inner.InnerFuncs.SecToHms(System.Int64)">
-            <summary>
-            将秒转换为时分秒
-            </summary>
-            <param name="duration">秒</param>
-            <returns>时分秒格式化结果</returns>
-        </member>
-        <member name="M:StonePlanner.Inner.InnerFuncs.CmdExecuter.RunCmd(System.String)">
+        <member name="M:StonePlanner.Helpers.CmdHelper.RunCmd(System.String)">
              <summary>
              执行cmd命令 返回cmd窗口显示的信息
              多命令请使用批处理命令连接符：
@@ -491,59 +434,7 @@
              </summary>
             <param name="cmd">执行的命令</param>
         </member>
-        <member name="M:StonePlanner.Inner.HttpHelper.CreateGetHttpResponse(System.String,System.Int32,System.String,System.Net.CookieCollection)">
-            <summary>  
-            创建GET方式的HTTP请求  
-            </summary>  
-        </member>
-        <member name="M:StonePlanner.Inner.HttpHelper.CreatePostHttpResponse(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Int32,System.String,System.Net.CookieCollection)">
-            <summary>  
-            创建POST方式的HTTP请求  
-            </summary>  
-        </member>
-        <member name="M:StonePlanner.Inner.HttpHelper.GetResponseString(System.Net.HttpWebResponse)">
-            <summary>
-            获取请求的数据
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Inner.HttpHelper.CheckValidationResult(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
-            <summary>
-            验证证书
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Inner.INIHolder.GetPrivateProfileString(System.String,System.String,System.String,System.Text.StringBuilder,System.Int32,System.String)">
-            <summary>
-            为INI文件中指定的节点取得字符串
-            </summary>
-            <param name="lpAppName">欲在其中查找关键字的节点名称</param>
-            <param name="lpKeyName">欲获取的项名</param>
-            <param name="lpDefault">指定的项没有找到时返回的默认值</param>
-            <param name="lpReturnedString">指定一个字串缓冲区，长度至少为nSize</param>
-            <param name="nSize">指定装载到lpReturnedString缓冲区的最大字符数量</param>
-            <param name="lpFileName">INI文件完整路径</param>
-            <returns>复制到lpReturnedString缓冲区的字节数量，其中不包括那些NULL中止字符</returns>
-        </member>
-        <member name="M:StonePlanner.Inner.INIHolder.WritePrivateProfileString(System.String,System.String,System.String,System.String)">
-            <summary>
-            修改INI文件中内容
-            </summary>
-            <param name="lpApplicationName">欲在其中写入的节点名称</param>
-            <param name="lpKeyName">欲设置的项名</param>
-            <param name="lpString">要写入的新字符串</param>
-            <param name="lpFileName">INI文件完整路径</param>
-            <returns>非零表示成功，零表示失败</returns>
-        </member>
-        <member name="M:StonePlanner.Inner.INIHolder.Read(System.String,System.String,System.String,System.String)">
-            <summary>
-            读取INI文件值
-            </summary>
-            <param name="section">节点名</param>
-            <param name="key">键</param>
-            <param name="def">未取到值时返回的默认值</param>
-            <param name="filePath">INI文件完整路径</param>
-            <returns>读取的值</returns>
-        </member>
-        <member name="M:StonePlanner.Inner.INIHolder.Write(System.String,System.String,System.String,System.String)">
+        <member name="M:StonePlanner.Helpers.INIHelper.Write(System.String,System.String,System.String,System.String)">
             <summary>
             写INI文件值
             </summary>
@@ -553,7 +444,7 @@
             <param name="filePath">INI文件完整路径</param>
             <returns>非零表示成功，零表示失败</returns>
         </member>
-        <member name="M:StonePlanner.Inner.INIHolder.DeleteSection(System.String,System.String)">
+        <member name="M:StonePlanner.Helpers.INIHelper.DeleteSection(System.String,System.String)">
             <summary>
             删除节
             </summary>
@@ -561,7 +452,7 @@
             <param name="filePath">INI文件完整路径</param>
             <returns>非零表示成功，零表示失败</returns>
         </member>
-        <member name="M:StonePlanner.Inner.INIHolder.DeleteKey(System.String,System.String,System.String)">
+        <member name="M:StonePlanner.Helpers.INIHelper.DeleteKey(System.String,System.String,System.String)">
             <summary>
             删除键的值
             </summary>
@@ -602,6 +493,50 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:StonePlanner.Manager">
+            <summary>
+            Provide managers
+            </summary>
+        </member>
+        <member name="T:StonePlanner.Manager.SerialManager">
+            <summary>
+            Provide functions about manage task number
+            </summary>
+        </member>
+        <member name="P:StonePlanner.Manager.SerialManager.TaskCount">
+            <summary>
+            Count of current tasks
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Manager.SerialManager.GetManagerInstance">
+            <summary>
+            Get singal instance
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StonePlanner.Manager.SerialManager.AddTask(StonePlanner.Plan)">
+            <summary>
+            Add specific task to list
+            </summary>
+            <param name="task">The postion of current task</param>
+            <returns></returns>
+        </member>
+        <member name="M:StonePlanner.Manager.SerialManager.RemoveTask(System.Int32)">
+            <summary>
+            Remove specific task and remember the number
+            </summary>
+            <param name="serial"></param>
+        </member>
+        <member name="T:StonePlanner.Manager.MoneyManager">
+            <summary>
+            Provide functions to manage money
+            </summary>
+        </member>
+        <member name="T:StonePlanner.Manager.PropertyManager">
+            <summary>
+            Provide functions to manage property
             </summary>
         </member>
         <member name="F:StonePlanner.SchedulingCalendar.components">
@@ -821,15 +756,6 @@
             该函数将拖动事件发送，以用于拖动窗口。
             </summary>
         </member>
-        <member name="M:StonePlanner.Main.#ctor">
-            <summary>
-            主窗口构造函数，基本用途如下：
-            1、加载控件（自动生成）；
-            2、把自己赋值给自身的<code>main</code>变量；
-            3、取消跨线程操作检查；
-            4、提前加载设置窗口，以便于后期读取设置。
-            </summary>
-        </member>
         <member name="M:StonePlanner.Main.DefWndProc(System.Windows.Forms.Message@)">
             <summary>
             覆写窗体的消息处理函数
@@ -841,32 +767,12 @@
             该函数处理用户退出事件，存入新的还未存储的数据。
             </summary>
         </member>
-        <member name="M:StonePlanner.Main.Main_Load(System.Object,System.EventArgs)">
-            <summary>
-            该函数用于主窗口加载，其基本用途如下：
-            1、加载设置项；
-            2、初始化回收站模块，用于读取数据；
-            3、读取用户属性并加载相应值；
-            4、盗版检查；
-            5、获取格言与图片地址或内容；
-            6、预分配100个空任务；
-            7、加载日期时间；
-            8、加载一个一个语言啊；
-            9、读取未完成任务
-            10、加载功能。
-            </summary>
-        </member>
         <member name="M:StonePlanner.Main.SearchProcA(System.String)">
             <summary>
             判断是否包含此字串的进程   模糊
             </summary>
             <param name="strProcName">进程字符串</param>
             <returns>是否包含</returns>
-        </member>
-        <member name="M:StonePlanner.Main.MoneyUpdate(System.Int32)">
-            <summary>
-            更新用户金钱
-            </summary>
         </member>
         <member name="M:StonePlanner.Main.panel_L_MouseWheel(System.Object,System.Windows.Forms.MouseEventArgs)">
             <summary>

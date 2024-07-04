@@ -1,13 +1,7 @@
 ﻿using MetroFramework.Forms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StonePlanner
@@ -20,15 +14,15 @@ namespace StonePlanner
         object _Callback = null;
         object _Sender = null;
 
-        public Function(string lpImageAddress,string lpCapital,string szFunctionName,object Callback = null,object sender = null)
+        public Function(string imageAddress,string capital,string functionName,object callback = null,object sender = null)
         {
             InitializeComponent();
 
-            this._ImageAddress = lpImageAddress;
-            this._Caplital = lpCapital;
-            this._Name = szFunctionName;
+            this._ImageAddress = imageAddress;
+            this._Caplital = capital;
+            this._Name = functionName;
 
-            this._Callback ??= Callback;
+            this._Callback ??= callback;
             this._Sender ??= sender;
         }
 
@@ -88,6 +82,7 @@ namespace StonePlanner
                 default:
                     // Need not any params in constructor
                     var assembly = Assembly.GetExecutingAssembly();
+                    // Use full name to get type
                     var invokeWindow = assembly.GetType($"StonePlanner.{_Name}");
                     var windowInstance = (MetroForm) Activator.CreateInstance(invokeWindow);
                     windowInstance.Show();

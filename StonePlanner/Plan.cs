@@ -159,16 +159,18 @@ namespace StonePlanner
             //添加限制条件：只有任务完成时才可以被删除
             if (this.Seconds == 0)
             {
-                Main.MoneyUpdate(+(int) this.Difficulty * 10);
+                var moneyManager = Manager.MoneyManager.GetManagerInstance();
+                moneyManager.Change(+(int) this.Difficulty * 10);
                 // Update properties
-                Main.ValuesUpdate(+Lasting, +Explosive, +Wisdom);
+                var propertyManager = Manager.PropertyManager.GetManagerInstance();
+                propertyManager.Change((+Lasting, +Explosive, +Wisdom));
                 Main.plan = this;
                 AddSign?.Invoke(1);
             }
             else
             {
                 // Task has not been finished
-                System.Console.WriteLine("任务尚未完成！");
+                MessageBox.Show("任务尚未完成！", "尚未完成", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 button_Finish.Enabled = true;
             }
         }
