@@ -36,6 +36,30 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:StonePlanner.AccessEntity">
+            <summary>
+            Provide methods for serialization or deserialization objects for Access
+            </summary>
+        </member>
+        <member name="M:StonePlanner.AccessEntity.AddElement``1(``0,System.String)">
+            <summary>
+            Insert object instance to database
+            </summary>
+            <typeparam name="T">Type of data source</typeparam>
+            <param name="instance">Object instance</param>
+            <param name="tableName">Name of data table</param>
+            <returns></returns>
+        </member>
+        <member name="M:StonePlanner.AccessEntity.GetElement``2(``1,System.String)">
+            <summary>
+            Get object instance from database
+            </summary>
+            <typeparam name="T">Type of data source</typeparam>
+            <typeparam name="R">Type of mapping table</typeparam>
+            <param name="mappingTable">Provide mapping from database row headers to field names</param>
+            <param name="tableName">Name of data table</param>
+            <returns></returns>
+        </member>
         <member name="M:StonePlanner.Activation.#ctor">
             <summary>
             构造函数，用于加载窗口中的控件。

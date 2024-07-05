@@ -32,6 +32,7 @@ namespace StonePlanner
         internal interface IMappingTable
         {
             string GetPropertyName(string columnName);
+            string GetColumnName(string propertyName);
         }
     }
 }
