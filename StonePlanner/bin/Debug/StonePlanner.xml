@@ -287,6 +287,86 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.Capital">
+            <summary>
+            The capital of this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.Seconds">
+            <summary>
+            The duration of this plan will continue
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.Intro">
+            <summary>
+            The introduce of this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.Difficulty">
+            <summary>
+            A number from 1 to 10, in steps of 0.1, representing the difficulty of this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.ID">
+            <summary>
+            The unique identifier of this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.Parent">
+            <summary>
+            The list to which this plan belongs
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.Lasting">
+            <summary>
+            Lasting obtained from completing this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.Wisdom">
+            <summary>
+            Wisdom obtained from completing this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.Explosive">
+            <summary>
+            Explosive obtained from completing this plan
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.StartTime">
+            <summary>
+            Task start time
+            </summary>
+        </member>
+        <member name="F:StonePlanner.DataType.Structs.UserPlan.AddSign">
+            <summary>
+            AddSign delegate
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.BuildMode">
+            <summary>
+            Model applicable in plan building
+            </summary>
+        </member>
+        <member name="T:StonePlanner.DataType.Structs.PlanBuildMode">
+            <summary>
+            任务构建模式
+            </summary>
+        </member>
+        <member name="F:StonePlanner.DataType.Structs.PlanBuildMode.A">
+            <summary>
+            用于分配空白Plan对象
+            </summary>
+        </member>
+        <member name="F:StonePlanner.DataType.Structs.PlanBuildMode.B">
+            <summary>
+            用于从数据库建立Plan对象
+            </summary>
+        </member>
+        <member name="F:StonePlanner.DataType.Structs.PlanBuildMode.C">
+            <summary>
+            用于从新建页面建立Plan对象
+            </summary>
+        </member>
         <member name="F:StonePlanner.Develop.Sign.AM_EXIT">
             <summary>
             该消息用于命令AimPlanner退出，注意：直接退出会导致用户数据丢失，如非必须，请勿使用。
@@ -573,86 +653,6 @@
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="P:StonePlanner.Structs.UserPlan.Capital">
-            <summary>
-            The capital of this plan
-            </summary>
-        </member>
-        <member name="P:StonePlanner.Structs.UserPlan.Seconds">
-            <summary>
-            The duration of this plan will continue
-            </summary>
-        </member>
-        <member name="P:StonePlanner.Structs.UserPlan.Intro">
-            <summary>
-            The introduce of this plan
-            </summary>
-        </member>
-        <member name="P:StonePlanner.Structs.UserPlan.Difficulty">
-            <summary>
-            A number from 1 to 10, in steps of 0.1, representing the difficulty of this plan
-            </summary>
-        </member>
-        <member name="P:StonePlanner.Structs.UserPlan.ID">
-            <summary>
-            The unique identifier of this plan
-            </summary>
-        </member>
-        <member name="P:StonePlanner.Structs.UserPlan.Parent">
-            <summary>
-            The list to which this plan belongs
-            </summary>
-        </member>
-        <member name="P:StonePlanner.Structs.UserPlan.Lasting">
-            <summary>
-            Lasting obtained from completing this plan
-            </summary>
-        </member>
-        <member name="P:StonePlanner.Structs.UserPlan.Wisdom">
-            <summary>
-            Wisdom obtained from completing this plan
-            </summary>
-        </member>
-        <member name="P:StonePlanner.Structs.UserPlan.Explosive">
-            <summary>
-            Explosive obtained from completing this plan
-            </summary>
-        </member>
-        <member name="P:StonePlanner.Structs.UserPlan.StartTime">
-            <summary>
-            Task start time
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Structs.UserPlan.AddSign">
-            <summary>
-            AddSign delegate
-            </summary>
-        </member>
-        <member name="P:StonePlanner.Structs.UserPlan.BuildMode">
-            <summary>
-            Model applicable in plan building
-            </summary>
-        </member>
-        <member name="T:StonePlanner.Structs.PlanBuildMode">
-            <summary>
-            任务构建模式
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Structs.PlanBuildMode.A">
-            <summary>
-            用于分配空白Plan对象
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Structs.PlanBuildMode.B">
-            <summary>
-            用于从数据库建立Plan对象
-            </summary>
-        </member>
-        <member name="F:StonePlanner.Structs.PlanBuildMode.C">
-            <summary>
-            用于从新建页面建立Plan对象
-            </summary>
-        </member>
         <member name="F:StonePlanner.TestTools.components">
             <summary>
             Required designer variable.
@@ -766,13 +766,6 @@
             <summary>
             该函数处理用户退出事件，存入新的还未存储的数据。
             </summary>
-        </member>
-        <member name="M:StonePlanner.Main.SearchProcA(System.String)">
-            <summary>
-            判断是否包含此字串的进程   模糊
-            </summary>
-            <param name="strProcName">进程字符串</param>
-            <returns>是否包含</returns>
         </member>
         <member name="M:StonePlanner.Main.panel_L_MouseWheel(System.Object,System.Windows.Forms.MouseEventArgs)">
             <summary>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using static StonePlanner.Structs;
+using static StonePlanner.DataType.Structs;
 
 namespace StonePlanner
 {

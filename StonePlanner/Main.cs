@@ -12,7 +12,7 @@ using System.Threading;
 using System.Windows.Forms;
 using static StonePlanner.Develop.Sign;
 using static StonePlanner.Exceptions;
-using static StonePlanner.Structs;
+using static StonePlanner.DataType.Structs;
 
 /*
  * **************************************************************************
@@ -54,7 +54,6 @@ namespace StonePlanner
         #region 主字段
         //常量
         const int DC_PLANHEIGHT = 36;
-        const int DC_LRESULT = 0;
         //信号
         internal Signal signal = new Signal();
         //传出请求删除的请求体对象本身
@@ -65,8 +64,6 @@ namespace StonePlanner
         public static List<Plan> recycle_bin = new List<Plan>();
         //TO-DO
         internal static UserPlan planner; //It is a void*
-        //总时间
-        internal static int nTime;
         //密码
         internal static string password = "methodbox5";
         //检查语言包
@@ -76,8 +73,8 @@ namespace StonePlanner
         TaskDetails td;
         //数据库查询
         internal static OleDbConnection odcConnection = new OleDbConnection();
-        public static DateTime tStart;
         #endregion
+
         #region 外部引用
         /// <summary>
         /// 该函数用来发送Windows消息（WM）处理窗口拖动事件。
@@ -105,18 +102,17 @@ namespace StonePlanner
             }
         }
         #endregion
+
+
         #region 主窗口及设置加载/退出
         public Main()
         {
             InitializeComponent();
             Settings settings = new Settings();
-            label_XHDL.Parent = pictureBox_Main;
             settings.Dispose();
 
             signal.SignChanged += HandleSign;
         }
-        delegate void addDelegate();
-        addDelegate controlsAdd;
 
         internal void HandleSign(object sender, DataType.SignChangedEventArgs e)
         {
@@ -365,7 +361,7 @@ namespace StonePlanner
             var moneyManager =
                 Manager.MoneyManager.GetManagerInstance(Convert.ToInt32(userInfo.GetValue(2)));
 
-            // Create property(LEW) manager for global
+            // Create property manager for global
             int userLasting = Convert.ToInt32(userInfo.GetValue(6));
             int userExplosive = Convert.ToInt32(userInfo.GetValue(7));
             int userWisdom = Convert.ToInt32(userInfo.GetValue(8));
@@ -558,7 +554,7 @@ namespace StonePlanner
                 this.Invoke(LoadFunction);
             else
             {
-                SynchronizationContext.Current.Post(state => { int i; }, 1);
+                // Functions
                 AddTodo.PlanAddInvoke officalInvoke = new AddTodo.PlanAddInvoke(AddPlan);
                 Function newTodo = new Function($"{Application.StartupPath}\\icon\\new.png",
                     $"新建任务", "AddToDo", officalInvoke, (Action<int>) AddSignal)
@@ -582,7 +578,8 @@ namespace StonePlanner
                     Top = 8 * 34
                 };
                 panel_L.Controls.Add(Schedule);
-                //你猜猜点击函数在哪里？没想到吧，在这里！
+
+                //Bottom
                 Bottom Function = new("功能")
                 {
                     Top = 374,
@@ -683,33 +680,6 @@ namespace StonePlanner
             catch { }
         }
 
-        /// <summary>
-        /// 判断是否包含此字串的进程   模糊
-        /// </summary>
-        /// <param name="strProcName">进程字符串</param>
-        /// <returns>是否包含</returns>
-        public bool SearchProcA(string strProcName)
-        {
-            try
-            {
-                //模糊进程名  枚举
-                //Process[] ps = Process.GetProcesses();  //进程集合
-                foreach (Process p in Process.GetProcesses())
-                {
-
-                    if (p.ProcessName.IndexOf(strProcName) > -1)  //第一个字符匹配的话为0，这与VB不同
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         #region 金钱操作
         public void ValueGetter()
         {
@@ -720,6 +690,7 @@ namespace StonePlanner
                 Thread.Sleep(1000);
             }
         }
+
         #endregion
         #region 加载排班日历
         internal string GetSchedule(bool @out = false)
@@ -803,7 +774,7 @@ namespace StonePlanner
                 {
                     Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
                 };
-                Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/sentence.txt"); //下载                                                                                            //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
+                Byte[] pageData = MyWebClient.DownloadData("http://methodbox.top/wkgd/Services/StonePlanner/sentence.txt"); //下载                                                                                            //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
                 string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
                 foreach (var item in pageHtml.Split(';'))
                 {
@@ -872,9 +843,9 @@ namespace StonePlanner
             if (e.Delta > 0) // 向上滚动
             {
 
-                if (panel_L.Top >= DC_LRESULT)
+                if (panel_L.Top >= 0)
                 {
-                    panel_L.Top = DC_LRESULT;
+                    panel_L.Top = 0;
                     //恢复底部控件
                     Bottom Function = new Bottom("功能");
                     Function.Top = 374;

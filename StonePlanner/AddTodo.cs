@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static StonePlanner.Structs;
+using static StonePlanner.DataType.Structs;
 using MetroFramework.Forms;
 
 namespace StonePlanner

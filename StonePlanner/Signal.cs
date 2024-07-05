@@ -15,11 +15,13 @@ namespace StonePlanner
                 SignChanged?.Invoke(null,e);
             }
         }
+
         public bool AddSignal(int signal) 
         {
             Value = signal;
             return true;
         }
+
         public event Action<object,DataType.SignChangedEventArgs> SignChanged;
     }
 }

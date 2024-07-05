@@ -86,7 +86,7 @@ namespace StonePlanner
                     catch { }
                     try
                     {
-                        var dResult = (Structs.PlanStruct) ByteConvert.BytesToObject(buffer);
+                        var dResult = (DataType.Structs.PlanStruct) ByteConvert.BytesToObject(buffer);
                         AddTodo addtodo = new AddTodo(dResult);
                         MethodInvoker fmShower = new MethodInvoker(() => addtodo.Show());
                         BeginInvoke(fmShower);
@@ -94,7 +94,7 @@ namespace StonePlanner
                     catch { }
                     if (serverInfo.Replace("\0", "") == "-Getinfo")
                     {
-                        Structs.UserStruct ubuff = new Structs.UserStruct();
+                        DataType.Structs.UserStruct ubuff = new DataType.Structs.UserStruct();
                         ubuff.userName = Login.UserName;
 
                         var moneyManager = Manager.MoneyManager.GetManagerInstance();

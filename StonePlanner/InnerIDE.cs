@@ -13,7 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using static StonePlanner.Structs;
+using static StonePlanner.DataType.Structs;
 
 namespace StonePlanner
 {
@@ -578,17 +578,8 @@ namespace StonePlanner
             stOpenRem = !stOpenRem;
         }
 
-        private void 中文插入CToolStripMenuItem_Click(object sender, EventArgs e)
-        {            //char szBufferSize;
-            //char* chineseText = &szBufferSize;
-            //InputBoxStruct IBS = new InputBoxStruct();
-            //IBS.lpText = "请输入您想插入的中文";
-            //IBS.lpCaption = "中文插入系统";
-            //IBS.szValueBack = chineseText;
-            //InputBox IB = new InputBox(IBS);
-            //IB.Show();
-            //TaskFactory nameGetThread = new TaskFactory();
-            //nameGetThread.StartNew(() => FileAddition(chineseText, IB));
+        private void 中文插入CToolStripMenuItem_Click(object sender, EventArgs e) 
+        { 
             Helpers.CmdHelper.RunCmd("notepad");
         }
         private void 新建NToolStripMenuItem_Click(object sender, EventArgs e)

@@ -70,7 +70,6 @@
             this.panel_L = new System.Windows.Forms.Panel();
             this.label_YoursTasks = new System.Windows.Forms.Label();
             this.panel_TaskDetail = new System.Windows.Forms.Panel();
-            this.label_XHDL = new System.Windows.Forms.Label();
             this.pictureBox_Tip = new System.Windows.Forms.PictureBox();
             this.pictureBox_Main = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -98,7 +97,7 @@
             this.panel_Top.Controls.Add(this.label_Sentence);
             this.panel_Top.Controls.Add(this.pictureBox_T_More);
             this.panel_Top.Location = new System.Drawing.Point(0, 0);
-            this.panel_Top.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel_Top.Margin = new System.Windows.Forms.Padding(4);
             this.panel_Top.Name = "panel_Top";
             this.panel_Top.Size = new System.Drawing.Size(900, 38);
             this.panel_Top.TabIndex = 0;
@@ -109,7 +108,7 @@
             this.pictureBox_T_Float.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_T_Float.BackgroundImage")));
             this.pictureBox_T_Float.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_T_Float.Location = new System.Drawing.Point(819, 2);
-            this.pictureBox_T_Float.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_T_Float.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_T_Float.Name = "pictureBox_T_Float";
             this.pictureBox_T_Float.Size = new System.Drawing.Size(33, 31);
             this.pictureBox_T_Float.TabIndex = 10;
@@ -133,7 +132,7 @@
             this.User_Piicture.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("User_Piicture.BackgroundImage")));
             this.User_Piicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.User_Piicture.Location = new System.Drawing.Point(421, 2);
-            this.User_Piicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.User_Piicture.Margin = new System.Windows.Forms.Padding(4);
             this.User_Piicture.Name = "User_Piicture";
             this.User_Piicture.Size = new System.Drawing.Size(43, 34);
             this.User_Piicture.TabIndex = 8;
@@ -146,7 +145,7 @@
             this.pictureBox_T_Exit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_T_Exit.BackgroundImage")));
             this.pictureBox_T_Exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_T_Exit.Location = new System.Drawing.Point(859, 2);
-            this.pictureBox_T_Exit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_T_Exit.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_T_Exit.Name = "pictureBox_T_Exit";
             this.pictureBox_T_Exit.Size = new System.Drawing.Size(33, 31);
             this.pictureBox_T_Exit.TabIndex = 2;
@@ -171,7 +170,7 @@
             this.pictureBox_T_More.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_T_More.BackgroundImage")));
             this.pictureBox_T_More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_T_More.Location = new System.Drawing.Point(-4, 0);
-            this.pictureBox_T_More.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_T_More.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_T_More.Name = "pictureBox_T_More";
             this.pictureBox_T_More.Size = new System.Drawing.Size(48, 36);
             this.pictureBox_T_More.TabIndex = 1;
@@ -241,7 +240,7 @@
             this.panel_M.Controls.Add(this.panel_L);
             this.panel_M.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel_M.Location = new System.Drawing.Point(0, 38);
-            this.panel_M.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel_M.Margin = new System.Windows.Forms.Padding(4);
             this.panel_M.Name = "panel_M";
             this.panel_M.Size = new System.Drawing.Size(315, 496);
             this.panel_M.TabIndex = 1;
@@ -441,7 +440,7 @@
             // 
             this.panel_L.BackColor = System.Drawing.SystemColors.Control;
             this.panel_L.Location = new System.Drawing.Point(0, 0);
-            this.panel_L.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel_L.Margin = new System.Windows.Forms.Padding(4);
             this.panel_L.Name = "panel_L";
             this.panel_L.Size = new System.Drawing.Size(0, 496);
             this.panel_L.TabIndex = 0;
@@ -459,7 +458,6 @@
             // 
             // panel_TaskDetail
             // 
-            this.panel_TaskDetail.Controls.Add(this.label_XHDL);
             this.panel_TaskDetail.Controls.Add(this.pictureBox_Tip);
             this.panel_TaskDetail.Controls.Add(this.pictureBox_Main);
             this.panel_TaskDetail.Controls.Add(this.label2);
@@ -468,19 +466,10 @@
             this.panel_TaskDetail.Controls.Add(this.label_Anther1);
             this.panel_TaskDetail.Controls.Add(this.label_Month);
             this.panel_TaskDetail.Location = new System.Drawing.Point(339, 38);
-            this.panel_TaskDetail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel_TaskDetail.Margin = new System.Windows.Forms.Padding(4);
             this.panel_TaskDetail.Name = "panel_TaskDetail";
             this.panel_TaskDetail.Size = new System.Drawing.Size(563, 496);
             this.panel_TaskDetail.TabIndex = 5;
-            // 
-            // label_XHDL
-            // 
-            this.label_XHDL.AutoSize = true;
-            this.label_XHDL.Location = new System.Drawing.Point(565, 481);
-            this.label_XHDL.Name = "label_XHDL";
-            this.label_XHDL.Size = new System.Drawing.Size(15, 15);
-            this.label_XHDL.TabIndex = 10;
-            this.label_XHDL.Text = "0";
             // 
             // pictureBox_Tip
             // 
@@ -500,7 +489,7 @@
             this.pictureBox_Main.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_Main.ContextMenuStrip = this.contextMenuStrip;
             this.pictureBox_Main.Location = new System.Drawing.Point(4, -4);
-            this.pictureBox_Main.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Main.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_Main.Name = "pictureBox_Main";
             this.pictureBox_Main.Size = new System.Drawing.Size(567, 500);
             this.pictureBox_Main.TabIndex = 5;
@@ -542,7 +531,7 @@
             this.Controls.Add(this.label_Status);
             this.Controls.Add(this.vScrollBar_Main);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Main";
             this.Text = "Aim";
             this.Load += new System.EventHandler(this.Main_Load);
@@ -585,7 +574,6 @@
         private System.Windows.Forms.VScrollBar vScrollBar_Main;
         private System.Windows.Forms.PictureBox pictureBox_Tip;
         private System.Windows.Forms.Timer timer_Anti;
-        private System.Windows.Forms.Label label_XHDL;
         private System.Windows.Forms.PictureBox pictureBox_T_Float;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem maximumToolStripMenuItem;

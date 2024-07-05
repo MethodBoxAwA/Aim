@@ -111,6 +111,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="AccessEntity.cs" />
     <Compile Include="Activation.cs">
       <SubType>Form</SubType>
     </Compile>

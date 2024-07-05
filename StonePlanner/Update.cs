@@ -17,6 +17,7 @@ namespace StonePlanner
     {
         string updateSource = @"https://www.methodbox.top/Services/StonePlanner/update.txt";
         List<VersionInfo> versions = new List<VersionInfo>();
+
         public Update()
         {
             InitializeComponent();

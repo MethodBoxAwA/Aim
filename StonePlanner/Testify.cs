@@ -22,7 +22,7 @@ namespace StonePlanner
             label5.Text = $"用户耐力值：{_propertyManager.Lasting}";
             label6.Text = $"用户爆发值：{_propertyManager.Explosive}";
             label7.Text = $"用户智慧值：{_propertyManager.Wisdom}";
-            label8.Text = $"剩余时间：{Main.nTime}";
+            label8.Text = $"剩余时间：已废弃";
             label9.Text = $"主信号值：0";
         }
 
