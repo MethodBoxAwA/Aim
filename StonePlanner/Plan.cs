@@ -82,13 +82,13 @@ namespace StonePlanner
             {
                 case PlanBuildMode.A:
                     Parent = planData.Parent;
-                    StartTime = planData.StartTime;
+                    StartTime = Convert.ToInt64(planData.StartTime);
                     AddSign = planData.AddSign;
                     ID = new Random().Next(100000000, 999999999);
                     goto default;
                 case PlanBuildMode.B:
                     Parent = planData.Parent;
-                    StartTime = planData.StartTime;
+                    StartTime = Convert.ToInt64(planData.StartTime);
                     AddSign = planData.AddSign;
                     ID = planData.ID;
                     goto default;

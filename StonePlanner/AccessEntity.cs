@@ -14,13 +14,19 @@ namespace StonePlanner
     {
         private static AccessEntity _accessEntityInstance;
         static readonly object _threadLock = new();
+        private List<string> _ignoredPropertyList;
 
         private OleDbConnection _dbConnection;
 
-        private AccessEntity(string fileName, string password)
+        private AccessEntity(string fileName, string password, List<string> ignoredPropertyList = null)
         {
             // Connect and open database
             string stringConnection = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={fileName};Jet OLEDB:Database Password={password}";
+            // Build ignored property list
+            if (ignoredPropertyList is not null)
+            {
+                _ignoredPropertyList = ignoredPropertyList;
+            }
             _dbConnection = new OleDbConnection(stringConnection);
             _dbConnection.Open();
         }
@@ -31,13 +37,13 @@ namespace StonePlanner
         /// <param name="fileName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        internal static AccessEntity GetAccessEntityInstance(string fileName, string password)
+        internal static AccessEntity GetAccessEntityInstance(string fileName = null, string password = null, List<string> ignoredPropertyList = null)
         {
             if (_accessEntityInstance is null)
             {
                 lock (_threadLock)
                 {
-                    _accessEntityInstance ??= new AccessEntity(fileName, password);
+                    _accessEntityInstance ??= new AccessEntity(fileName, password, ignoredPropertyList);
                 }
             }
             return _accessEntityInstance;
@@ -61,41 +67,39 @@ namespace StonePlanner
 
             for (int i = 0; i < properties.Length; i++)
             {
-                if (i == properties.Length - 1)
+                // Ignored
+                if (_ignoredPropertyList is not null)
                 {
-                    insertStringBuilderName.Append($"{properties[i].Name})");
-
-                    if (properties[i].PropertyType == typeof(string))
+                    if (_ignoredPropertyList.Contains(properties[i].Name))
                     {
-                        insertStringBuilderValue.Append($"'{properties[i].GetValue(instance)}')");
-                    }
-                    else
-                    {
-                        insertStringBuilderValue.Append($"{properties[i].GetValue(instance)})");
+                        continue;
                     }
                 }
 
+                insertStringBuilderName.Append($"{properties[i].Name},");
+
+                if (properties[i].PropertyType == typeof(string))
+                {
+                    insertStringBuilderValue.Append($"'{properties[i].GetValue(instance)}',");
+                }
                 else
                 {
-                    insertStringBuilderName.Append($"{properties[i].Name},");
-
-                    if (properties[i].PropertyType == typeof(string))
-                    {
-                        insertStringBuilderValue.Append($"'{properties[i].GetValue(instance)}',");
-                    }
-                    else
-                    {
-                        insertStringBuilderValue.Append($"{properties[i].GetValue(instance)},");
-                    }
+                    insertStringBuilderValue.Append($"{properties[i].GetValue(instance)},");
                 }
+
             }
 
+            insertStringBuilderName.Remove(insertStringBuilderName.Length - 1, 1);
+            insertStringBuilderName.Append(")");
             insertStringBuilderName.Append(" VALUES (");
             insertStringBuilderName.Append(insertStringBuilderValue);
 
             // Insert object to database
             var insertCommand = _dbConnection.CreateCommand();
+            insertStringBuilderName.Remove(insertStringBuilderName.Length - 1, 1);
+            insertStringBuilderName.Append(")");
             insertCommand.CommandText = insertStringBuilderName.ToString();
+
             return insertCommand.ExecuteNonQuery();
         }
 
@@ -130,8 +134,8 @@ namespace StonePlanner
         /// <param name="propertyValue">Value of specific property</param>
         /// <param name="tableFirst">Whether search from table first</param>
         /// <returns>Specific object instance list</returns>
-        internal List<T> GetElement<T, R>(R mappingTable, string tableName, 
-            string propertyName, string propertyValue ,bool tableFirst = true)
+        internal List<T> GetElement<T, R>(R mappingTable, string tableName,
+            string propertyName, string propertyValue, bool isString = false, bool tableFirst = true)
         where R : IMappingTable
         {
             string databaseColumnName;
@@ -142,7 +146,11 @@ namespace StonePlanner
 
             if (tableFirst)
             {
-                var searchSring = $"select * from {tableName} where {databaseColumnName} = {propertyValue}";
+                string searchSring;
+                if (!isString)
+                    searchSring = $"select * from {tableName} where {databaseColumnName} = {propertyValue}";
+                else
+                    searchSring = $"select * from {tableName} where {databaseColumnName} = '{propertyValue}'";
                 var removeCommand = _dbConnection.CreateCommand();
                 removeCommand.CommandText = searchSring;
                 var reader = removeCommand.ExecuteReader();
@@ -155,9 +163,9 @@ namespace StonePlanner
                         string fromColumnName = reader.GetName(i);
                         string fromPropertyName;
 
-                        if (mappingTable.GetType() == typeof(NonMappingTable)) 
+                        if (mappingTable.GetType() == typeof(NonMappingTable))
                             fromPropertyName = fromColumnName;
-                        else 
+                        else
                             fromPropertyName = mappingTable.GetPropertyName(fromColumnName);
 
                         var propertyInfo = instance.GetType().GetProperty(fromPropertyName);
@@ -169,7 +177,7 @@ namespace StonePlanner
 
             else
             {
-                List<T> allItems = GetElements<T,R>(tableName,mappingTable);
+                List<T> allItems = GetElements<T, R>(tableName, mappingTable);
                 result = (List<T>) allItems.Where(obj =>
                 {
                     var type = typeof(T);
@@ -189,8 +197,8 @@ namespace StonePlanner
         /// <param name="tableName">Name of data table</param>
         /// <param name="mappingTable">Instance of mapping table</param>
         /// <returns>Object instance list</returns>
-        internal List<T> GetElements<T,R>(string tableName,R mappingTable)
-            where R:IMappingTable
+        internal List<T> GetElements<T, R>(string tableName, R mappingTable)
+            where R : IMappingTable
         {
             // Get all name of column
             var queryCommand = _dbConnection.CreateCommand();
@@ -203,10 +211,16 @@ namespace StonePlanner
 
             while (reader.Read())
             {
+                // Ignored
+
                 T temp = (T) Activator.CreateInstance(objectType);
 
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
+                    if (_ignoredPropertyList!.Contains(reader.GetName(i)))
+                    {
+                        continue;
+                    }
                     var field = objectType.GetField(mappingTable.GetPropertyName(reader.GetName(i)));
                     field.SetValue(temp, reader[i]);
                 }
@@ -221,20 +235,53 @@ namespace StonePlanner
         /// Set new value to specific object of database
         /// </summary>
         /// <typeparam name="T">Type of data source</typeparam>
+        /// <typeparam name="R">Type of mapping table</typeparam>
         /// <inheritdoc cref="RemoveElement{R}(R, string, string, string)"/>
         /// <param name="element">Object that want to change</param>
-        /// <param name="propertyValue">New value of specific property</param>
-        internal void ChangeElement<T, R>(T element, R mappingTable, string propertyName,
-            string propertyValue, string tableName) where R : IMappingTable
+        /// <param name="setPropertyName">New value of specific property</param>
+        /// <param name="tableName">Name of data table</param>
+        internal int UpdateElement<T, R>(T element, R mappingTable, string setPropertyName,
+            string propertyName, string tableName) where R : IMappingTable
         {
             string databaseColumnName;
-            if (mappingTable is null) databaseColumnName = propertyName;
-
+            if (mappingTable.GetType() == typeof(NonMappingTable)) databaseColumnName = propertyName;
             else databaseColumnName = mappingTable.GetColumnName(propertyName);
-            var changeSring = $"delete from {tableName} where {databaseColumnName} = {propertyValue}";
+            var type = typeof(T);
+
+            var setBuilder = new StringBuilder();
+            var properties = type.GetProperties();
+            setBuilder.Append($"update {tableName} ");
+            setBuilder.Append("set ");
+
+            foreach (var property in properties)
+            {
+                // Ignored
+                _ignoredPropertyList.Add("ID");
+                if (_ignoredPropertyList!.Contains(property.Name))
+                {
+                    continue;
+                }
+
+                string inlineName;
+                if (mappingTable.GetType() == typeof(NonMappingTable)) inlineName = property.Name;
+                else inlineName = mappingTable.GetColumnName(propertyName);
+                if (property.PropertyType == typeof(string))
+                    setBuilder.Append($"{inlineName} = '{property.GetValue(element)}', ");
+                else
+                    setBuilder.Append($"{inlineName} = {property.GetValue(element)}, ");
+            }
+            setBuilder.Remove(setBuilder.Length - 2, 2);
+            setBuilder.Append($" where {databaseColumnName} = {type.GetProperty(databaseColumnName).GetValue(element)}");
+            var commandLine = _dbConnection.CreateCommand();
+            commandLine.CommandText = setBuilder.ToString();
+            _ignoredPropertyList.Remove("ID");
+            return commandLine.ExecuteNonQuery();
         }
     }
 
+    /// <summary>
+    /// Indicates that no mapping table is required
+    /// </summary>
     internal class NonMappingTable : IMappingTable
     {
         public string GetPropertyName(string _) => null;

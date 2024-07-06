@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using static StonePlanner.Develop.Sign;
 using static StonePlanner.Exceptions;
 using static StonePlanner.DataType.Structs;
+using static StonePlanner.Interfaces;
 
 /*
  * **************************************************************************
@@ -157,6 +158,7 @@ namespace StonePlanner
                 manager.RemoveTask(plan.Serial);
                 plan = null;
                 LengthCalculation();
+
             }
 
             //已废弃：Sign == 1，添加任务
@@ -397,7 +399,7 @@ namespace StonePlanner
                     Lasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value),
                     Explosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
                     Wisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value),
-                    StartTime = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[10].Value),
+                    StartTime = Convert.ToString(recy_bin.dataGridView1.Rows[i].Cells[10].Value),
                     AddSign = (Action<int>) AddSignal,
                     BuildMode = PlanBuildMode.B
                 };
@@ -1050,4 +1052,5 @@ namespace StonePlanner
             update.Show();
         }
     }
+
 }

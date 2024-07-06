@@ -29,39 +29,65 @@ namespace StonePlanner
 
         private void button_Submit_Click(object sender, EventArgs e)
         {
+            // Confirm user had inputed corrsponding data
             if (textBox_M_Name.Text.Length == 0 || textBox_M_Pwd.Text.Length == 0)
             {
                 MessageBox.Show("请输入用户名或密码！","注册失败",
                     MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 return;
             }
-            //确认用户名密码是否符合规则
             Regex regex = new Regex("^[\u4E00-\u9FA5A-Za-z0-9]+$");
-            Match result = regex.Match(textBox_M_Name.Text);
-            bool add = (!regex.Match(textBox_M_Name.Text).Success) && (!regex.Match(textBox_M_Pwd.Text).Success);
-            if (add)
+            bool isInvalid = (!regex.Match(textBox_M_Name.Text).Success) && 
+                (!regex.Match(textBox_M_Pwd.Text).Success);
+            
+            // Confirm that the username and password is vaild
+            if (isInvalid)
             {
                 MessageBox.Show("您输入的用户名或密码含有特殊字符", "注册失败",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if (comboBox_M_Type.Text != "Administrator" && comboBox_M_Type.Text != "Standard")
+
+            // Create a vaild data
+            if (comboBox_M_Type.Text != "Administrator" && 
+                comboBox_M_Type.Text != "Standard")
             {
                 comboBox_M_Type.Text = "Standard";
             }
-            int i = comboBox_M_Type.Text == "Administrator" ? 0 : 1;
-            //创建一个恢复用KEY
-            var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var Charsarr = new char[30];
+
+            int accountType = comboBox_M_Type.Text == "Administrator" ? 0 : 1;
+         
+            // Create a key use for account restore
+            var charActers = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var Chararr = new char[30];
             var random = new Random();
-            for (int j = 0; j < Charsarr.Length; j++)
+            for (int j = 0; j < Chararr.Length; j++)
             {
-                Charsarr[j] = characters[random.Next(characters.Length)];
+                Chararr[j] = charActers[random.Next(charActers.Length)];
             }
-            var resultString = new String(Charsarr);
-            SQLConnect.SQLCommandExecution($" INSERT INTO Users (Username , Cmoney , Type , Pwd , Rkey) VALUES ('{textBox_M_Name.Text}' , 0 , {i} , '{textBox_M_Pwd.Text}','{resultString}')"/*cmd*/, ref Main.odcConnection);
-            MessageBox.Show($"以下是您的用户恢复密钥：\n{resultString}\n请妥善保管该密钥，您将不会再次看到它了。按确定键复制到剪贴板。");
-            Clipboard.SetText(resultString);
+            var restoreKey = new String(Chararr);
+
+            // Confirm does not exist user that have the same name
+            var entity = AccessEntity.GetAccessEntityInstance();
+            var mappingTable = new NonMappingTable();
+
+            if (entity.GetElement<DataType.Structs.User, NonMappingTable>
+                (mappingTable, "tb_Users", "UserName", textBox_M_Name.Text, true).Count != 0)
+            {
+                MessageBox.Show("已经存在具有相同名称的用户!", "注册失败",
+                  MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+              
+            // Insert into database
+            var user = new DataType.Structs.User();
+            user.UserName = textBox_M_Name.Text;
+            user.Password = textBox_M_Pwd.Text;
+            user.Wisdom = user.Lasting = user.Explosive = user.UserMoney = 0;
+            user.RestoreKey = restoreKey;
+            entity.AddElement(user, "tb_Users");
+      
+            Clipboard.SetText(restoreKey);
             Close();
         }
     }

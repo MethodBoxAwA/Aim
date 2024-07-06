@@ -131,7 +131,7 @@ namespace StonePlanner
                     Convert.ToInt32(textBox_hh.Text),
                     Convert.ToInt32(textBox_mm.Text),
                     0
-                    ).ToBinary(),
+                    ).ToBinary().ToString(),
                     ID = new Random().Next(100000000, 999999999),
                     AddSign = Addsignal
                 };

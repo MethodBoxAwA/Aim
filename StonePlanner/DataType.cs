@@ -124,7 +124,7 @@ namespace StonePlanner
                 /// <summary>
                 /// Task start time
                 /// </summary>
-                public long StartTime { get; set; } = DateTime.Now.ToFileTimeUtc();
+                public string StartTime { get; set; } = DateTime.Now.ToFileTimeUtc().ToString();
 
                 /// <summary>
                 /// AddSign delegate
@@ -135,6 +135,26 @@ namespace StonePlanner
                 /// Model applicable in plan building
                 /// </summary>
                 public PlanBuildMode BuildMode { get; set; } = PlanBuildMode.A;
+
+                public UserPlan(Plan plan)
+                {
+                    this.Capital = plan.Capital;
+                    this.Seconds = plan.Seconds;
+                    this.Intro = plan.Intro;
+                    this.Difficulty = plan.Difficulty;
+                    this.ID = plan.ID;
+                    this.Parent = plan.Parent;
+                    this.Lasting = plan.Lasting;
+                    this.Wisdom = plan.Wisdom;
+                    this.Explosive = plan.Explosive;
+                    this.StartTime = plan.StartTime.ToString();
+                    this.AddSign = plan.AddSign;
+                }
+
+                public UserPlan()
+                {
+
+                }
             }
 
             /// <summary>
@@ -163,6 +183,18 @@ namespace StonePlanner
             {
                 internal string req_Head;
                 internal string Text;
+            }
+
+            public class User
+            {
+                public string UserName { get; set; }
+                public int UserMoney { get; set; }
+                public int Type { get; set; }
+                public string Password { get; set; }
+                public string RestoreKey { get; set; }
+                public int Lasting { get; set; }
+                public int Explosive { get; set; }
+                public int Wisdom { get; set; }
             }
         }
     }

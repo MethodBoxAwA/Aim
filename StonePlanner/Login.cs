@@ -14,6 +14,7 @@ namespace StonePlanner
         public Login()
         {
             InitializeComponent();
+            AccessEntity.GetAccessEntityInstance($"{Application.StartupPath}\\data.mdb", "methodbox5");
         }
 
         private void Login_Load(object sender, EventArgs e)

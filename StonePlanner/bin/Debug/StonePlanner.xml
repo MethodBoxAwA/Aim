@@ -38,8 +38,16 @@
         </member>
         <member name="T:StonePlanner.AccessEntity">
             <summary>
-            Provide methods for serialization or deserialization objects for Access
+            Provide methods for serialization or deserialization objects for Access database
             </summary>
+        </member>
+        <member name="M:StonePlanner.AccessEntity.GetAccessEntityInstance(System.String,System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Get singleton instance of access entity object
+            </summary>
+            <param name="fileName"></param>
+            <param name="password"></param>
+            <returns></returns>
         </member>
         <member name="M:StonePlanner.AccessEntity.AddElement``1(``0,System.String)">
             <summary>
@@ -48,17 +56,56 @@
             <typeparam name="T">Type of data source</typeparam>
             <param name="instance">Object instance</param>
             <param name="tableName">Name of data table</param>
-            <returns></returns>
+            <returns>The number of rows affected</returns>
         </member>
-        <member name="M:StonePlanner.AccessEntity.GetElement``2(``1,System.String)">
+        <member name="M:StonePlanner.AccessEntity.RemoveElement``1(``0,System.String,System.String,System.String)">
             <summary>
-            Get object instance from database
+            Remove specific object from database when the value of propertyName equals propertyValue
+            </summary>
+            <typeparam name="R">Type of mapping table</typeparam>
+            <param name="mappingTable">Provide mapping from database row headers to field names</param>
+            <param name="propertyName">Name of specific property</param>
+            <param name="propertyValue">Value of specific property</param>
+            <returns>The number of rows affected</returns>
+        </member>
+        <member name="M:StonePlanner.AccessEntity.GetElement``2(``1,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Get specific object instance from database
             </summary>
             <typeparam name="T">Type of data source</typeparam>
             <typeparam name="R">Type of mapping table</typeparam>
-            <param name="mappingTable">Provide mapping from database row headers to field names</param>
+            <param name="mappingTable">Instance of mapping table</param>
             <param name="tableName">Name of data table</param>
-            <returns></returns>
+            <param name="propertyName">Name of specific property</param>
+            <param name="propertyValue">Value of specific property</param>
+            <param name="tableFirst">Whether search from table first</param>
+            <returns>Specific object instance list</returns>
+        </member>
+        <member name="M:StonePlanner.AccessEntity.GetElements``2(System.String,``1)">
+            <summary>
+            Get all object instance from database
+            </summary>
+            <typeparam name="T">Type of data source</typeparam>
+            <typeparam name="R">Type of mapping table</typeparam>
+            <param name="tableName">Name of data table</param>
+            <param name="mappingTable">Instance of mapping table</param>
+            <returns>Object instance list</returns>
+        </member>
+        <member name="M:StonePlanner.AccessEntity.UpdateElement``2(``0,``1,System.String,System.String,System.String)">
+            <summary>
+            Set new value to specific object of database
+            </summary>
+            <typeparam name="T">Type of data source</typeparam>
+            <typeparam name="R">Type of mapping table</typeparam>
+            <inheritdoc cref="M:StonePlanner.AccessEntity.RemoveElement``1(``0,System.String,System.String,System.String)"/>
+            <param name="element">Object that want to change</param>
+            <param name="setPropertyName">New value of specific property</param>
+            <param name="tableName">Name of data table</param>
+        </member>
+        <member name="T:StonePlanner.NonMappingTable">
+            <summary>
+            Indicates that no mapping table is required
+            </summary>
         </member>
         <member name="M:StonePlanner.Activation.#ctor">
             <summary>
