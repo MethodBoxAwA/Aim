@@ -461,7 +461,7 @@
             this.pictureBox_Tip.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Tip.BackgroundImage")));
             this.pictureBox_Tip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_Tip.Location = new System.Drawing.Point(535, 250);
-            this.pictureBox_Tip.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox_Tip.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_Tip.Name = "pictureBox_Tip";
             this.pictureBox_Tip.Size = new System.Drawing.Size(85, 87);
             this.pictureBox_Tip.TabIndex = 9;
@@ -498,7 +498,6 @@
             // 
             // timer_Anti
             // 
-            this.timer_Anti.Enabled = true;
             this.timer_Anti.Interval = 10000;
             this.timer_Anti.Tick += new System.EventHandler(this.timer_Anti_Tick);
             // 

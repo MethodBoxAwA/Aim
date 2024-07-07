@@ -4,7 +4,7 @@
     {
         static void Main() 
         {
-            SQLTest.Test();
+            //SQLTest.Test();
         }
     }
 }

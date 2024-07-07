@@ -133,7 +133,9 @@ namespace StonePlanner
         /// <param name="tableName">Name of data table</param>
         /// <param name="propertyName">Name of specific property</param>
         /// <param name="propertyValue">Value of specific property</param>
+        /// <param name="isString">Whether use string pattern</param>
         /// <param name="tableFirst">Whether search from table first</param>
+        /// <param name="ignoredPropertyList">Ignored property</param>
         /// <returns>Specific object instance list</returns>
         internal List<T> GetElement<T, R>(R mappingTable, string tableName,
             string propertyName, string propertyValue, bool isString = false, 
@@ -203,14 +205,18 @@ namespace StonePlanner
         /// <typeparam name="R">Type of mapping table</typeparam>
         /// <param name="tableName">Name of data table</param>
         /// <param name="mappingTable">Instance of mapping table</param>
+        /// <param name="ignoredPropertyList">Ignored property</param>
         /// <returns>Object instance list</returns>
-        internal List<T> GetElements<T, R>(string tableName, R mappingTable)
+        internal List<T> GetElements<T, R>(string tableName, R mappingTable, List<string> ignoredPropertyList = null)
             where R : IMappingTable
         {
             // Get all name of column
             var queryCommand = _dbConnection.CreateCommand();
             queryCommand.CommandText = $"SELECT * FROM {tableName}";
             var reader = queryCommand.ExecuteReader();
+
+            // Re write
+            _ignoredPropertyList = ignoredPropertyList;
 
             // Read and construct object
             var objectType = typeof(T);
@@ -224,12 +230,22 @@ namespace StonePlanner
 
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    if (_ignoredPropertyList!.Contains(reader.GetName(i)))
+                    if (_ignoredPropertyList! is not null)
                     {
-                        continue;
+                        if (_ignoredPropertyList.Contains(reader.GetName(i)))
+                        {
+                            continue;
+                        }
                     }
-                    var field = objectType.GetField(mappingTable.GetPropertyName(reader.GetName(i)));
-                    field.SetValue(temp, reader[i]);
+
+                    System.Reflection.PropertyInfo property;
+
+                    if (mappingTable.GetType() == typeof(NonMappingTable))
+                        property = objectType.GetProperty(reader.GetName(i));
+                    else
+                        property = objectType.GetProperty(mappingTable.GetPropertyName(reader.GetName(i)));
+
+                    property.SetValue(temp, reader[i]);
                 }
 
                 result.Add(temp);
@@ -247,6 +263,7 @@ namespace StonePlanner
         /// <param name="element">Object that want to change</param>
         /// <param name="setPropertyName">New value of specific property</param>
         /// <param name="tableName">Name of data table</param>
+        /// <param name="ignoredPropertyList">Ignored property</param>
         internal int UpdateElement<T, R>(T element, R mappingTable, string setPropertyName,
             string propertyName, string tableName, List<string> ignoredPropertyList = null) 
             where R : IMappingTable

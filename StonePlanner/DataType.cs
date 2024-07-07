@@ -196,6 +196,15 @@ namespace StonePlanner
                 public int Explosive { get; set; }
                 public int Wisdom { get; set; }
             }
+
+            public class Error
+            {
+                public int ID { get; set; }
+                public string OccurredTime { get; set; }
+                public string ErrorLevel { get; set; }
+                public string ErrorMessage { get; set; }
+                public string ErrorSource { get; set; }
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace StonePlanner
     internal static class Program
     {
         public static bool HIDEBUG = false;
-        public static bool EnableErrorCenter = false;
+        public static bool EnableErrorCenter = true;
         static bool EnableProgramTrusteeship = true;
         /// <summary>
         /// The main entry point for the application.

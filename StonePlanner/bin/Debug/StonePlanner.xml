@@ -78,10 +78,12 @@
             <param name="tableName">Name of data table</param>
             <param name="propertyName">Name of specific property</param>
             <param name="propertyValue">Value of specific property</param>
+            <param name="isString">Whether use string pattern</param>
             <param name="tableFirst">Whether search from table first</param>
+            <param name="ignoredPropertyList">Ignored property</param>
             <returns>Specific object instance list</returns>
         </member>
-        <member name="M:StonePlanner.AccessEntity.GetElements``2(System.String,``1)">
+        <member name="M:StonePlanner.AccessEntity.GetElements``2(System.String,``1,System.Collections.Generic.List{System.String})">
             <summary>
             Get all object instance from database
             </summary>
@@ -89,6 +91,7 @@
             <typeparam name="R">Type of mapping table</typeparam>
             <param name="tableName">Name of data table</param>
             <param name="mappingTable">Instance of mapping table</param>
+            <param name="ignoredPropertyList">Ignored property</param>
             <returns>Object instance list</returns>
         </member>
         <member name="M:StonePlanner.AccessEntity.UpdateElement``2(``0,``1,System.String,System.String,System.String,System.Collections.Generic.List{System.String})">
@@ -101,6 +104,7 @@
             <param name="element">Object that want to change</param>
             <param name="setPropertyName">New value of specific property</param>
             <param name="tableName">Name of data table</param>
+            <param name="ignoredPropertyList">Ignored property</param>
         </member>
         <member name="T:StonePlanner.NonMappingTable">
             <summary>

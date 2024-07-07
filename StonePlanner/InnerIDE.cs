@@ -469,67 +469,7 @@ namespace StonePlanner
                         var moneyManager = Manager.MoneyManager.GetManagerInstance();
                         moneyManager.Change(Convert.ToInt32(nInput[1]));
                     }
-                    else if (nInput[0] == "RESET")
-                    {
-                        if (accountManager.GetValue().Item2 != "2")
-                        {
-                            MessageBox.Show("该功能及其危险，已被默认禁用，如确需启用，请联系作者。","用户系统（测试）",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                            return;
-                        }
-                        //错误表
-                        SQLConnect.SQLCommandExecution("DROP     TABLE Errors", ref Main.odcConnection);
-                        SQLConnect.SQLCommandExecution(
-                            "CREATE TABLE Errors" +
-                            "(ID INTEGER IDENTITY," +
-                            "ErrTime TEXT," +
-                            "ErrLevel TEXT," +
-                            "ErrMessage TEXT)", ref Main.odcConnection);
-                        SQLConnect.SQLCommandExecution(
-                            "CREATE INDEX ID " +
-                            "ON Errors (ID ASC) " +
-                            "WITH PRIMARY", ref Main.odcConnection);
-                        //任务表
-                        SQLConnect.SQLCommandExecution("DROP TABLE Tasks", ref Main.odcConnection);
-                        SQLConnect.SQLCommandExecution(
-                            "CREATE TABLE Tasks" +
-                            "(ID INTEGER IDENTITY," +
-                            "TaskName TEXT," +
-                            "TaskIntro TEXT," +
-                            "TaskStatus TEXT," +
-                            "TaskDiff INTEGER," +
-                            "TaskTime INTEGER," +
-                            "TaskLasting INTEGER," +
-                            "TaskExplosive INTEGER," +
-                            "TaskWisdom INTEGER)", ref Main.odcConnection);
-                        SQLConnect.SQLCommandExecution(
-                            "CREATE INDEX ID " +
-                            "ON Tasks (ID ASC) " +
-                            "WITH PRIMARY", ref Main.odcConnection);
-                        //商品表
-                        SQLConnect.SQLCommandExecution("DROP TABLE Goods", ref Main.odcConnection);
-                        SQLConnect.SQLCommandExecution(
-                            "CREATE TABLE Goods" +
-                            "(ID INTEGER IDENTITY," +
-                            "GoodPrice INTEGER," +
-                            "GoodName TEXT," +
-                            "GoodPicture TEXT," +
-                            "GoodIntro TEXT," +
-                            "UseCode TEXT)", ref Main.odcConnection);
-                        SQLConnect.SQLCommandExecution(
-                            "CREATE INDEX ID " +
-                            "ON Goods (ID ASC) " +
-                            "WITH PRIMARY", ref Main.odcConnection);
-                        //仓库
-                        SQLConnect.SQLCommandExecution("DROP TABLE Depot", ref Main.odcConnection);
-                        SQLConnect.SQLCommandExecution(
-                           "CREATE TABLE Depot" +
-                           "(ID INTEGER IDENTITY," +
-                           "GoodID INTEGER)", ref Main.odcConnection);
-                        SQLConnect.SQLCommandExecution(
-                           "CREATE INDEX ID " +
-                           "ON Depot (ID ASC) " +
-                           "WITH PRIMARY", ref Main.odcConnection);
-                    }
+ 
                     else if (nInput[0] == "EXIT")
                     {
                         richTextBox_Output.Text = "";
