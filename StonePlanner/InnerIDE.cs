@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using static StonePlanner.DataType.Structs;
+using static StonePlanner.Manager;
 
 namespace StonePlanner
 {
@@ -43,6 +44,8 @@ namespace StonePlanner
         internal PerformanceCounter ramCountValue;
         Series memChartSeries = new Series();
         Series cpuChartSeries = new Series();
+
+        static AccountManager accountManager = AccountManager.GetManagerInstance();
         //internal DataPointCollection tempCollections = null;
         private void panel_Top_MouseDown(object sender, MouseEventArgs e)
         {
@@ -468,7 +471,7 @@ namespace StonePlanner
                     }
                     else if (nInput[0] == "RESET")
                     {
-                        if (Login.UserType != 2)
+                        if (accountManager.GetValue().Item2 != "2")
                         {
                             MessageBox.Show("该功能及其危险，已被默认禁用，如确需启用，请联系作者。","用户系统（测试）",MessageBoxButtons.OK,MessageBoxIcon.Error);
                             return;
@@ -762,7 +765,7 @@ namespace StonePlanner
         {
             if (e.KeyChar == 13)
             {
-                if (Login.UserType == 1)
+                if (accountManager.GetValue().Item2 == "1")
                 {
                     MessageBox.Show("语法解析运行时权限拒绝：非管理员用户无权运行命令。", "用户系统（测试）", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -1168,7 +1171,7 @@ namespace StonePlanner
                     }
                     else if (nInput[0] == "RESET")
                     {
-                        if (Login.UserType != 2)
+                        if (accountManager.GetValue().Item2 != "2")
                         {
                             MessageBox.Show("该功能及其危险，已被默认禁用，如确需启用，请联系作者。", "用户系统（测试）", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return "";

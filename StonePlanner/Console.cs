@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using static StonePlanner.Manager;
 
 namespace StonePlanner
 {
@@ -14,6 +15,8 @@ namespace StonePlanner
     {
         //INT类型存储器 多步执行布尔存储器
         internal int EPH,KDP = 0;
+        AccountManager accountManager = AccountManager.GetManagerInstance();
+
         public Console()
         {
             InitializeComponent();
@@ -278,7 +281,7 @@ namespace StonePlanner
             //命令执行
             if (e.KeyCode == Keys.Enter)
             {
-                if (Login.UserType == 1)
+                if (accountManager.GetValue().Item2 == "1")
                 {
                     MessageBox.Show("语法解析运行时权限拒绝：非管理员用户无权运行命令。", "用户系统（测试）", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

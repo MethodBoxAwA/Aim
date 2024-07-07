@@ -785,11 +785,6 @@
             原外部评分函数
             </summary>
         </member>
-        <member name="M:StonePlanner.Login.button_Submit_Click(System.Object,System.EventArgs)">
-            <summary>
-            Handle logic of user login
-            </summary>
-        </member>
         <member name="M:StonePlanner.Login.linkLabel_Register_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
             <summary>
             Open register form

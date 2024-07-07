@@ -126,8 +126,9 @@ namespace StonePlanner
 
             public void Change(int delta) 
             {
+                var _accountManager = AccountManager.GetManagerInstance();
                 _Money += delta;
-                SQLConnect.SQLCommandExecution($"UPDATE Users SET Cmoney = {_Money} WHERE Username = {Login.UserName}", ref Main.odcConnection);
+                SQLConnect.SQLCommandExecution($"UPDATE Users SET Cmoney = {_Money} WHERE Username = {_accountManager.GetValue().Item1}", ref Main.odcConnection);
             }
 
             public int GetValue() => _Money;
@@ -175,8 +176,10 @@ namespace StonePlanner
                     default:
                         break;
                 }
+
+                var manager = AccountManager.GetManagerInstance();
                 SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_{name} = " +
-                    $"{insert} WHERE Username = '{Login.UserName}';",
+                    $"{insert} WHERE Username = '{manager.GetValue().Item1}';",
                     ref Main.odcConnection);
             }
 
@@ -204,6 +207,37 @@ namespace StonePlanner
                 Update("explosive", delta.Item2);
                 Update("wisdom", delta.Item3);
             }
+        }
+
+        public class AccountManager : IManager<(string, string)> 
+        {
+            private string _Account;
+            private string _Type;
+            private static AccountManager _Manager { get; set; }
+
+            private AccountManager(string account, string type)
+            {
+                _Account = account;
+                _Type = type;
+            }
+
+            public static AccountManager GetManagerInstance(string account = null, string type = null)
+            {
+                if (_Manager is null)
+                {
+                    _Manager = new(account ,type);
+                }
+
+                return _Manager;
+            }
+
+            public void Change((string, string) value)
+            {
+                _Account = value.Item1;
+                _Type = value.Item2;
+            }
+
+            public (string,string) GetValue() => (_Account, _Type);
         }
     }
 }

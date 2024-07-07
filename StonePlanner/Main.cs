@@ -349,28 +349,32 @@ namespace StonePlanner
         {
             #region 窗口加载
             this.TopMost = false;
-            //难度评价
-            //先初始化回收站
+
             Recycle recy_bin = new Recycle();
             GC.Collect();
-            //从表中获取金钱
-            //Login.UserName = "Me";
-            var userInfo = SQLConnect.SQLCommandQuery($"SELECT * FROM Users WHERE Username = '{Login.UserName}'");
 
-            userInfo.Read();
+            var accountManager =
+                Manager.AccountManager.GetManagerInstance();
+
+            // Connect database & constuct user instance
+            var entity = AccessEntity.GetAccessEntityInstance();
+            var users = entity.GetElement<User, IMappingTable>(
+                new NonMappingTable(), "tb_Users", "UserName", accountManager.GetValue().Item1, 
+                 true, true, new List<string>() { "ID" });
+            var userInstance = users[0];
 
             // Create money manager for global
             var moneyManager =
-                Manager.MoneyManager.GetManagerInstance(Convert.ToInt32(userInfo.GetValue(2)));
+                Manager.MoneyManager.GetManagerInstance(userInstance.UserMoney);
 
             // Create property manager for global
-            int userLasting = Convert.ToInt32(userInfo.GetValue(6));
-            int userExplosive = Convert.ToInt32(userInfo.GetValue(7));
-            int userWisdom = Convert.ToInt32(userInfo.GetValue(8));
             var propertyManager =
-                Manager.PropertyManager.GetManagerInstance(userLasting, userExplosive, userWisdom);
+                Manager.PropertyManager.GetManagerInstance(
+                    userInstance.Lasting,
+                    userInstance.Explosive,
+                    userInstance.Wisdom);
 
-            label_GGS.Text = userInfo.GetValue(2).ToString();
+            label_GGS.Text = userInstance.UserMoney.ToString();
             Thread valueThread = new Thread(new ThreadStart(ValueGetter));
             valueThread.Start();
             //pictureBox_Main.ImageLocation = "https://tse1-mm.cn.bing.net/th/id/R-C.2fd0dadf9d13c716cf0494d17875cf3b?rik=mf3ZQjupoBDr2A&riu=http%3a%2f%2fup.36992.com%2fpic%2f07%2fd3%2fe8%2f07d3e81f37f5922b5b0021a1c0b2d3da.jpg&ehk=P8hpii3cUJykmCt97WX0kATyROzUNRuexj8faXE7q6c%3d&risl=&pid=ImgRaw&r=0";
@@ -570,7 +574,7 @@ namespace StonePlanner
                 LoadSignalFunction("主控制台", "Console", "console", 3);
                 LoadSignalFunction("事件编写", "InnerIDE", "program", 4);
                 LoadSignalFunction("在线协作", "WebService", "server", 5);
-                LoadSignalFunction("软件升级", "update", "Update", 6);
+                LoadSignalFunction("软件升级", "Update", "update", 6);
                 LoadSignalFunction("调试工具", "Debugger", "debug", 7);
                 LoadSignalFunction("关于软件", "About", "info", 9);
 
@@ -617,25 +621,33 @@ namespace StonePlanner
 
         private void timer_Anti_Tick(object sender, EventArgs e)
         {
+            // Get parent process infomation
             if (Process.GetCurrentProcess().Parent().ProcessName != "explorer.exe" && Process.GetCurrentProcess().Parent().ProcessName != "msvsmon")
             {
-                string p = "";
+                var entity = AccessEntity.GetAccessEntityInstance();
+                string processName;
+
                 try
                 {
-                    p = Process.GetCurrentProcess().Parent().ProcessName.Split('.')[0];
+                    processName = Process.GetCurrentProcess().Parent().ProcessName.Split('.')[0];
                 }
                 catch
                 {
-                    p = Process.GetCurrentProcess().Parent().ProcessName;
+                    processName = Process.GetCurrentProcess().Parent().ProcessName;
                 }
-                if (p == "explorer") return;
-                MessageBox.Show($"您可能试图尝试在其它框架下运行Aim，例如{p}。请注意，这样的做法不是正确的。", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
-                //反手关闭各线程
-                label_Sentence.Text = "A Fetal Error Occured";
-                timer_Anti.Enabled = false;
-                return;
+
+                // Confirm have not any error
+                if (processName == "explorer") return;
+
+                // Ban account
+                var banUser = new User();
+                banUser.UserName = "METHODBOX_BAN";
+                entity.AddElement(banUser, "tb_Users", new List<string> { "ID" });
+
+                // Terminate process
+                Environment.Exit(-114);
             }
+
             nownn.Clear();
             string[] files;
             foreach (Control item in panel_M.Controls)
@@ -645,24 +657,21 @@ namespace StonePlanner
                     nownn.Add((item as Plan).Capital);
                 }
             }
+
             try
             {
                 files = Directory.GetFiles(Application.StartupPath, "*.dll");
+
+                if (files.Length != 0)
+                {
+                    BanUser();
+                }
             }
             catch
             {
-                MessageBox.Show("您可能试图尝试在其它框架下运行Aim，例如BepInEx。请注意，这样的做法不是正确的。", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
-                //反手关闭各线程
-                label_Sentence.Text = "A Fetal Error Occured";
-                return;
+                BanUser();
             }
-            if (files.Length != 0)
-            {
-                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
-                //反手关闭各线程
-                label_Sentence.Text = "A Fetal Error Occured";
-            }
+            
             try
             {
                 var result = SQLConnect.SQLCommandQuery($"SELECT * FROM Users where Username='METHODBOX_BAN';");
@@ -1034,6 +1043,18 @@ namespace StonePlanner
             _.Show();
         }
         #endregion
+
+        private void BanUser() 
+        {
+            // Ban account
+            var banUser = new User();
+            banUser.UserName = "METHODBOX_BAN";
+            var entity = AccessEntity.GetAccessEntityInstance();
+            entity.AddElement(banUser, "tb_Users", new List<string> { "ID" });
+
+            // Terminate process
+            Environment.Exit(-114);
+        }
 
         private void pictureBox_T_Float_DoubleClick(object sender, EventArgs e)
         {

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Data;
-using System.Data.OleDb;
-using MetroFramework.Forms;
+﻿using MetroFramework.Forms;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using static StonePlanner.Interfaces;
+using static StonePlanner.Manager;
 
 namespace StonePlanner
 {
     public partial class Login : MetroForm
     {
-        public static string UserName;
-        public static int UserType;
-
         public Login()
         {
             InitializeComponent();
@@ -22,38 +20,35 @@ namespace StonePlanner
             dataGridView1.Visible = false;  
             textBox_M_Pwd.UseSystemPasswordChar = true;
         }
-        
-        /// <summary>
-        /// Handle logic of user login
-        /// </summary>
+
         private void button_Submit_Click(object sender, EventArgs e)
         {
-            // Re-write by query
-            var account = SQLConnect.SQLCommandQuery(
-                $"SELECT Pwd FROM Users where Username='{textBox_M_Name.Text}';");
-            if (!account.HasRows)
+            // Connect databse
+            var entity = AccessEntity.GetAccessEntityInstance();
+            var userInstance = entity.GetElement<DataType.Structs.User,IMappingTable>
+                (new NonMappingTable(), "tb_Users","UserName", textBox_M_Name.Text, true,
+                true, new List<string> { "ID" });
+
+            // User is not exists
+            if (userInstance.Count == 0)
             {
                 MessageBox.Show("账号不存在！", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else
+
+            // Wrong password
+            if (userInstance[0].UserPassword != textBox_M_Pwd.Text) 
             {
-                // Corresponding account exists
-                account.Read();
-                string password = account["Pwd"].ToString();
-                if (textBox_M_Pwd.Text == password)
-                {
-                    MessageBox.Show("登录成功", "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Hide();
-                    UserName = textBox_M_Name.Text;
-                    Main m = new Main();
-                    m.Show();
-                }
-                else
-                {
-                    MessageBox.Show("用户名或密码错误!", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                MessageBox.Show("用户名或密码错误!", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            // Create account manager
+            MessageBox.Show("登录成功", "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            AccountManager accountManager = AccountManager.GetManagerInstance(textBox_M_Name.Text, userInstance[0].UserType.ToString());
+            Main mainWindow = new Main();
+            mainWindow.Show();
+            Hide();
         }
 
         private void linkLabel_GetPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

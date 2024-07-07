@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using static StonePlanner.Interfaces;
+using static StonePlanner.Manager;
 
 namespace StonePlanner
 {
@@ -30,7 +32,8 @@ namespace StonePlanner
                 return;
             }
             //用户基本信息
-            label_Username.Text = $"用 户 名：{Login.UserName}";
+            var accountManager = AccountManager.GetManagerInstance();
+            label_Username.Text = $"用 户 名：{accountManager.GetValue().Item1}";
             label_Money.Text = $"金 币 数 量：{moneyManager.GetValue()}";
             //耐力值信息
             var Lasting = LevelGetter(propertyManager.Lasting);

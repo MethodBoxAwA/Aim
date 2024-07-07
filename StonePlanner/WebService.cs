@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using static StonePlanner.Manager;
 
 namespace StonePlanner
 {
@@ -94,11 +95,12 @@ namespace StonePlanner
                     catch { }
                     if (serverInfo.Replace("\0", "") == "-Getinfo")
                     {
-                        DataType.Structs.UserStruct ubuff = new DataType.Structs.UserStruct();
-                        ubuff.userName = Login.UserName;
-
+                        DataType.Structs.UserStruct ubuff = new DataType.Structs.UserStruct(); 
                         var moneyManager = Manager.MoneyManager.GetManagerInstance();
                         var propertyManager = Manager.PropertyManager.GetManagerInstance();
+                        var accountManager = Manager.AccountManager.GetManagerInstance();
+
+                        ubuff.userName = accountManager.GetValue().Item1;
 
                         ubuff.userMoney = moneyManager.GetValue();
                         ubuff.userExplosive = propertyManager.Explosive;

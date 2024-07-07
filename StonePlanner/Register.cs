@@ -64,7 +64,7 @@ namespace StonePlanner
          
             // Create a key use for account restore
             var charActers = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var Chararr = new char[30];
+            var Chararr = new char[16];
             var random = new Random();
             for (int j = 0; j < Chararr.Length; j++)
             {
