@@ -56,13 +56,14 @@ namespace StonePlanner
         /// <param name="instance">Object instance</param>
         /// <param name="tableName">Name of data table</param>
         /// <returns>The number of rows affected</returns>
-        internal int AddElement<T>(T instance, string tableName)
+        internal int AddElement<T>(T instance, string tableName, List<string> ignoredPropertyList = null)
         {
             var instanceType = typeof(T);
             var properties = instanceType.GetProperties();
             var insertStringBuilderName = new StringBuilder();
             var insertStringBuilderValue = new StringBuilder();
 
+            _ignoredPropertyList = ignoredPropertyList;
             insertStringBuilderName.Append($"INSERT INTO {tableName}(");
 
             for (int i = 0; i < properties.Length; i++)
@@ -135,10 +136,12 @@ namespace StonePlanner
         /// <param name="tableFirst">Whether search from table first</param>
         /// <returns>Specific object instance list</returns>
         internal List<T> GetElement<T, R>(R mappingTable, string tableName,
-            string propertyName, string propertyValue, bool isString = false, bool tableFirst = true)
+            string propertyName, string propertyValue, bool isString = false, 
+            bool tableFirst = true, List<string> ignoredPropertyList = null)
         where R : IMappingTable
         {
             string databaseColumnName;
+            this._ignoredPropertyList = ignoredPropertyList;
             List<T> result = new List<T>();
 
             if (mappingTable.GetType() == typeof(NonMappingTable)) databaseColumnName = propertyName;
@@ -158,6 +161,7 @@ namespace StonePlanner
                 while (reader.Read())
                 {
                     T instance = (T) Activator.CreateInstance(typeof(T));
+
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         string fromColumnName = reader.GetName(i);
@@ -168,6 +172,9 @@ namespace StonePlanner
                         else
                             fromPropertyName = mappingTable.GetPropertyName(fromColumnName);
 
+                        if (ignoredPropertyList.Contains(fromPropertyName))
+                            continue;
+                        
                         var propertyInfo = instance.GetType().GetProperty(fromPropertyName);
                         propertyInfo.SetValue(instance, reader[i]);
                     }
@@ -241,9 +248,11 @@ namespace StonePlanner
         /// <param name="setPropertyName">New value of specific property</param>
         /// <param name="tableName">Name of data table</param>
         internal int UpdateElement<T, R>(T element, R mappingTable, string setPropertyName,
-            string propertyName, string tableName) where R : IMappingTable
+            string propertyName, string tableName, List<string> ignoredPropertyList = null) 
+            where R : IMappingTable
         {
             string databaseColumnName;
+            _ignoredPropertyList = ignoredPropertyList;
             if (mappingTable.GetType() == typeof(NonMappingTable)) databaseColumnName = propertyName;
             else databaseColumnName = mappingTable.GetColumnName(propertyName);
             var type = typeof(T);

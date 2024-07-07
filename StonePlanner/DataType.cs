@@ -189,8 +189,8 @@ namespace StonePlanner
             {
                 public string UserName { get; set; }
                 public int UserMoney { get; set; }
-                public int Type { get; set; }
-                public string Password { get; set; }
+                public int UserType { get; set; }
+                public string UserPassword { get; set; }
                 public string RestoreKey { get; set; }
                 public int Lasting { get; set; }
                 public int Explosive { get; set; }

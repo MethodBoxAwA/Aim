@@ -49,7 +49,7 @@
             <param name="password"></param>
             <returns></returns>
         </member>
-        <member name="M:StonePlanner.AccessEntity.AddElement``1(``0,System.String)">
+        <member name="M:StonePlanner.AccessEntity.AddElement``1(``0,System.String,System.Collections.Generic.List{System.String})">
             <summary>
             Insert object instance to database
             </summary>
@@ -68,7 +68,7 @@
             <param name="propertyValue">Value of specific property</param>
             <returns>The number of rows affected</returns>
         </member>
-        <member name="M:StonePlanner.AccessEntity.GetElement``2(``1,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+        <member name="M:StonePlanner.AccessEntity.GetElement``2(``1,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Collections.Generic.List{System.String})">
             <summary>
             Get specific object instance from database
             </summary>
@@ -91,7 +91,7 @@
             <param name="mappingTable">Instance of mapping table</param>
             <returns>Object instance list</returns>
         </member>
-        <member name="M:StonePlanner.AccessEntity.UpdateElement``2(``0,``1,System.String,System.String,System.String)">
+        <member name="M:StonePlanner.AccessEntity.UpdateElement``2(``0,``1,System.String,System.String,System.String,System.Collections.Generic.List{System.String})">
             <summary>
             Set new value to specific object of database
             </summary>

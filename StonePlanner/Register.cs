@@ -3,6 +3,7 @@ using MetroFramework.Forms;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace StonePlanner
 {
@@ -10,10 +11,11 @@ namespace StonePlanner
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern IntPtr GetWindow(IntPtr hWnd, int uCmd);
-        int GW_CHILD = 5;
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
-        public const int EM_SETREADONLY = 0xcf;
+
+        int GW_CHILD = 5;
+        const int EM_SETREADONLY = 0xcf;
 
         public Register()
         {
@@ -22,7 +24,10 @@ namespace StonePlanner
 
         private void Register_Load(object sender, EventArgs e)
         {
+            // Use password protection
             textBox_M_Pwd.UseSystemPasswordChar = true;
+
+            // Set readonly
             IntPtr editHandle = GetWindow(comboBox_M_Type.Handle, GW_CHILD);
             SendMessage(editHandle, EM_SETREADONLY, 1, 0);
         }
@@ -72,7 +77,8 @@ namespace StonePlanner
             var mappingTable = new NonMappingTable();
 
             if (entity.GetElement<DataType.Structs.User, NonMappingTable>
-                (mappingTable, "tb_Users", "UserName", textBox_M_Name.Text, true).Count != 0)
+                (mappingTable, "tb_Users", "UserName", textBox_M_Name.Text, true,
+                true ,new List<string> { "ID"}).Count != 0)
             {
                 MessageBox.Show("已经存在具有相同名称的用户!", "注册失败",
                   MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -82,11 +88,14 @@ namespace StonePlanner
             // Insert into database
             var user = new DataType.Structs.User();
             user.UserName = textBox_M_Name.Text;
-            user.Password = textBox_M_Pwd.Text;
+            user.UserPassword = textBox_M_Pwd.Text;
             user.Wisdom = user.Lasting = user.Explosive = user.UserMoney = 0;
             user.RestoreKey = restoreKey;
             entity.AddElement(user, "tb_Users");
-      
+
+            // Show restore key
+            MessageBox.Show($"您的恢复密钥是:{restoreKey}，已经复制到剪切板，请妥善保管。", "注册成功", 
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
             Clipboard.SetText(restoreKey);
             Close();
         }

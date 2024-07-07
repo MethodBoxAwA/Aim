@@ -68,7 +68,7 @@ namespace StonePlanner
         {
             switch (_Name)
             {
-                case "AddTodo":
+                case "AddToDo":
                     AddTodo addTodo = new AddTodo((AddTodo.PlanAddInvoke) _Callback, (Action<int>) this._Sender);
                     addTodo.Show();
                     break;
