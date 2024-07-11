@@ -13,9 +13,9 @@ namespace StonePlanner
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool ReleaseCapture();
         public delegate void PlanAddInvoke(Plan plan);
-        public Action<int> Addsignal;
+        public Action<Plan> Addsignal;
         PlanAddInvoke PlanAdditionInvoke;
-        public AddTodo(PlanAddInvoke TargetFun,Action<int> Addsignal)
+        public AddTodo(PlanAddInvoke TargetFun,Action<Plan> Addsignal)
         {
             InitializeComponent();
             PlanAdditionInvoke = new PlanAddInvoke(TargetFun);
@@ -82,11 +82,15 @@ namespace StonePlanner
                 domainUpDown_Difficulty.Items.Add($"BEYOND {i:F1}");
             }
 
-            //读取清单
-            var sResult = SQLConnect.SQLCommandQuery("SELECT * FROM Lists");
-            while (sResult.Read())
+            // Read task lists
+            var entity = AccessEntity.GetAccessEntityInstance();
+            var taskLists = entity.GetElements<TaskList, NonMappingTable>(
+                "tb_Lists", new NonMappingTable());
+            
+            // Add to combo box
+            foreach (var taskList in taskLists)
             {
-                comboBox_List.Items.Add(sResult[1]);
+                comboBox_List.Items.Add(taskList.ListName);
             }
 
             //加载TIPS

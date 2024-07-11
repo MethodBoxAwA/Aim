@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using static StonePlanner.DataType.Structs;
 using static StonePlanner.Interfaces;
 
 namespace StonePlanner
@@ -109,6 +111,8 @@ namespace StonePlanner
             private int _Money;
             private static MoneyManager _Manager { get; set; }
 
+            internal event Action<int> moneyChanged;
+
             private MoneyManager(int money)
             {
                 _Money = money;
@@ -128,7 +132,12 @@ namespace StonePlanner
             {
                 var _accountManager = AccountManager.GetManagerInstance();
                 _Money += delta;
-                SQLConnect.SQLCommandExecution($"UPDATE Users SET Cmoney = {_Money} WHERE Username = {_accountManager.GetValue().Item1}", ref Main.odcConnection);
+
+                var entity = AccessEntity.GetAccessEntityInstance();
+                var user = new User() { UserMoney = _Money };
+
+                moneyChanged(_Money);
+                entity.UpdateElement(user, new NonMappingTable(), "ID", "tb_Users");
             }
 
             public int GetValue() => _Money;
@@ -158,29 +167,34 @@ namespace StonePlanner
 
             public void Update(string name,int delta)
             {
-                int insert = 0;
+                var user = new User();
+
                 switch (name)
                 {
                     case "lasting":
-                        insert = _Property.Item1 + delta;
+                        int insert = _Property.Item1 + delta;
                         _Property.Item1 = insert;
+                        user.Lasting = insert;
                         break;
                     case "exposive":
                         insert = _Property.Item2 + delta;
                         _Property.Item2 = insert;
+                        user.Explosive = insert;
                         break;
                     case "wisdom":
                         insert = _Property.Item3 + delta;
                         _Property.Item3 = insert;
+                        user.Wisdom = insert;
                         break;
                     default:
                         break;
                 }
 
-                var manager = AccountManager.GetManagerInstance();
-                SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_{name} = " +
-                    $"{insert} WHERE Username = '{manager.GetValue().Item1}';",
-                    ref Main.odcConnection);
+                name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name);
+                var accountManager = AccountManager.GetManagerInstance();
+                var entity = AccessEntity.GetAccessEntityInstance();
+
+                entity.UpdateElement(user, new NonMappingTable(), "ID", "tb_Users");
             }
 
             private static PropertyManager _Manager { get; set; }

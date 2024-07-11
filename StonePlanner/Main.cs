@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Media;
-using System.Net;
+using System.Net.Http;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using static StonePlanner.DataType.Structs;
 using static StonePlanner.Develop.Sign;
 using static StonePlanner.Exceptions;
-using static StonePlanner.DataType.Structs;
 using static StonePlanner.Interfaces;
 
 /*
@@ -59,7 +59,6 @@ namespace StonePlanner
         internal Signal signal = new Signal();
         //传出请求删除的请求体对象本身
         internal static Plan plan = null;
-        internal static List<string> sentence = new List<string>();
         internal static List<string> nownn = new List<string>();
         //废弃任务数组
         public static List<Plan> recycle_bin = new List<Plan>();
@@ -72,8 +71,6 @@ namespace StonePlanner
         internal static bool banned = false;
         //全局展示
         TaskDetails td;
-        //数据库查询
-        internal static OleDbConnection odcConnection = new OleDbConnection();
         #endregion
 
         #region 外部引用
@@ -112,53 +109,61 @@ namespace StonePlanner
             Settings settings = new Settings();
             settings.Dispose();
 
+            // Construct sign handler
             signal.SignChanged += HandleSign;
+        }
+
+        internal void ShowDetails(Plan task)
+        {
+            panel_TaskDetail.Controls.Remove(td);
+            if (task is null)
+                return;
+            td = new TaskDetails((Action<int>) AddSignal);
+            td.Left = 16;
+            td.Top = 15;
+            td.Capital = task.Capital;
+            td.Time = task.Seconds.ToString();
+            td.Intro = task.Intro;
+            td.Difficulty = task.Difficulty;
+            td.Lasting = task.Lasting.ToString();
+            td.Explosive = task.Explosive.ToString();
+            td.Wisdom = task.Wisdom.ToString();
+            SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\icon\Click.wav");
+            sp.Play();
+            panel_TaskDetail.Controls.Add(td);
+            td.BringToFront();
         }
 
         internal void HandleSign(object sender, DataType.SignChangedEventArgs e)
         {
+            // Task finished
             if (e.Sign == 1)
             {
-                //链接数据库
-                string strConn = $" Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = {Application.StartupPath}\\data.mdb;Jet OLEDB:Database Password={Main.password}";
-                OleDbConnection myConn = new OleDbConnection(strConn);
-                myConn.Open();
-                //先搜一下数据库
-                var hResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE ID = {plan.ID}");
-                if (hResult.HasRows)
+                // Build eneity
+                var entity = AccessEntity.GetAccessEntityInstance();
+                plan.Status = "已办完";
+                var task = entity.GetElement<UserPlan, NonMappingTable>(
+                    new NonMappingTable(), "tb_Tasks", "ID", plan.ID.ToString());
+
+                // Exists current plan
+                if (task.Count != 0)
                 {
-                    string updateString = $"UPDATE Tasks SET TaskTime = {plan.Seconds}" +
-                                $" , TaskStatus = \"已办完\"" +
-                                $" WHERE ID = {plan.ID}";
-                    SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
+                    entity.UpdateElement(new UserPlan(plan), new NonMappingTable(), "ID", 
+                        "tb_Tasks", new List<string> { "ID", "BuildType" });
                 }
+                // Not
                 else
                 {
-                    string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , " +
-                        "TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , ID" +
-                        " , TaskParent) VALUES ( ";
-                    strInsert += "'" + plan.Capital + "', '";
-                    strInsert += plan.Intro + "', '";
-                    strInsert += plan.Status + "', ";
-                    strInsert += plan.Seconds + ", ";
-                    strInsert += plan.Difficulty + ",";
-                    strInsert += plan.Lasting + ",";
-                    strInsert += plan.Explosive + ",";
-                    strInsert += plan.Width + ",";
-                    strInsert += plan.ID + ",";
-                    strInsert += "'" + plan.Parent + "'" + ")";
-                    //执行插入
-                    OleDbCommand inst = new OleDbCommand(strInsert, myConn);
-                    inst.ExecuteNonQuery();
+                    entity.AddElement(new UserPlan(plan), "tb_Tasks", 
+                        new List<string> { "ID", "BuildType" });
                 }
-
-                //删除
+               
+                // Delete from software
                 var manager = Manager.SerialManager.GetManagerInstance();
                 recycle_bin.Add(plan);
                 manager.RemoveTask(plan.Serial);
                 plan = null;
                 LengthCalculation();
-
             }
 
             //已废弃：Sign == 1，添加任务
@@ -180,34 +185,13 @@ namespace StonePlanner
                 }
             }
 
-            //已废弃：Sign == 4，添加任务
+            // [Obsolete]Sign == 4, Add Task
             else if (e.Sign == 5)
             {
                 ExportTodo et = new ExportTodo(panel_M.Controls);
                 et.Show();
             }
-
-            else if (e.Sign == 6)
-            {
-                panel_TaskDetail.Controls.Remove(td);
-                if (plan == null)
-                    return;
-                td = new TaskDetails((Action<int>) AddSignal);
-                td.Left = 16;
-                td.Top = 15;
-                td.Capital = plan.Capital;
-                td.Time = plan.Seconds.ToString();
-                td.Intro = plan.Intro;
-                td.StatusResult = plan.Status;
-                td.Difficulty = plan.Difficulty;
-                td.Lasting = plan.Lasting.ToString();
-                td.Explosive = plan.Explosive.ToString();
-                td.Wisdom = plan.Wisdom.ToString();
-                SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\icon\Click.wav");
-                sp.Play();
-                panel_TaskDetail.Controls.Add(td);
-                td.BringToFront();
-            }
+            // [Obsolete]Sign == 6, Show details
             else if (e.Sign == 7)
             {
                 panel_TaskDetail.Controls.Remove(td);
@@ -271,88 +255,60 @@ namespace StonePlanner
             }
         }
 
-        /// <summary>
-        /// 该函数处理用户退出事件，存入新的还未存储的数据。
-        /// </summary>
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
+            // Get task serial manager
             var manager = Manager.SerialManager.GetManagerInstance();
-            //存入还未完成的任务
+
+            // Iterate remained plan list
             foreach (var plan in manager.GetList())
             {
-                //先判断是否存在
-                //Users可还行 表都他妈不分了吗你
                 if (plan != null)
                 {
-                    /*
-                     * 此处的Bug：
-                     * 关闭的时候，检查是否已经存在了相应任务
-                     * 如果存在就不在添加
-                     * 但是，如果已经更新了数据
-                     * 也无法存储，导致了任务还原的Bug
-                     * 做法：
-                     * 仅对状态为待办的剩余时间和是否完成进行更新
-                    */
-                    string queryString = $"SELECT * FROM Tasks WHERE ID = {plan.ID}";
-                    var sqlResult = SQLConnect.SQLCommandQuery(queryString, ref Main.odcConnection);
-                    if (sqlResult.HasRows)
+                    // Build instance
+                    var entity = AccessEntity.GetAccessEntityInstance();
+                    var planFromDB = entity.GetElement<UserPlan, NonMappingTable>(
+                        new NonMappingTable(), "tb_Tasks", "ID", plan.ID.ToString());
+
+                    // Plan is exists
+                    if (planFromDB.Count != 0) 
                     {
-                        //已经存在相应任务，查询是否已完成，否则更新时间
-                        sqlResult.Read();
-                        //查询状态 不为待办
-                        if (sqlResult["TaskStatus"].ToString() != "待办")
+                        // Exists,switch state
+                        if (planFromDB[0].Status != "待办")
                         {
-                            //MessageBox.Show(sqlResult["TaskStatus"].ToString());
                             continue;
                         }
+
+                        // Update plan
+                        if (plan.Seconds > 0)
+                        {
+                            var userPlan = new UserPlan(plan);
+                            entity.UpdateElement(userPlan, new NonMappingTable(), "ID", "tb_Tasks",new List<string> { "ID","BuildMode"});
+                            continue;
+                        }
+                        
                         else
                         {
-                            //更新时间和待办状态
-                            //UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
-                            if (plan.Seconds > 0)
-                            {
-                                string updateString = $"UPDATE Tasks SET TaskTime = {plan.Seconds}" +
-                                    $" WHERE ID = {plan.ID}";
-                                SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
-                                continue;
-                            }
-                            else
-                            {
-                                ErrorCenter.AddError(DataType.ExceptionsLevel.Warning
-                                    , new ObjectFreedException("已经被清除的任务再次添加。"));
-                            }
+                            ErrorCenter.AddError(DataType.ExceptionsLevel.Warning
+                                , new ObjectFreedException("已经被清除的任务再次添加。"));
+                            continue;
                         }
                     }
-                    //脑子是个好东西 下次带上
-                    string strInsert = "INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , TaskParent , StartTime) VALUES ( ";
-                    strInsert += "'" + plan.Capital + "', '";
-                    strInsert += plan.Intro + "', '";
-                    strInsert += plan.Status + "', ";
-                    strInsert += plan.Seconds + ", ";
-                    strInsert += plan.Difficulty + ",";
-                    strInsert += plan.Lasting + ",";
-                    strInsert += plan.Explosive + ",";
-                    strInsert += plan.Wisdom + ",";
-                    strInsert += "'" + plan.Parent + "',";
-                    strInsert += "'" + plan.StartTime + "')";
-                    //执行插入
-                    SQLConnect.SQLCommandExecution(strInsert, ref Main.odcConnection);
-                    recycle_bin.Add(plan);
+
+                    // Plan is not exists
+                    entity.AddElement(new UserPlan(plan), "tb_Tasks", new List<string> { "ID","BuildMode" });
                 }
             }
-            //关闭数据库连接
-            Main.odcConnection.Close();
+
             Environment.Exit(0);
         }
 
-        private void Main_Load(object sender, EventArgs e)
+        private async void Main_Load(object sender, EventArgs e)
         {
-            #region 窗口加载
+            // Set low postion
             this.TopMost = false;
 
-            Recycle recy_bin = new Recycle();
-            GC.Collect();
-
+            // Prepare account info
             var accountManager =
                 Manager.AccountManager.GetManagerInstance();
 
@@ -360,7 +316,7 @@ namespace StonePlanner
             var entity = AccessEntity.GetAccessEntityInstance();
             var users = entity.GetElement<User, IMappingTable>(
                 new NonMappingTable(), "tb_Users", "UserName", accountManager.GetValue().Item1, 
-                 true, true, new List<string>() { "ID" });
+                 true, true);
             var userInstance = users[0];
 
             // Create money manager for global
@@ -374,62 +330,38 @@ namespace StonePlanner
                     userInstance.Explosive,
                     userInstance.Wisdom);
 
-            label_GGS.Text = userInstance.UserMoney.ToString();
-            Thread valueThread = new Thread(new ThreadStart(ValueGetter));
-            valueThread.Start();
-            //pictureBox_Main.ImageLocation = "https://tse1-mm.cn.bing.net/th/id/R-C.2fd0dadf9d13c716cf0494d17875cf3b?rik=mf3ZQjupoBDr2A&riu=http%3a%2f%2fup.36992.com%2fpic%2f07%2fd3%2fe8%2f07d3e81f37f5922b5b0021a1c0b2d3da.jpg&ehk=P8hpii3cUJykmCt97WX0kATyROzUNRuexj8faXE7q6c%3d&risl=&pid=ImgRaw&r=0";
-            //获取格言
-            Thread sentenceGetter = new Thread(() => SentenceGetter());
-            sentenceGetter.Start();
-            label_Date.Text = DateTime.Now.ToString("dd");
-            label_Month.Text = DateTime.Now.ToString("MM");
-            #endregion
-            CheckForIllegalCrossThreadCalls = false;
-            #region 未完成任务读取
-            for (int i = 0; i < recy_bin.dataGridView1.Rows.Count - 1; i++)
+            label_Money.Text = userInstance.UserMoney.ToString();
+
+            // Display money
+            moneyManager.moneyChanged += (money) => label_Money.Text = money.ToString();
+
+            // Get sentences
+            var sentences = await GetSentence();
+
+            // Set sentences
+            // Here comes a cool effect even although it is a bug
+            sentences.FindAll(sentence => sentence.Contains("\n")).ForEach(sentence => sentence.Replace("\n", ""));
+            ThreadPool.QueueUserWorkItem(HandleSentence, sentences);
+
+            // Read & Add unfinsihed tasks
+            var plans = entity.GetElements<UserPlan, NonMappingTable>(
+                "tb_Tasks",new NonMappingTable());
+            plans.ForEach(plan =>
             {
-                if (recy_bin.dataGridView1.Rows[i].Cells[5].Value.ToString() == "0")
-                {
-                    continue;
-                }
-
-                UserPlan userPlan = new()
-                {
-                    Capital = recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
-                    Intro = recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
-                    Seconds = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
-                    Difficulty = Convert.ToDouble(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
-                    ID = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[0].Value),
-                    Lasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value),
-                    Explosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
-                    Wisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value),
-                    StartTime = Convert.ToString(recy_bin.dataGridView1.Rows[i].Cells[10].Value),
-                    AddSign = (Action<int>) AddSignal,
-                    BuildMode = PlanBuildMode.B
-                };
-
-                AddPlan(new Plan(userPlan));
+                plan.AddSign = ShowDetails;
+                AddPlan(new(plan));
                 LengthCalculation();
-                plan = null;
-            }
-            #endregion
-            sentence.FindAll(sentence => sentence.Contains("\n")).ForEach(sentence => sentence.Replace("\n", ""));
-            #region 功能控制器
-            if (!activation)
-            {
-                label_Sentence.Text = "MethodBox Aim（评估副本）";
-            }
-            if (banned)
-            {
-                label_Sentence.Text = "MethodBox Aim（限制副本）";
-            }
-            #endregion
+            });
+
+            // Some alerts
+            label_Sentence.Text = activation? "MethodBox Aim" : "MethodBox Aim（评估副本）";
             string alert = GetSchedule(true);
             ScanTaskTime(alert);
             contextMenuStrip.Enabled = false;
         }
+
         #endregion
-        delegate void PlanAddInvoke(Plan pValue);
+
         #region 任务处理相关
         internal void AddPlan(Plan task)
         {
@@ -471,85 +403,42 @@ namespace StonePlanner
 
 
         #endregion
+        
         #region 加载器
-        //列表加载器
         protected void HoldList()
         {
-            //MYUKKE IS GOOOOOOD!
-            //像暂时存储副控件添加新的Controls.Add函数
+            // Load list on panel
             panel_L.ControlAdded += new ControlEventHandler(Another_OnControlAdded);
             panel_L.Controls.Clear();
-            //这个字段是用来连接用的
-            //string strConn = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\data.mdb;Jet OLEDB:Database Password={Main.password}";
-            //OleDbConnection odcConnection = new OleDbConnection(strConn); //打开连接
-            //odcConnection.Open(); //建立SQL查询   
-            //OleDbCommand odCommand = odcConnection.CreateCommand();
-            //搜索数据库中所有列表
-            List<string> list = new List<string>();
-            //OleDbConnection odcConnectiontemp = new OleDbConnection();
-            //var sResult = SQLConnect.SQLCommandQuery("SELECT * FROM Lists",ref odcConnectiontemp);
-            //odCommand.CommandText = "SELECT * FROM Lists";
-            var sResult = SQLConnect.SQLCommandQuery("SELECT * FROM Lists", ref Main.odcConnection);
-            while (sResult.Read())
-            {
-                list.Add(sResult[1].ToString());
-            }
-            //对所有列表 依次搜索其子值
-            //这里读取次数太多，就不用封装好的查询了
-            //引用关闭原有数据库连接
-            List<Plan> sonTask = new List<Plan>();
-            //猜猜DataReader在哪儿，小子
+
+            // Load list name from Access
+            var entity = AccessEntity.GetAccessEntityInstance();
+            var taskLists = entity.GetElements<TaskList, NonMappingTable>(
+             "tb_Lists", new NonMappingTable());
+
+            // Prepare list of tasks
+            List<string> list = new();
+            taskLists.ForEach(t => list.Add(t.ListName));
+
             foreach (var item in list)
             {
-                //添加父节点
+                // Add parent node
                 Function parentMain = new Function(item, item, 1);
                 panel_L.Controls.Add(parentMain);
-                /*
-                 * '已有打开的与此 Command 相关联的 DataReader，必须首先将它关闭。'
-                 * 他妈的 DataReader在哪儿
-                 * 谁来告诉我
-                 * 淦我自己觉得一点问题没有
-                 * 里边关里边不行 用了引用外边关
-                 * 还是不行 怎么也不行
-                 * 百度说用一个连接参数 我直接连接报错
-                 * 奶奶的 真是绝了
-                 *
-                 * 怀疑：读空报错
-                 *
-                 * 果然是读空报错
-                 * 怀疑原因是自动跳出之后再次尝试读取
-                 * 你的报错能不能走点心啊
-                 */
-                try
-                {
-                    sResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE TaskParent = '{item}'");
-                }
-                catch { return; }
-                //建立Plan对象
-                //1 5 2 4 9 6 7 8
-                while (sResult.Read())
-                {
-                    UserPlan userPlan = new()
-                    {
-                        Capital = sResult[1].ToString(),
-                        Intro = sResult[2].ToString(),
-                        Seconds = Convert.ToInt32(sResult[5]),
-                        Difficulty = Convert.ToInt64(sResult[4]),
-                        ID = Convert.ToInt32(sResult[0]),
-                        Lasting = Convert.ToInt32(sResult[6]),
-                        Explosive = Convert.ToInt32(sResult[7]),
-                        Wisdom = Convert.ToInt32(sResult[8]),
-                        AddSign = (Action<int>) AddSignal,
-                        BuildMode = PlanBuildMode.B
-                    };
 
-                    using Plan plan = new Plan
-                    (
-                          userPlan
-                    );
-                    Function sonMain = new Function(sResult[1].ToString(), item, 0); panel_L.Controls.Add(sonMain);
+                // Get specific task object
+                var taskList = entity.GetElement<UserPlan, NonMappingTable>(
+                    new NonMappingTable(), "tb_Tasks", "Parent", item, true);
+
+                // Iterate task list
+                foreach (var task in taskList)
+                {
+                    Function sonMain = new Function(task.Capital, item, 0);
+                    panel_L.Controls.Add(sonMain);
                 }
             }
+
+            // Unsubscribe event about length
             panel_L.ControlAdded -= Another_OnControlAdded;
             return;
         }
@@ -671,38 +560,8 @@ namespace StonePlanner
             {
                 BanUser();
             }
-            
-            try
-            {
-                var result = SQLConnect.SQLCommandQuery($"SELECT * FROM Users where Username='METHODBOX_BAN';");
-                result.Read();
-                if (result[0].ToString() != "" || result[0].ToString() != null)
-                {
-                    Ban ban = new Ban();
-                    Opacity = 0;
-                    int isCritical = 1;
-                    int BreakOnTermination = 0x1D;
-                    Process.EnterDebugMode();  //acquire Debug Privileges
-                                               // setting the BreakOnTermination = 1 for the current process
-                    NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
-                    //for (int i = 0; ; i++) { System.Console.WriteLine(i); }
-                }
-            }
-            catch { }
         }
 
-        #region 金钱操作
-        public void ValueGetter()
-        {
-            var moneyManager = Manager.MoneyManager.GetManagerInstance();
-            while (true)
-            {
-                label_GGS.Text = moneyManager.GetValue().ToString();
-                Thread.Sleep(1000);
-            }
-        }
-
-        #endregion
         #region 加载排班日历
         internal string GetSchedule(bool @out = false)
         {
@@ -777,30 +636,37 @@ namespace StonePlanner
         }
         #endregion
         #region 每日一句/一图加载器
-        public void SentenceGetter()
+        public async Task<List<string>> GetSentence() 
         {
-            try
+            using (var httpClient = new HttpClient())
             {
-                WebClient MyWebClient = new WebClient
+                try
                 {
-                    Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
-                };
-                Byte[] pageData = MyWebClient.DownloadData("http://methodbox.top/wkgd/Services/StonePlanner/sentence.txt"); //下载                                                                                            //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
-                string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
-                foreach (var item in pageHtml.Split(';'))
+                    var resultString = await httpClient.GetStringAsync("https://www.methodbox.top/Services/StonePlanner/sentence.txt");
+                    return resultString.Split(';').ToList();
+                }
+                catch(HttpRequestException ex)
                 {
-                    sentence.Add(item);
+                    ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, ex);
+                    return new List<string>() { "浪费时间叫虚度，剥用时间叫生活。" };
                 }
             }
-            catch (Exception ex)
-            {
-                ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, ex);
-                sentence.Add("浪费时间叫虚度，剥用时间叫生活。");
-            }
-            return;
         }
+
         #endregion
         #region 每日一句/一图执行器
+        internal void HandleSentence(object sentences)
+        {
+            var sentencesInstance = (List<string>) sentences;
+            var random = new Random();
+
+            while (true)
+            {
+                label_Sentence.Text = sentencesInstance[random.Next(0, sentencesInstance.Count)];
+                Thread.Sleep(5_000);
+            }
+        }
+
         private void label_Sentence_TextChanged(object sender, EventArgs e)
         {
             label_Sentence.Text = label_Sentence.Text.Replace("\n", "");
@@ -950,7 +816,7 @@ namespace StonePlanner
 
         private void 添加任务ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTodo _ = new AddTodo(AddPlan, (Action<int>) AddSignal);
+            AddTodo _ = new AddTodo(AddPlan, (Action<Plan>) ShowDetails);
             _.Show();
         }
 

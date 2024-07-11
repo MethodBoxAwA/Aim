@@ -13,7 +13,7 @@ namespace StonePlanner
         {
             InitializeComponent();
 
-            // Switch weather use error center
+            // Switch whether use error center
             if (!Program.EnableErrorCenter)
             {
                 Text = "错误中心（未启用记录）";
@@ -22,7 +22,7 @@ namespace StonePlanner
 
         internal static void AddError(DataType.ExceptionsLevel errLevel,Exception err) 
         {
-            //
+            // Error center is disabled
             if (!Program.EnableErrorCenter)
             {
                 return;
@@ -83,6 +83,7 @@ namespace StonePlanner
                 dataTable.Rows.Add(dataRow);
             }
 
+            // Display data
             dataGridView1.DataSource = dataTable;
         }
     }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static StonePlanner.DataType.Structs;
 
 namespace StonePlanner
 {
@@ -63,8 +64,12 @@ namespace StonePlanner
             if (License.Code.codes.Contains(textBox_Code.Text))
             {
                 MessageBox.Show("激活成功，感谢您对MethodBox的支持。\n请重启软件。","激活成功",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                //写入
-                SQLConnect.SQLCommandExecution($"UPDATE Users SET Pwd = '{textBox_Code.Text}' WHERE Username = 'mactivation'", ref Main.odcConnection);
+
+                // Insert into database
+                var user = new User() { UserPassword = textBox_Code.Text };
+                var entity = AccessEntity.GetAccessEntityInstance();
+                entity.UpdateElement(user, new NonMappingTable(), "ID", "tb_Users",
+                    new List<string> { "ID" });
                 Environment.Exit(0);
             }
             else

@@ -24,15 +24,17 @@ namespace StonePlanner
             {
                 // Try buy good
                 var moneyManager = Manager.MoneyManager.GetManagerInstance();
+                var entity = AccessEntity.GetAccessEntityInstance();
+
                 int money = moneyManager.GetValue();
                 if (money > GoodPrice)
                 {
                     // Cost money
                     moneyManager.Change(-GoodPrice);
                     //执行
-                    var reader = SQLConnect.SQLCommandQuery($"SELECT UseCode FROM Goods WHERE GoodName = '{GoodName}'");
-                    reader.Read();
-                    string code = reader.GetValue(0).ToString();
+                    var good = entity.GetElement<DataType.Structs.Good, NonMappingTable>(
+                        new NonMappingTable(), "tb_Goods", "GoodName", GoodName, true);
+                    string code = good[0].UseCode;
                     //存储并解析
                     string path = $@"{Application.StartupPath}\temp\cFile{new Random().Next(100000, 999999)}.txt";
                     StreamWriter sw = new StreamWriter(path);

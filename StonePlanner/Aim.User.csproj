@@ -311,7 +311,6 @@
       <DependentUpon>Shop.cs</DependentUpon>
     </Compile>
     <Compile Include="SocketClient.cs" />
-    <Compile Include="SQLConnect.cs" />
     <Compile Include="TaskDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>

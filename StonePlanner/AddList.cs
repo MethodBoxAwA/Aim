@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using static StonePlanner.DataType.Structs;
 
 namespace StonePlanner
 {
@@ -15,8 +17,12 @@ namespace StonePlanner
         {
             try
             {
-                SQLConnect.SQLCommandExecution($"INSERT INTO Lists (ListName) VALUES('{textBox_Listname.Text}')",ref Main.odcConnection);
-                Close();   
+                // Build entity
+                var entity = AccessEntity.GetAccessEntityInstance();
+                var taskList = new TaskList { ListName = textBox_Listname.Text };
+
+                // Insert to database
+                entity.AddElement(taskList, "tb_Lists", new List<string> { "ID" });
             }
             catch(Exception ex) 
             {

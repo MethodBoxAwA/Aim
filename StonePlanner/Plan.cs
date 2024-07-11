@@ -72,6 +72,8 @@ namespace StonePlanner
         /// </summary>
         public Action<int> AddSign;
 
+        public Action<Plan> ShowDetailsHandler;
+
         internal Plan(UserPlan planData)
         {
             // Initial controls
@@ -83,13 +85,13 @@ namespace StonePlanner
                 case PlanBuildMode.A:
                     Parent = planData.Parent;
                     StartTime = Convert.ToInt64(planData.StartTime);
-                    AddSign = planData.AddSign;
-                    ID = new Random().Next(100000000, 999999999);
+                    ShowDetailsHandler = planData.AddSign;
+                    ID = planData.ID;
                     goto default;
                 case PlanBuildMode.B:
                     Parent = planData.Parent;
                     StartTime = Convert.ToInt64(planData.StartTime);
-                    AddSign = planData.AddSign;
+                    ShowDetailsHandler = planData.AddSign;
                     ID = planData.ID;
                     goto default;
                 case PlanBuildMode.C:
@@ -207,8 +209,7 @@ namespace StonePlanner
 
         private void label_TaskDes_Click_1(object sender, EventArgs e)
         {
-            AddSign?.Invoke(6);
-            Main.plan = this;
+            ShowDetailsHandler?.Invoke(this);
         }
     }
 }

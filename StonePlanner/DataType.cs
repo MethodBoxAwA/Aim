@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using static StonePlanner.Interfaces;
 
 namespace StonePlanner
 {
@@ -74,7 +75,7 @@ namespace StonePlanner
             }
 
             [Serializable]
-            internal class UserPlan
+            internal class UserPlan : IDBEntity
             {
                 /// <summary>
                 /// The capital of this plan
@@ -85,6 +86,11 @@ namespace StonePlanner
                 /// The duration of this plan will continue
                 /// </summary>
                 public int Seconds { get; set; }
+
+                /// <summary>
+                /// The status of current plan
+                /// </summary>
+                public string Status { get; set; }
 
                 /// <summary>
                 /// The introduce of this plan
@@ -129,7 +135,7 @@ namespace StonePlanner
                 /// <summary>
                 /// AddSign delegate
                 /// </summary>
-                public Action<int> AddSign = null;
+                public Action<Plan> AddSign = null;
 
                 /// <summary>
                 /// Model applicable in plan building
@@ -140,6 +146,7 @@ namespace StonePlanner
                 {
                     this.Capital = plan.Capital;
                     this.Seconds = plan.Seconds;
+                    this.Status = plan.Status;
                     this.Intro = plan.Intro;
                     this.Difficulty = plan.Difficulty;
                     this.ID = plan.ID;
@@ -148,7 +155,7 @@ namespace StonePlanner
                     this.Wisdom = plan.Wisdom;
                     this.Explosive = plan.Explosive;
                     this.StartTime = plan.StartTime.ToString();
-                    this.AddSign = plan.AddSign;
+                    this.AddSign = plan.ShowDetailsHandler;
                 }
 
                 public UserPlan()
@@ -185,8 +192,9 @@ namespace StonePlanner
                 internal string Text;
             }
 
-            public class User
+            public class User : IDBEntity
             {
+                public int ID { get; set; }
                 public string UserName { get; set; }
                 public int UserMoney { get; set; }
                 public int UserType { get; set; }
@@ -197,13 +205,29 @@ namespace StonePlanner
                 public int Wisdom { get; set; }
             }
 
-            public class Error
+            public class Error : IDBEntity
             {
                 public int ID { get; set; }
                 public string OccurredTime { get; set; }
                 public string ErrorLevel { get; set; }
                 public string ErrorMessage { get; set; }
                 public string ErrorSource { get; set; }
+            }
+
+            public class TaskList : IDBEntity
+            {
+                public int ID { get; set; }
+                public string ListName { get; set; }
+            }
+
+            public class Good : IDBEntity
+            {
+                public int ID { get; set; }
+                public int GoodPrice { get; set; }
+                public string GoodName { get; set; }
+                public string GoodPicture { get; set; }
+                public string GoodIntro { get; set; }
+                public string UseCode { get; set; }
             }
         }
     }

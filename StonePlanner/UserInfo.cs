@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using static StonePlanner.DataType.Structs;
 using static StonePlanner.Interfaces;
 using static StonePlanner.Manager;
 
@@ -68,32 +69,23 @@ namespace StonePlanner
             delta = Convert.ToInt32(label_Wisdomright.Text) - Convert.ToInt32(label_Wisdomleft.Text);
             int wisdom = propertyManager.Wisdom;
             panel_Wisdom.Width = (int) (((double) (wisdom - Convert.ToInt32(label_Wisdomleft.Text)) / (double) delta) * 184);
-            //综合评分
-            double point_User = lasting * 0.05 + wisdom * 0.02 + explosive * 0.01;
-            if (point_User > 6)
+
+            // Get user score
+            var entity = AccessEntity.GetAccessEntityInstance();
+            var taskList = entity.GetElements<UserPlan, NonMappingTable>(
+                "tb_Tasks", new NonMappingTable());
+            var pointPlan = 0d;
+            var pointUser = lasting * 0.05 + wisdom * 0.02 + explosive * 0.01;
+            var count = taskList.Count > 10 ? 10 : taskList.Count;
+
+            for (int num = 0; num < count; num++)
             {
-                point_User = 6d;
+                pointPlan += taskList[num].Difficulty;
             }
-            //重构评分读取
-            var tasks = SQLConnect.SQLCommandQuery("SELECT * FROM Tasks",ref Main.odcConnection);
-            //运用“T10”进行评分
-            int i = 0,sum = 0;
-            while (tasks.Read())
-            {
-                sum += Convert.ToInt32(tasks["TaskDiff"]);
-                i++;
-                if (i == 10) break;
-            }
-            double point_Plan;
-            if (i == 0) 
-            { 
-                 point_Plan = 0;
-            }
-            else
-            {
-                point_Plan = sum / i;
-            }
-            label_Point.Text = $"评 分 值（pp）：{point_User + point_Plan:F2}";
+
+            pointPlan = pointPlan / count;
+            label_Point.Text = $"评 分 值（pp）：{pointUser + pointPlan:F2}";
+
         }
 
         /// <summary>

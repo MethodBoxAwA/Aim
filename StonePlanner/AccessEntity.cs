@@ -8,7 +8,7 @@ using static StonePlanner.Interfaces;
 namespace StonePlanner
 {
     /// <summary>
-    /// Provide methods for serialization or deserialization objects for Access database
+    /// Provide methods for serialization or deserialization objects of Access database
     /// </summary>
     internal class AccessEntity
     {
@@ -174,8 +174,9 @@ namespace StonePlanner
                         else
                             fromPropertyName = mappingTable.GetPropertyName(fromColumnName);
 
-                        if (ignoredPropertyList.Contains(fromPropertyName))
-                            continue;
+                        if (ignoredPropertyList is not null)
+                            if (ignoredPropertyList.Contains(fromPropertyName))
+                                continue;
                         
                         var propertyInfo = instance.GetType().GetProperty(fromPropertyName);
                         propertyInfo.SetValue(instance, reader[i]);
@@ -183,7 +184,6 @@ namespace StonePlanner
                     result.Add(instance);
                 }
             }
-
             else
             {
                 List<T> allItems = GetElements<T, R>(tableName, mappingTable);
@@ -224,13 +224,12 @@ namespace StonePlanner
 
             while (reader.Read())
             {
-                // Ignored
-
                 T temp = (T) Activator.CreateInstance(objectType);
 
+                // Ignored
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    if (_ignoredPropertyList! is not null)
+                    if (_ignoredPropertyList is not null)
                     {
                         if (_ignoredPropertyList.Contains(reader.GetName(i)))
                         {
@@ -261,11 +260,10 @@ namespace StonePlanner
         /// <typeparam name="R">Type of mapping table</typeparam>
         /// <inheritdoc cref="RemoveElement{R}(R, string, string, string)"/>
         /// <param name="element">Object that want to change</param>
-        /// <param name="setPropertyName">New value of specific property</param>
         /// <param name="tableName">Name of data table</param>
         /// <param name="ignoredPropertyList">Ignored property</param>
-        internal int UpdateElement<T, R>(T element, R mappingTable, string setPropertyName,
-            string propertyName, string tableName, List<string> ignoredPropertyList = null) 
+        internal int UpdateElement<T, R>(T element, R mappingTable,string propertyName, 
+            string tableName, List<string> ignoredPropertyList = null) 
             where R : IMappingTable
         {
             string databaseColumnName;
@@ -282,6 +280,10 @@ namespace StonePlanner
             foreach (var property in properties)
             {
                 // Ignored
+                if (_ignoredPropertyList is null)
+                    _ignoredPropertyList = new List<string>();
+
+                // Do not update ID
                 _ignoredPropertyList.Add("ID");
                 if (_ignoredPropertyList!.Contains(property.Name))
                 {

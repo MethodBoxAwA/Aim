@@ -38,7 +38,7 @@
         </member>
         <member name="T:StonePlanner.AccessEntity">
             <summary>
-            Provide methods for serialization or deserialization objects for Access database
+            Provide methods for serialization or deserialization objects of Access database
             </summary>
         </member>
         <member name="M:StonePlanner.AccessEntity.GetAccessEntityInstance(System.String,System.String,System.Collections.Generic.List{System.String})">
@@ -94,7 +94,7 @@
             <param name="ignoredPropertyList">Ignored property</param>
             <returns>Object instance list</returns>
         </member>
-        <member name="M:StonePlanner.AccessEntity.UpdateElement``2(``0,``1,System.String,System.String,System.String,System.Collections.Generic.List{System.String})">
+        <member name="M:StonePlanner.AccessEntity.UpdateElement``2(``0,``1,System.String,System.String,System.Collections.Generic.List{System.String})">
             <summary>
             Set new value to specific object of database
             </summary>
@@ -102,7 +102,6 @@
             <typeparam name="R">Type of mapping table</typeparam>
             <inheritdoc cref="M:StonePlanner.AccessEntity.RemoveElement``1(``0,System.String,System.String,System.String)"/>
             <param name="element">Object that want to change</param>
-            <param name="setPropertyName">New value of specific property</param>
             <param name="tableName">Name of data table</param>
             <param name="ignoredPropertyList">Ignored property</param>
         </member>
@@ -370,6 +369,11 @@
         <member name="P:StonePlanner.DataType.Structs.UserPlan.Seconds">
             <summary>
             The duration of this plan will continue
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.Structs.UserPlan.Status">
+            <summary>
+            The status of current plan
             </summary>
         </member>
         <member name="P:StonePlanner.DataType.Structs.UserPlan.Intro">
@@ -784,11 +788,6 @@
             此类内含所有已经被废弃的代码 以供查阅
             </summary>
         </member>
-        <member name="M:StonePlanner.Legacy.GetPoint">
-            <summary>
-            原外部评分函数
-            </summary>
-        </member>
         <member name="M:StonePlanner.Login.linkLabel_Register_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
             <summary>
             Open register form
@@ -831,11 +830,6 @@
             覆写窗体的消息处理函数
             </summary>
             <param name="m">消息</param>
-        </member>
-        <member name="M:StonePlanner.Main.pictureBox_T_Exit_Click(System.Object,System.EventArgs)">
-            <summary>
-            该函数处理用户退出事件，存入新的还未存储的数据。
-            </summary>
         </member>
         <member name="M:StonePlanner.Main.panel_L_MouseWheel(System.Object,System.Windows.Forms.MouseEventArgs)">
             <summary>

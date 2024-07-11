@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StonePlanner
@@ -94,8 +89,8 @@ namespace StonePlanner
                     }
                     else
                     {
-                        SQLConnect.SQLCommandExecution("INSERT INTO Goods(GoodPrice,GoodName,GoodPicture,GoodIntro,UseCode)" +
-                            $"VALUES({k[0]},'{k[1]}','{k[2]}','{k[3]}','{k[4]}')", ref Main.odcConnection);
+                        //SQLConnect.SQLCommandExecution("INSERT INTO Goods(GoodPrice,GoodName,GoodPicture,GoodIntro,UseCode)" +
+                           // $"VALUES({k[0]},'{k[1]}','{k[2]}','{k[3]}','{k[4]}')", ref Main.odcConnection);
                     }
                 }
                 k.Clear();

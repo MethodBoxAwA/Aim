@@ -32,15 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panel_Top = new System.Windows.Forms.Panel();
             this.pictureBox_T_Float = new System.Windows.Forms.PictureBox();
-            this.label_GGS = new System.Windows.Forms.Label();
+            this.label_Money = new System.Windows.Forms.Label();
             this.User_Piicture = new System.Windows.Forms.PictureBox();
             this.pictureBox_T_Exit = new System.Windows.Forms.PictureBox();
             this.label_Sentence = new System.Windows.Forms.Label();
             this.pictureBox_T_More = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label_Month = new System.Windows.Forms.Label();
             this.label_Anther1 = new System.Windows.Forms.Label();
-            this.label_Date = new System.Windows.Forms.Label();
             this.label_Status = new System.Windows.Forms.Label();
             this.panel_M = new System.Windows.Forms.Panel();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -91,7 +89,7 @@
             // 
             this.panel_Top.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.panel_Top.Controls.Add(this.pictureBox_T_Float);
-            this.panel_Top.Controls.Add(this.label_GGS);
+            this.panel_Top.Controls.Add(this.label_Money);
             this.panel_Top.Controls.Add(this.User_Piicture);
             this.panel_Top.Controls.Add(this.pictureBox_T_Exit);
             this.panel_Top.Controls.Add(this.label_Sentence);
@@ -114,15 +112,15 @@
             this.pictureBox_T_Float.Click += new System.EventHandler(this.pictureBox_T_Float_Click);
             this.pictureBox_T_Float.DoubleClick += new System.EventHandler(this.pictureBox_T_Float_DoubleClick);
             // 
-            // label_GGS
+            // label_Money
             // 
-            this.label_GGS.AutoSize = true;
-            this.label_GGS.Font = new System.Drawing.Font("Cascadia Code", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_GGS.Location = new System.Drawing.Point(348, 16);
-            this.label_GGS.Name = "label_GGS";
-            this.label_GGS.Size = new System.Drawing.Size(20, 12);
-            this.label_GGS.TabIndex = 9;
-            this.label_GGS.Text = "0.0";
+            this.label_Money.AutoSize = true;
+            this.label_Money.Font = new System.Drawing.Font("Cascadia Code", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Money.Location = new System.Drawing.Point(348, 16);
+            this.label_Money.Name = "label_Money";
+            this.label_Money.Size = new System.Drawing.Size(20, 12);
+            this.label_Money.TabIndex = 9;
+            this.label_Money.Text = "0.0";
             // 
             // User_Piicture
             // 
@@ -180,16 +178,6 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "日";
             // 
-            // label_Month
-            // 
-            this.label_Month.AutoSize = true;
-            this.label_Month.Font = new System.Drawing.Font("Cambria", 10F);
-            this.label_Month.Location = new System.Drawing.Point(123, 153);
-            this.label_Month.Name = "label_Month";
-            this.label_Month.Size = new System.Drawing.Size(23, 16);
-            this.label_Month.TabIndex = 6;
-            this.label_Month.Text = "03";
-            // 
             // label_Anther1
             // 
             this.label_Anther1.AutoSize = true;
@@ -199,16 +187,6 @@
             this.label_Anther1.Size = new System.Drawing.Size(21, 16);
             this.label_Anther1.TabIndex = 7;
             this.label_Anther1.Text = "月";
-            // 
-            // label_Date
-            // 
-            this.label_Date.AutoSize = true;
-            this.label_Date.Font = new System.Drawing.Font("Cambria", 10F);
-            this.label_Date.Location = new System.Drawing.Point(165, 153);
-            this.label_Date.Name = "label_Date";
-            this.label_Date.Size = new System.Drawing.Size(23, 16);
-            this.label_Date.TabIndex = 5;
-            this.label_Date.Text = "26";
             // 
             // label_Status
             // 
@@ -447,9 +425,7 @@
             this.panel_TaskDetail.Controls.Add(this.pictureBox_Main);
             this.panel_TaskDetail.Controls.Add(this.label2);
             this.panel_TaskDetail.Controls.Add(this.label1);
-            this.panel_TaskDetail.Controls.Add(this.label_Date);
             this.panel_TaskDetail.Controls.Add(this.label_Anther1);
-            this.panel_TaskDetail.Controls.Add(this.label_Month);
             this.panel_TaskDetail.Location = new System.Drawing.Point(254, 30);
             this.panel_TaskDetail.Name = "panel_TaskDetail";
             this.panel_TaskDetail.Size = new System.Drawing.Size(422, 397);
@@ -551,7 +527,7 @@
         private System.Windows.Forms.PictureBox pictureBox_Main;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox User_Piicture;
-        private System.Windows.Forms.Label label_GGS;
+        private System.Windows.Forms.Label label_Money;
         private System.Windows.Forms.VScrollBar vScrollBar_Main;
         private System.Windows.Forms.PictureBox pictureBox_Tip;
         private System.Windows.Forms.Timer timer_Anti;

@@ -34,5 +34,10 @@ namespace StonePlanner
             string GetPropertyName(string columnName);
             string GetColumnName(string propertyName);
         }
+
+        internal interface IDBEntity
+        {
+            int ID { get; set; }
+        }
     }
 }

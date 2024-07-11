@@ -19,11 +19,11 @@ namespace StonePlanner
     internal static class Legacy
     {
         #region 主窗口【Main】废弃代码
-        [Obsolete("该代码重新读取与写入占用大量内存",true)]
+        [Obsolete("该代码重新读取与写入占用大量内存", true)]
         /// <summary>
         /// 原主窗口关闭时执行的函数 功能是存储所有已保存的任务
         /// </summary>
-        internal static void Main_ExitMemory() 
+        internal static void Main_ExitMemory()
         {
             List<Plan> recycle_bin = new List<Plan>();
             //存储
@@ -61,14 +61,14 @@ namespace StonePlanner
             }
             allTask = null;
             //金钱
-             StreamWriter sw = new StreamWriter($@"{Application.StartupPath}\temp\pFile114514.txt");
+            StreamWriter sw = new StreamWriter($@"{Application.StartupPath}\temp\pFile114514.txt");
         }
 
-        [Obsolete("该代码读取大量文件，占用大量内存",true)]
+        [Obsolete("该代码读取大量文件，占用大量内存", true)]
         /// <summary>
         /// 原主窗口加载函数 功能是读取所有的任务
         /// </summary>
-        internal static void Main_LoadMemory() 
+        internal static void Main_LoadMemory()
         {
             List<Plan> recycle_bin = new List<Plan>();
             string allTask;
@@ -121,58 +121,6 @@ namespace StonePlanner
             }
         }
 
-        [Obsolete("该代码存在逻辑问题，应该尽早重构",false)]
-        /// <summary>
-        /// 原评分计算函数，算法优化不好导致很卡顿
-        /// </summary>
-        /// <returns>评分值</returns>
-        internal static double Main_Calc() 
-        {
-            double GGS = 0;
-            Recycle recy_bin = new Recycle();
-            for (int i = 0; i < recy_bin.dataGridView1.Rows.Count - 1; i++)
-            {
-                //你干嘛要重新建立Plan捏
-                //Plan plan = new Plan
-                //    (
-                //    recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
-                //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
-                //    recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
-                //    Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
-                //    ""
-                //    );
-                GGS += (double)Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[5].Value);
-                // plan = null;
-            }
-            return GGS / recy_bin.dataGridView1.Rows.Count;
-        }
-        #endregion
-
-        /// <summary>
-        /// 原外部评分函数
-        /// </summary>
-        [Obsolete("该代码获取数据方式及其奇怪，不应被使用")]
-        
-        internal static void GetPoint() 
-        {
-            //人类迷惑行为 获取数据
-            Recycle recy_bin = new Recycle();
-            int GGS = 0;
-            for (int i = 0; i < recy_bin.dataGridView1.Rows.Count - 1; i++)
-            {
-                //Plan plan = new Plan
-                //    (
-                //    recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
-                //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
-                //    recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
-                //    Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
-                //    ""
-                //    );
-                GGS += (int)Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[5].Value);
-                // plan = null;
-            }
-        }
-
         //internal unsafe void PlanAdder(Plan pValue, PlanClassD @struct)
         //{
         //    /*
@@ -221,97 +169,7 @@ namespace StonePlanner
 
         #region 编辑器【InnerIDE】废弃代码
         #endregion
-        #region 登录窗口【Login】废弃代码
-        public static void Login()
-        {
-            try
-            {
-                var result = SQLConnect.SQLCommandQuery($"SELECT Pwd FROM Users where Username='';");
-                DataTable dt = new DataTable();
-                if (result.HasRows)
-                {
-                    for (int i = 0; i < result.FieldCount; i++)
-                    {
-                        dt.Columns.Add(result.GetName(i));
-                    }
-                    dt.Rows.Clear();
-                }
-                while (result.Read())
-                {
-                    DataRow row = dt.NewRow();
-                    for (int i = 0; i < result.FieldCount; i++)
-                    {
-                        row[i] = result[i];
-                    }
-                    dt.Rows.Add(row);
-                }
-                //    dataGridView1.DataSource = dt;
-                //    if (dataGridView1.Rows[0].Cells[0].Value.ToString() == "")
-                //    {
-                //        MessageBox.Show("账号不存在！", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //        return;
-                //    }
-
-                //    if (dataGridView1.Rows[0].Cells[0].Value.ToString() == textBox_M_Pwd.Text)
-                //    {
-                //        result = SQLConnect.SQLCommandQuery($"SELECT Type FROM Users where Username='{textBox_M_Name.Text}';");
-                //        dt = new DataTable();
-                //        if (result.HasRows)
-                //        {
-                //            for (int i = 0; i < result.FieldCount; i++)
-                //            {
-                //                dt.Columns.Add(result.GetName(i));
-                //            }
-                //            dt.Rows.Clear();
-                //        }
-                //        while (result.Read())
-                //        {
-                //            DataRow row = dt.NewRow();
-                //            for (int i = 0; i < result.FieldCount; i++)
-                //            {
-                //                row[i] = result[i];
-                //            }
-                //            dt.Rows.Add(row);
-                //        }
-                //        dataGridView1.DataSource = dt;
-                //        //特殊用户
-                //        try
-                //        {
-                //            UserType = Convert.ToInt32(dataGridView1.Rows[0].Cells[0].Value);
-                //            if (UserType == 2)
-                //            {
-                //                Testify ti = new Testify();
-                //                ti.Show();
-                //                new ErrorCenter().Show();
-                //            }
-                //            MessageBox.Show("登录成功", "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //            Hide();
-                //            UserName = textBox_M_Name.Text;
-                //            Main m = new Main();
-                //            m.Show();
-                //            //Thread td = new Thread(new ThreadStart(
-                //            //    () => Application.Run(new Main())
-                //            //    )) ;
-                //        }
-                //        catch (Exception ex)
-                //        {
-                //            MessageBox.Show("读取用户时出现异常，详情请见错误中心", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //            ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
-                //            return;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        MessageBox.Show("用户名或密码错误!", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //    }
-                //}
-                //catch
-                //{
-                //    MessageBox.Show("不存在该用户!", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //}
-            }
-            catch { }
-        #endregion
-        }
+    
     }
 }
+#endregion
