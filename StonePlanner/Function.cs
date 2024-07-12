@@ -10,7 +10,7 @@ namespace StonePlanner
     {
         string _ImageAddress = null;
         string _Caplital = "";
-        string _Name = "";
+        internal string _Name = "";
         object _Callback = null;
         object _Sender = null;
 
@@ -26,15 +26,15 @@ namespace StonePlanner
             this._Sender ??= sender;
         }
 
-        public Function(string lpCapital, string szListName,int nLineParents, object Callback = null)
+        public Function(string capital, string listName,int lineParents, object callback = null)
         {
             InitializeComponent();
 
             this._ImageAddress = "";
-            this._Caplital = lpCapital;
-            this._Name = szListName;
+            this._Caplital = capital;
+            this._Name = listName;
 
-            if (nLineParents == 1)
+            if (lineParents == 1)
             {
                 label_M.Left = 10;
             }
@@ -64,7 +64,7 @@ namespace StonePlanner
             this.BackColor = SystemColors.Control;
         }
 
-        private void Function_Click(object sender, EventArgs e)
+        internal void Function_Click(object sender, EventArgs e)
         {
             switch (_Name)
             {

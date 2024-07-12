@@ -69,26 +69,18 @@ namespace StonePlanner
         //检查语言包
         internal static bool activation = true;
         internal static bool banned = false;
+        private readonly SynchronizationContext UISyncContext;
         //全局展示
         TaskDetails td;
         #endregion
 
-        #region 外部引用
-        /// <summary>
-        /// 该函数用来发送Windows消息（WM）处理窗口拖动事件。
-        /// </summary>
+        #region 外部引用[F]
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
-        /// <summary>
-        /// 该函数从当前线程中的窗口释放鼠标捕获，并恢复通常的鼠标输入处理。
-        /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool ReleaseCapture();
         [DllImport("ntdll.dll", SetLastError = true)]
         private static extern int NtSetInformationProcess(IntPtr hProcess, int processInformationClass, ref int processInformation, int processInformationLength);
-        /// <summary>
-        /// 该函数将拖动事件发送，以用于拖动窗口。
-        /// </summary>
         private void panel_Top_MouseDown(object sender, MouseEventArgs e)
         {
             const int WM_NCLBUTTONDOWN = 0x00A1;
@@ -105,6 +97,10 @@ namespace StonePlanner
         #region 主窗口及设置加载/退出
         public Main()
         {
+            // Catch current synchronization context
+            UISyncContext = SynchronizationContext.Current;
+
+            // Load window
             InitializeComponent();
             Settings settings = new Settings();
             settings.Dispose();
@@ -115,9 +111,12 @@ namespace StonePlanner
 
         internal void ShowDetails(Plan task)
         {
+            // Delete existed control
             panel_TaskDetail.Controls.Remove(td);
             if (task is null)
                 return;
+
+            // Build new details panel
             td = new TaskDetails((Action<int>) AddSignal);
             td.Left = 16;
             td.Top = 15;
@@ -128,9 +127,13 @@ namespace StonePlanner
             td.Lasting = task.Lasting.ToString();
             td.Explosive = task.Explosive.ToString();
             td.Wisdom = task.Wisdom.ToString();
+
+            // Play sound to simulate click
             SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\icon\Click.wav");
             sp.Play();
             panel_TaskDetail.Controls.Add(td);
+
+            // Move to top
             td.BringToFront();
         }
 
@@ -148,16 +151,16 @@ namespace StonePlanner
                 // Exists current plan
                 if (task.Count != 0)
                 {
-                    entity.UpdateElement(new UserPlan(plan), new NonMappingTable(), "ID", 
+                    entity.UpdateElement(new UserPlan(plan), new NonMappingTable(), "ID",
                         "tb_Tasks", new List<string> { "ID", "BuildType" });
                 }
                 // Not
                 else
                 {
-                    entity.AddElement(new UserPlan(plan), "tb_Tasks", 
+                    entity.AddElement(new UserPlan(plan), "tb_Tasks",
                         new List<string> { "ID", "BuildType" });
                 }
-               
+
                 // Delete from software
                 var manager = Manager.SerialManager.GetManagerInstance();
                 recycle_bin.Add(plan);
@@ -271,7 +274,7 @@ namespace StonePlanner
                         new NonMappingTable(), "tb_Tasks", "ID", plan.ID.ToString());
 
                     // Plan is exists
-                    if (planFromDB.Count != 0) 
+                    if (planFromDB.Count != 0)
                     {
                         // Exists,switch state
                         if (planFromDB[0].Status != "待办")
@@ -283,10 +286,10 @@ namespace StonePlanner
                         if (plan.Seconds > 0)
                         {
                             var userPlan = new UserPlan(plan);
-                            entity.UpdateElement(userPlan, new NonMappingTable(), "ID", "tb_Tasks",new List<string> { "ID","BuildMode"});
+                            entity.UpdateElement(userPlan, new NonMappingTable(), "ID", "tb_Tasks", new List<string> { "ID", "BuildMode" });
                             continue;
                         }
-                        
+
                         else
                         {
                             ErrorCenter.AddError(DataType.ExceptionsLevel.Warning
@@ -296,7 +299,7 @@ namespace StonePlanner
                     }
 
                     // Plan is not exists
-                    entity.AddElement(new UserPlan(plan), "tb_Tasks", new List<string> { "ID","BuildMode" });
+                    entity.AddElement(new UserPlan(plan), "tb_Tasks", new List<string> { "ID", "BuildMode" });
                 }
             }
 
@@ -315,7 +318,7 @@ namespace StonePlanner
             // Connect database & constuct user instance
             var entity = AccessEntity.GetAccessEntityInstance();
             var users = entity.GetElement<User, IMappingTable>(
-                new NonMappingTable(), "tb_Users", "UserName", accountManager.GetValue().Item1, 
+                new NonMappingTable(), "tb_Users", "UserName", accountManager.GetValue().Item1,
                  true, true);
             var userInstance = users[0];
 
@@ -333,7 +336,7 @@ namespace StonePlanner
             label_Money.Text = userInstance.UserMoney.ToString();
 
             // Display money
-            moneyManager.moneyChanged += (money) => label_Money.Text = money.ToString();
+            moneyManager.MoneyChanged += (money) => label_Money.Text = money.ToString();
 
             // Get sentences
             var sentences = await GetSentence();
@@ -345,7 +348,7 @@ namespace StonePlanner
 
             // Read & Add unfinsihed tasks
             var plans = entity.GetElements<UserPlan, NonMappingTable>(
-                "tb_Tasks",new NonMappingTable());
+                "tb_Tasks", new NonMappingTable());
             plans.ForEach(plan =>
             {
                 plan.AddSign = ShowDetails;
@@ -354,7 +357,7 @@ namespace StonePlanner
             });
 
             // Some alerts
-            label_Sentence.Text = activation? "MethodBox Aim" : "MethodBox Aim（评估副本）";
+            label_Sentence.Text = activation ? "MethodBox Aim" : "MethodBox Aim（评估副本）";
             string alert = GetSchedule(true);
             ScanTaskTime(alert);
             contextMenuStrip.Enabled = false;
@@ -362,11 +365,12 @@ namespace StonePlanner
 
         #endregion
 
-        #region 任务处理相关
+        #region 任务处理相关[F]
         internal void AddPlan(Plan task)
         {
-            //分配唯一编号
+            // Get serial
             var manager = Manager.SerialManager.GetManagerInstance();
+            // Add to window
             task.Top = manager.AddTask(task);
             panel_M.Controls.Add(task);
             LengthCalculation();
@@ -374,10 +378,15 @@ namespace StonePlanner
 
         protected void ScanTaskTime(string alert = "")
         {
-            List<string> _tasks = new List<string>();
+            // Construct task list for alert window
+            List<string> tasks = new List<string>();
+
+            // Iterate controls which a symbol of tasks
             foreach (var item in panel_M.Controls)
             {
                 Plan temp;
+
+                // Other controls
                 if (item is not Plan)
                 {
                     continue;
@@ -386,25 +395,27 @@ namespace StonePlanner
                 {
                     temp = item as Plan;
                 }
+
+                // Switch whether is handling
                 if (temp.Status != "正在办")
                 {
                     if (DateTime.Now.ToBinary() >= temp.StartTime)
                     {
-                        _tasks.Add(temp.Capital);
+                        tasks.Add(temp.Capital);
                     }
                 }
             }
-            if (_tasks.Count != 0)
+
+            // Exits specific task
+            if (tasks.Count != 0)
             {
-                new Alert(_tasks, alert).ShowDialog();
+                new Alert(tasks, alert).ShowDialog();
             }
-            _tasks.Clear();
+            tasks.Clear();
         }
-
-
         #endregion
-        
-        #region 加载器
+
+        #region 加载器[F]
         protected void HoldList()
         {
             // Load list on panel
@@ -635,34 +646,40 @@ namespace StonePlanner
             }
         }
         #endregion
-        #region 每日一句/一图加载器
-        public async Task<List<string>> GetSentence() 
+        #region 每日一句相关[F]
+        public async Task<List<string>> GetSentence()
         {
+            // Build request to get sentences for server
             using (var httpClient = new HttpClient())
             {
                 try
                 {
+                    // Add to array
                     var resultString = await httpClient.GetStringAsync("https://www.methodbox.top/Services/StonePlanner/sentence.txt");
                     return resultString.Split(';').ToList();
                 }
-                catch(HttpRequestException ex)
+                catch (HttpRequestException ex)
                 {
+                    // Add a common sentence
                     ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, ex);
                     return new List<string>() { "浪费时间叫虚度，剥用时间叫生活。" };
                 }
             }
         }
 
-        #endregion
-        #region 每日一句/一图执行器
         internal void HandleSentence(object sentences)
         {
+            // Get sentences array
             var sentencesInstance = (List<string>) sentences;
             var random = new Random();
 
+            // Automatically change sentence
             while (true)
             {
-                label_Sentence.Text = sentencesInstance[random.Next(0, sentencesInstance.Count)];
+                UISyncContext.Post((state) =>
+                {
+                    label_Sentence.Text = sentencesInstance[random.Next(0, sentencesInstance.Count)];
+                }, null);
                 Thread.Sleep(5_000);
             }
         }
@@ -672,6 +689,7 @@ namespace StonePlanner
             label_Sentence.Text = label_Sentence.Text.Replace("\n", "");
         }
         #endregion
+
         #region 外观控制
         private void label_Sentence_MouseDown(object sender, MouseEventArgs e)
         {
@@ -803,70 +821,8 @@ namespace StonePlanner
             base.OnControlAdded(e);
         }
         #endregion
+
         #region 右键菜单事件
-        private void 最大化ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddSignal(13);
-        }
-
-        private void 最小化ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddSignal(12);
-        }
-
-        private void 添加任务ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddTodo _ = new AddTodo(AddPlan, (Action<Plan>) ShowDetails);
-            _.Show();
-        }
-
-        private void 任务回收站ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Recycle _ = new Recycle();
-            _.Show();
-        }
-
-        private void 新建清单ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddList _ = new AddList();
-            _.Show();
-        }
-
-        private void 控制台ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Console _ = new Console();
-            _.Show();
-        }
-
-        private void 事件IDEToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            InnerIDE _ = new InnerIDE();
-            _.Show();
-        }
-
-        private void 登录服务器ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            WebService _ = new WebService();
-            _.Show();
-        }
-
-        private void 静态指示器ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Testify _ = new Testify();
-            _.Show();
-        }
-
-        private void 信号控制器ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("信号控制功能已从AimPlanner中被移除", "被移除的功能", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        private void 错误中心ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ErrorCenter _ = new ErrorCenter();
-            _.Show();
-        }
-
         private void 引发崩溃ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             throw new Exception("用户引发崩溃");
@@ -881,36 +837,9 @@ namespace StonePlanner
         {
             Process.Start("https://afdian.net/a/MethodBox");
         }
-        private void 堵塞执行ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddSignal(114514);
-        }
-
-        private void 恢复执行ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddSignal(2);
-        }
-
-        private void 停用商城ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Shop _ = new Shop();
-            _.Show();
-        }
-
-        private void 停用导入包ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Importer _ = new Importer();
-            _.Show();
-        }
-
-        private void 停用导出待办ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExportTodo _ = new ExportTodo(panel_M.Controls);
-            _.Show();
-        }
         #endregion
 
-        private void BanUser() 
+        private void BanUser()
         {
             // Ban account
             var banUser = new User();
@@ -938,6 +867,33 @@ namespace StonePlanner
             Update update = new Update();
             update.Show();
         }
-    }
 
+        private void MenuClick(object sender, EventArgs e)
+        {
+            // Get name of menu
+            var callerName = ((ToolStripMenuItem) sender).Name;
+
+            // Get specific modifier
+            string modifier = callerName.Split('_')[2];
+
+            // Signal
+            if (modifier.StartsWith("S"))
+            {
+                int signal = Convert.ToInt32(modifier.Substring(1));
+                AddSignal(signal);
+            }
+            // Create window
+            else
+            {
+                if (modifier == "Banned")
+                {
+                    MessageBox.Show("该功能目前不可用");
+                    return;
+                }
+                var function = new Function(null, null, null);
+                function._Name = modifier;
+                function.Function_Click(this, null);
+            }
+        }
+    }
 }

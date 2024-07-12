@@ -14,6 +14,7 @@ namespace StonePlanner
     public partial class TaskDetails : UserControl
     {
         Action<int> AddSign;
+
         public TaskDetails(Action<int> AddSign)
         {
             InitializeComponent();

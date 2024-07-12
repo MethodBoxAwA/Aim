@@ -9,7 +9,7 @@ namespace StonePlanner
 {
     internal static class Program
     {
-        private static bool _hideBug = false;
+        private static bool _hideBug = true;
         public static bool EnableErrorCenter = true;
 
         /// <summary>

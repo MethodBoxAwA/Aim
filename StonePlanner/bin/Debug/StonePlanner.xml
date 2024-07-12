@@ -810,21 +810,6 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:StonePlanner.Main.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
-            <summary>
-            该函数用来发送Windows消息（WM）处理窗口拖动事件。
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.ReleaseCapture">
-            <summary>
-            该函数从当前线程中的窗口释放鼠标捕获，并恢复通常的鼠标输入处理。
-            </summary>
-        </member>
-        <member name="M:StonePlanner.Main.panel_Top_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            该函数将拖动事件发送，以用于拖动窗口。
-            </summary>
-        </member>
         <member name="M:StonePlanner.Main.DefWndProc(System.Windows.Forms.Message@)">
             <summary>
             覆写窗体的消息处理函数

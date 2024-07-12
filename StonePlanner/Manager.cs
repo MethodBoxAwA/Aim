@@ -111,7 +111,7 @@ namespace StonePlanner
             private int _Money;
             private static MoneyManager _Manager { get; set; }
 
-            internal event Action<int> moneyChanged;
+            internal event Action<int> MoneyChanged;
 
             private MoneyManager(int money)
             {
@@ -136,7 +136,7 @@ namespace StonePlanner
                 var entity = AccessEntity.GetAccessEntityInstance();
                 var user = new User() { UserMoney = _Money };
 
-                moneyChanged(_Money);
+                MoneyChanged(_Money);
                 entity.UpdateElement(user, new NonMappingTable(), "ID", "tb_Users");
             }
 

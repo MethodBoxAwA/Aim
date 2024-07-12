@@ -149,7 +149,7 @@
         SUVORK5CYII=
 </value>
   </data>
-  <data name="User_Piicture.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PictureBox_User_UserInfo.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAABGdBTUEAALGPC/xhBQAACcBJREFUeF7t
         nXuMXVUVh6sERFGDIWARX4kmpvGfBlDQNLEFSmLiH6RFaARCNTUWYmMVJAUfnISZ++h96ZD+McSKUStm
