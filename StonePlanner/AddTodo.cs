@@ -8,17 +8,13 @@ namespace StonePlanner
 {
     public partial class AddTodo : MetroForm
     {
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern bool ReleaseCapture();
-        public delegate void PlanAddInvoke(Plan plan);
         public Action<Plan> Addsignal;
-        PlanAddInvoke PlanAdditionInvoke;
-        public AddTodo(PlanAddInvoke TargetFun,Action<Plan> Addsignal)
+        Action<Plan> PlanAdditionInvoke;
+
+        public AddTodo(Action<Plan> TargetFun,Action<Plan> Addsignal)
         {
             InitializeComponent();
-            PlanAdditionInvoke = new PlanAddInvoke(TargetFun);
+            PlanAdditionInvoke = new Action<Plan>(TargetFun);
             this.Addsignal = Addsignal;
         }
 
@@ -150,26 +146,10 @@ namespace StonePlanner
                 //对指针传出
                 PlanAdditionInvoke(new Plan(userPlan));
                 Close();
-                //封送结构体
-                //Main.planner = psc;
-                //Main.AddSign(4);
-                //Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n这通常是您错误的键入了某个值，或没有输入某个值导致。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void panel_Top_MouseDown(object sender, MouseEventArgs e)
-        {
-            const int WM_NCLBUTTONDOWN = 0x00A1;
-            const int HTCAPTION = 2;
-
-            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
-            {
-                ReleaseCapture();
-                SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
             }
         }
 

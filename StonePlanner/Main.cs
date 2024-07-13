@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static StonePlanner.DataType.Structs;
-using static StonePlanner.Develop.Sign;
 using static StonePlanner.Exceptions;
 using static StonePlanner.Interfaces;
 
@@ -232,32 +231,6 @@ namespace StonePlanner
             }
         }
 
-        /// <summary>
-        /// 覆写窗体的消息处理函数
-        /// </summary>
-        /// <param name="m">消息</param>
-        protected override void DefWndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case AM_EXIT:
-                    Environment.Exit(0);
-                    break;
-                case AM_ADDMONEY:
-                    var moneyManager = Manager.MoneyManager.GetManagerInstance();
-                    moneyManager.Change(m.WParam.ToInt32());
-                    break;
-                case AM_GETMONEY:
-                    moneyManager = Manager.MoneyManager.GetManagerInstance();
-                    SendMessage(m.WParam, AM_GETMONEY, (IntPtr) moneyManager.GetValue(), IntPtr.Zero);
-                    break;
-                //调用基类函数，以便系统处理其它消息。
-                default:
-                    base.DefWndProc(ref m);
-                    break;
-            }
-        }
-
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
             // Get task serial manager
@@ -461,7 +434,7 @@ namespace StonePlanner
             else
             {
                 // Functions
-                AddTodo.PlanAddInvoke officalInvoke = new AddTodo.PlanAddInvoke(AddPlan);
+                var officalInvoke = new Action<Plan>(AddPlan);
                 Function newTodo = new Function($"{Application.StartupPath}\\icon\\new.png",
                     $"新建任务", "AddToDo", officalInvoke, (Action<int>) AddSignal)
                 {
@@ -894,6 +867,12 @@ namespace StonePlanner
                 function._Name = modifier;
                 function.Function_Click(this, null);
             }
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            PlugIn plugIn = new PlugIn();
+            plugIn.Show();
         }
     }
 }

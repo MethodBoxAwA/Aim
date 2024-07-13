@@ -229,6 +229,21 @@ namespace StonePlanner
                 public string GoodIntro { get; set; }
                 public string UseCode { get; set; }
             }
+
+            public class PlugInDetails
+            {
+                public string PlugInName { get; set; }
+                public string PlugInDescription { get; set; }
+                public string PlugInAuthor { get; set; }
+                public int Status { get; set; }
+            }
+
+            public class Plugin : IDBEntity
+            {
+                public int ID { get; set; }
+                public string PlugInMD5 { get; set; }
+                public int Status { get; set; }
+            }
         }
     }
 }

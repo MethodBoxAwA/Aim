@@ -1,0 +1,12 @@
+D:\Project\Aim\Aim.PlugIn\bin\Debug\net6.0\Aim.PlugIn.deps.json
+D:\Project\Aim\Aim.PlugIn\bin\Debug\net6.0\Aim.PlugIn.dll
+D:\Project\Aim\Aim.PlugIn\bin\Debug\net6.0\Aim.PlugIn.pdb
+D:\Project\Aim\Aim.PlugIn\obj\Debug\net6.0\Aim.PlugIn.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\Aim\Aim.PlugIn\obj\Debug\net6.0\Aim.PlugIn.AssemblyInfoInputs.cache
+D:\Project\Aim\Aim.PlugIn\obj\Debug\net6.0\Aim.PlugIn.AssemblyInfo.cs
+D:\Project\Aim\Aim.PlugIn\obj\Debug\net6.0\Aim.PlugIn.csproj.CoreCompileInputs.cache
+D:\Project\Aim\Aim.PlugIn\obj\Debug\net6.0\Aim.PlugIn.sourcelink.json
+D:\Project\Aim\Aim.PlugIn\obj\Debug\net6.0\Aim.PlugIn.dll
+D:\Project\Aim\Aim.PlugIn\obj\Debug\net6.0\refint\Aim.PlugIn.dll
+D:\Project\Aim\Aim.PlugIn\obj\Debug\net6.0\Aim.PlugIn.pdb
+D:\Project\Aim\Aim.PlugIn\obj\Debug\net6.0\ref\Aim.PlugIn.dll
