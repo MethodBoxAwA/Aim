@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using static StonePlanner.Interfaces;
 
 namespace StonePlanner
@@ -20,13 +15,27 @@ namespace StonePlanner
 
         internal class SignChangedEventArgs:EventArgs
         {
+            /// <summary>
+            /// Changed sign
+            /// </summary>
             public int Sign { get; set; }
         }
 
-        internal class VersionInfo : Interfaces.IVersion
+        internal class VersionInfo : IVersion
         {
+            /// <summary>
+            /// Software version full name
+            /// </summary>
             public string Version { get; set; }
+
+            /// <summary>
+            /// Software version serial number
+            /// </summary>
             public int Number { get; set; }
+
+            /// <summary>
+            /// Address to download specific version of software
+            /// </summary>
             public Uri DownloadUri { get; set; }
 
             public string GetVersion() 
@@ -49,7 +58,6 @@ namespace StonePlanner
 
         internal class Structs
         {
-
             [Serializable]
             internal struct PlanStruct
             {
@@ -232,13 +240,14 @@ namespace StonePlanner
 
             public class PlugInDetails
             {
+                public string PlugInFullName { get; set; }
                 public string PlugInName { get; set; }
                 public string PlugInDescription { get; set; }
                 public string PlugInAuthor { get; set; }
                 public int Status { get; set; }
             }
 
-            public class Plugin : IDBEntity
+            public class DataPlugIn : IDBEntity
             {
                 public int ID { get; set; }
                 public string PlugInMD5 { get; set; }

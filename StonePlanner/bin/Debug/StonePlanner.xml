@@ -327,6 +327,26 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="P:StonePlanner.DataType.SignChangedEventArgs.Sign">
+            <summary>
+            Changed sign
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.VersionInfo.Version">
+            <summary>
+            Software version full name
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.VersionInfo.Number">
+            <summary>
+            Software version serial number
+            </summary>
+        </member>
+        <member name="P:StonePlanner.DataType.VersionInfo.DownloadUri">
+            <summary>
+            Address to download specific version of software
+            </summary>
+        </member>
         <member name="P:StonePlanner.DataType.Structs.UserPlan.Capital">
             <summary>
             The capital of this plan

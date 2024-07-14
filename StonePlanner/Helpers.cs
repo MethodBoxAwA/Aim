@@ -1,12 +1,14 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace StonePlanner
 {
     internal static class Helpers
     {
-        internal static class TextHelper 
+        internal static class TextHelper
         {
             public static string MultipleStrings(int multiple)
             {
@@ -111,6 +113,18 @@ namespace StonePlanner
             public static int DeleteKey(string section, string key, string filePath)
             {
                 return Write(section, key, null, filePath);
+            }
+        }
+
+        internal static class CryproHelper
+        {
+            public static string GetMD5WithFilePath(string filePath)
+            {
+                FileStream file = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider(); byte[] hash_byte = md5.ComputeHash(file);
+                string str = System.BitConverter.ToString(hash_byte);
+                str = str.Replace("-", "");
+                return str;
             }
         }
     }

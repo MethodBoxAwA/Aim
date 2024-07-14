@@ -240,7 +240,7 @@
     <Compile Include="PlugIn.Designer.cs">
       <DependentUpon>PlugIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProcessExtends.cs" />
+    <Compile Include="ProcessExtend.cs" />
     <Compile Include="SchedulingCalendar.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -48,6 +48,7 @@ namespace StonePlanner
             plugin.PlugInName = (string)dllMain.GetField("PlugInName", BindingFlags.Public | BindingFlags.Static).GetValue(null);
             plugin.PlugInDescription = (string) dllMain.GetField("PlugInDescription", BindingFlags.Public | BindingFlags.Static).GetValue(null);
             plugin.PlugInAuthor = (string) dllMain.GetField("PlugInAuthor", BindingFlags.Public | BindingFlags.Static).GetValue(null);
+            plugin.PlugInFullName = (string) listBox_Plugs.Items[listBox_Plugs.SelectedIndex];
 
             // Display
             var plugDetails = new PlugDetails(plugin);

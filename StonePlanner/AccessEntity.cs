@@ -299,7 +299,13 @@ namespace StonePlanner
                     setBuilder.Append($"{inlineName} = {property.GetValue(element)}, ");
             }
             setBuilder.Remove(setBuilder.Length - 2, 2);
-            setBuilder.Append($" where {databaseColumnName} = {type.GetProperty(databaseColumnName).GetValue(element)}");
+
+            var setType = type.GetProperty(propertyName).PropertyType;
+
+            if (setType == typeof(string))
+                setBuilder.Append($" where {databaseColumnName} = '{type.GetProperty(databaseColumnName).GetValue(element)}'");
+            else
+                setBuilder.Append($" where {databaseColumnName} = {type.GetProperty(databaseColumnName).GetValue(element)}");
             var commandLine = _dbConnection.CreateCommand();
             commandLine.CommandText = setBuilder.ToString();
             _ignoredPropertyList.Remove("ID");

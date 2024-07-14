@@ -193,6 +193,7 @@ namespace StonePlanner
                 ExportTodo et = new ExportTodo(panel_M.Controls);
                 et.Show();
             }
+
             // [Obsolete]Sign == 6, Show details
             else if (e.Sign == 7)
             {
